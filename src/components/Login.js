@@ -1,38 +1,58 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { updateLoginForm } from '../actions/loginForm';
+import { login } from '../actions/currentUser';
 
-const Login = ({username, password}) => {
+
+// Written in Redux - change to React? Make sure I understand what's going on here...
+
+const Login = ({ loginFormData, updateLoginForm, login }) => {
+
+  const handleInputChange = event => {
+    const { name, value } = event.target
+    const updatedFormInfo = {
+      ...loginFormData,
+      [name]: value
+    }
+    updateLoginForm(updatedFormInfo)
+  }
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    login(loginFormData)
+  }
+
   return (
-    <form onSubmit={undefined}>
+    <form onSubmit={handleSubmit}>
       <input
         placeholder="Username"
-        value={username}
+        value={loginFormData.username}
         name="username"
         type="text"
-        onChange={undefined}
+        onChange={handleInputChange}
       />
       <input
         placeholder="Password"
-        value={password}
+        value={loginFormData.password}
         name="password"
         type="text"
-        onChange={undefined}
+        onChange={handleInputChange}
       />
+      <input type="submit" value="Log In" />
     </form>
   )
 }
 
 const mapStateToProps = state => {
   return {
-    username: state.loginForm.username,
-    password: state.loginForm.password
+    loginFormData: state.loginForm
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-
+    updateLoginForm: formData => dispatch({type: "UPDATE_LOGIN_FORM", formData})
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, { updateLoginForm, login })(Login);
