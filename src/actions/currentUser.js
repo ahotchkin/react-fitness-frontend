@@ -34,6 +34,21 @@ export const login = credentials => {
   }
 }
 
+// this takes care of clearing the session, also need to clear out the user in the store with clearCurrentUser
+export const logout = () => {
+  return dispatch => {
+    // don't need to wait until fetch request resolves to log out a user, when a user clicks logout they should logout right away. call clearCurrentUser immediately
+    // optimistic => make the change to the frontend right away, don't wait for the backend
+    // pessimistic => hold on, make sure the server is running, the response we said works and the backend is all set before changing anything on the frontend and displaying anything to the user
+    dispatch(clearCurrentUser())
+    return fetch("http://localhost:3001/api/v1/logout", {
+      credentials: "include",
+      method: "DELETE"
+    })
+
+  }
+}
+
 
 export const getCurrentUser = () => {
   return dispatch => {
@@ -56,5 +71,12 @@ export const getCurrentUser = () => {
         }
       })
       .catch(console.log())
+  }
+}
+
+// get rid of the currentUser that is sitting in Redux store
+export const clearCurrentUser = () => {
+  return {
+    type: "CLEAR_CURRENT_USER"
   }
 }
