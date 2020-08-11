@@ -49,10 +49,10 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    updateLoginForm: formData => dispatch({type: "UPDATE_LOGIN_FORM", formData})
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     updateLoginForm: formData => dispatch({type: "UPDATE_LOGIN_FORM", formData})
+//   }
+// }
 
 export default connect(mapStateToProps, { updateLoginForm, login })(Login);
