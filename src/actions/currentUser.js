@@ -23,11 +23,11 @@ export const login = credentials => {
     })
       .then(response => response.json())
       // .then(user => dispatch({type: "SET_CURRENT_USER"}))
-      .then(user => {
-        if (user.error) {
-          alert(user.error)
+      .then(json => {
+        if (json.error) {
+          alert(json.error)
         } else {
-          dispatch(setCurrentUser(user))
+          dispatch(setCurrentUser(json.data))
         }
       })
       .catch(console.log())
@@ -63,11 +63,11 @@ export const getCurrentUser = () => {
     })
       .then(response => response.json())
       // .then(user => dispatch({type: "SET_CURRENT_USER"}))
-      .then(user => {
-        if (user.error) {
-          alert(user.error)
+      .then(json => {
+        if (json.error) {
+          alert(json.error)
         } else {
-          dispatch(setCurrentUser(user))
+          dispatch(setCurrentUser(json.data))
         }
       })
       .catch(console.log())
