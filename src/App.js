@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import Login from './components/Login'
-import Logout from './components/Logout'
 import { connect } from 'react-redux'
 import { getCurrentUser } from './actions/currentUser'
+// import Login from './components/Login'
+// import Logout from './components/Logout'
+import NavBar from './components/NavBar'
+import MainContainer from './components/MainContainer'
 
 class App extends Component {
 
@@ -15,17 +17,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* move to navBar */}
-        { this.props.currentUser ? <Logout /> : <Login /> }
+        <NavBar />
+        <MainContainer />
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.currentUser
-  }
-}
-
-export default connect(mapStateToProps, { getCurrentUser })(App);
+export default connect(null, { getCurrentUser })(App);
