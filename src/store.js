@@ -1,15 +1,17 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 // import { compose } from 'redux' ???????????????
+import thunk from 'redux-thunk';
+
 import users from './reducers/users'
 import currentUser from './reducers/currentUser'
 import loginForm from './reducers/loginForm'
-import thunk from 'redux-thunk';
-
+import exercises from './reducers/exercises'
 
 const reducer = combineReducers({
   users,
   currentUser,
-  loginForm
+  loginForm,
+  exercises
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
