@@ -4,7 +4,7 @@ import Exercises from './Exercises'
 const MainContainer = () => {
   return (
     <div className="MainContainer">
-      <Exercises />
+      {/* <Exercises /> */}
     </div>
   )
 }
