@@ -1,3 +1,6 @@
+// only needed since LoginForm is in Redux, not react
+import { resetLoginForm } from './loginForm'
+import { getExercises } from './exercises'
 // synchronous action creators
 export const setCurrentUser = user => {
   return {
@@ -28,6 +31,9 @@ export const login = credentials => {
           alert(json.error)
         } else {
           dispatch(setCurrentUser(json.data))
+          dispatch(getExercises())
+          // only needed because Login is in Redux and not React?
+          dispatch(resetLoginForm())
         }
       })
       .catch(console.log())
@@ -68,6 +74,7 @@ export const getCurrentUser = () => {
           alert(json.error)
         } else {
           dispatch(setCurrentUser(json.data))
+          dispatch(getExercises())
         }
       })
       .catch(console.log())
