@@ -1,5 +1,6 @@
 // only needed since LoginForm is in Redux, not react
 import { resetLoginForm } from './loginForm'
+import { resetSignUpForm } from './signUpForm'
 import { getExercises } from './exercises'
 // synchronous action creators
 export const setCurrentUser = user => {
@@ -34,6 +35,37 @@ export const login = credentials => {
           dispatch(getExercises())
           // only needed because Login is in Redux and not React?
           dispatch(resetLoginForm())
+        }
+      })
+      .catch(console.log())
+  }
+}
+
+export const signUp = credentials => {
+  console.log("credentials are", credentials)
+  const userInfo = {
+    user: credentials
+  }
+  return dispatch => {
+    // can abstract fetch requests into an adapter class and do something like - return Adapter.login(args) or Api.login(args)
+    return fetch("http://localhost:3001/api/v1/signup", {
+      credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(userInfo)
+    })
+      .then(response => response.json())
+      // .then(user => dispatch({type: "SET_CURRENT_USER"}))
+      .then(json => {
+        if (json.error) {
+          alert(json.error)
+        } else {
+          dispatch(setCurrentUser(json.data))
+          dispatch(getExercises())
+          // only needed because Login is in Redux and not React?
+          dispatch(resetSignUpForm())
         }
       })
       .catch(console.log())
