@@ -6,7 +6,10 @@ const Exercises = props => {
   const exerciseCards = props.exercises.map(exercise => <ExerciseCard exercise={exercise} key={exercise.id} />)
   // in return, going more than one level deep, so need to make sure exerciseCards are there before rendering anything. instead of just saying exerciseCards, need to say:
   return (
-    exerciseCards.length > 0 ? exerciseCards : null
+    <div>
+      <h2>Exercises</h2>
+      { exerciseCards.length > 0 ? exerciseCards : null }
+    </div>
   )
 }
 
