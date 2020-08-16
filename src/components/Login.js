@@ -5,8 +5,14 @@ import { login } from '../actions/currentUser';
 
 
 // Written in Redux - change to React? Make sure I understand what's going on here...
+// *********** LOOK INTO HISTORY PROP TO UNDERSTAND WHAT THAT IS
+  // 3 ROUTER PROPS: MATCH, HISTORY, LOCATION
+      // match has params and will hold an object just like params hash in rails - keys and values will match the dynamic pieces of your url
+      // history - where are we at any given time? Can "push" and change where you are; is special because it is a mutable object, you can mutate it on the fly
+      // location
 
-const Login = ({ loginFormData, updateLoginForm, login }) => {
+// take the history prop that you get from using route and pass it in to login - have access to history because Login is rendered directly as the result of a route
+const Login = ({ loginFormData, updateLoginForm, login, history }) => {
 
   const handleInputChange = event => {
     const { name, value } = event.target
@@ -19,7 +25,7 @@ const Login = ({ loginFormData, updateLoginForm, login }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    login(loginFormData)
+    login(loginFormData, history)
   }
 
   return (
