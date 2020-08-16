@@ -6,7 +6,7 @@ import { signUp } from '../actions/currentUser';
 
 // Written in Redux - change to React? Make sure I understand what's going on here...
 
-const Login = ({ signUpFormData, updateSignUpForm, signUp }) => {
+const Login = ({ signUpFormData, updateSignUpForm, signUp, history }) => {
 
   const handleInputChange = event => {
     const { name, value } = event.target
@@ -19,7 +19,7 @@ const Login = ({ signUpFormData, updateSignUpForm, signUp }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    signUp(signUpFormData)
+    signUp(signUpFormData, history)
   }
 
   return (
