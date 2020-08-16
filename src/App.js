@@ -10,6 +10,9 @@ import Login from './components/Login'
 import Logout from './components/Logout'
 import SignUp from './components/SignUp'
 import Exercises from './components/Exercises'
+import Home from './components/Home'
+
+// Add Switch and wrap routes?
 
 class App extends Component {
 
@@ -19,6 +22,7 @@ class App extends Component {
   }
 
   render() {
+    const { loggedIn } = this.props
     return (
       <Router>
         <div className="App">
@@ -26,10 +30,11 @@ class App extends Component {
 
           <NavBar />
           <MainContainer />
+          { loggedIn ? <Logout /> : null }
+          <Route exact path="/" render={ () => loggedIn ? <Exercises /> : <Home /> } />
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
           <Route exact path="/exercises" component={Exercises} />
-          <Logout />
           <Route />
           <Route />
         </div>
@@ -39,4 +44,10 @@ class App extends Component {
   }
 }
 
-export default connect(null, { getCurrentUser })(App);
+const mapStateToProps = state => {
+  return {
+    loggedIn: !!state.currentUser
+  }
+}
+
+export default connect(mapStateToProps, { getCurrentUser })(App);
