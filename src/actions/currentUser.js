@@ -13,7 +13,8 @@ export const setCurrentUser = user => {
 
 
 // aysnchronous action creators
-export const login = credentials => {
+// pass in history prop
+export const login = (credentials, history) => {
   console.log("credentials are", credentials)
   return dispatch => {
     // can abstract fetch requests into an adapter class and do something like - return Adapter.login(args) or Api.login(args)
@@ -35,13 +36,15 @@ export const login = credentials => {
           dispatch(getExercises())
           // only needed because Login is in Redux and not React?
           dispatch(resetLoginForm())
+          // tells your app which path to go to once logged in
+          history.push("/")
         }
       })
       .catch(console.log())
   }
 }
 
-export const signUp = credentials => {
+export const signUp = (credentials, history) => {
   console.log("credentials are", credentials)
   const userInfo = {
     user: credentials
@@ -66,6 +69,7 @@ export const signUp = credentials => {
           dispatch(getExercises())
           // only needed because Login is in Redux and not React?
           dispatch(resetSignUpForm())
+          history.push("/")
         }
       })
       .catch(console.log())
