@@ -1,7 +1,9 @@
 // only needed since LoginForm is in Redux, not react
-import { resetLoginForm } from './loginForm'
-import { resetSignUpForm } from './signUpForm'
-import { getExercises } from './exercises'
+// import { resetLoginForm } from './loginForm'
+// import { resetSignUpForm } from './signUpForm'
+import { getExercises } from './exercises';
+
+
 // synchronous action creators
 export const setCurrentUser = user => {
   return {
@@ -27,15 +29,15 @@ export const login = (credentials, history) => {
       body: JSON.stringify(credentials)
     })
       .then(response => response.json())
-      // .then(user => dispatch({type: "SET_CURRENT_USER"}))
       .then(json => {
         if (json.error) {
           alert(json.error)
         } else {
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
-          // only needed because Login is in Redux and not React?
-          dispatch(resetLoginForm())
+          // only needed because Login is in Redux and not React
+          // dispatch(resetLoginForm())
+
           // tells your app which path to go to once logged in
           history.push("/")
         }
@@ -60,15 +62,15 @@ export const signUp = (credentials, history) => {
       body: JSON.stringify(userInfo)
     })
       .then(response => response.json())
-      // .then(user => dispatch({type: "SET_CURRENT_USER"}))
       .then(json => {
         if (json.error) {
           alert(json.error)
         } else {
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
-          // only needed because Login is in Redux and not React?
-          dispatch(resetSignUpForm())
+          // only needed because Login is in Redux and not React
+          // dispatch(resetSignUpForm())
+
           history.push("/")
         }
       })
