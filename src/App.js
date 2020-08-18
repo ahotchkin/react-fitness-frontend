@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 // can move BrowserRouter to index.js and wrap App instead of using here
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getCurrentUser } from './actions/currentUser'
 import NavBar from './components/NavBar'
@@ -24,6 +24,7 @@ class App extends Component {
 
   render() {
     const { loggedIn } = this.props
+
     return (
       <Router>
         <div className="App">
@@ -31,17 +32,27 @@ class App extends Component {
 
           <NavBar />
           <MainContainer />
-          { loggedIn ? <Logout /> : null }
+
+          <Route exact path="/login" render={ (props) => loggedIn ? <Exercises /> : <Login history={props.history}/> } />
+
+
+          { loggedIn ? <Logout /> : <Redirect to="/" /> }
+
+
+          <Route exact path="/signup" render={ () => loggedIn ? <Exercises /> : <SignUp /> } />
+
+
           <Route exact path="/" render={ () => loggedIn ? <Exercises /> : <Home /> } />
 
           {/* below routes should only be available to users who are NOT logged in */}
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/signup" component={SignUp} />
-          
-          {/* below routes should only be available to users who are logged in */}
+          <Route exact path="/logout" component={Logout} />
+
+
+          {/* below routes should only be available to users who are logged in - they are working correctly, but i'm not sure how I set that up...*/}
           <Route exact path="/exercises" component={Exercises} />
           <Route exact path="/exercises/new" component={NewExerciseForm} />
           <Route />
+
         </div>
       </Router>
 
