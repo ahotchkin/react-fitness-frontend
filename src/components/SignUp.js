@@ -24,7 +24,7 @@ const Login = ({ signUpFormData, updateSignUpForm, signUp, history }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Username:</label>
+      <label>Username: </label>
       <input
         placeholder="Username"
         value={signUpFormData.username}
@@ -33,7 +33,7 @@ const Login = ({ signUpFormData, updateSignUpForm, signUp, history }) => {
         onChange={handleInputChange}
       />
 
-      <label>Password:</label>
+      <label>Password: </label>
       <input
         placeholder="Password"
         value={signUpFormData.password}
@@ -42,14 +42,14 @@ const Login = ({ signUpFormData, updateSignUpForm, signUp, history }) => {
         onChange={handleInputChange}
       />
 
-      <label>Gender:</label>
+      <label>Gender: </label>
       <select name="gender" defaultValue="DEFAULT" onChange={handleInputChange}>
         <option value="DEFAULT" disabled hidden>Select</option>
         <option value="male">Male</option>
         <option value="female">Female</option>
       </select>
 
-      <label>Age:</label>
+      <label>Age: </label>
       <input
         placeholder="Age"
         value={signUpFormData.age}
@@ -58,7 +58,7 @@ const Login = ({ signUpFormData, updateSignUpForm, signUp, history }) => {
         onChange={handleInputChange}
       />
 
-      <label>Height:</label>
+      <label>Height: </label>
       <input
         placeholder="Feet"
         value={signUpFormData.height_feet}
