@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/currentUser';
 
 
-// Written in Redux - change to React? Make sure I understand what's going on here...
-
 // have logout as props, destructuring and using as a callback
 const Logout = ({ logout }) => {
 
@@ -23,4 +21,4 @@ const Logout = ({ logout }) => {
 // }
 
 // using logout in mapDispatchToProps object
-export default connect(null, { logout })(Logout );
+export default connect(null, { logout })(Logout);
