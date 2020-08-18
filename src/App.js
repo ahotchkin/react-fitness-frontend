@@ -39,7 +39,7 @@ class App extends Component {
           { loggedIn ? <Logout /> : <Redirect to="/" /> }
 
 
-          <Route exact path="/signup" render={ () => loggedIn ? <Exercises /> : <SignUp /> } />
+          <Route exact path="/signup" render={ (props) => loggedIn ? <Exercises /> : <SignUp history={props.history}/> } />
 
 
           <Route exact path="/" render={ () => loggedIn ? <Exercises /> : <Home /> } />
