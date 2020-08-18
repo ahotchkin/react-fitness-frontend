@@ -89,10 +89,10 @@ const mapStateToProps = state => {
 }
 
 // how can I get this to work to be able to call mapDispatchToProps in connect???
-const mapDispatchToProps = dispatch => {
-  return {
-    addExercise: exerciseData => dispatch({ type: "ADD_EXERCISE", exerciseData })
-  }
-}
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     addExercise: exerciseData => dispatch({ type: "ADD_EXERCISE", exerciseData })
+//   }
+// }
 
 export default connect(mapStateToProps, { addExercise })(NewExerciseForm);
