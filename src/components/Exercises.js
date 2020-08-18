@@ -1,6 +1,7 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import ExerciseCard from './ExerciseCard'
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import ExerciseCard from './ExerciseCard';
 
 const Exercises = props => {
   const exerciseCards = props.exercises.map(exercise => <ExerciseCard exercise={exercise} key={exercise.id} />)
@@ -9,6 +10,13 @@ const Exercises = props => {
     <div>
       <h2>Exercises</h2>
       { exerciseCards.length > 0 ? exerciseCards : null }
+
+      <Link to="/exercises/new">
+        <button type="button">
+          Add Exercise
+        </button>
+      </Link>
+
     </div>
   )
 }
