@@ -11,6 +11,7 @@ import Logout from './components/Logout'
 import SignUp from './components/SignUp'
 import Exercises from './components/Exercises'
 import Home from './components/Home'
+import NewExerciseForm from './components/NewExerciseForm'
 
 // Add Switch and wrap routes?
 
@@ -32,10 +33,14 @@ class App extends Component {
           <MainContainer />
           { loggedIn ? <Logout /> : null }
           <Route exact path="/" render={ () => loggedIn ? <Exercises /> : <Home /> } />
+
+          {/* below routes should only be available to users who are NOT logged in */}
           <Route exact path="/login" component={Login} />
           <Route exact path="/signup" component={SignUp} />
+          
+          {/* below routes should only be available to users who are logged in */}
           <Route exact path="/exercises" component={Exercises} />
-          <Route />
+          <Route exact path="/exercises/new" component={NewExerciseForm} />
           <Route />
         </div>
       </Router>
