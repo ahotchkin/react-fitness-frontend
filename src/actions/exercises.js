@@ -1,9 +1,15 @@
 // synchronous actions
 export const setExercises = exercises => {
   return {
-    type: "SET_MY_EXERCISES",
+    type: "SET_EXERCISES",
     exercises
     // or payload: exercises
+  }
+}
+
+export const clearExercises = () => {
+  return {
+    type: "CLEAR_EXERCISES"
   }
 }
 
