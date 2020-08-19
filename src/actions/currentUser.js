@@ -2,6 +2,7 @@
 // import { resetLoginForm } from './loginForm'
 // import { resetSignUpForm } from './signUpForm'
 import { getExercises } from './exercises';
+import { clearExercises } from './exercises';
 
 
 // synchronous action creators
@@ -85,6 +86,7 @@ export const logout = () => {
     // optimistic => make the change to the frontend right away, don't wait for the backend
     // pessimistic => hold on, make sure the server is running, the response we said works and the backend is all set before changing anything on the frontend and displaying anything to the user
     dispatch(clearCurrentUser())
+    dispatch(clearExercises())
     return fetch("http://localhost:3001/api/v1/logout", {
       credentials: "include",
       method: "DELETE"
