@@ -7,6 +7,7 @@ import currentUser from './reducers/currentUser'
 import loginForm from './reducers/loginForm'
 import exercises from './reducers/exercises'
 import signUpForm from './reducers/signUpForm'
+import diaries from './reducers/diaries'
 
 // could separate this into a separate rootReducer file
 const reducer = combineReducers({
@@ -14,7 +15,8 @@ const reducer = combineReducers({
   currentUser,
   loginForm,
   exercises,
-  signUpForm
+  signUpForm,
+  diaries
 })
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
