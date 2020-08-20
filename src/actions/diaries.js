@@ -3,7 +3,7 @@ export const setDiaries = diaries => {
   return {
     type: "SET_DIARIES",
     diaries
-    // or payload: exercises
+    // or payload: diaries
   }
 }
 
