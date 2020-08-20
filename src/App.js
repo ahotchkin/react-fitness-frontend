@@ -12,7 +12,7 @@ import SignUp from './components/SignUp'
 import Exercises from './components/Exercises'
 import Home from './components/Home'
 import NewExerciseForm from './components/NewExerciseForm'
-import Diary from './components/Diary'
+import Diaries from './components/Diaries'
 
 // Add Switch and wrap routes?
 
@@ -47,7 +47,7 @@ class App extends Component {
           {/* below routes should only be available to users who are logged in - they are working correctly, but i'm not sure how I set that up...*/}
           <Route exact path="/exercises" component={Exercises} />
           <Route exact path="/exercises/new" component={NewExerciseForm} />
-          { loggedIn ? <Diary /> : null }
+          { loggedIn ? <Diaries /> : null }
 
           {/* is this doing anything???? */}
           <Route exact path="/logout" component={Logout} />
