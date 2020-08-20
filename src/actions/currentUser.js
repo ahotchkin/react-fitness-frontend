@@ -3,6 +3,7 @@
 // import { resetSignUpForm } from './signUpForm'
 import { getExercises } from './exercises';
 import { clearExercises } from './exercises';
+import { getDiaries } from './diaries';
 
 
 // synchronous action creators
@@ -36,6 +37,7 @@ export const login = (credentials, history) => {
         } else {
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
+          dispatch(getDiaries())
           // only needed because Login is in Redux and not React
           // dispatch(resetLoginForm())
 
