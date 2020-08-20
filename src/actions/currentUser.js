@@ -71,6 +71,7 @@ export const signUp = (credentials, history) => {
         } else {
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
+          dispatch(getDiaries())
           // only needed because Login is in Redux and not React
           // dispatch(resetSignUpForm())
 
@@ -117,6 +118,7 @@ export const getCurrentUser = () => {
         } else {
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
+          dispatch(getDiaries())
         }
       })
       .catch(console.log())
