@@ -12,6 +12,7 @@ import SignUp from './components/SignUp'
 import Exercises from './components/Exercises'
 import Home from './components/Home'
 import NewExerciseForm from './components/NewExerciseForm'
+import Diary from './components/Diary'
 
 // Add Switch and wrap routes?
 
@@ -34,23 +35,27 @@ class App extends Component {
           <MainContainer />
 
           <Route exact path="/login" render={ (props) => loggedIn ? <Exercises /> : <Login history={props.history}/> } />
-
-
-          { loggedIn ? <Logout /> : <Redirect to="/" /> }
-
-
           <Route exact path="/signup" render={ (props) => loggedIn ? <Exercises /> : <SignUp history={props.history}/> } />
+
 
 
           <Route exact path="/" render={ () => loggedIn ? <Exercises /> : <Home /> } />
 
           {/* below routes should only be available to users who are NOT logged in */}
-          <Route exact path="/logout" component={Logout} />
 
 
           {/* below routes should only be available to users who are logged in - they are working correctly, but i'm not sure how I set that up...*/}
           <Route exact path="/exercises" component={Exercises} />
           <Route exact path="/exercises/new" component={NewExerciseForm} />
+          { loggedIn ? <Diary /> : null }
+
+          {/* is this doing anything???? */}
+          <Route exact path="/logout" component={Logout} />
+
+          { loggedIn ? <Logout /> : <Redirect to="/" /> }
+
+
+
           <Route />
 
         </div>
