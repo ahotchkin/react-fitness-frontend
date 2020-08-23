@@ -1,4 +1,5 @@
 import React from 'react';
+import Foods from './Foods';
 
 const MealCard = (props) => {
   return (
