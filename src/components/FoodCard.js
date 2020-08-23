@@ -13,6 +13,7 @@ const FoodCard = ({ food }) => {
 
   return (
     <div>
+     <h6>{food.brand_name} {food.description} - {food.calories} calories</h6>
     </div>
 
   )
