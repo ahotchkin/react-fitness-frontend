@@ -1,13 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { deleteExercise } from '../actions/exercises';
 
-const ExerciseCard = ({ exercise }) => {
+
+      // <button onClick={handleClick}>Delete</button>
+const ExerciseCard = (props) => {
+
+  const handleClick = () => {
+    props.deleteExercise(props.exercise.id)
+  }
+
   return (
     <div>
-      <h3>{exercise.attributes.name}</h3>
-      <p>Calories Burned: {exercise.attributes.calories_burned}</p>
+      <h3>{props.exercise.attributes.name}</h3>
+      <p>Calories Burned: {props.exercise.attributes.calories_burned}</p>
+      <form onSubmit={handleClick}>
+        <input type="submit" value="Delete" />
+      </form>
+
     </div>
 
   )
 }
 
-export default ExerciseCard
+export default connect(null, { deleteExercise })(ExerciseCard);
