@@ -7,6 +7,11 @@ export default (state = [], action) => {
         ...state,
         action.exercise
       ]
+    case "UPDATE_EXERCISE":
+      return [
+        ...state,
+        action.exercise
+      ]
     case "DELETE_EXERCISE":
       return [
         state.filter(exercise => exercise !== action.exercise)
