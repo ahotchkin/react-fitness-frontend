@@ -76,12 +76,36 @@ export const addExercise = (exerciseData, currentUser, history) => {
   }
 }
 
+// export const updateExercise = id => {
+//   console.log(`getting ready to update exercise with an id of ${id}`)
+//   return dispatch => {
+//     return fetch(`http://localhost:3001/api/v1/exercises/${id}`, {
+//       credentials: "include",
+//       method: "PATCH",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//       body: JSON.stringify(exercise)
+//     })
+//       .then(response => response.json())
+//       .then(json => {
+//         if (json.error) {
+//           alert(json.error)
+//         } else {
+//           console.log(json)
+//           dispatch({ type: "UPDATE_EXERCISE", exercise: json.data })
+//           // should they go back to home page or to exercise show page???
+//           // what is the difference between push and pushState???
+//           history.push("/")
+//         }
+//       })
+//       .catch(console.log())
+//   }
+// }
+
 export const deleteExercise = id => {
   console.log(`getting ready to delete exercise with an id of ${id}`)
   return dispatch => {
-    // don't need to wait until fetch request resolves to log out a user, when a user clicks logout they should logout right away. call clearCurrentUser immediately
-    // optimistic => make the change to the frontend right away, don't wait for the backend
-    // pessimistic => hold on, make sure the server is running, the response we said works and the backend is all set before changing anything on the frontend and displaying anything to the user
     return fetch(`http://localhost:3001/api/v1/exercises/${id}`, {
       credentials: "include",
       method: "DELETE"
