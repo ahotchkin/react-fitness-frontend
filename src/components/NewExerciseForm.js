@@ -23,7 +23,7 @@ class NewExerciseForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // set the state here by accessing props provided by mapDispatchToProps
-    console.log(this.props.addExercise)
+    console.log(this.props)
     this.props.addExercise(this.state, this.props.currentUser, this.props.history)
     this.setState({
       // drop down stays selected on whatever category was selected. Is this a problem or will it always update on page refresh?
@@ -36,6 +36,7 @@ class NewExerciseForm extends Component {
   };
 
   render() {
+    {console.log("the new exercise form should appear on the page now")}
     return(
       <form onSubmit={this.handleSubmit}>
         <label>Category: </label>
@@ -96,3 +97,4 @@ const mapStateToProps = state => {
 // }
 
 export default connect(mapStateToProps, { addExercise })(NewExerciseForm);
+// export default connect(mapStateToProps)(NewExerciseForm);
