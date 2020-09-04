@@ -76,32 +76,40 @@ export const addExercise = (exerciseData, currentUser, history) => {
   }
 }
 
-// export const updateExercise = id => {
-//   console.log(`getting ready to update exercise with an id of ${id}`)
-//   return dispatch => {
-//     return fetch(`http://localhost:3001/api/v1/exercises/${id}`, {
-//       credentials: "include",
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify(exercise)
-//     })
-//       .then(response => response.json())
-//       .then(json => {
-//         if (json.error) {
-//           alert(json.error)
-//         } else {
-//           console.log(json)
-//           dispatch({ type: "UPDATE_EXERCISE", exercise: json.data })
-//           // should they go back to home page or to exercise show page???
-//           // what is the difference between push and pushState???
-//           history.push("/")
-//         }
-//       })
-//       .catch(console.log())
-//   }
-// }
+export const updateExercise = (exerciseData, history) => {
+  console.log(`getting ready to update exercise with an id of ${exerciseData.id}`)
+  const exercise = {
+    // is there a cleaner way to do this???
+    name: exerciseData.name,
+    category: exerciseData.category,
+    duration_in_minutes: exerciseData.duration_in_minutes,
+    calories_burned: exerciseData.calories_burned
+  }
+
+  return dispatch => {
+    return fetch(`http://localhost:3001/api/v1/exercises/${exerciseData.id}`, {
+      credentials: "include",
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(exercise)
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json.error) {
+          alert(json.error)
+        } else {
+          console.log(json)
+          dispatch({ type: "UPDATE_EXERCISE", exercise: json.data })
+          // should they go back to home page or to exercise show page???
+          // what is the difference between push and pushState???
+          history.push("/")
+        }
+      })
+      .catch(console.log())
+  }
+}
 
 export const deleteExercise = id => {
   console.log(`getting ready to delete exercise with an id of ${id}`)
