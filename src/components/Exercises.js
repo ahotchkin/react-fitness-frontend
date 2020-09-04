@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import ExerciseCard from './ExerciseCard';
 
+import UpdateExercise from './UpdateExercise'
+
 const Exercises = props => {
-  const exerciseCards = props.exercises.map(exercise => <ExerciseCard exercise={exercise} key={exercise.id} />)
+  const exerciseCards = props.exercises.map(exercise => <ExerciseCard exercise={exercise} key={exercise.id} updateExercise={props.updateExercise} />)
   // in return, going more than one level deep, so need to make sure exerciseCards are there before rendering anything. instead of just saying exerciseCards, need to say:
   return (
     <div>
@@ -30,4 +32,4 @@ const mapStateToProps = state => {
 
 // the function returned from invoking connect taht will now supply Exercises with props included state as descriped in MSTP and actions as described in MDTP takes Exercises as an argument - the whole expression is a connected Exercises component with state and actions
 // not just exporting the const from above, but exporting a bulked up version with state and actions
-export default connect(mapStateToProps)(Exercises)
+export default connect(mapStateToProps, { UpdateExercise })(Exercises)
