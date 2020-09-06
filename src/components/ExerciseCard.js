@@ -18,11 +18,10 @@ const ExerciseCard = (props) => {
 
   return (
     <div>
-      {console.log(props)}
       <h3>{props.exercise.attributes.name}</h3>
       <p>Calories Burned: {props.exercise.attributes.calories_burned}</p>
 
-      <Link to={`/exercises/${props.exercise.id}`}>
+      <Link to={`/exercises/${props.exercise.id}/edit`}>
         <button type="button">
           Update Exercise
         </button>
@@ -31,7 +30,6 @@ const ExerciseCard = (props) => {
       <form onSubmit={handleDeleteClick}>
         <input type="submit" value="Delete" />
       </form>
-
     </div>
 
   )
