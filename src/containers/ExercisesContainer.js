@@ -13,17 +13,18 @@ import { addExercise } from '../actions/exercises';
 
 import NewExerciseForm from '../components/NewExerciseForm'
 import Exercises from '../components/Exercises'
-
+import ExerciseCard from '../components/ExerciseCard'
+import UpdateExercise from '../components/UpdateExercise'
 
 class ExercisesContainer extends Component {
 
   // add componentDidMount that calls a fetchExercises function from actions/exercises.js??????
 
   componentDidMount() {
-    console.log(this.props)
     // this.props.loggedIn ? this.props.getExercises() : null
     // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
     this.props.getExercises()
+
   }
 
   render() {
@@ -33,11 +34,19 @@ class ExercisesContainer extends Component {
         <NewExerciseForm addRestaurant={this.props.addExercise} />
         <Exercises exercises={this.props.exercises} updateExercise={this.props.updateExercise} deleteExercise={this.props.deleteExercise} />
         */}
+        {/* SHOULD ONLY SHOW EXERCISES FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
         <h1>I'm in the exercises container</h1>
-        <Exercises />
           <Switch>
             <Route exact path="/exercises/new" render={ (props) => <NewExerciseForm addExercise={this.props.addExercise} history={this.props.history} /> } />
+            <Route exact path={this.props.match.url} render={() => <Exercises />} />
+            <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
+              const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
+              return <UpdateExercise exercise={exercise} {...props} />
+            }} />
+
+            {/*
             <Route exact path="/exercises" component={Exercises} />
+            */}
           </Switch>
           {/*
 
