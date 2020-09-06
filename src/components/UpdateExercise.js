@@ -13,7 +13,7 @@ class UpdateExercise extends Component {
   }
 
   handleOnChange = event => {
-    // is this necessary?
+    // is this necessary? WHAT DOES EVENT.PERSIST() DO??????
     event.persist()
     this.setState({
       [event.target.name]: event.target.value
@@ -24,7 +24,7 @@ class UpdateExercise extends Component {
     event.preventDefault();
     // set the state here by accessing props provided by mapDispatchToProps
     console.log(this.props)
-    this.props.updateExercise(this.state, this.props.history)
+    this.props.updateExercise(this.state, this.props.exercise, this.props.history)
     this.setState({
       // drop down stays selected on whatever category was selected. Is this a problem or will it always update on page refresh?
       category: "",
@@ -43,14 +43,13 @@ class UpdateExercise extends Component {
       <div>
 
         This is the update exercise page for {this.props.exercise.attributes.name}
-
+        <br /><br />
         {console.log(this.state)}
 
 
         <form onSubmit={this.handleSubmit}>
           <label>Category: </label>
-          <select name="category" defaultValue="DEFAULT" onChange={this.handleOnChange}>
-            <option value={this.state.category} disabled hidden>Select</option>
+          <select name="category" value={this.state.category} onChange={this.handleOnChange}>
             <option value="cardio">Cardio</option>
             <option value="strength_training">Strength Training</option>
             <option value="balance">Balance</option>
