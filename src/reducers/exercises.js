@@ -9,9 +9,15 @@ export default (state = [], action) => {
       ]
     case "UPDATE_EXERCISE":
       return [
-        ...state,
-        action.exercise
+        state.map(exercise => {
+          if (exercise.id === action.exercise.id ) {
+            return action.exercise
+          } else {
+            return exercise
+          }
+        }),
       ]
+      console.log("THE EXERCISE HAS NOW BEEN UPDATED")
     case "DELETE_EXERCISE":
       return [
         state.filter(exercise => exercise !== action.exercise)
