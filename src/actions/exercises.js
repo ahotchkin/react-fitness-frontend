@@ -76,24 +76,28 @@ export const addExercise = (exerciseData, currentUser, history) => {
   }
 }
 
-export const updateExercise = (exerciseData, history) => {
-  console.log(`getting ready to update exercise with an id of ${exerciseData.id}`)
-  const exercise = {
+export const updateExercise = (exerciseFormData, exercise, history) => {
+  console.log(exercise)
+  console.log(`getting ready to update exercise with an id of ${exercise.id}`)
+  const updatedExercise = {
     // is there a cleaner way to do this???
-    name: exerciseData.name,
-    category: exerciseData.category,
-    duration_in_minutes: exerciseData.duration_in_minutes,
-    calories_burned: exerciseData.calories_burned
+    // is this persisting the userId that was originally saved?????
+    name: exerciseFormData.name,
+    category: exerciseFormData.category,
+    duration_in_minutes: exerciseFormData.duration_in_minutes,
+    calories_burned: exerciseFormData.calories_burned
   }
+  console.log("here is the updated exercise: ")
+  console.log(updatedExercise)
 
   return dispatch => {
-    return fetch(`http://localhost:3001/api/v1/exercises/${exerciseData.id}`, {
+    return fetch(`http://localhost:3001/api/v1/exercises/${exercise.id}`, {
       credentials: "include",
       method: "PATCH",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(exercise)
+      body: JSON.stringify(updatedExercise)
     })
       .then(response => response.json())
       .then(json => {
@@ -101,10 +105,15 @@ export const updateExercise = (exerciseData, history) => {
           alert(json.error)
         } else {
           console.log(json)
+          console.log(history)
           dispatch({ type: "UPDATE_EXERCISE", exercise: json.data })
           // should they go back to home page or to exercise show page???
           // what is the difference between push and pushState???
-          history.push("/")
+
+
+
+          // **********THIS IS CAUSING AN ERROR, NOT REDIRECTING PROPERLY**********
+          history.push("/exercises")
         }
       })
       .catch(console.log())
@@ -118,6 +127,7 @@ export const deleteExercise = id => {
       credentials: "include",
       method: "DELETE"
     })
+    // **********NEED TO REDIRECT TO /EXERCISES, FIGURE OUT HOW TO DO THIS**********
 
   }
 }
