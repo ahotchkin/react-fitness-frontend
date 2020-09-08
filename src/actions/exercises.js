@@ -105,14 +105,8 @@ export const updateExercise = (exerciseFormData, exercise, history) => {
           alert(json.error)
         } else {
           console.log(json)
-          console.log(history)
           dispatch({ type: "UPDATE_EXERCISE", exercise: json.data })
-          // should they go back to home page or to exercise show page???
           // what is the difference between push and pushState???
-
-
-
-          // **********THIS IS CAUSING AN ERROR, NOT REDIRECTING PROPERLY**********
           history.push("/exercises")
         }
       })
@@ -120,13 +114,25 @@ export const updateExercise = (exerciseFormData, exercise, history) => {
   }
 }
 
-export const deleteExercise = id => {
+export const deleteExercise = (id, history) => {
   console.log(`getting ready to delete exercise with an id of ${id}`)
+  console.log(history)
   return dispatch => {
     return fetch(`http://localhost:3001/api/v1/exercises/${id}`, {
       credentials: "include",
       method: "DELETE"
     })
+      .then(response => response.json())
+      .then(json => {
+        if (json.error) {
+          alert(json.error)
+        } else {
+          console.log(json)
+          dispatch({ type: "DELETE_EXERCISE", exercise: json.data })
+          history.push("/exercises")
+        }
+      })
+      .catch(console.log())
     // **********NEED TO REDIRECT TO /EXERCISES, FIGURE OUT HOW TO DO THIS**********
 
   }
