@@ -13,7 +13,7 @@ const ExerciseCard = (props) => {
   // </form>
 
   const handleDeleteClick = () => {
-    props.deleteExercise(props.exercise.id)
+    props.deleteExercise(props.exercise.id, props.history)
   }
 
   return (
