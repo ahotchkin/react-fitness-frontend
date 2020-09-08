@@ -6,7 +6,8 @@ import ExerciseCard from './ExerciseCard';
 import UpdateExercise from './UpdateExercise'
 
 const Exercises = props => {
-  const exerciseCards = props.exercises.map(exercise => <ExerciseCard exercise={exercise} key={exercise.id} updateExercise={props.updateExercise} />)
+  console.log(props.history)
+  const exerciseCards = props.exercises.map(exercise => <ExerciseCard exercise={exercise} key={exercise.id} updateExercise={props.updateExercise} history={props.history} />)
   // in return, going more than one level deep, so need to make sure exerciseCards are there before rendering anything. instead of just saying exerciseCards, need to say: { exerciseCards.length > 0 ? exerciseCards : null }
   return (
     <div>
