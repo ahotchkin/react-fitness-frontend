@@ -38,7 +38,7 @@ class ExercisesContainer extends Component {
         <h1>I'm in the exercises container</h1>
           <Switch>
             <Route exact path="/exercises/new" render={ (props) => <NewExerciseForm addExercise={this.props.addExercise} history={this.props.history} /> } />
-            <Route exact path={this.props.match.url} render={() => <Exercises />} />
+            <Route exact path={this.props.match.url} render={(props) => <Exercises {...props} />} />
             <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
               const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
               return <UpdateExercise exercise={exercise} {...props} />
