@@ -3,7 +3,6 @@ export const setExercises = exercises => {
   return {
     type: "SET_EXERCISES",
     exercises
-    // or payload: exercises
   }
 }
 
@@ -13,14 +12,35 @@ export const clearExercises = () => {
   }
 }
 
+export const addExercise = exercise => {
+  return {
+    type: "ADD_EXERCISE",
+    exercise
+  }
+}
+
+export const updateExerciseSuccess = exercise => {
+  return {
+    type: "UPDATE_EXERCISE",
+    exercise
+  }
+}
+
+export const deleteExerciseSuccess = exerciseId => {
+  return {
+    type: "DELETE_EXERCISE",
+    exerciseId
+  }
+}
+
 // before you think about populating this piece of state with anything, get it into the store first to see the name and data type are correct
 // steps: 1. Build reducer, 2. Add to store, 3. Build action creator
-
+const baseUrl = "http://localhost:3001/api/v1/exercises"
 // asychronous actions
 export const getExercises = () => {
   return dispatch => {
     console.log("DISPATCHING CURRENT USER'S EXERCISES")
-    return fetch("http://localhost:3001/api/v1/exercises", {
+    return fetch(baseUrl, {
       credentials: "include",
       method: "GET",
       headers: {
@@ -28,7 +48,6 @@ export const getExercises = () => {
       },
     })
       .then(response => response.json())
-      // .then(user => dispatch({type: "SET_CURRENT_USER"}))
       .then(json => {
         if (json.error) {
           alert(json.error)
@@ -41,7 +60,7 @@ export const getExercises = () => {
   }
 }
 
-export const addExercise = (exerciseData, currentUser, history) => {
+export const createExercise = (exerciseData, currentUser, history) => {
   console.log("exercise data is ", exerciseData)
   const exercise = {
     // is there a cleaner way to do this???
@@ -53,7 +72,7 @@ export const addExercise = (exerciseData, currentUser, history) => {
   }
 
   return dispatch => {
-    return fetch("http://localhost:3001/api/v1/exercises", {
+    return fetch(baseUrl, {
       credentials: "include",
       method: "POST",
       headers: {
@@ -67,9 +86,9 @@ export const addExercise = (exerciseData, currentUser, history) => {
           alert(json.error)
         } else {
           console.log(json)
-          dispatch({ type: "ADD_EXERCISE", exercise: json.data })
+          dispatch(addExercise(json.data))
           // should they go back to home page or to exercise show page???
-          history.push("/")
+          history.push("/exercises")
         }
       })
       .catch(console.log())
@@ -91,7 +110,7 @@ export const updateExercise = (exerciseFormData, exercise, history) => {
   console.log(updatedExercise)
 
   return dispatch => {
-    return fetch(`http://localhost:3001/api/v1/exercises/${exercise.id}`, {
+    return fetch(baseUrl + `/${exercise.id}`, {
       credentials: "include",
       method: "PATCH",
       headers: {
@@ -105,7 +124,7 @@ export const updateExercise = (exerciseFormData, exercise, history) => {
           alert(json.error)
         } else {
           console.log(json)
-          dispatch({ type: "UPDATE_EXERCISE", exercise: json.data })
+          dispatch(updateExerciseSuccess(json.data))
           // what is the difference between push and pushState???
           history.push("/exercises")
         }
@@ -114,13 +133,16 @@ export const updateExercise = (exerciseFormData, exercise, history) => {
   }
 }
 
-export const deleteExercise = (id, history) => {
-  console.log(`getting ready to delete exercise with an id of ${id}`)
+export const deleteExercise = (exerciseId, history) => {
+  console.log(`getting ready to delete exercise with an id of ${exerciseId}`)
   console.log(history)
   return dispatch => {
-    return fetch(`http://localhost:3001/api/v1/exercises/${id}`, {
+    return fetch(baseUrl + `/${exerciseId}`, {
       credentials: "include",
-      method: "DELETE"
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
     })
       .then(response => response.json())
       .then(json => {
@@ -128,7 +150,7 @@ export const deleteExercise = (id, history) => {
           alert(json.error)
         } else {
           console.log(json)
-          dispatch({ type: "DELETE_EXERCISE", exercise: json.data })
+          dispatch(deleteExerciseSuccess(exerciseId))
           history.push("/exercises")
         }
       })
