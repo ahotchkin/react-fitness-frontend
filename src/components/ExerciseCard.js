@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { deleteExercise } from '../actions/exercises';
 import { Link } from 'react-router-dom'
 
 const ExerciseCard = (props) => {
@@ -18,6 +16,7 @@ const ExerciseCard = (props) => {
 
   return (
     <div>
+    {console.log(props)}
       <h3>{props.exercise.attributes.name}</h3>
       <p>Calories Burned: {props.exercise.attributes.calories_burned}</p>
 
@@ -27,12 +26,10 @@ const ExerciseCard = (props) => {
         </button>
       </Link>
 
-      <form onSubmit={handleDeleteClick}>
-        <input type="submit" value="Delete" />
-      </form>
+      <button onClick={handleDeleteClick}>Delete</button>
     </div>
 
   )
 }
 
-export default connect(null, { deleteExercise })(ExerciseCard);
+export default ExerciseCard;
