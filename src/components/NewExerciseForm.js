@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { addExercise } from '../actions/exercises';
 
-// rename to CreateExercise????
+// rename to ExerciseInput????
 class NewExerciseForm extends Component {
 
   state = {
@@ -24,7 +22,7 @@ class NewExerciseForm extends Component {
     event.preventDefault();
     // set the state here by accessing props provided by mapDispatchToProps
     console.log(this.props)
-    this.props.addExercise(this.state, this.props.currentUser, this.props.history)
+    this.props.createExercise(this.state, this.props.currentUser, this.props.history)
     this.setState({
       // drop down stays selected on whatever category was selected. Is this a problem or will it always update on page refresh?
       category: "",
@@ -36,7 +34,6 @@ class NewExerciseForm extends Component {
   };
 
   render() {
-    {console.log("the new exercise form should appear on the page now")}
     return(
       <form onSubmit={this.handleSubmit}>
         <label>Category: </label>
@@ -83,18 +80,4 @@ class NewExerciseForm extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.currentUser
-  }
-}
-
-// how can I get this to work to be able to call mapDispatchToProps in connect???
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     addExercise: exerciseData => dispatch({ type: "ADD_EXERCISE", exerciseData })
-//   }
-// }
-
-export default connect(mapStateToProps, { addExercise })(NewExerciseForm);
-// export default connect(mapStateToProps)(NewExerciseForm);
+export default NewExerciseForm;
