@@ -3,10 +3,7 @@ export default (state = [], action) => {
     case "SET_EXERCISES":
       return action.exercises
     case "ADD_EXERCISE":
-      return [
-        ...state,
-        action.exercise
-      ]
+      return state.concat(action.exercise)
     case "UPDATE_EXERCISE":
       return (state.map(exercise => {
         if (exercise.id === action.exercise.id ) {
@@ -16,10 +13,8 @@ export default (state = [], action) => {
         }
       }))
     case "DELETE_EXERCISE":
-      console.log(state.filter(exercise => exercise !== action.exercise))
-      return (
-        state.filter(exercise => exercise !== action.exercise)
-      )
+      console.log(state.filter(exercise => exercise.id !== action.exerciseId))
+      return state.filter(exercise => exercise.id !== action.exerciseId)
     case "CLEAR_EXERCISES":
       // want the exercises to be empty when the current user logs out
       return []
