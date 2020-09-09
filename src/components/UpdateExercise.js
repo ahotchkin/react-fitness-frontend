@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { updateExercise } from '../actions/exercises';
 
-// rename to CreateExercise????
+// rename to ExerciseUpdate????
 class UpdateExercise extends Component {
 
+  // CAN I REFACTOR AND USE THE SAME FORM FOR NEW AND UPDATE?????? WATCH GLOBETROTTER PART 11
   state = {
     category: this.props.exercise.attributes.category,
     name: this.props.exercise.attributes.name,
@@ -24,6 +23,8 @@ class UpdateExercise extends Component {
     event.preventDefault();
     // set the state here by accessing props provided by mapDispatchToProps
     console.log(this.props)
+
+    // IS IT NOT NECESSARY TO PASS IN THE CURRENT USER BECAUSE ONLY THE FIELDS DECLARED IN THE ACTION WILL BE UPDATED?????????????
     this.props.updateExercise(this.state, this.props.exercise, this.props.history)
     this.setState({
       // drop down stays selected on whatever category was selected. Is this a problem or will it always update on page refresh?
@@ -93,18 +94,4 @@ class UpdateExercise extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.currentUser
-  }
-}
-
-// how can I get this to work to be able to call mapDispatchToProps in connect???
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     addExercise: exerciseData => dispatch({ type: "ADD_EXERCISE", exerciseData })
-//   }
-// }
-
-export default connect(mapStateToProps, { updateExercise })(UpdateExercise);
-// export default connect(mapStateToProps)(NewExerciseForm);
+export default UpdateExercise;
