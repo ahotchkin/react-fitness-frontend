@@ -33,7 +33,6 @@ export const getDiaries = () => {
         if (json.error) {
           alert(json.error)
         } else {
-          console.log(json.data)
           dispatch(setDiaries(json.data))
         }
       })
