@@ -1,5 +1,5 @@
 import React from 'react';
-import DiaryCard from './DiaryCard.js';
+import DiaryCard from './DiaryCard';
 
 const Diaries = props => {
 
@@ -19,7 +19,7 @@ const Diaries = props => {
       <h2>Diaries</h2>
       {/* props.diaries is an empty array on page refresh, but is populated on login...... what is happening here*/}
 
-      // is this necessary? check on day when no diary exists
+      {/* is this necessary? check on day when no diary exists */}
       { diaryCard.length > 0 ? diaryCard : null }
     </div>
   )
