@@ -13,10 +13,9 @@ import { updateExercise } from '../actions/exercises';
 import { deleteExercise } from '../actions/exercises';
 
 
-import NewExerciseForm from '../components/NewExerciseForm'
-import Exercises from '../components/Exercises'
-import ExerciseCard from '../components/ExerciseCard'
-import UpdateExercise from '../components/UpdateExercise'
+import ExerciseInput from '../components/exercises/ExerciseInput'
+import Exercises from '../components/exercises/Exercises'
+import ExerciseUpdate from '../components/exercises/ExerciseUpdate'
 
 class ExercisesContainer extends Component {
 
@@ -36,11 +35,11 @@ class ExercisesContainer extends Component {
         {/* SHOULD ONLY SHOW EXERCISES FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
         <h1>I'm in the exercises container</h1>
           <Switch>
-            <Route exact path="/exercises/new" render={ (props) => <NewExerciseForm currentUser={this.props.currentUser} createExercise={this.props.createExercise} history={this.props.history} /> } />
+            <Route exact path="/exercises/new" render={ (props) => <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} history={this.props.history} /> } />
             <Route exact path={this.props.match.url} render={(props) => <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} {...props} />} />
             <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
               const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
-              return <UpdateExercise exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} {...props} />
+              return <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} {...props} />
             }} />
 
           </Switch>
