@@ -1,5 +1,5 @@
 import React from 'react';
-import Meals from './Meals';
+import Meals from '../Meals';
 
 const DiaryCard = ({ diary }) => {
   return (
@@ -11,4 +11,4 @@ const DiaryCard = ({ diary }) => {
   )
 }
 
-export default DiaryCard
+export default DiaryCard;
