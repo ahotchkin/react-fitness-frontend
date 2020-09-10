@@ -12,13 +12,9 @@ import Login from './components/Login'
 // import Logout from './components/Logout'
 import SignUp from './components/SignUp'
 import Home from './components/Home'
-import Diaries from './components/Diaries'
 
-
-import ExercisesContainer from './containers/ExercisesContainer'
-// import Exercises from './components/Exercises'
-// import NewExerciseForm from './components/NewExerciseForm'
-// import UpdateExercise from './components/UpdateExercise'
+import DiariesContainer from './containers/DiariesContainer';
+import ExercisesContainer from './containers/ExercisesContainer';
 
 // Add Switch and wrap routes?
 
@@ -41,14 +37,17 @@ class App extends Component {
 
           <NavBar />
           <Switch>
-            <Route exact path="/" render={ () => loggedIn ? <div> <MainContainer /> <Diaries /> </div> : <Home /> }  />
+            <Route exact path="/" render={ () => loggedIn ? <MainContainer /> : <Home /> }  />
 
             {/* below routes should only be available to users who are NOT logged in */}
             <Route exact path="/login" render={ (props) => loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
             <Route exact path="/signup" render={ (props) => loggedIn ? <Redirect to="/" /> : <SignUp history={props.history}/> } />
 
             {/* below routes should only be available to users who are logged in - they are working correctly, but i'm not sure how I set that up...*/}
-            <Route path="/exercises" render={routerProps => loggedIn ? <ExercisesContainer {...routerProps} /> : <Redirect to="/" />} />
+            <Route path="/diaries" render={routerProps => loggedIn ? <DiariesContainer {...routerProps} /> : <Home />} />
+
+            <Route path="/exercises" render={routerProps => loggedIn ? <ExercisesContainer {...routerProps} /> : <Home />} />
+
 
 
 
