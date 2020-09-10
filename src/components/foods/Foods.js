@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import FoodCard from './FoodCard.js';
 
 const Foods = (props) => {
@@ -28,12 +26,6 @@ const Foods = (props) => {
   )
 }
 
-// receives the state of the Redux store as an argument
-// const mapStateToProps = state => {
-//   return {
-//     foods: state.foods
-//   }
-// }
 
 // the function returned from invoking connect taht will now supply Exercises with props included state as descriped in MSTP and actions as described in MDTP takes Exercises as an argument - the whole expression is a connected Exercises component with state and actions
 // not just exporting the const from above, but exporting a bulked up version with state and actions
