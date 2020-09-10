@@ -7,11 +7,14 @@ const MainContainer = () => {
     <div className="MainContainer">
       In the main container now!
       <br />
-      <Link to="/exercises">
-        <button type="button">
-          Exercises
-        </button>
+      <Link to="/diaries">
+        <button>Diaries</button>
       </Link>
+      <br />
+      <Link to="/exercises">
+        <button>Exercises</button>
+      </Link>
+      <br /><br />
       <Logout />
     </div>
   )
