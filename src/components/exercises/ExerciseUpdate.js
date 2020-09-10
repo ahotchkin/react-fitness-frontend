@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // rename to ExerciseUpdate????
-class UpdateExercise extends Component {
+class ExerciseUpdate extends Component {
 
   // CAN I REFACTOR AND USE THE SAME FORM FOR NEW AND UPDATE?????? WATCH GLOBETROTTER PART 11
   state = {
@@ -94,4 +94,4 @@ class UpdateExercise extends Component {
   }
 }
 
-export default UpdateExercise;
+export default ExerciseUpdate;
