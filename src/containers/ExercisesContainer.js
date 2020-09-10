@@ -1,21 +1,17 @@
-// HOW DO CONTAINER COMPONENTS WORK WITH ROUTES??????
-
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 // for routing - WHAT IS SWITCH???
 import { Route, Switch, withRouter } from 'react-router-dom';
 
-// ORGANIZE ALL COMPONENTS INTO SEPARATE FOLDERS
 import { getExercises } from '../actions/exercises';
 import { createExercise } from '../actions/exercises';
 import { updateExercise } from '../actions/exercises';
 import { deleteExercise } from '../actions/exercises';
 
-
-import ExerciseInput from '../components/exercises/ExerciseInput'
-import Exercises from '../components/exercises/Exercises'
-import ExerciseUpdate from '../components/exercises/ExerciseUpdate'
+import Exercises from '../components/exercises/Exercises';
+import ExerciseInput from '../components/exercises/ExerciseInput';
+import ExerciseUpdate from '../components/exercises/ExerciseUpdate';
 
 class ExercisesContainer extends Component {
 
@@ -80,4 +76,3 @@ const mapDispatchToProps = {
 // not just exporting the const from above, but exporting a bulked up version with state and actions
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ExercisesContainer));
-// export default connect(null, mapDispatchToProps)(ExercisesContainer);
