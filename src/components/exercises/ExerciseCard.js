@@ -3,13 +3,6 @@ import { Link } from 'react-router-dom'
 
 const ExerciseCard = (props) => {
 
-  // const handleUpdateClick = () => {
-  //   console.log("updating exercise here")
-  // }
-  // <form onSubmit={handleUpdateClick}>
-  //   <input type="submit" value="Update" />
-  // </form>
-
   const handleDeleteClick = () => {
     props.deleteExercise(props.exercise.id, props.history)
   }
