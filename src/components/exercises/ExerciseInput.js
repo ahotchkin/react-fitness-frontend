@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
-// rename to ExerciseInput????
-class NewExerciseForm extends Component {
+class ExerciseInput extends Component {
 
   state = {
     category: "",
@@ -80,4 +79,4 @@ class NewExerciseForm extends Component {
   }
 }
 
-export default NewExerciseForm;
+export default ExerciseInput;
