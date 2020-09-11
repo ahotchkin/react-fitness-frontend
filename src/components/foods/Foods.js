@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import FoodCard from './FoodCard.js';
 
 const Foods = (props) => {
@@ -19,7 +20,11 @@ const Foods = (props) => {
       {/* props.foods is an empty array on page refresh, but is populated on login...... what is happening here*/}
 
       { foodCards.length > 0 ? foodCards : null }
-
+      <Link to="/foods/new">
+        <button type="button">
+          Add Food
+        </button>
+      </Link>
 
 
     </div>
