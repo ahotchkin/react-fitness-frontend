@@ -6,7 +6,6 @@ const MealCard = (props) => {
     <div>
       <h3>{props.meal.attributes.category}</h3>
       <p>Calories: {props.meal.attributes.calories}</p>
-      <p>Here's what you ate today</p>
       <Foods foods={props.foods} />
     </div>
 
