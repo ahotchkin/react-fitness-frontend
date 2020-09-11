@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 import { getDiaries } from '../actions/diaries';
-// import { createExercise } from '../actions/exercises';
+import { createDiary } from '../actions/diaries';
 // import { updateExercise } from '../actions/exercises';
 // import { deleteExercise } from '../actions/exercises';
 
@@ -31,7 +31,7 @@ class DiariesContainer extends Component {
         {/* SHOULD ONLY SHOW DIARY FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
         <h1>I'm in the diaries container</h1>
           <Switch>
-            <Route exact path={this.props.match.url} render={(props) => <Diaries diaries={this.props.diaries} {...props} />} />
+            <Route exact path={this.props.match.url} render={(props) => <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} {...props} />} />
           </Switch>
           {/* ONLY WANT TO DISPLAY TODAY'S DIARY IF PATH IS /
 
@@ -53,6 +53,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getDiaries,
+  createDiary
 }
 
 
