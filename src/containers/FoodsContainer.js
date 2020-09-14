@@ -12,12 +12,12 @@ import Foods from '../components/foods/Foods'
 
 class FoodsContainer extends Component {
 
-  // componentDidMount() {
-  //   // this.props.loggedIn ? this.props.getExercises() : null
-  //   // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
-  //   this.props.getFoods()
-  //
-  // }
+  componentDidMount() {
+    // this.props.loggedIn ? this.props.getExercises() : null
+    // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
+    this.props.getFoods()
+
+  }
 
   render() {
     return (
