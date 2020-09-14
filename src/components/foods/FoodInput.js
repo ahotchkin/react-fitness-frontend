@@ -41,7 +41,7 @@ class FoodInput extends Component {
     event.preventDefault();
     // set the state here by accessing props provided by mapDispatchToProps
     console.log(this.props)
-    this.props.createExercise(this.state, this.props.history)
+    // this.props.createExercise(this.state, this.props.history)
     this.setState({
       brand_name: "",
       description: "",
