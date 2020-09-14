@@ -23,7 +23,7 @@ class FoodsContainer extends Component {
     return (
       <div>
         {/* SHOULD ONLY SHOW DIARY FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
-        <h1>I'm in the meals container</h1>
+        <h1>I'm in the foods container</h1>
         <Switch>
           <Route exact path="/foods/new" render={ (props) => <FoodInput  /> } />
 
