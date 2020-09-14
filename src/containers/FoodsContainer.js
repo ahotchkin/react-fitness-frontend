@@ -8,7 +8,7 @@ import FoodInput from '../components/foods/FoodInput'
 
 
 import { getFoods } from '../actions/foods';
-
+import Foods from '../components/foods/Foods'
 
 class FoodsContainer extends Component {
 
@@ -30,6 +30,9 @@ class FoodsContainer extends Component {
           {/*
           <Route exact path="/foods/new" render={ (props) => <FoodInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} history={this.props.history} /> } />
           */}
+
+          <Route exact path={this.props.match.url} render={(props) => <Foods foods={this.props.foods} {...props} />} />
+
         </Switch>
       </div>
     );
