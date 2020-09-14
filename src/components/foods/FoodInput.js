@@ -290,7 +290,7 @@ class FoodInput extends Component {
 
         <br />
 
-        <input type="submit" value="Add Exercise" />
+        <input type="submit" value="Add Food" />
       </form>
 
     )
