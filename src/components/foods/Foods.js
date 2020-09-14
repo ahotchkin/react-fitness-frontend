@@ -5,6 +5,8 @@ import FoodCard from './FoodCard.js';
 const Foods = (props) => {
 
   console.log(props)
+  console.log("meal id is", props.location.state.mealId)
+
   // const foodCards = props.foods.map(food => <FoodCard key={food.id} food={food} />)
 
 
@@ -24,7 +26,7 @@ const Foods = (props) => {
       <p>Search the database for a food or add a new food</p>
       <Link to="/foods/new">
         <button type="button">
-          Add Food
+          Add New Food
         </button>
       </Link>
 
