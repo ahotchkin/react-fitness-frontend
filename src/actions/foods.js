@@ -7,11 +7,17 @@ export const setFoods = foods => {
   }
 }
 
-export const clearFoods = () => {
+export const addFood = food => {
   return {
-    type: "CLEAR_FOODS"
+    type: "ADD_FOOD",
+    food
   }
 }
+// export const clearFoods = () => {
+//   return {
+//     type: "CLEAR_FOODS"
+//   }
+// }
 
 // before you think about populating this piece of state with anything, get it into the store first to see the name and data type are correct
 // steps: 1. Build reducer, 2. Add to store, 3. Build action creator
@@ -19,7 +25,7 @@ export const clearFoods = () => {
 // asychronous actions
 export const getFoods = () => {
   return dispatch => {
-    console.log("DISPATCHING CURRENT USER'S FOODS")
+    console.log("DISPATCHING ALL FOODS FROM THE DATABASE")
     return fetch("http://localhost:3001/api/v1/foods", {
       credentials: "include",
       method: "GET",
@@ -42,16 +48,17 @@ export const getFoods = () => {
   }
 }
 
-// export const addMeal = (mealData, currentUser, history) => {
-//   console.log("meal data is ", mealData)
-//   const meal = {
+// export const addFoodToMeal = (foodData, mealId, history) => {
+//   console.log("food data is ", foodData)
+//   const mealFood = {
 //     // is there a cleaner way to do this???
-//     user_id: currentUser.id,
-//     name: mealData.name,
-//     category: mealData.category,
-//     duration_in_minutes: mealData.duration_in_minutes,
-//     calories_burned: mealData.calories_burned
+//     meal_id: mealId,
+//     food_id: foodData.id,
+//     // placeholder info - need to have user enter this information
+//     number_of_servings: 1,
+//     calories: foodData.calories * 1
 //   }
+//
 //
 //   return dispatch => {
 //     return fetch("http://localhost:3001/api/v1/foods", {
@@ -60,7 +67,7 @@ export const getFoods = () => {
 //       headers: {
 //         "Content-Type": "application/json"
 //       },
-//       body: JSON.stringify(meal)
+//       body: JSON.stringify(mealFood)
 //     })
 //       .then(response => response.json())
 //       .then(json => {
@@ -70,7 +77,7 @@ export const getFoods = () => {
 //           console.log(json)
 //           dispatch({ type: "ADD_FOOD", foods: json.data })
 //           // should they go back to home page or to meal show page???
-//           history.push("/")
+//           history.push("/diaries")
 //         }
 //       })
 //       .catch(console.log())
