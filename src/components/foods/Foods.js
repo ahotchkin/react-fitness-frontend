@@ -5,7 +5,7 @@ import FoodCard from './FoodCard.js';
 const Foods = (props) => {
 
   console.log(props)
-  const foodCards = props.foods.map(food => <FoodCard key={food.id} food={food} />)
+  // const foodCards = props.foods.map(food => <FoodCard key={food.id} food={food} />)
 
 
   // in return, going more than one level deep, so need to make sure exerciseCards are there before rendering anything. instead of just saying exerciseCards, need to say: { exerciseCards.length > 0 ? exerciseCards : null }
@@ -19,13 +19,14 @@ const Foods = (props) => {
       <h2>Foods</h2>
       {/* props.foods is an empty array on page refresh, but is populated on login...... what is happening here*/}
 
-      { foodCards.length > 0 ? foodCards : null }
+      {/* { foodCards.length > 0 ? foodCards : null } */}
+
+      <p>Search the database for a food or add a new food</p>
       <Link to="/foods/new">
         <button type="button">
           Add Food
         </button>
       </Link>
-
 
     </div>
   )
