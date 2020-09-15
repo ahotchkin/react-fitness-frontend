@@ -10,6 +10,8 @@ import FoodInput from '../components/foods/FoodInput'
 import { getFoods } from '../actions/foods';
 import Foods from '../components/foods/Foods'
 
+import { createMealFood } from '../actions/mealFoods'
+
 class FoodsContainer extends Component {
 
   componentDidMount() {
@@ -25,13 +27,13 @@ class FoodsContainer extends Component {
         {/* SHOULD ONLY SHOW DIARY FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
         <h1>I'm in the foods container</h1>
         <Switch>
-          <Route exact path="/foods/new" render={ (props) => <FoodInput  /> } />
+          <Route exact path="/foods/new" render={ (props) => <FoodInput /> } />
 
           {/*
           <Route exact path="/foods/new" render={ (props) => <FoodInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} history={this.props.history} /> } />
           */}
 
-          <Route exact path={this.props.match.url} render={(props) => <Foods foods={this.props.foods} {...props} />} />
+          <Route exact path={this.props.match.url} render={(props) => <Foods foods={this.props.foods} createMealFood={this.props.createMealFood} {...props} />} />
 
         </Switch>
       </div>
@@ -49,6 +51,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getFoods,
+  createMealFood,
 }
 
 
