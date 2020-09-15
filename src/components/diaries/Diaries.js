@@ -19,7 +19,6 @@ const Diaries = props => {
     <div>
       <h2>Diaries</h2>
       {/* props.diaries is an empty array on page refresh, but is populated on login...... what is happening here*/}
-      {console.log(props)}
       {/* move createDiary to separate function? */}
       { diaryCard.length > 0 ? diaryCard : <button onClick={() => props.createDiary(todaysDate, props.currentUser, props.history)}>Start Today's Meal Diary</button> }
     </div>
