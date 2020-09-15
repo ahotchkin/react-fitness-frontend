@@ -9,7 +9,7 @@ const MealCard = (props) => {
     {console.log(props)}
       <h3>{props.meal.attributes.category}</h3>
       <p>Calories: {props.meal.attributes.calories}</p>
-      <MealFoods mealFoods={props.mealFoods} />
+      <MealFoods mealFoods={props.mealFoods} foods={props.foods} />
 
       {/* is there a better way to provide the meal id so the food added can be associated? */}
       <Link to={{
