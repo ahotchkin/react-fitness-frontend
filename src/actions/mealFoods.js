@@ -5,15 +5,15 @@ export const addMealFood = mealFood => {
   }
 }
 
-export const createMealFood = (mealId, foodData, history) => {
+export const createMealFood = (mealId, foodData, number_of_servings, history) => {
   console.log("foodId is ", foodData, "mealId is ", mealId)
   const mealFood = {
     // is there a cleaner way to do this???
     meal_id: mealId,
     food_id: foodData.id,
     // placeholder info - need to have user enter this information
-    number_of_servings: 1,
-    calories: foodData.attributes.calories * 1
+    number_of_servings: number_of_servings,
+    calories: foodData.attributes.calories * number_of_servings
   }
 
 
