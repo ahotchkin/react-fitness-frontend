@@ -1,19 +1,19 @@
-export addMealFood = food => {
+export const addMealFood = mealFood => {
   return {
     type: "ADD_MEAL_FOOD",
-    food
+    mealFood
   }
 }
 
-export const createMealFood = (foodData, mealId, history) => {
-  console.log("food data is ", foodData)
+export const createMealFood = (mealId, foodData, history) => {
+  console.log("foodId is ", foodData, "mealId is ", mealId)
   const mealFood = {
     // is there a cleaner way to do this???
     meal_id: mealId,
     food_id: foodData.id,
     // placeholder info - need to have user enter this information
     number_of_servings: 1,
-    calories: foodData.calories * 1
+    calories: foodData.attributes.calories * 1
   }
 
 
