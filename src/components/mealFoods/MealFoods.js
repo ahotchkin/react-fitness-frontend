@@ -3,16 +3,14 @@ import MealFoodCard from './MealFoodCard.js';
 
 const MealFoods = (props) => {
 
-  console.log(props)
-  const mealFoodCards = props.mealFoods.map(mealFood => <MealFoodCard key={mealFood.id} mealFood={mealFood} />)
+  // Need to use mealFood.id as the key since it unique
+  // Need to get all other information from food
+  // zippedMealFoods combines the two arrays (mealFoods and foods) that are passed as props so all information can be accessed for the MealFoodCard
+  const zippedMealFoods = props.foods.map((food, i) => [food, props.mealFoods[i]])
 
+  const mealFoodCards = zippedMealFoods.map(zippedMealFood => <MealFoodCard key={zippedMealFood[1].id} food={zippedMealFood[0]}/>)
 
-  // in return, going more than one level deep, so need to make sure exerciseCards are there before rendering anything. instead of just saying exerciseCards, need to say: { exerciseCards.length > 0 ? exerciseCards : null }
-  // <Link to="/exercises/new">
-  //   <button type="button">
-  //     Add Exercise
-  //   </button>
-  // </Link>
+  console.log(mealFoodCards)
   return (
     <div>
       <h2>Foods for this meal</h2>
