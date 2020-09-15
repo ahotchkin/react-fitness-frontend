@@ -6,9 +6,9 @@ const MealFoods = (props) => {
   // Need to use mealFood.id as the key since it unique
   // Need to get all other information from food
   // zippedMealFoods combines the two arrays (mealFoods and foods) that are passed as props so all information can be accessed for the MealFoodCard
-  const zippedMealFoods = props.foods.map((food, i) => [food, props.mealFoods[i]])
+  const zippedMealFoods = props.mealFoods.map((mealFood, i) => [mealFood, props.foods[i]])
 
-  const mealFoodCards = zippedMealFoods.map(zippedMealFood => <MealFoodCard key={zippedMealFood[1].id} food={zippedMealFood[0]}/>)
+  const mealFoodCards = zippedMealFoods.map(zippedMealFood => <MealFoodCard key={zippedMealFood[0].id} mealFood={zippedMealFood[0]} food={zippedMealFood[1]}/>)
 
   console.log(mealFoodCards)
   return (
