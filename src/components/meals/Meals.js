@@ -2,7 +2,8 @@ import React from 'react';
 import MealCard from './MealCard.js';
 
 const Meals = props => {
-  const mealCards = props.meals.map(meal => <MealCard meal={meal} key={meal.id} mealFoods={meal.attributes.foods} />)
+  console.log(props)
+  const mealCards = props.meals.map(meal => <MealCard meal={meal} key={meal.id} mealFoods={meal.attributes.meal_foods} foods={meal.attributes.foods} />)
 
   console.log(mealCards)
   // in return, going more than one level deep, so need to make sure exerciseCards are there before rendering anything. instead of just saying exerciseCards, need to say: { exerciseCards.length > 0 ? exerciseCards : null }
