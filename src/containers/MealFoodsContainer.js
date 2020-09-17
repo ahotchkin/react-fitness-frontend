@@ -36,7 +36,7 @@ class MealFoodsContainer extends Component {
             if (!!mealFood) {
               const meal = this.props.meals.find(meal => parseInt(meal.id) === mealFood.meal_id)
               const food = meal.attributes.foods.find(food => food.id === mealFood.food_id)
-              return <MealFoodUpdate mealFood={mealFood} meal={meal} food={food} updateMealFood={this.props.updateMealFood} />
+              return <MealFoodUpdate mealFood={mealFood} meal={meal} food={food} updateMealFood={this.props.updateMealFood} {...props} />
             }
           }} />
         </Switch>
