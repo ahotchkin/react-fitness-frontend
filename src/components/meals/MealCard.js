@@ -5,7 +5,13 @@ import MealFoods from '../mealFoods/MealFoods';
 
 const MealCard = (props) => {
 
-  const mealCalories = props.mealFoods.reduce((a, b) => ({calories: a.calories + b.calories}))
+  let mealCalories = {
+    calories: 0
+  }
+  // // MAKE SURE I UNDERSTAND HOW REDUCE IS WORKING
+  if (props.mealFoods.length > 0) {
+    mealCalories = props.mealFoods.reduce((a, b) => ({calories: a.calories + b.calories}))
+  }
 
 
   return (
