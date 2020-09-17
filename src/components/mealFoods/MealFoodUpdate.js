@@ -35,7 +35,6 @@ class MealFoodUpdate extends Component {
   render() {
     return(
       <div>
-
         <p>This is the MEALFOOD UPDATE page for mealFood with an ID of {this.props.mealFood.id}.</p>
         <p>Meal is {this.props.meal.attributes.category}</p>
         <p>Food is {this.props.food.brand_name}</p>
