@@ -5,10 +5,8 @@ import SearchInput from '../SearchInput'
 
 const Foods = (props) => {
 
-  console.log("meal id is", props.location.state.mealId)
-  console.log(props)
 
-  const foodCards = props.foods.map(food => <FoodCard key={food.id} food={food} mealId={props.location.state.mealId} createMealFood={props.createMealFood} history={props.history}/>)
+  const foodCards = props.foods.map(food => <FoodCard key={food.id} food={food} meal={props.meal} createMealFood={props.createMealFood} history={props.history}/>)
 
   return (
     <div>
