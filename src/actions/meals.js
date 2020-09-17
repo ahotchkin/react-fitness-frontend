@@ -3,7 +3,13 @@ export const setMeals = meals => {
   return {
     type: "SET_MEALS",
     meals
-    // or payload: meals
+  }
+}
+
+export const updateMealSuccess = meal => {
+  return {
+    type: "UPDATE_MEAL",
+    meal
   }
 }
 
@@ -42,6 +48,40 @@ export const getMeals = () => {
   }
 }
 
+export const updateMeal = (meal, mealFood) => {
+  console.log(meal)
+  console.log(mealFood)
+  console.log(`getting ready to update meal with an id of ${meal.id}`)
+  const updatedMeal = {
+    // is there a cleaner way to do this???
+    // is this persisting the userId that was originally saved?????
+    calories: meal.attributes.calories += mealFood.calories,
+  }
+  console.log("here is the updated meal: ")
+  console.log(updatedMeal)
+
+  return dispatch => {
+    return fetch(`http://localhost:3001/api/v1/meals/${meal.id}`, {
+      credentials: "include",
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedMeal)
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json.error) {
+          alert(json.error)
+        } else {
+          console.log(json)
+          dispatch(updateMealSuccess(json.data))
+          // what is the difference between push and pushState???
+        }
+      })
+      .catch(console.log())
+  }
+}
 // export const addMeal = (mealData, currentUser, history) => {
 //   console.log("meal data is ", mealData)
 //   const meal = {
