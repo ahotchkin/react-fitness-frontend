@@ -18,7 +18,7 @@ class FoodCard extends Component {
     event.preventDefault();
     // set the state here by accessing props provided by mapDispatchToProps
     console.log(this.props)
-    this.props.createMealFood(this.props.mealId, this.props.food, this.state.number_of_servings, this.props.history)
+    this.props.createMealFood(this.props.meal, this.props.food, this.state.number_of_servings, this.props.history)
     this.setState({
       text: "",
     })
@@ -31,7 +31,6 @@ class FoodCard extends Component {
     return (
       <div>
        <p>{this.props.food.attributes.brand_name} {this.props.food.attributes.description} - {this.props.food.attributes.calories} calories</p>
-
        <form onSubmit={this.handleSubmit}>
          <label>Number of Servings: </label>
          <input
