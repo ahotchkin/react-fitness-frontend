@@ -26,12 +26,18 @@ class FoodsContainer extends Component {
       <div>
         {/* SHOULD ONLY SHOW DIARY FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
         <h1>I'm in the foods container</h1>
+        {console.log(this.props)}
         <Switch>
           <Route exact path="/foods/new" render={ (props) => <FoodInput /> } />
 
           {/*
           <Route exact path="/foods/new" render={ (props) => <FoodInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} history={this.props.history} /> } />
           */}
+
+          <Route exact path="/meals/:mealId/foods" render={(props) => {
+            const meal = this.props.meals.find(meal => meal.id === props.match.params.mealId)
+            return <Foods foods={this.props.foods} meal={meal} createMealFood={this.props.createMealFood} {...props} />
+          }} />
 
           <Route exact path={this.props.match.url} render={(props) => <Foods foods={this.props.foods} createMealFood={this.props.createMealFood} {...props} />} />
 
@@ -45,7 +51,8 @@ class FoodsContainer extends Component {
 const mapStateToProps = state => ({
   // loggedIn: !!state.currentUser,
   // currentUser: state.currentUser,
-  foods: state.foods
+  foods: state.foods,
+  meals: state.meals
 });
 
 
