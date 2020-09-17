@@ -50,6 +50,7 @@ class App extends Component {
             <Route path="/exercises" render={routerProps => loggedIn ? <ExercisesContainer {...routerProps} /> : <Home />} />
 
             <Route path="/foods" render={routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home /> } />
+            <Route path="/meals/:mealId/foods" render={routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home /> } />
 
             <Route path="/meal_foods" render={routerProps => loggedIn ? <MealFoodsContainer {...routerProps} /> : <Home /> } />
             {/*    WILL NEED THE BELOW IF I MOVE ALL ROUTES TO APP.JS
