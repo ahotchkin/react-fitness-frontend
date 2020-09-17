@@ -18,24 +18,19 @@ const MealCard = (props) => {
   //   mealCalories = props.mealFoods.reduce((a, b) => ({calories: a.calories + b.calories}))
   // }
 
-
+  console.log(props)
   return (
     <div>
       <h3>{props.meal.attributes.category}</h3>
-      {/* <p>Calories: {mealCalories.calories}</p> */}
+      <p>Calories: {props.meal.attributes.calories}</p>
       {/*<MealFoods mealFoods={props.mealFoods} foods={props.foods} /> */}
 
       {/* ******************************************************************************** */}
       <MealFoodsContainer meal={props.meal} />
+      {console.log(props.meal)}
       {/* ******************************************************************************** */}
 
-      {/* is there a better way to provide the meal id so the food added can be associated? */}
-      <Link to={{
-        pathname: "/foods",
-        state: {
-          mealId: props.meal.id
-        }
-      }}>
+      <Link to={`/meals/${props.meal.id}/foods`}>
         <button type="button">
           Add Food
         </button>
