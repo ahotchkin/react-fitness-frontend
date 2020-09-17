@@ -16,6 +16,7 @@ import Home from './components/Home'
 import DiariesContainer from './containers/DiariesContainer';
 import ExercisesContainer from './containers/ExercisesContainer';
 import FoodsContainer from './containers/FoodsContainer';
+import MealFoodsContainer from './containers/MealFoodsContainer';
 // Add Switch and wrap routes?
 
 // you want your routes in the component that has access to the store - need to set up the routes in a component that an send the props through the route to the rendered component
@@ -50,7 +51,7 @@ class App extends Component {
 
             <Route path="/foods" render={routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home /> } />
 
-
+            <Route path="/meal_foods" render={routerProps => loggedIn ? <MealFoodsContainer {...routerProps} /> : <Home /> } />
             {/*    WILL NEED THE BELOW IF I MOVE ALL ROUTES TO APP.JS
             <Route exact path="/login" render={ (props) => loggedIn ? <Exercises /> : <Login history={props.history}/> } />
             <Route exact path="/signup" render={ (props) => loggedIn ? <Exercises /> : <SignUp history={props.history}/> } />
