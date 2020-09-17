@@ -5,6 +5,21 @@ export const addMealFood = mealFood => {
   }
 }
 
+export const updateMealFoodSuccess = mealFood => {
+  return {
+    type: "UPDATE_MEAL_FOOD",
+    mealFood
+  }
+}
+
+export const deleteMealFoodSuccess = mealFoodId => {
+  return {
+    type: "DELETE_MEAL_FOOD",
+    mealFoodId
+  }
+}
+
+
 export const createMealFood = (mealId, foodData, number_of_servings, history) => {
   console.log("foodId is ", foodData, "mealId is ", mealId)
   const mealFood = {
@@ -40,3 +55,71 @@ export const createMealFood = (mealId, foodData, number_of_servings, history) =>
       .catch(console.log())
   }
 }
+
+
+
+
+export const updateMealFood = (mealFood, foodData, number_of_servings, history) => {
+  console.log(mealFood)
+  console.log(`getting ready to update mealFood with an id of ${mealFood.id}`)
+  const updatedMealFood = {
+    // is there a cleaner way to do this???
+    // is this persisting the userId that was originally saved?????
+
+    number_of_servings: number_of_servings,
+    calories: foodData.calories * number_of_servings
+  }
+  console.log("here is the updated mealFood: ")
+  console.log(updatedMealFood)
+
+  return dispatch => {
+    // CREATE BASE URL VARIABLE TO USE
+    return fetch(`http://localhost:3001/api/v1/meal_foods/${mealFood.id}`, {
+      credentials: "include",
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedMealFood)
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json.error) {
+          alert(json.error)
+        } else {
+          console.log(json)
+          dispatch(updateMealFoodSuccess(json.data))
+          // what is the difference between push and pushState???
+          history.push("/diaries")
+        }
+      })
+      .catch(console.log())
+  }
+}
+//
+// export const deleteMealFood = (mealFoodId, history) => {
+//   console.log(`getting ready to delete mealFood with an id of ${mealFoodId}`)
+//   console.log(history)
+//   return dispatch => {
+//     return fetch(baseUrl + `/${mealFoodId}`, {
+//       credentials: "include",
+//       method: "DELETE",
+//       headers: {
+//         "Content-Type": "application/json"
+//       },
+//     })
+//       .then(response => response.json())
+//       .then(json => {
+//         if (json.error) {
+//           alert(json.error)
+//         } else {
+//           console.log(json)
+//           dispatch(deleteMealFoodSuccess(mealFoodId))
+//           history.push("/diaries")
+//         }
+//       })
+//       .catch(console.log())
+//     // **********NEED TO REDIRECT TO /EXERCISES, FIGURE OUT HOW TO DO THIS**********
+//
+//   }
+// }
