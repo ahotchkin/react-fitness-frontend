@@ -29,10 +29,11 @@ class ExercisesContainer extends Component {
     return (
       <div>
         {/* SHOULD ONLY SHOW EXERCISES FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
+        {/* UPDATE ALL ROUTES TO {THIS.PROPS.MATCH.URL} */}
         <h1>I'm in the exercises container</h1>
           <Switch>
-            <Route exact path="/exercises/new" render={ (props) => <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} history={this.props.history} /> } />
-            <Route exact path={this.props.match.url} render={(props) => <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} {...props} />} />
+            <Route exact path="/exercises/new" render={props => <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} history={this.props.history} /> } />
+            <Route exact path={this.props.match.url} render={props => <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} {...props} />} />
             <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
               const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
               return <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} {...props} />
