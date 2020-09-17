@@ -1,3 +1,48 @@
+// synchronous actions
+export const setMealFoods = mealFoods => {
+  return {
+    type: "SET_MEAL_FOODS",
+    mealFoods
+  }
+}
+
+// NEED TO CALL THIS AND ALL OTHER CLEAR FUNCTIONS ON LOGOUT
+export const clearMealFoods = () => {
+  return {
+    type: "CLEAR_MEAL_FOODS"
+  }
+}
+
+
+// asychronous actions
+export const getMealFoods = () => {
+  return dispatch => {
+    console.log("DISPATCHING CURRENT USER'S MEAL_FOODS")
+    return fetch("http://localhost:3001/api/v1/meal_foods", {
+      credentials: "include",
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json.error) {
+          alert(json.error)
+        } else {
+          console.log(json.data)
+          dispatch(setMealFoods(json.data))
+        }
+      })
+      .catch(console.log())
+
+  }
+}
+
+
+
+// ***************************************************************************
+
 export const addMealFood = mealFood => {
   return {
     type: "ADD_MEAL_FOOD",
@@ -97,29 +142,28 @@ export const updateMealFood = (mealFood, foodData, number_of_servings, history) 
   }
 }
 //
-// export const deleteMealFood = (mealFoodId, history) => {
-//   console.log(`getting ready to delete mealFood with an id of ${mealFoodId}`)
-//   console.log(history)
-//   return dispatch => {
-//     return fetch(baseUrl + `/${mealFoodId}`, {
-//       credentials: "include",
-//       method: "DELETE",
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//     })
-//       .then(response => response.json())
-//       .then(json => {
-//         if (json.error) {
-//           alert(json.error)
-//         } else {
-//           console.log(json)
-//           dispatch(deleteMealFoodSuccess(mealFoodId))
-//           history.push("/diaries")
-//         }
-//       })
-//       .catch(console.log())
-//     // **********NEED TO REDIRECT TO /EXERCISES, FIGURE OUT HOW TO DO THIS**********
-//
-//   }
-// }
+export const deleteMealFood = (mealFoodId, history) => {
+  console.log(`getting ready to delete mealFood with an id of ${mealFoodId}`)
+  console.log(history)
+  return dispatch => {
+    return fetch(`http://localhost:3001/api/v1/meal_foods/${mealFoodId}`, {
+      credentials: "include",
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json.error) {
+          alert(json.error)
+        } else {
+          console.log(json)
+          dispatch(deleteMealFoodSuccess(mealFoodId))
+          history.push("/diaries")
+        }
+      })
+      .catch(console.log())
+
+  }
+}
