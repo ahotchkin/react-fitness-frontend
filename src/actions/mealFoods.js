@@ -1,4 +1,7 @@
 // synchronous actions
+
+import { updateMeal } from './meals';
+
 export const setMealFoods = mealFoods => {
   return {
     type: "SET_MEAL_FOODS",
@@ -65,15 +68,15 @@ export const deleteMealFoodSuccess = mealFoodId => {
 }
 
 
-export const createMealFood = (mealId, foodData, number_of_servings, history) => {
-  console.log("foodId is ", foodData, "mealId is ", mealId)
+export const createMealFood = (meal, food, number_of_servings, history) => {
+  console.log("foodId is ", food.id, "mealId is ", meal.id)
   const mealFood = {
     // is there a cleaner way to do this???
-    meal_id: mealId,
-    food_id: foodData.id,
+    meal_id: meal.id,
+    food_id: food.id,
     // placeholder info - need to have user enter this information
     number_of_servings: number_of_servings,
-    calories: foodData.attributes.calories * number_of_servings
+    calories: food.attributes.calories * number_of_servings
   }
 
 
@@ -93,6 +96,8 @@ export const createMealFood = (mealId, foodData, number_of_servings, history) =>
         } else {
           console.log(json)
           dispatch(addMealFood(json.data))
+          dispatch(updateMeal(meal, mealFood))
+
           // should they go back to home page or to meal show page???
           history.push("/diaries")
         }
@@ -134,6 +139,8 @@ export const updateMealFood = (mealFood, foodData, number_of_servings, history) 
         } else {
           console.log(json)
           dispatch(updateMealFoodSuccess(json.data))
+          dispatch(updateMeal())
+
           // what is the difference between push and pushState???
           history.push("/diaries")
         }
