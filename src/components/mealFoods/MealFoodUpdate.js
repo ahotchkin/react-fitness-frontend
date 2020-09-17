@@ -4,7 +4,7 @@ class MealFoodUpdate extends Component {
 
   // CAN I REFACTOR AND USE THE SAME FORM FOR NEW AND UPDATE?????? WATCH GLOBETROTTER PART 11
   state = {
-    number_of_servings: this.props.mealFood.number_of_servings,
+    number_of_servings: this.props.mealFood.attributes.number_of_servings,
   }
 
   handleOnChange = event => {
@@ -21,7 +21,7 @@ class MealFoodUpdate extends Component {
     console.log(this.props)
 
     // IS IT NOT NECESSARY TO PASS IN THE CURRENT USER BECAUSE ONLY THE FIELDS DECLARED IN THE ACTION WILL BE UPDATED?????????????
-    this.props.updateMealFood(this.props.mealFood, this.props.food, this.state.number_of_servings, this.props.history)
+    this.props.updateMealFood(this.props.mealFood, this.props.mealFood.attributes.food, this.state.number_of_servings, this.props.history)
     this.setState({
       // drop down stays selected on whatever category was selected. Is this a problem or will it always update on page refresh?
       number_of_servings: "",
@@ -35,11 +35,16 @@ class MealFoodUpdate extends Component {
   render() {
     return(
       <div>
+      {console.log(this.props)}
+
+      <h1>Let's get ready to update!!!</h1>
+
         <p>This is the MEALFOOD UPDATE page for mealFood with an ID of {this.props.mealFood.id}.</p>
-        <p>Meal is {this.props.meal.attributes.category}</p>
-        <p>Food is {this.props.food.brand_name}</p>
-        <br /><br />
+
+        <p>Meal is {this.props.mealFood.attributes.meal.category}</p>
+        <p>Food is {this.props.mealFood.attributes.food.brand_name}</p>
         {/* BREAK THIS OUT INTO SEPARATE COMPONENT TO USE HERE AND IN FOODCARD.JS */}
+
         <form onSubmit={this.handleSubmit}>
           <label>Number of Servings: </label>
           <input
@@ -48,7 +53,7 @@ class MealFoodUpdate extends Component {
             value={this.state.number_of_servings}
           />
 
-          <br />
+          <br /><br />
 
           <input type="submit" value="Update" />
 
