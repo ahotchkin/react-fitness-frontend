@@ -4,7 +4,7 @@
 // import { getExercises } from './exercises';
 import { clearExercises } from './exercises';
 import { getDiaries } from './diaries';
-import { getMeals } from './meals';
+// import { getMeals } from './meals';
 
 
 // synchronous action creators
@@ -39,7 +39,7 @@ export const login = (credentials, history) => {
           dispatch(setCurrentUser(json.data))
           // dispatch(getExercises())
           dispatch(getDiaries())
-          dispatch(getMeals())
+          // dispatch(getMeals())
           // only needed because Login is in Redux and not React
           // dispatch(resetLoginForm())
 
@@ -74,7 +74,7 @@ export const signUp = (credentials, history) => {
           dispatch(setCurrentUser(json.data))
           // dispatch(getExercises())
           dispatch(getDiaries())
-          dispatch(getMeals())
+          // dispatch(getMeals())
 
           // only needed because Login is in Redux and not React
           // dispatch(resetSignUpForm())
@@ -123,7 +123,7 @@ export const getCurrentUser = () => {
           dispatch(setCurrentUser(json.data))
           // dispatch(getExercises())
           dispatch(getDiaries())
-          dispatch(getMeals())
+          // dispatch(getMeals())
 
         }
       })
