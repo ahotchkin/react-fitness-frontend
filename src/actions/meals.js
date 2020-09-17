@@ -7,6 +7,7 @@ export const setMeals = meals => {
   }
 }
 
+// NEED TO CALL THIS ON LOGOUT
 export const clearMeals = () => {
   return {
     type: "CLEAR_MEALS"
