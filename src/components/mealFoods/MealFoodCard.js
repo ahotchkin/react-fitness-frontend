@@ -6,15 +6,15 @@ const MealFoodCard = props => {
 
   // copied from ExerciseCard.js
   const handleDeleteClick = () => {
-    props.deleteExercise(props.exercise.id, props.history)
+    props.deleteMealFood(props.mealFood, props.mealFood.attributes.meal, props.history)
   }
 
   // previous <p>:       <p>{props.food.brand_name} {props.food.description}, {props.mealFood.number_of_servings} servings - {props.mealFood.calories} calories - ...
 
-  
+
   return (
     <div>
-    {console.log(props)}
+      {console.log(props)}
       <p>{props.mealFood.attributes.food.brand_name} {props.mealFood.attributes.food.description}, {props.mealFood.attributes.number_of_servings} servings - {props.mealFood.attributes.calories} calories -
       <Link to={`/meal_foods/${props.mealFood.id}/edit`}>
         <button type="button">
