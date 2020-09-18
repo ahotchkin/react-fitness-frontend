@@ -18,7 +18,6 @@ const MealCard = (props) => {
   //   mealCalories = props.mealFoods.reduce((a, b) => ({calories: a.calories + b.calories}))
   // }
 
-  console.log(props)
   return (
     <div>
       <h3>{props.meal.attributes.category}</h3>
@@ -27,7 +26,6 @@ const MealCard = (props) => {
 
       {/* ******************************************************************************** */}
       <MealFoodsContainer meal={props.meal} />
-      {console.log(props.meal)}
       {/* ******************************************************************************** */}
 
       <Link to={`/meals/${props.meal.id}/foods`}>
