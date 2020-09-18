@@ -8,7 +8,7 @@ import { Route, Switch, withRouter } from 'react-router-dom';
 import MealFoodUpdate from '../components/mealFoods/MealFoodUpdate'
 
 import { updateMealFood } from '../actions/mealFoods';
-
+import { deleteMealFood } from '../actions/mealFoods';
 // *********************************************************************************
 import { getMealFoods } from '../actions/mealFoods';
 import MealFoods from '../components/mealFoods/MealFoods'
@@ -53,7 +53,7 @@ class MealFoodsContainer extends Component {
         <Switch>
 
           {/* THIS IS MUCH SLOWER THAN RENDERING BASED ON MEALFOODS ASSOCIATED WITH MEALS */}
-          <Route exact path="/diaries" render={props => <MealFoods mealFoods={this.props.mealFoods.filter(mealFood => mealFood.attributes.meal.id === parseInt(this.props.meal.id))} /> } />
+          <Route exact path="/diaries" render={props => <MealFoods mealFoods={this.props.mealFoods.filter(mealFood => mealFood.attributes.meal.id === parseInt(this.props.meal.id))} deleteMealFood={this.props.deleteMealFood} {...props} /> } />
 
           <Route exact path="/meal_foods/:mealFoodId/edit" render={props => {
             const mealFood = this.props.mealFoods.find(mealFood => mealFood.id === props.match.params.mealFoodId)
@@ -83,6 +83,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getMealFoods,
   updateMealFood,
+  deleteMealFood
 }
 
 
