@@ -48,20 +48,20 @@ export const getMeals = () => {
   }
 }
 
-export const updateMeal = (meal, mealFood) => {
-  console.log(meal)
-  console.log(mealFood)
-  console.log(`getting ready to update meal with an id of ${meal.id}`)
+// Updates meal.calories when a meallFood is added, updated, or deleted
+export const updateMeal = (mealId, mealCalories, previousMealFoodCalories = 0, updatedMealFoodCalories = 0) => {
+  console.log(previousMealFoodCalories)
+  console.log(updatedMealFoodCalories)
+  console.log(mealCalories)
+  console.log(mealId)
   const updatedMeal = {
-    // is there a cleaner way to do this???
-    // is this persisting the userId that was originally saved?????
-    calories: meal.attributes.calories += mealFood.calories,
+    calories: mealCalories - previousMealFoodCalories + updatedMealFoodCalories,
   }
   console.log("here is the updated meal: ")
   console.log(updatedMeal)
 
   return dispatch => {
-    return fetch(`http://localhost:3001/api/v1/meals/${meal.id}`, {
+    return fetch(`http://localhost:3001/api/v1/meals/${mealId}`, {
       credentials: "include",
       method: "PATCH",
       headers: {
