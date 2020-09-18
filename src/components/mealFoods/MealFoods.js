@@ -15,14 +15,13 @@ const MealFoods = (props) => {
 
 
   // ****************************************************************************************************************************************************
-  const mealFoodCards = props.mealFoods.map(mealFood => <MealFoodCard key={mealFood.id} mealFood={mealFood} />)
+  const mealFoodCards = props.mealFoods.map(mealFood => <MealFoodCard key={mealFood.id} mealFood={mealFood} deleteMealFood={props.deleteMealFood} history={props.history} />)
   // ****************************************************************************************************************************************************
 
   return (
     <div>
       <h4>Foods for this meal:</h4>
       {/* props.foods is an empty array on page refresh, but is populated on login...... what is happening here*/}
-
       { mealFoodCards.length > 0 ? mealFoodCards : null }
 
 
