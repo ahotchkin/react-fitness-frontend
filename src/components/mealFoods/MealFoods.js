@@ -15,7 +15,7 @@ const MealFoods = (props) => {
 
 
   // ****************************************************************************************************************************************************
-  const mealFoodCards = props.mealFoods.map(mealFood => <MealFoodCard key={mealFood.id} mealFood={mealFood} deleteMealFood={props.deleteMealFood} history={props.history} />)
+  const mealFoodCards = props.mealFoods.map(mealFood => <MealFoodCard key={mealFood.id} mealFood={mealFood} meal={props.meal}  deleteMealFood={props.deleteMealFood} history={props.history} />)
   // ****************************************************************************************************************************************************
 
   return (
