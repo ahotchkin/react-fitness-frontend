@@ -49,17 +49,25 @@ class MealFoodsContainer extends Component {
       <div>
       <h2>I'm in the mealFoodsContainer Now</h2>
 
-
         <Switch>
 
           {/* THIS IS MUCH SLOWER THAN RENDERING BASED ON MEALFOODS ASSOCIATED WITH MEALS */}
-          <Route exact path="/diaries" render={props => <MealFoods mealFoods={this.props.mealFoods.filter(mealFood => mealFood.attributes.meal.id === parseInt(this.props.meal.id))} deleteMealFood={this.props.deleteMealFood} {...props} /> } />
+          {/* Need to pass meal as prop to mealFoods to have access to it in MealFoodCard to pass to deleteMealFood. Can access meal from mealFood, however when doing this in deleteMealFood meal.calories is not always updated appropriately. Passing in the meal itself seems to solve this problem. */}
+          <Route exact path="/diaries" render={props => <MealFoods mealFoods={this.props.mealFoods.filter(mealFood => mealFood.attributes.meal.id === parseInt(this.props.meal.id))} meal={this.props.meal} deleteMealFood={this.props.deleteMealFood} {...props} /> } />
 
           <Route exact path="/meal_foods/:mealFoodId/edit" render={props => {
             const mealFood = this.props.mealFoods.find(mealFood => mealFood.id === props.match.params.mealFoodId)
+
+            {/* See note below in mapStateToProps---
+            const meal = this.props.meals.find(meal => parseInt(meal.id) === mealFood.attributes.meal.id)
+            */}
             if (!!mealFood) {
+              {console.log(this.props)}
               return <MealFoodUpdate mealFood={mealFood} updateMealFood={this.props.updateMealFood} {...props} />
 
+              {/* See note below in mapStateToProps---
+              return <MealFoodUpdate mealFood={mealFood} meal={meal}  updateMealFood={this.props.updateMealFood} {...props} />
+            */}
             }
           }} />
 
@@ -76,7 +84,10 @@ class MealFoodsContainer extends Component {
 };
 
 const mapStateToProps = state => ({
-  mealFoods: state.mealFoods
+  mealFoods: state.mealFoods,
+
+  // Below is necessary if I need to pass meal to MealFoodUpdate. At this point it doesn't look like I do. Having some issues with rendering the correct meal calories based on meal_food updates, but seems to be okay now. Thought it might be due to the fact that I was updating the meal attached to the mealFood and not the meal itself, but I don't think this should make a difference.
+  // meals: state.meals
 });
 
 
