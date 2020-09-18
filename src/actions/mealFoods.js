@@ -9,6 +9,27 @@ export const setMealFoods = mealFoods => {
   }
 }
 
+export const addMealFood = mealFood => {
+  return {
+    type: "ADD_MEAL_FOOD",
+    mealFood
+  }
+}
+
+export const updateMealFoodSuccess = mealFood => {
+  return {
+    type: "UPDATE_MEAL_FOOD",
+    mealFood
+  }
+}
+
+export const deleteMealFoodSuccess = mealFoodId => {
+  return {
+    type: "DELETE_MEAL_FOOD",
+    mealFoodId
+  }
+}
+
 // NEED TO CALL THIS AND ALL OTHER CLEAR FUNCTIONS ON LOGOUT
 export const clearMealFoods = () => {
   return {
@@ -16,6 +37,11 @@ export const clearMealFoods = () => {
   }
 }
 
+
+
+
+
+// ***************************************************************************
 
 // asychronous actions
 export const getMealFoods = () => {
@@ -41,31 +67,11 @@ export const getMealFoods = () => {
 
   }
 }
+// ^^Added when started pulling mealFoods from database instead of from associated meals
+// ****************************************************************************
 
 
 
-// ***************************************************************************
-
-export const addMealFood = mealFood => {
-  return {
-    type: "ADD_MEAL_FOOD",
-    mealFood
-  }
-}
-
-export const updateMealFoodSuccess = mealFood => {
-  return {
-    type: "UPDATE_MEAL_FOOD",
-    mealFood
-  }
-}
-
-export const deleteMealFoodSuccess = mealFoodId => {
-  return {
-    type: "DELETE_MEAL_FOOD",
-    mealFoodId
-  }
-}
 
 
 export const createMealFood = (meal, food, number_of_servings, history) => {
@@ -95,8 +101,10 @@ export const createMealFood = (meal, food, number_of_servings, history) => {
           alert(json.error)
         } else {
           console.log(json)
+          console.log(mealFood)
+          console.log(meal)
           dispatch(addMealFood(json.data))
-          dispatch(updateMeal(meal, mealFood))
+          dispatch(updateMeal(meal.id, meal.attributes.calories, null, mealFood.calories))
 
           // should they go back to home page or to meal show page???
           history.push("/diaries")
@@ -109,15 +117,15 @@ export const createMealFood = (meal, food, number_of_servings, history) => {
 
 
 
-export const updateMealFood = (mealFood, foodData, number_of_servings, history) => {
+export const updateMealFood = (mealFood, updated_number_of_servings, history) => {
   console.log(mealFood)
   console.log(`getting ready to update mealFood with an id of ${mealFood.id}`)
   const updatedMealFood = {
     // is there a cleaner way to do this???
     // is this persisting the userId that was originally saved?????
 
-    number_of_servings: number_of_servings,
-    calories: foodData.calories * number_of_servings
+    number_of_servings: updated_number_of_servings,
+    calories: mealFood.attributes.food.calories * updated_number_of_servings
   }
   console.log("here is the updated mealFood: ")
   console.log(updatedMealFood)
@@ -138,8 +146,9 @@ export const updateMealFood = (mealFood, foodData, number_of_servings, history) 
           alert(json.error)
         } else {
           console.log(json)
+          console.log(mealFood)
           dispatch(updateMealFoodSuccess(json.data))
-          dispatch(updateMeal())
+          dispatch(updateMeal(mealFood.attributes.meal.id, mealFood.attributes.meal.calories, mealFood.attributes.calories, updatedMealFood.calories))
 
           // what is the difference between push and pushState???
           history.push("/diaries")
@@ -148,12 +157,14 @@ export const updateMealFood = (mealFood, foodData, number_of_servings, history) 
       .catch(console.log())
   }
 }
-//
-export const deleteMealFood = (mealFoodId, history) => {
-  console.log(`getting ready to delete mealFood with an id of ${mealFoodId}`)
+//SOMETHING FUNNY IS HAPPENING HERE. CALORIE COUNT NOT UPDATING PROPERLY.
+export const deleteMealFood = (mealFood, meal, history) => {
+  console.log(`getting ready to delete mealFood with an id of ${mealFood.id}`)
   console.log(history)
+  console.log(mealFood)
+  console.log(meal)
   return dispatch => {
-    return fetch(`http://localhost:3001/api/v1/meal_foods/${mealFoodId}`, {
+    return fetch(`http://localhost:3001/api/v1/meal_foods/${mealFood.id}`, {
       credentials: "include",
       method: "DELETE",
       headers: {
@@ -166,7 +177,8 @@ export const deleteMealFood = (mealFoodId, history) => {
           alert(json.error)
         } else {
           console.log(json)
-          dispatch(deleteMealFoodSuccess(mealFoodId))
+          dispatch(deleteMealFoodSuccess(mealFood.id))
+          dispatch(updateMeal(mealFood.attributes.meal.id, mealFood.attributes.meal.calories, mealFood.attributes.calories, null))
           history.push("/diaries")
         }
       })
