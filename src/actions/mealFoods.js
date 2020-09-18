@@ -178,7 +178,7 @@ export const deleteMealFood = (mealFood, meal, history) => {
         } else {
           console.log(json)
           dispatch(deleteMealFoodSuccess(mealFood.id))
-          dispatch(updateMeal(mealFood.attributes.meal.id, mealFood.attributes.meal.calories, mealFood.attributes.calories, null))
+          dispatch(updateMeal(meal.id, meal.attributes.calories, mealFood.attributes.calories, null))
           history.push("/diaries")
         }
       })
