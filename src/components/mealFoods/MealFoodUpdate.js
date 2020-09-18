@@ -17,11 +17,10 @@ class MealFoodUpdate extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    // set the state here by accessing props provided by mapDispatchToProps
-    // IS IT NOT NECESSARY TO PASS IN THE CURRENT USER BECAUSE ONLY THE FIELDS DECLARED IN THE ACTION WILL BE UPDATED?????????????
+
     this.props.updateMealFood(this.props.mealFood, this.state.number_of_servings, this.props.history)
+
     this.setState({
-      // drop down stays selected on whatever category was selected. Is this a problem or will it always update on page refresh?
       number_of_servings: "",
     })
   };
