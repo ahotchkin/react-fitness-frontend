@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 
 const MealFoodCard = props => {
 
-  // copied from ExerciseCard.js
   const handleDeleteClick = () => {
-    props.deleteMealFood(props.mealFood, props.mealFood.attributes.meal, props.history)
+    props.deleteMealFood(props.mealFood, props.meal, props.history)
   }
 
   // previous <p>:       <p>{props.food.brand_name} {props.food.description}, {props.mealFood.number_of_servings} servings - {props.mealFood.calories} calories - ...
