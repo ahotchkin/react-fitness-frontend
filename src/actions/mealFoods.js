@@ -143,7 +143,11 @@ export const updateMealFood = (mealFood, updated_number_of_servings, history) =>
       .then(response => response.json())
       .then(json => {
         if (json.error) {
-          alert(json.error)
+          if (updated_number_of_servings <= 0) {
+            alert("Number of servings must be greater than 0")
+          } else if (!Number(updated_number_of_servings)) {
+            alert("Number of servings is not a number")
+          }
         } else {
           console.log(json)
           console.log(mealFood)
