@@ -6,7 +6,7 @@ import { Route, Redirect, Switch } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { getCurrentUser } from './actions/currentUser'
-import NavBar from './components/NavBar'
+// import NavBar from './components/NavBar'
 import MainContainer from './containers/MainContainer'
 import Login from './components/Login'
 // import Logout from './components/Logout'
@@ -17,6 +17,9 @@ import DiariesContainer from './containers/DiariesContainer';
 import ExercisesContainer from './containers/ExercisesContainer';
 import FoodsContainer from './containers/FoodsContainer';
 import MealFoodsContainer from './containers/MealFoodsContainer';
+
+import NavBar from './components/NavBar'
+
 // Add Switch and wrap routes?
 
 // you want your routes in the component that has access to the store - need to set up the routes in a component that an send the props through the route to the rendered component
@@ -35,8 +38,10 @@ class App extends Component {
     return (
         <div className="App">
 
+          {/* Have to render NavBar here for it to appear on all pages. If rendered in MainContainer it only appears at "/" */}
+          { loggedIn ? <NavBar /> : null }
+          {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
 
-          <NavBar />
           <Switch>
             <Route exact path="/" render={ () => loggedIn ? <MainContainer /> : <Home /> }  />
 
