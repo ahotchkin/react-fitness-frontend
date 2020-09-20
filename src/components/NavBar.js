@@ -1,19 +1,32 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-const NavBar = ({ currentUser }) => {
+import { logout } from '../actions/currentUser';
+
+
+const NavBar = ({ logout }) => {
 
   return (
     <div className="NavBar">
-      { currentUser ? <h2>Welcome, {currentUser.attributes.username}!</h2> : "" }
+      <NavLink exact activeclass="true" to ="/">
+        Home
+      </NavLink>
+       |
+      <NavLink exact activeclass="true" to="/diaries">
+        Diaries
+      </NavLink>
+       |
+      <NavLink exact activeclass="true" to="/exercises">
+        Exercises
+      </NavLink>
+       |
+       {/* Need to figure out a way to not highlight this link as active when on the home page*/}
+      <NavLink exact activeclass="false" to="/" onClick={logout}>
+        Log Out
+      </NavLink>
     </div>
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    currentUser: state.currentUser
-  }
-}
-
-export default connect(mapStateToProps)(NavBar);
+export default connect(null, { logout })(NavBar);
