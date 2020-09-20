@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import MealFoods from '../mealFoods/MealFoods';
+// import MealFoods from '../mealFoods/MealFoods';
 
 // *******************************************************************************************************
 import MealFoodsContainer from '/Users/allysonhotchkin/Development/code/react-fitness-app/react-fitness-frontend/src/containers/MealFoodsContainer'
