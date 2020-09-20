@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
 // for routing - WHAT IS SWITCH???
-import { Route, Switch, withRouter } from 'react-router-dom';
+// removed withRouter 9/20/20 and seems to be working okay
+import { Route, Switch } from 'react-router-dom';
 
 import { getDiaries } from '../actions/diaries';
 import { createDiary } from '../actions/diaries';
@@ -61,4 +62,5 @@ const mapDispatchToProps = {
 // the function returned from invoking connect that will now supply DiariesContainer with props included state as descriped in MSTP and actions as described in MDTP takes DiariesContainer as an argument - the whole expression is a connected DiariesContainer component with state and actions
 // not just exporting the const from above, but exporting a bulked up version with state and actions
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DiariesContainer));
+// removed withRouter 9/20/20 and seems to be working okay
+export default connect(mapStateToProps, mapDispatchToProps)(DiariesContainer);

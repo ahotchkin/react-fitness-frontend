@@ -3,7 +3,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
-import { Route, Switch, withRouter } from 'react-router-dom';
+// removed withRouter 9/20/20 and seems to be working okay
+import { Route, Switch } from 'react-router-dom';
 
 import MealFoodUpdate from '../components/mealFoods/MealFoodUpdate'
 
@@ -62,7 +63,6 @@ class MealFoodsContainer extends Component {
             const meal = this.props.meals.find(meal => parseInt(meal.id) === mealFood.attributes.meal.id)
             */}
             if (!!mealFood) {
-              {console.log(this.props)}
               return <MealFoodUpdate mealFood={mealFood} updateMealFood={this.props.updateMealFood} {...props} />
 
               {/* See note below in mapStateToProps---
@@ -102,4 +102,5 @@ const mapDispatchToProps = {
 // the function returned from invoking connect that will now supply DiariesContainer with props included state as descriped in MSTP and actions as described in MDTP takes DiariesContainer as an argument - the whole expression is a connected DiariesContainer component with state and actions
 // not just exporting the const from above, but exporting a bulked up version with state and actions
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(MealFoodsContainer));
+// removed withRouter 9/20/20 and seems to be working okay
+export default connect(mapStateToProps, mapDispatchToProps)(MealFoodsContainer);
