@@ -21,8 +21,7 @@ const NavBar = ({ logout }) => {
         Exercises
       </NavLink>
        |
-       {/* Need to figure out a way to not highlight this link as active when on the home page*/}
-      <NavLink exact activeclass="false" to="/" onClick={logout}>
+      <NavLink exact to="/logout" onClick={logout}>
         Log Out
       </NavLink>
     </div>
