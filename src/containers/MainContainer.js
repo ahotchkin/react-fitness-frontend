@@ -1,23 +1,23 @@
 import React from 'react';
-import Logout from '../components/Logout'
-import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const MainContainer = () => {
+
+
+const MainContainer = ({ currentUser }) => {
   return (
     <div className="MainContainer">
-      In the main container now!
-      <br />
-      <Link to="/diaries">
-        <button>Diaries</button>
-      </Link>
-      <br />
-      <Link to="/exercises">
-        <button>Exercises</button>
-      </Link>
-      <br /><br />
-      <Logout />
+
+      { currentUser ? <h2>Hello, {currentUser.attributes.username}! Welcome to the Main Container of React Fitness!</h2> : "" }
+
     </div>
   )
 }
 
-export default MainContainer
+
+const mapStateToProps = state => {
+  return {
+    currentUser: state.currentUser
+  }
+}
+
+export default connect(mapStateToProps)(MainContainer);
