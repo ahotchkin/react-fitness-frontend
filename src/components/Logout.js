@@ -1,8 +1,9 @@
+// NO LONGER USING THIS COMPONENT. DELETE IF NOT NEEDED.
+
 import React from 'react';
 import { connect } from 'react-redux';
 // importing logout, an action creator
 import { logout } from '../actions/currentUser';
-
 
 // have logout as props, destructuring and using as a callback
 const Logout = ({ logout }) => {
