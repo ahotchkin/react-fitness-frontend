@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 // import { updateLoginForm } from '../actions/loginForm';
 import { login } from '../actions/currentUser';
 
@@ -38,23 +40,27 @@ class Login extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleOnSubmit}>
-        <input
-          placeholder="Username"
-          value={this.state.username}
-          name="username"
-          type="text"
-          onChange={this.handleOnChange}
-        />
-        <input
-          placeholder="Password"
-          value={this.state.password}
-          name="password"
-          type="text"
-          onChange={this.handleOnChange}
-        />
-        <input type="submit" value="Log In" />
-      </form>
+      <div>
+        <h1>Log In</h1>
+        <form onSubmit={this.handleOnSubmit}>
+          <input
+            placeholder="Username"
+            value={this.state.username}
+            name="username"
+            type="text"
+            onChange={this.handleOnChange}
+          />
+          <input
+            placeholder="Password"
+            value={this.state.password}
+            name="password"
+            type="text"
+            onChange={this.handleOnChange}
+          />
+          <input type="submit" value="Log In" />
+        </form>
+        <p>Not a member? Sign up <Link to="/signup">here</Link>.</p>
+      </div>
     )
   }
 }
