@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 // import { updateSignUpForm } from '../actions/signUpForm';
 import { signUp } from '../actions/currentUser';
 
@@ -41,69 +43,85 @@ class SignUp extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleOnSubmit}>
-        <label>Username: </label>
-        <input
-          placeholder="Username"
-          value={this.state.username}
-          name="username"
-          type="text"
-          onChange={this.handleOnChange}
-        />
+      <div>
+        <h1>Create an Account</h1>
+        <form onSubmit={this.handleOnSubmit}>
+          <label>Username: </label>
+          <input
+            placeholder="Username"
+            value={this.state.username}
+            name="username"
+            type="text"
+            onChange={this.handleOnChange}
+          />
 
-        <label>Password: </label>
-        <input
-          placeholder="Password"
-          value={this.state.password}
-          name="password"
-          type="text"
-          onChange={this.handleOnChange}
-        />
+          <br />
 
-        <label>Gender: </label>
-        <select name="gender" defaultValue="DEFAULT" onChange={this.handleOnChange}>
-          <option value="DEFAULT" disabled hidden>Select</option>
-          <option value="male">Male</option>
-          <option value="female">Female</option>
-        </select>
+          <label>Password: </label>
+          <input
+            placeholder="Password"
+            value={this.state.password}
+            name="password"
+            type="text"
+            onChange={this.handleOnChange}
+          />
 
-        <label>Age: </label>
-        <input
-          placeholder="Age"
-          value={this.state.age}
-          name="age"
-          type="text"
-          onChange={this.handleOnChange}
-        />
+          <br />
 
-        <label>Height: </label>
-        <input
-          placeholder="Feet"
-          value={this.state.height_feet}
-          name="height_feet"
-          type="text"
-          onChange={this.handleOnChange}
-        />
-        <input
-          placeholder="Inches"
-          value={this.state.height_inches}
-          name="height_inches"
-          type="text"
-          onChange={this.handleOnChange}
-        />
+          <label>Gender: </label>
+          <select name="gender" defaultValue="DEFAULT" onChange={this.handleOnChange}>
+            <option value="DEFAULT" disabled hidden>Select</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
 
-        <label>Weight:</label>
-        <input
-          placeholder="Weight"
-          value={this.state.weight}
-          name="weight"
-          type="text"
-          onChange={this.handleOnChange}
-        />
+          <br />
 
-        <input type="submit" value="Sign Up" />
-      </form>
+          <label>Age: </label>
+          <input
+            placeholder="Age"
+            value={this.state.age}
+            name="age"
+            type="text"
+            onChange={this.handleOnChange}
+          />
 
+          <br />
+
+          <label>Height: </label>
+          <input
+            placeholder="Feet"
+            value={this.state.height_feet}
+            name="height_feet"
+            type="text"
+            onChange={this.handleOnChange}
+          />
+          <input
+            placeholder="Inches"
+            value={this.state.height_inches}
+            name="height_inches"
+            type="text"
+            onChange={this.handleOnChange}
+          />
+
+          <br />
+
+          <label>Weight:</label>
+          <input
+            placeholder="Weight"
+            value={this.state.weight}
+            name="weight"
+            type="text"
+            onChange={this.handleOnChange}
+          />
+
+          <br />
+          
+          <input type="submit" value="Sign Up" />
+        </form>
+
+        <p>Already have an account? Log in <Link to="/login">here</Link>.</p>
+      </div>
     )
   }
 
