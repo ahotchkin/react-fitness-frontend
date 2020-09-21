@@ -43,6 +43,7 @@ class Login extends Component {
       <div>
         <h1>Log In</h1>
         <form onSubmit={this.handleOnSubmit}>
+          <label>Username: </label>
           <input
             placeholder="Username"
             value={this.state.username}
@@ -50,6 +51,10 @@ class Login extends Component {
             type="text"
             onChange={this.handleOnChange}
           />
+
+          <br />
+
+          <label>Password: </label>
           <input
             placeholder="Password"
             value={this.state.password}
@@ -57,8 +62,14 @@ class Login extends Component {
             type="text"
             onChange={this.handleOnChange}
           />
+
+          <br /><br />
+
           <input type="submit" value="Log In" />
         </form>
+
+        <br />
+        
         <p>Not a member? Sign up <Link to="/signup">here</Link>.</p>
       </div>
     )

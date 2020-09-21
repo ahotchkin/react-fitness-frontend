@@ -115,10 +115,12 @@ class SignUp extends Component {
             onChange={this.handleOnChange}
           />
 
-          <br />
-          
+          <br /><br />
+
           <input type="submit" value="Sign Up" />
         </form>
+
+        <br />
 
         <p>Already have an account? Log in <Link to="/login">here</Link>.</p>
       </div>
