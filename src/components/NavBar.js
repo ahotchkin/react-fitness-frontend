@@ -14,11 +14,11 @@ const NavBar = ({ logout }) => {
       </NavLink>
        |
       <NavLink exact activeclass="true" to="/diaries">
-        Diaries
+        Meal Diary
       </NavLink>
        |
       <NavLink exact activeclass="true" to="/exercises">
-        Exercises
+        Exercise
       </NavLink>
        |
       <NavLink exact to="/logout" onClick={logout}>
