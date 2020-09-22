@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import FoodCard from './FoodCard';
 import SearchInput from '../SearchInput'
 
-const Foods = (props) => {
-
+const Foods = props => {
 
   const foodCards = props.foods.map(food => <FoodCard key={food.id} food={food} meal={props.meal} createMealFood={props.createMealFood} history={props.history}/>)
 
