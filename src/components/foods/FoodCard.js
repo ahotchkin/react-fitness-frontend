@@ -29,20 +29,27 @@ class FoodCard extends Component {
   render() {
     return (
       <div>
-       <p>{this.props.food.attributes.brand_name} {this.props.food.attributes.description} - {this.props.food.attributes.calories} calories</p>
-       <form onSubmit={this.handleSubmit}>
-         <label>Number of Servings: </label>
-         <input
-           name="number_of_servings"
-           onChange={this.handleOnChange}
-           value={this.state.number_of_servings}
-         />
+        <p>{this.props.food.attributes.brand_name} {this.props.food.attributes.description} - {this.props.food.attributes.calories} calories</p>
 
-         <br />
+        {!!this.props.meal ?
+          <form onSubmit={this.handleSubmit}>
+            <label>Number of Servings: </label>
+            <input
+              name="number_of_servings"
+              onChange={this.handleOnChange}
+              value={this.state.number_of_servings}
+            />
 
-         <input type="submit" value="Add" />
+            <br />
 
-       </form>
+            <input type="submit" value="Add" />
+
+         </form>
+
+         :
+
+         null
+       }
 
       </div>
 
