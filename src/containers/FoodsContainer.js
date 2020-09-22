@@ -29,7 +29,6 @@ class FoodsContainer extends Component {
         <Switch>
           <Route exact path="/foods/new" render={props => <FoodInput createFood={this.props.createFood} {...props} /> } />
 
-          {/* SHOULD THIS BE /NEW OR DOES THAT NOT MAKE SENSE???????????????????? */}
           <Route exact path="/meals/:mealId/foods" render={props => {
             const meal = this.props.meals.find(meal => meal.id === props.match.params.mealId)
             return <Foods foods={this.props.foods} meal={meal} createMealFood={this.props.createMealFood} {...props} />
