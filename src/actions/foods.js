@@ -48,6 +48,64 @@ export const getFoods = () => {
   }
 }
 
+export const createFood = (foodData, history) => {
+  console.log(foodData)
+  const food = {
+    // is there a cleaner way to do this???
+    brand_name: foodData.brand_name,
+    description: foodData.description,
+    serving_size: foodData.serving_size,
+    servings_per_container: foodData.servings_per_container,
+    calories: foodData.calories,
+    total_fat: foodData.total_fat,
+    saturated_fat: foodData.saturated_fat,
+    polyunsaturated_fat: foodData.polyunsaturated_fat,
+    monounsaturated_fat: foodData.monounsaturated_fat,
+    trans_fat: foodData.trans_fat,
+    cholesterol: foodData.cholesterol,
+    sodium: foodData.sodium,
+    total_carbohydrate: foodData.total_carbohydrate,
+    dietary_fiber: foodData.dietary_fiber,
+    total_sugars: foodData.total_sugars,
+    added_sugars: foodData.added_sugars,
+    sugar_alcohols: foodData.sugar_alcohols,
+    protein: foodData.protein,
+    vitamin_a: foodData.vitamin_a,
+    vitamin_c: foodData.vitamin_c,
+    vitamin_d: foodData.vitamin_d,
+    calcium: foodData.calcium,
+    iron: foodData.iron,
+    potassium: foodData.potassium,
+
+  }
+
+
+  return dispatch => {
+    return fetch("http://localhost:3001/api/v1/foods", {
+
+      // credentials: "include",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(food)
+    })
+      .then(response => response.json())
+      .then(json => {
+        if (json.error) {
+          alert(json.error)
+        } else {
+          dispatch(addFood(json.data))
+
+          // should they go back to home page or to meal show page???
+          history.push("/foods")
+        }
+      })
+      .catch(console.log())
+  }
+}
+
+
 // export const addFoodToMeal = (foodData, mealId, history) => {
 //   console.log("food data is ", foodData)
 //   const mealFood = {
