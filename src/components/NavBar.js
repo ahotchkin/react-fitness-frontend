@@ -17,8 +17,12 @@ const NavBar = ({ logout }) => {
         Meal Diary
       </NavLink>
        |
-      <NavLink exact activeclass="true" to="/exercises">
+      <NavLink activeclass="true" to="/exercises">
         Exercise
+      </NavLink>
+       |
+      <NavLink activeclass="true" to="/foods">
+        Food Database
       </NavLink>
        |
       <NavLink exact to="/logout" onClick={logout}>
