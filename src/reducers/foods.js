@@ -5,6 +5,8 @@ export default (state = [], action) => {
     // case "CLEAR_FOODS":
     //   // want the diaries to be empty when the current user logs out
     //   return []
+    case "ADD_FOOD":
+      return state.concat(action.food)
     default:
       return state
   }
