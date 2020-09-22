@@ -49,14 +49,14 @@ class App extends Component {
             <Route exact path="/signup" render={ (props) => loggedIn ? <Redirect to="/" /> : <SignUp history={props.history}/> } />
 
             {/* below routes should only be available to users who are logged in - they are working correctly, but i'm not sure how I set that up...*/}
-            <Route exact path="/diaries" render={ routerProps => loggedIn ? <DiariesContainer {...routerProps} /> : <Home /> } />
+            <Route path="/diaries" render={ routerProps => loggedIn ? <DiariesContainer {...routerProps} /> : <Home /> } />
 
-            <Route exact path="/exercises" render={ routerProps => loggedIn ? <ExercisesContainer {...routerProps} /> : <Home /> } />
+            <Route path="/exercises" render={ routerProps => loggedIn ? <ExercisesContainer {...routerProps} /> : <Home /> } />
 
-            <Route exact path="/foods" render={ routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home />} />
-            <Route exact path="/meals/:mealId/foods" render={ routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home /> } />
+            <Route path="/foods" render={ routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home />} />
+            <Route path="/meals/:mealId/foods" render={ routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home /> } />
 
-            <Route exact path="/meal_foods" render={ routerProps => loggedIn ? <MealFoodsContainer {...routerProps} /> : <Home /> } />
+            <Route path="/meal_foods" render={ routerProps => loggedIn ? <MealFoodsContainer {...routerProps} /> : <Home /> } />
 
             {/* Added path so Logout link in NavBar isn't highlighted as active when at "/" */}
             <Route exact path="/logout" render={ () => <Redirect to="/" /> } />
