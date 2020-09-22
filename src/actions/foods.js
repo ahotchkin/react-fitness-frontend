@@ -48,7 +48,7 @@ export const getFoods = () => {
   }
 }
 
-export const createFood = (foodData, history) => {
+export const createFood = (foodData, mealId, history) => {
   console.log(foodData)
   const food = {
     // is there a cleaner way to do this???
@@ -98,7 +98,11 @@ export const createFood = (foodData, history) => {
           dispatch(addFood(json.data))
 
           // should they go back to home page or to meal show page???
-          history.push("/foods")
+          if (!!mealId) {
+            history.push(`/meals/${mealId}/foods`)
+          } else {
+            history.push("/foods")
+          }
         }
       })
       .catch(console.log())
