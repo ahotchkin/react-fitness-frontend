@@ -5,6 +5,7 @@ import SearchInput from '../SearchInput'
 
 const Foods = props => {
 
+
   const foodCards = props.foods.map(food => <FoodCard key={food.id} food={food} meal={props.meal} createMealFood={props.createMealFood} history={props.history}/>)
 
   return (
@@ -18,12 +19,24 @@ const Foods = props => {
 
       <SearchInput />
 
-      <Link to="/foods/new">
-        <button type="button">
-          Add New Food
-        </button>
-      </Link>
-
+      {!!props.meal ?
+        <Link to={{
+          pathname: "/foods/new",
+          state: {
+            mealId: props.meal.id
+          }
+        }}>
+          <button type="button">
+            Add New Food
+          </button>
+        </Link>
+        :
+        <Link to="/foods/new">
+          <button type="button">
+            Add New Food
+          </button>
+        </Link>
+      }
     </div>
   )
 }
