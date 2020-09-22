@@ -41,7 +41,13 @@ class FoodInput extends Component {
     event.preventDefault();
     // set the state here by accessing props provided by mapDispatchToProps
     console.log(this.props)
-    this.props.createFood(this.state, this.props.history)
+
+    if (!!this.props.location.state) {
+      this.props.createFood(this.state, this.props.location.state.mealId, this.props.history)
+    } else {
+      this.props.createFood(this.state, null, this.props.history)
+    }
+    
     this.setState({
       brand_name: "",
       description: "",
