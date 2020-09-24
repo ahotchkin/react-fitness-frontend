@@ -40,6 +40,7 @@ export const getMeals = () => {
         if (json.error) {
           alert(json.error)
         } else {
+          console.log(json)
           dispatch(setMeals(json.data))
         }
       })
