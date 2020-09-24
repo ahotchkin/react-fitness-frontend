@@ -59,7 +59,7 @@ export const getMealFoods = () => {
         if (json.error) {
           alert(json.error)
         } else {
-          console.log(json.data)
+          // console.log(json.data)
           dispatch(setMealFoods(json.data))
         }
       })
@@ -100,9 +100,9 @@ export const createMealFood = (meal, food, number_of_servings, history) => {
         if (json.error) {
           alert(json.error)
         } else {
-          console.log(json)
-          console.log(mealFood)
-          console.log(meal)
+          // console.log(json)
+          // console.log(mealFood)
+          // console.log(meal)
           dispatch(addMealFood(json.data))
           dispatch(updateMeal(meal.id, meal.attributes.calories, null, mealFood.calories))
 

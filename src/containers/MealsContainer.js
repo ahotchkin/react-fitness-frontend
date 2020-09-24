@@ -20,7 +20,9 @@ class MealsContainer extends Component {
       <div>
         {/* SHOULD ONLY SHOW DIARY FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
         <h1>I'm in the meals container</h1>
+        {/*
         {console.log(this.props)}
+        */}
         <Meals meals={this.props.meals} diaryId={this.props.diaryId} />
       </div>
     );

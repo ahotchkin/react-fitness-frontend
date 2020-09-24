@@ -13,7 +13,9 @@ const MealFoodCard = props => {
 
   return (
     <div>
+      {/*
       {console.log(props)}
+      */}
       <p>{props.mealFood.attributes.food.brand_name} {props.mealFood.attributes.food.description}, {props.mealFood.attributes.number_of_servings} servings - {props.mealFood.attributes.calories} calories -
       <Link to={`/meal_foods/${props.mealFood.id}/edit`}>
         <button type="button">
