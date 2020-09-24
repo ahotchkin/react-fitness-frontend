@@ -38,7 +38,6 @@ class Diaries extends Component {
 
   state = {
     startDate: new Date()
-
   };
 
   handleChange = date => {
@@ -65,6 +64,11 @@ class Diaries extends Component {
     // filter desired diary before mapping to avoid a situation where nothing would be returned at the end of map - necessary to avoid warning: Expected to return a value at the end of arrow function array-callback-return
     // return this.props.diaries.filter(diary => diary.attributes.date === this.getDate()).map(filteredDiary => <DiaryCard diary={filteredDiary} key={filteredDiary.id} />)
 
+    const filteredDiaries = this.props.diaries.filter(diary => diary.attributes.date === this.state.startDate.toISOString().split('T')[0])
+
+    if (filteredDiaries.length === 0) {
+      this.props.createDiary(this.state.startDate.toISOString().split('T')[0], this.props.currentUser, this.props.history)
+    }
 
     return this.props.diaries.filter(diary => diary.attributes.date === this.state.startDate.toISOString().split('T')[0]).map(filteredDiary => <DiaryCard diary={filteredDiary} key={filteredDiary.id} />)
   }
@@ -75,18 +79,21 @@ class Diaries extends Component {
     return (
       <div>
         <h2>Diaries</h2>
-        {console.log(this.state.startDate)}
-        {console.log(this.state.startDate.toISOString().split('T')[0])}
           <h4>Search for Meal Diary by Date:</h4>
             <DatePicker
               selected={this.state.startDate}
               onChange={this.handleChange}
             />
-            {console.log(this.state.startDate)}
 
             {/* props.diaries is an empty array on page refresh, but is populated on login...... what is happening here*/}
+
             {/* move createDiary to separate function? */}
+            {/*
             { this.renderDiaryCards().length > 0 ? this.renderDiaryCards() : <button onClick={() => this.props.createDiary(this.getDate(), this.props.currentUser, this.props.history)}>Start Today's Meal Diary</button> }
+            */}
+
+            {this.renderDiaryCards()}
+
       </div>
     )
   }
