@@ -50,12 +50,11 @@ export const getDiaries = () => {
   }
 }
 
-export const createDiary = (todaysDate, currentUser, history) => {
-  console.log("Diary date is", todaysDate)
+export const createDiary = (diaryDate, currentUser, history) => {
   const diary = {
     // is there a cleaner way to do this???
     user_id: currentUser.id,
-    date: todaysDate,
+    date: diaryDate,
   }
 
   return dispatch => {
