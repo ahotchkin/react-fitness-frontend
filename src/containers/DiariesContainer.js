@@ -16,6 +16,9 @@ import Diaries from '../components/diaries/Diaries'
 
 class DiariesContainer extends Component {
 
+  state = {
+    loaded: false
+  }
   // add componentDidMount that calls a fetchExercises function from actions/exercises.js??????
 
   // SHOULD I BE USING THE OTHER LIFECYCLE METHODS???????
@@ -23,7 +26,9 @@ class DiariesContainer extends Component {
     // this.props.loggedIn ? this.props.getExercises() : null
     // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
     this.props.getDiaries()
-
+    this.setState({
+      loaded: true
+    })
   }
 
   render() {
@@ -31,8 +36,13 @@ class DiariesContainer extends Component {
       <div>
         {/* SHOULD ONLY SHOW DIARY FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
         <h1>I'm in the diaries container</h1>
+          {console.log(this.props)}
           <Switch>
-            <Route exact path={this.props.match.url} render={(props) => <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} {...props} />} />
+            { !!this.state.loaded ?
+              <Route exact path={this.props.match.url} render={(props) => <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} {...props} />} />
+            :
+              null
+            }
           </Switch>
           {/* ONLY WANT TO DISPLAY TODAY'S DIARY IF PATH IS /
 
