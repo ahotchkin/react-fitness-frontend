@@ -40,6 +40,7 @@ export const getDiaries = () => {
       .then(json => {
         if (json.error) {
           alert(json.error)
+          console.log(json.data)
         } else {
           dispatch(setDiaries(json.data))
         }
