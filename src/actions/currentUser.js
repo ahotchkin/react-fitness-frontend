@@ -3,7 +3,7 @@
 // import { resetSignUpForm } from './signUpForm'
 // import { getExercises } from './exercises';
 import { clearExercises } from './exercises';
-import { getDiaries } from './diaries';
+// import { getDiaries } from './diaries';
 // import { getMeals } from './meals';
 
 
@@ -38,7 +38,7 @@ export const login = (credentials, history) => {
         } else {
           dispatch(setCurrentUser(json.data))
           // dispatch(getExercises())
-          dispatch(getDiaries())
+          // dispatch(getDiaries())
           // dispatch(getMeals())
           // only needed because Login is in Redux and not React
           // dispatch(resetLoginForm())
@@ -73,7 +73,7 @@ export const signUp = (credentials, history) => {
         } else {
           dispatch(setCurrentUser(json.data))
           // dispatch(getExercises())
-          dispatch(getDiaries())
+          // dispatch(getDiaries())
           // dispatch(getMeals())
 
           // only needed because Login is in Redux and not React
@@ -122,7 +122,7 @@ export const getCurrentUser = () => {
         } else {
           dispatch(setCurrentUser(json.data))
           // dispatch(getExercises())
-          dispatch(getDiaries())
+          // dispatch(getDiaries())
           // dispatch(getMeals())
 
         }
