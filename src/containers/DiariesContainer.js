@@ -36,10 +36,9 @@ class DiariesContainer extends Component {
       <div>
         {/* SHOULD ONLY SHOW DIARY FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
         <h1>I'm in the diaries container</h1>
-          {console.log(this.props)}
           <Switch>
             { !!this.state.loaded ?
-              <Route exact path={this.props.match.url} render={(props) => <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} {...props} />} />
+              <Route exact path={this.props.match.url} render={props => <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} {...props} />} />
             :
               null
             }
