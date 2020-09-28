@@ -26,8 +26,7 @@
 // }
 //
 // export default Diaries;
-
-
+// **************************************************************************************************************
 import React, { Component } from 'react';
 import DiaryCard from './DiaryCard';
 import DatePicker from "react-datepicker";
@@ -46,32 +45,28 @@ class Diaries extends Component {
     });
   };
 
-
-
-
+  // Below method accounts for time zone difference, ensures date is correct based on location
   getDate = () => {
-    const today = new Date();
-    const day = today.getDate();
-    const dd = () => { return (day < 10 ? '0' : '') + day }
-    const month = today.getMonth() + 1
-    const mm = () => { return (month < 10 ? '0' : '') + month }
-    const yyyy = today.getFullYear();
-    const todaysDate = `${yyyy}-${mm()}-${dd()}`
-    return todaysDate
+    const tzoffset = this.state.startDate.getTimezoneOffset() * 60000; //offset in milliseconds
+    const localISOTime = (new Date(this.state.startDate - tzoffset)).toISOString().split("T")[0];
+    return localISOTime
   }
 
   renderDiaryCards = () => {
     // filter desired diary before mapping to avoid a situation where nothing would be returned at the end of map - necessary to avoid warning: Expected to return a value at the end of arrow function array-callback-return
-    // return this.props.diaries.filter(diary => diary.attributes.date === this.getDate()).map(filteredDiary => <DiaryCard diary={filteredDiary} key={filteredDiary.id} />)
 
-    const filteredDiaries = this.props.diaries.filter(diary => diary.attributes.date === this.state.startDate.toISOString().split('T')[0])
+    // BELOW CODE IS CAUSING BUG AND CREATING SEVERAL DIARIES FOR ANY GIVEN DAY. TRIED TO SOLVE THIS WITH VALIDATIONS ON BACKEND, BUT KEPT GETTING ERRORS. WORKAROUND IS TO KEEP "START DIARY" BUTTON AND ADD VALIDATION ON BACKEND TO ENSURE USER CAN'T CREATE MORE THAN ONE DIARY WITH THE SAME DATE
+    // const foundDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
+    // // console.log(foundDiary.length)
+    //
+    // if (!foundDiary) {
+    //   const newDiary = this.props.createDiary(this.getDate(), this.props.currentUser, this.props.history)
+    // }
 
-    if (filteredDiaries.length === 0) {
-      this.props.createDiary(this.state.startDate.toISOString().split('T')[0], this.props.currentUser, this.props.history)
-    }
-
-    return this.props.diaries.filter(diary => diary.attributes.date === this.state.startDate.toISOString().split('T')[0]).map(filteredDiary => <DiaryCard diary={filteredDiary} key={filteredDiary.id} />)
+    return this.props.diaries.filter(diary => diary.attributes.date === this.getDate()).map(filteredDiary => <DiaryCard diary={filteredDiary} key={filteredDiary.id} />)
   }
+
+
 
 
 
@@ -84,15 +79,21 @@ class Diaries extends Component {
               selected={this.state.startDate}
               onChange={this.handleChange}
             />
+             {console.log(this.state.startDate)}
+             {console.log(this.state.startDate.toISOString())}
+             {console.log("hello")}
+             {console.log(this.getDate())}
 
             {/* props.diaries is an empty array on page refresh, but is populated on login...... what is happening here*/}
 
             {/* move createDiary to separate function? */}
-            {/*
-            { this.renderDiaryCards().length > 0 ? this.renderDiaryCards() : <button onClick={() => this.props.createDiary(this.getDate(), this.props.currentUser, this.props.history)}>Start Today's Meal Diary</button> }
-            */}
 
+
+            { this.renderDiaryCards().length > 0 ? this.renderDiaryCards() : <button onClick={() => this.props.createDiary(this.state.startDate.toISOString().split('T')[0], this.props.currentUser, this.props.history)}>Start Meal Diary for {this.state.startDate.toISOString().split('T')[0]}</button> }
+
+            {/*
             {this.renderDiaryCards()}
+            */}
 
       </div>
     )
@@ -100,7 +101,7 @@ class Diaries extends Component {
 }
 
 export default Diaries;
-
+// ******************************************************************************************************************
 // import React from "react";
 // import DatePicker from "react-datepicker";
 //
