@@ -23,7 +23,7 @@ class MealsContainer extends Component {
         {/*
         {console.log(this.props)}
         */}
-        <Meals meals={this.props.meals} diaryId={this.props.diaryId} />
+        <Meals meals={this.props.meals} diaryId={this.props.diaryId} diaryDate={this.props.diaryDate}/>
       </div>
     );
   }
