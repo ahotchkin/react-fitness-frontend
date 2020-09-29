@@ -28,7 +28,13 @@ const MealCard = (props) => {
       <MealFoodsContainer meal={props.meal} />
       {/* ******************************************************************************** */}
 
-      <Link to={`/meals/${props.meal.id}/foods`}>
+      <Link to={{
+        pathname: `/meals/${props.meal.id}/foods`,
+        state: {
+          diaryId: props.diaryId,
+          diaryDate: props.diaryDate
+        }
+      }}>
         <button type="button">
           Add Food
         </button>
