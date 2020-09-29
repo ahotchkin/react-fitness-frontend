@@ -74,7 +74,8 @@ export const getMealFoods = () => {
 
 
 
-export const createMealFood = (meal, food, number_of_servings, history) => {
+export const createMealFood = (meal, food, number_of_servings, history, location) => {
+  console.log(location)
   console.log("foodId is ", food.id, "mealId is ", meal.id)
   const mealFood = {
     // is there a cleaner way to do this???
@@ -107,7 +108,20 @@ export const createMealFood = (meal, food, number_of_servings, history) => {
           dispatch(updateMeal(meal.id, meal.attributes.calories, null, mealFood.calories))
 
           // should they go back to home page or to meal show page???
-          history.push("/diaries")
+          // history.push("/diaries")
+
+          history.push({
+            pathname: "/diaries",
+            state: {
+              date: location.state.diaryDate
+            }
+          })
+
+          // this.props.history.push({
+          //   pathname: '/template',
+          //   search: '?query=abc',
+          //   state: { detail: response.data }
+          // })
         }
       })
       .catch(console.log())
