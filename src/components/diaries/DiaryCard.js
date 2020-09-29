@@ -8,7 +8,7 @@ const DiaryCard = ({ diary }) => {
     <div>
       <h3>Meal Diary for {diary.attributes.date}</h3>
       {console.log("diary: ", diary)}
-      <MealsContainer diaryId={diary.id} />
+      <MealsContainer diaryId={diary.id} diaryDate={diary.attributes.date} />
     </div>
 
   )
