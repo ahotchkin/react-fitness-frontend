@@ -14,7 +14,7 @@ class Foods extends Component {
   renderFoodCards = () => {
     // return this.props.foods.map(food => <FoodCard key={food.id} food={food} meal={this.props.meal} createMealFood={this.props.createMealFood} history={this.props.history}/>)
     return this.state.currentlyDisplayed.map(food => {
-      return (<FoodCard key={food.id} food={food} meal={this.props.meal} createMealFood={this.props.createMealFood} history={this.props.history}/>)
+      return (<FoodCard key={food.id} food={food} meal={this.props.meal} createMealFood={this.props.createMealFood} history={this.props.history} location={this.props.location}/>)
     })
   }
 
