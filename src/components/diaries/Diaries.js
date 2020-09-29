@@ -89,13 +89,9 @@ class Diaries extends Component {
 
   // Below method accounts for time zone difference, ensures date is correct based on location
   getDate = () => {
-    if (!!this.props.location.state) {
-      return this.props.location.state.date
-    } else {
-      const tzoffset = this.state.startDate.getTimezoneOffset() * 60000; //offset in milliseconds
-      const date = (new Date(this.state.startDate - tzoffset)).toISOString().split("T")[0];
-      return date
-    }
+    const tzoffset = this.state.startDate.getTimezoneOffset() * 60000; //offset in milliseconds
+    const date = (new Date(this.state.startDate - tzoffset)).toISOString().split("T")[0];
+    return date
   }
 
   createDiaryCards = () => {
