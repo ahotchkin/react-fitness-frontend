@@ -17,7 +17,7 @@ class FoodCard extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // set the state here by accessing props provided by mapDispatchToProps
-    this.props.createMealFood(this.props.meal, this.props.food, this.state.number_of_servings, this.props.history)
+    this.props.createMealFood(this.props.meal, this.props.food, this.state.number_of_servings, this.props.history, this.props.location)
     this.setState({
       text: "",
     })
