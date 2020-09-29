@@ -40,8 +40,30 @@ import SearchByDate from '../SearchByDate';
 class Diaries extends Component {
 
   state = {
-    startDate: new Date()
+    // if this.props.location.state.date is empty, startDate: new Date(). Otherwise, startDate: this.props.location.state.date
+
+
+    // startDate: new Date()
+    startDate: ""
   };
+
+  componentDidMount = () => {
+    // if (!!this.props.location.state) {
+    //   console.log(new Date(this.props.location.state.date))
+    //
+    //
+    // }
+    if (!!this.props.location.state) {
+      this.setState({
+        startDate: new Date(this.props.location.state.date)
+      })
+    } else {
+      this.setState({
+        startDate: new Date()
+      })
+    }
+
+  }
 
   handleOnChange = date => {
     this.setState({
@@ -56,7 +78,7 @@ class Diaries extends Component {
     return localISOTime
   }
 
-  renderDiaryCards = () => {
+  createDiaryCards = () => {
 
     // BELOW CODE IS CAUSING BUG AND CREATING SEVERAL DIARIES FOR ANY GIVEN DAY. TRIED TO SOLVE THIS WITH VALIDATIONS ON BACKEND, BUT KEPT GETTING ERRORS. WORKAROUND IS TO KEEP "START DIARY" BUTTON AND ADD VALIDATION ON BACKEND TO ENSURE USER CAN'T CREATE MORE THAN ONE DIARY WITH THE SAME DATE
     // const foundDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
@@ -70,7 +92,13 @@ class Diaries extends Component {
     return this.props.diaries.filter(diary => diary.attributes.date === this.getDate()).map(filteredDiary => <DiaryCard diary={filteredDiary} key={filteredDiary.id} />)
   }
 
-
+  renderDiaryCards = () => {
+    if (this.createDiaryCards().length > 0) {
+      return this.createDiaryCards()
+    } else {
+      return <button onClick={() => this.props.createDiary(this.getDate(), this.props.currentUser, this.props.history)}>Start Meal Diary for {this.getDate()}</button>
+    }
+  }
 
 
 
@@ -80,13 +108,22 @@ class Diaries extends Component {
         <h2>Diaries</h2>
           <h4>Search for Meal Diary by Date:</h4>
             <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
-
-            {console.log(this.getDate())}
+            {console.log(this.props)}
+            {console.log(this.state.startDate)}
 
             {/* props.diaries is an empty array on page refresh, but is populated on login...... what is happening here*/}
 
             {/* move createDiary to separate function? */}
+            { this.state.startDate != "" ?
+              this.renderDiaryCards()
+            :
+              <p>We don't have a date yet</p>
+            }
+            {/*
             { this.renderDiaryCards().length > 0 ? this.renderDiaryCards() : <button onClick={() => this.props.createDiary(this.getDate(), this.props.currentUser, this.props.history)}>Start Meal Diary for {this.getDate()}</button> }
+            */}
+
+
       </div>
     )
   }
