@@ -40,22 +40,38 @@ import SearchByDate from '../SearchByDate';
 class Diaries extends Component {
 
   state = {
-    // if this.props.location.state.date is empty, startDate: new Date(). Otherwise, startDate: this.props.location.state.date
-
-
     // startDate: new Date()
     startDate: ""
   };
 
   componentDidMount = () => {
-    // if (!!this.props.location.state) {
-    //   console.log(new Date(this.props.location.state.date))
-    //
-    //
-    // }
+
     if (!!this.props.location.state) {
+      // const currentDate = new Date()
+      // console.log(currentDate)
+      // const gmtTime = currentDate.toISOString().split("T")[1]
+      // console.log(gmtTime)
+      const diaryDate = this.props.location.state.date
+      // console.log(diaryDate)
+      // console.log(new Date(diaryDate + "T" + gmtTime).toString())
+      // console.log(new Date(diaryDate + "T" + gmtTime).toString().length)
+      // console.log(new Date(diaryDate + "T" + gmtTime).toUTCString())
+
+      // Below code is getting digits of timezone difference to be used when creating startDate.
+      // Necessary so day always shows as day the user came from, not the day before (due to time difference).
+      const a = new Date(diaryDate).toString().split("")[29]
+      const b = new Date(diaryDate).toString().split("")[30]
+      const c = new Date(diaryDate).toString().split("")[31]
+      const d = new Date(diaryDate).toString().split("")[32]
+
+      const hh = a + b
+      const mm = c + d
+
+      // date is showing up as day before. I think because when I create the date as above it is a day earlier in EST. it's taking the GMT time zone and thinking it's EST.
+      // what if i get the time differrence from currentDate and add it to the gmtTime?
+
       this.setState({
-        startDate: new Date(this.props.location.state.date)
+        startDate: new Date(diaryDate + ` ${hh}:${mm}:00 GMT`)
       })
     } else {
       this.setState({
@@ -73,9 +89,13 @@ class Diaries extends Component {
 
   // Below method accounts for time zone difference, ensures date is correct based on location
   getDate = () => {
-    const tzoffset = this.state.startDate.getTimezoneOffset() * 60000; //offset in milliseconds
-    const localISOTime = (new Date(this.state.startDate - tzoffset)).toISOString().split("T")[0];
-    return localISOTime
+    if (!!this.props.location.state) {
+      return this.props.location.state.date
+    } else {
+      const tzoffset = this.state.startDate.getTimezoneOffset() * 60000; //offset in milliseconds
+      const date = (new Date(this.state.startDate - tzoffset)).toISOString().split("T")[0];
+      return date
+    }
   }
 
   createDiaryCards = () => {
@@ -117,7 +137,7 @@ class Diaries extends Component {
             { this.state.startDate != "" ?
               this.renderDiaryCards()
             :
-              <p>We don't have a date yet</p>
+              null
             }
             {/*
             { this.renderDiaryCards().length > 0 ? this.renderDiaryCards() : <button onClick={() => this.props.createDiary(this.getDate(), this.props.currentUser, this.props.history)}>Start Meal Diary for {this.getDate()}</button> }
