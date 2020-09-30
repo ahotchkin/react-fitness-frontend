@@ -98,14 +98,15 @@ export const createExercise = (exerciseData, date, currentUser, history) => {
   }
 }
 
-export const updateExercise = (exerciseFormData, exercise, history) => {
+export const updateExercise = (exerciseFormData, date, exercise, history) => {
   console.log(exercise)
   console.log(`getting ready to update exercise with an id of ${exercise.id}`)
   const updatedExercise = {
     // is there a cleaner way to do this???
     // is this persisting the userId that was originally saved?????
-    name: exerciseFormData.name,
+    date: date,
     category: exerciseFormData.category,
+    name: exerciseFormData.name,
     duration_in_minutes: exerciseFormData.duration_in_minutes,
     calories_burned: exerciseFormData.calories_burned
   }
