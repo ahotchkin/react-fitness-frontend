@@ -7,38 +7,109 @@ import { Route, Switch } from 'react-router-dom';
 
 import { getDiaries } from '../actions/diaries';
 import { createDiary } from '../actions/diaries';
-// import { updateExercise } from '../actions/exercises';
-// import { deleteExercise } from '../actions/exercises';
 
 import Diaries from '../components/diaries/Diaries'
-// import ExerciseInput from '../components/exercises/ExerciseInput'
-// import ExerciseUpdate from '../components/exercises/ExerciseUpdate'
+
+// ********************************************
+import SearchByDate from '../components/SearchByDate';
+// ********************************************
+
 
 class DiariesContainer extends Component {
 
+  // state = {
+  //   loaded: false
+  // }
+
+  // ***************************************
   state = {
-    loaded: false
-  }
-  // add componentDidMount that calls a fetchExercises function from actions/exercises.js??????
+    loaded: false,
+    // startDate: new Date()
+    startDate: ""
+  };
 
   // SHOULD I BE USING THE OTHER LIFECYCLE METHODS???????
   componentDidMount() {
     // this.props.loggedIn ? this.props.getExercises() : null
     // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
+
+    if (!!this.props.location.state) {
+      // const currentDate = new Date()
+      // console.log(currentDate)
+      // const gmtTime = currentDate.toISOString().split("T")[1]
+      // console.log(gmtTime)
+      const diaryDate = this.props.location.state.date
+      // console.log(diaryDate)
+      // console.log(new Date(diaryDate + "T" + gmtTime).toString())
+      // console.log(new Date(diaryDate + "T" + gmtTime).toString().length)
+      // console.log(new Date(diaryDate + "T" + gmtTime).toUTCString())
+
+      // Below code is getting digits of timezone difference to be used when creating startDate
+      // Sets the first two digits to hh an the second two digits to mm
+      // Uses this data to set the GMT time so day always shows as day the user came from, not the day before (due to time difference)
+      const a = new Date(diaryDate).toString().split("")[29]
+      const b = new Date(diaryDate).toString().split("")[30]
+      const c = new Date(diaryDate).toString().split("")[31]
+      const d = new Date(diaryDate).toString().split("")[32]
+
+      const hh = a + b
+      const mm = c + d
+
+      this.setState({
+        loaded: true,
+        startDate: new Date(diaryDate + ` ${hh}:${mm}:00 GMT`)
+      })
+    } else {
+      this.setState({
+        loaded: true,
+        startDate: new Date()
+      })
+    }
+
     this.props.getDiaries()
-    this.setState({
-      loaded: true
-    })
+    // this.setState({
+    //   loaded: true
+    // })
   }
+
+  handleOnChange = date => {
+    this.setState({
+      startDate: date,
+    });
+  };
+
+  // Below method accounts for time zone difference, ensures date is correct based on location
+  getDate = () => {
+    const tzoffset = this.state.startDate.getTimezoneOffset() * 60000; //offset in milliseconds
+    const date = (new Date(this.state.startDate - tzoffset)).toISOString().split("T")[0];
+    return date
+  }
+
+  // ***************************************
+
+
+  // // SHOULD I BE USING THE OTHER LIFECYCLE METHODS???????
+  // componentDidMount() {
+  //   // this.props.loggedIn ? this.props.getExercises() : null
+  //   // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
+  //   this.props.getDiaries()
+  //   this.setState({
+  //     loaded: true
+  //   })
+  // }
 
   render() {
     return (
       <div>
-        {/* SHOULD ONLY SHOW DIARY FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
         <h1>I'm in the diaries container</h1>
           <Switch>
             { !!this.state.loaded ?
-              <Route exact path={this.props.match.url} render={props => <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} {...props} />} />
+              <Route exact path={this.props.match.url} render={props =>
+                <div>
+                  <h4>Search for Meal Diary by Date:</h4>
+                  <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
+                  <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.getDate()} {...props} />
+                </div>} />
             :
               null
             }
