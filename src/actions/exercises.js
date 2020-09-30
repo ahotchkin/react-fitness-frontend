@@ -60,16 +60,19 @@ export const getExercises = () => {
   }
 }
 
-export const createExercise = (exerciseData, currentUser, history) => {
+export const createExercise = (exerciseData, date, currentUser, history) => {
   console.log("exercise data is ", exerciseData)
   const exercise = {
     // is there a cleaner way to do this???
     user_id: currentUser.id,
-    name: exerciseData.name,
+    date: date,
     category: exerciseData.category,
+    name: exerciseData.name,
     duration_in_minutes: exerciseData.duration_in_minutes,
     calories_burned: exerciseData.calories_burned
   }
+  console.log(exercise)
+
 
   return dispatch => {
     return fetch(baseUrl, {
