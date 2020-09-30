@@ -25,7 +25,7 @@ class ExerciseUpdate extends Component {
     console.log(this.props)
 
     // IS IT NOT NECESSARY TO PASS IN THE CURRENT USER BECAUSE ONLY THE FIELDS DECLARED IN THE ACTION WILL BE UPDATED?????????????
-    this.props.updateExercise(this.state, this.props.exercise, this.props.history)
+    this.props.updateExercise(this.state, this.props.date, this.props.exercise, this.props.history)
     this.setState({
       // drop down stays selected on whatever category was selected. Is this a problem or will it always update on page refresh?
       category: "",
@@ -46,7 +46,6 @@ class ExerciseUpdate extends Component {
         This is the update exercise page for {this.props.exercise.attributes.name}
         <br /><br />
         {console.log(this.state)}
-
 
         <form onSubmit={this.handleSubmit}>
           <label>Category: </label>
