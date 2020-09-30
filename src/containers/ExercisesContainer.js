@@ -14,7 +14,33 @@ import Exercises from '../components/exercises/Exercises';
 import ExerciseInput from '../components/exercises/ExerciseInput';
 import ExerciseUpdate from '../components/exercises/ExerciseUpdate';
 
+// ********************************************
+import SearchByDate from '../components/SearchByDate';
+// ********************************************
+
 class ExercisesContainer extends Component {
+
+// ***************************************
+  state = {
+    startDate: new Date()
+    // startDate: ""
+  };
+
+  handleOnChange = date => {
+    this.setState({
+      startDate: date,
+    });
+  };
+
+  // Below method accounts for time zone difference, ensures date is correct based on location
+  getDate = () => {
+    const tzoffset = this.state.startDate.getTimezoneOffset() * 60000; //offset in milliseconds
+    const date = (new Date(this.state.startDate - tzoffset)).toISOString().split("T")[0];
+    return date
+  }
+
+// ***************************************
+
 
   // add componentDidMount that calls a fetchExercises function from actions/exercises.js??????
 
@@ -33,11 +59,23 @@ class ExercisesContainer extends Component {
         {/* UPDATE ALL ROUTES TO {THIS.PROPS.MATCH.URL} */}
         <h1>I'm in the exercises container</h1>
           <Switch>
-            <Route exact path="/exercises/new" render={props => <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} history={this.props.history} /> } />
-            <Route exact path={this.props.match.url} render={props => <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} {...props} />} />
+            <Route exact path="/exercises/new" render={props =>
+              <div>
+              Date: <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
+              <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} date={this.getDate()} history={this.props.history} />
+              </div>} />
+            <Route exact path={this.props.match.url} render={props =>
+              <div>
+              <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
+              <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.getDate()} {...props} /></div>} />
             <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
               const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
-              return <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} {...props} />
+              return (
+              <div>
+                <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
+                <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} date={this.getDate()} {...props} />
+              </div>
+              )
             }} />
 
           </Switch>
