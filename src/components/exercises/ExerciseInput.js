@@ -21,7 +21,7 @@ class ExerciseInput extends Component {
     event.preventDefault();
     // set the state here by accessing props provided by mapDispatchToProps
     console.log(this.props)
-    this.props.createExercise(this.state, this.props.currentUser, this.props.history)
+    this.props.createExercise(this.state, this.props.date, this.props.currentUser, this.props.history)
     this.setState({
       // drop down stays selected on whatever category was selected. Is this a problem or will it always update on page refresh?
       category: "",
