@@ -39,21 +39,40 @@ class DiariesContainer extends Component {
       // const gmtTime = currentDate.toISOString().split("T")[1]
       // console.log(gmtTime)
       const diaryDate = this.props.location.state.date
-      // console.log(diaryDate)
+      console.log(diaryDate)
+      console.log(new Date(diaryDate))
       // console.log(new Date(diaryDate + "T" + gmtTime).toString())
       // console.log(new Date(diaryDate + "T" + gmtTime).toString().length)
       // console.log(new Date(diaryDate + "T" + gmtTime).toUTCString())
 
-      // Below code is getting digits of timezone difference to be used when creating startDate
-      // Sets the first two digits to hh an the second two digits to mm
-      // Uses this data to set the GMT time so day always shows as day the user came from, not the day before (due to time difference)
+      // Below code is getting digits of timezone difference from GMT to be used when setting startDate
+      // new Date(diaryDate) creates a date that is set to midnight GMT, which will not always be the correct day based on the user's timezone
+        // If user's timezone is GMT-XXXX, hh is set to first two digits and mm is set to second two digits
+          // i.e. EST, which is GMT-0400, would be set to hh = 04, mm = 00
+        // If user's timezone is GMT+XXXX, hh is set to 24 - first two digits and mm is set to second two digits
+          // i.e. Australia WST, which is GMT+0800, would be set to hh = 16 (or 24 - 08), mm = 00
+      // Uses this data to set the day to midnight of diaryDate, no matter what time of day or timezone user is in
+      // Ensures user will always see the correct diaryDate, and not the day before or after depending on timezone
       const a = new Date(diaryDate).toString().split("")[29]
       const b = new Date(diaryDate).toString().split("")[30]
       const c = new Date(diaryDate).toString().split("")[31]
       const d = new Date(diaryDate).toString().split("")[32]
+      const e = new Date(diaryDate).toString().split("")[28]
+      console.log(e)
+      let hh = ""
+      let mm = ""
+      if (e === "+") {
+        hh = 24 - (a + b)
+        mm = c + d
+      } else {
+        hh = a + b
+        mm = c + d
+      }
 
-      const hh = a + b
-      const mm = c + d
+      // const hh = a + b
+      // const mm = c + d
+
+      console.log(new Date(diaryDate + ` ${hh}:${mm}:00 GMT`))
 
       this.setState({
         loaded: true,
