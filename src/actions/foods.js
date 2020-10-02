@@ -48,7 +48,7 @@ export const getFoods = () => {
   }
 }
 
-export const createFood = (foodData, mealId, history) => {
+export const createFood = (foodData, mealId, history, location) => {
   console.log(foodData)
   const food = {
     // is there a cleaner way to do this???
@@ -99,7 +99,12 @@ export const createFood = (foodData, mealId, history) => {
 
           // should they go back to home page or to meal show page???
           if (!!mealId) {
-            history.push(`/meals/${mealId}/foods`)
+            history.push({
+              pathname: `/meals/${mealId}/foods`,
+              state: {
+                diaryDate: location.state.diaryDate,
+              }
+            })
           } else {
             history.push("/foods")
           }
