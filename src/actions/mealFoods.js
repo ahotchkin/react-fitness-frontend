@@ -113,7 +113,7 @@ export const createMealFood = (meal, food, number_of_servings, history, location
           history.push({
             pathname: "/diaries",
             state: {
-              date: location.state.diaryDate
+              diaryDate: location.state.diaryDate
             }
           })
 
