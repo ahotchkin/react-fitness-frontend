@@ -38,7 +38,8 @@ class DiariesContainer extends Component {
       // console.log(currentDate)
       // const gmtTime = currentDate.toISOString().split("T")[1]
       // console.log(gmtTime)
-      const diaryDate = this.props.location.state.date
+      console.log(this.props)
+      const diaryDate = this.props.location.state.diaryDate
       console.log(diaryDate)
       console.log(new Date(diaryDate))
       // console.log(new Date(diaryDate + "T" + gmtTime).toString())
