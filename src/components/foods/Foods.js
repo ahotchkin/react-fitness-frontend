@@ -71,7 +71,10 @@ class Foods extends Component {
           <Link to={{
             pathname: "/foods/new",
             state: {
-              mealId: this.props.meal.id
+              mealId: this.props.meal.id,
+              // Need to pass diary information when creating new foods, user is directed back to /meals/:mealId/foods and without diary info the added food can't be added to the correct diary
+              diaryId: this.props.location.state.diaryId,
+              diaryDate: this.props.location.state.diaryDate
             }
           }}>
             <button type="button">
