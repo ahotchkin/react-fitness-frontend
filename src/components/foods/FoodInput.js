@@ -43,11 +43,11 @@ class FoodInput extends Component {
     console.log(this.props)
 
     if (!!this.props.location.state) {
-      this.props.createFood(this.state, this.props.location.state.mealId, this.props.history)
+      this.props.createFood(this.state, this.props.location.state.mealId, this.props.history, this.props.location)
     } else {
       this.props.createFood(this.state, null, this.props.history)
     }
-    
+
     this.setState({
       brand_name: "",
       description: "",
