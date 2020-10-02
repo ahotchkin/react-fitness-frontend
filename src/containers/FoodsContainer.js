@@ -10,6 +10,8 @@ import FoodInput from '../components/foods/FoodInput'
 import { getFoods } from '../actions/foods';
 import { createFood } from '../actions/foods';
 
+// add getMeals to mapDispatchToProps and call in componentDidMount to ensure meals are in state on page refresh
+import { getMeals } from '../actions/meals'
 import { createMealFood } from '../actions/mealFoods'
 
 class FoodsContainer extends Component {
@@ -18,14 +20,14 @@ class FoodsContainer extends Component {
     // this.props.loggedIn ? this.props.getExercises() : null
     // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
     this.props.getFoods()
-
+    this.props.getMeals()
   }
 
   render() {
     return (
       <div>
         <h1>I'm in the foods container</h1>
-        {console.log(this.props)}
+        {console.log(`I'm console logging props at ${new Date()}: `, this.props)}
         <Switch>
           <Route exact path="/foods/new" render={props => <FoodInput createFood={this.props.createFood} {...props} /> } />
 
@@ -62,6 +64,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getFoods,
+  getMeals,
   createFood,
   createMealFood,
 }
