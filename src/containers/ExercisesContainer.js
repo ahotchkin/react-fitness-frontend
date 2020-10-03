@@ -39,6 +39,28 @@ class ExercisesContainer extends Component {
     return date
   }
 
+  getTodaysDate = () => {
+    const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
+    const date = (new Date(new Date() - tzoffset)).toISOString().split("T")[0];
+    return date
+  }
+
+
+  caloriesBurned = () => {
+    let data = {}
+
+    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getTodaysDate())
+
+    if (todaysExercises.length === 1) {
+      data = {calories_burned: todaysExercises[0].attributes.calories_burned}
+    } else if (todaysExercises.length > 1) {
+      data = todaysExercises.reduce((a, b) => ({calories_burned: a.attributes.calories_burned + b.attributes.calories_burned}))
+    } else {
+      data = {calories_burned: 0}
+    }
+    return data.calories_burned
+  }
+
 // ***************************************
 
 
@@ -67,7 +89,7 @@ class ExercisesContainer extends Component {
             <Route exact path={this.props.match.url} render={props =>
               <div>
               <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
-              <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.getDate()} {...props} /></div>} />
+              <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.getDate()} caloriesBurned={this.caloriesBurned()} {...props} /></div>} />
             <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
               const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
               return (
