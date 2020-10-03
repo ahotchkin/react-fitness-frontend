@@ -8,6 +8,8 @@ import { Route, Switch } from 'react-router-dom';
 import { getDiaries } from '../actions/diaries';
 import { createDiary } from '../actions/diaries';
 
+import { getExercises } from '../actions/exercises';
+
 import Diaries from '../components/diaries/Diaries'
 
 // ********************************************
@@ -87,6 +89,7 @@ class DiariesContainer extends Component {
     }
 
     this.props.getDiaries()
+    this.props.getExercises()
     // this.setState({
     //   loaded: true
     // })
@@ -105,6 +108,27 @@ class DiariesContainer extends Component {
     return date
   }
 
+  getTodaysDate = () => {
+    const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
+    const date = (new Date(new Date() - tzoffset)).toISOString().split("T")[0];
+    return date
+  }
+
+
+  caloriesBurned = () => {
+    let data = {}
+
+    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getTodaysDate())
+
+    if (todaysExercises.length === 1) {
+      data = {calories_burned: todaysExercises[0].attributes.calories_burned}
+    } else if (todaysExercises.length > 1) {
+      data = todaysExercises.reduce((a, b) => ({calories_burned: a.attributes.calories_burned + b.attributes.calories_burned}))
+    } else {
+      data = {calories_burned: 0}
+    }
+    return data.calories_burned
+  }
   // ***************************************
 
 
@@ -128,7 +152,7 @@ class DiariesContainer extends Component {
                 <div>
                   <h4>Search for Meal Diary by Date:</h4>
                   <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
-                  <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.getDate()} {...props} />
+                  <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.getDate()} caloriesBurned={this.caloriesBurned()} {...props} />
                 </div>} />
             :
               null
@@ -148,13 +172,15 @@ class DiariesContainer extends Component {
 const mapStateToProps = state => ({
   loggedIn: !!state.currentUser,
   currentUser: state.currentUser,
-  diaries: state.diaries
+  diaries: state.diaries,
+  exercises: state.exercises
 });
 
 
 const mapDispatchToProps = {
   getDiaries,
-  createDiary
+  createDiary,
+  getExercises
 }
 
 
