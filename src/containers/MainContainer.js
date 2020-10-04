@@ -1,58 +1,98 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
+// can move BrowserRouter to index.js and wrap App instead of using here
+// import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 
+import { connect } from 'react-redux'
+import { getCurrentUser } from '../actions/currentUser'
+// import NavBar from './components/NavBar'
+import DashboardContainer from '../containers/DashboardContainer'
+import Login from '../components/Login'
+// import Logout from './components/Logout'
+import SignUp from '../components/SignUp'
+import Home from '../components/Home'
 
+import DiariesContainer from './DiariesContainer';
+import ExercisesContainer from './ExercisesContainer';
+import FoodsContainer from './FoodsContainer';
+import MealFoodsContainer from './MealFoodsContainer';
 
-const MainContainer = ({ currentUser }) => {
+import NavBar from '../components/NavBar'
 
-  // Used in several places, refactor somehow?
-  const getDate = () => {
-    const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
-    const date = (new Date(new Date() - tzoffset)).toISOString().split("T")[0];
-    return date
+// Add Switch and wrap routes?
+
+// you want your routes in the component that has access to the store - need to set up the routes in a component that an send the props through the route to the rendered component
+
+class MainContainer extends Component {
+
+  // when app mounts, I want to get my currentUser
+  componentDidMount() {
+    this.props.getCurrentUser()
+    console.log(this.props)
   }
 
-  // Only updates on page refresh...need to getExercises rather than pull from currentUser.attributes.exercises
-  const caloriesBurned = () => {
-    const data = currentUser.attributes.exercises.filter(exercise => exercise.date === getDate()).reduce((a, b) => ({calories_burned: a.calories_burned + b.calories_burned}))
-    return data.calories_burned
+  render() {
+    const { loggedIn } = this.props
+    console.log(this.props)
+    return (
+      // Update className when adding css
+      <div className="App">
+
+        {/* Have to render NavBar here for it to appear on all pages. If rendered in MainContainer it only appears at "/" */}
+        { loggedIn ? <NavBar /> : null }
+        {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
+
+        <Switch>
+          <Route exact path="/" render={ () => loggedIn ? <DashboardContainer /> : <Home /> }  />
+
+          {/* below routes should only be available to users who are NOT logged in */}
+          <Route exact path="/login" render={ (props) => loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
+          <Route exact path="/signup" render={ (props) => loggedIn ? <Redirect to="/" /> : <SignUp history={props.history}/> } />
+
+          {/* below routes should only be available to users who are logged in - they are working correctly, but i'm not sure how I set that up...*/}
+          <Route path="/diaries" render={ routerProps => loggedIn ? <DiariesContainer {...routerProps} /> : <Home /> } />
+
+          <Route path="/exercises" render={ routerProps => loggedIn ? <ExercisesContainer {...routerProps} /> : <Home /> } />
+
+          <Route path="/foods" render={ routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home />} />
+          <Route path="/meals/:mealId/foods" render={ routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home /> } />
+
+          <Route path="/meal_foods" render={ routerProps => loggedIn ? <MealFoodsContainer {...routerProps} /> : <Home /> } />
+
+          {/* Added path so Logout link in NavBar isn't highlighted as active when at "/" */}
+          <Route exact path="/logout" render={ () => <Redirect to="/" /> } />
+
+          {/*    WILL NEED THE BELOW IF I MOVE ALL ROUTES TO APP.JS
+          <Route exact path="/login" render={ (props) => loggedIn ? <Exercises /> : <Login history={props.history}/> } />
+          <Route exact path="/signup" render={ (props) => loggedIn ? <Exercises /> : <SignUp history={props.history}/> } />
+          <Route exact path="/" render={ () => loggedIn ? <div> <Exercises /> <Diaries /> <Logout /> </div> : <Home /> } />
+
+          <Route exact path="/exercises" component={Exercises} />
+          <Route exact path="/exercises/new" component={NewExerciseForm} />
+          <Route exact path="/exercises/:exerciseId" render={routerProps => <UpdateExercise {...routerProps} />} />
+
+          { loggedIn ? <Logout /> : <Redirect to="/" /> }
+
+          I DON'T THINK I NEED THIS AT ALL
+          <Route exact path="/logout" component={Logout} />
+          */}
+
+          <Route />
+        </Switch>
+      </div>
+
+    );
   }
-
-  return (
-    <div className="MainContainer">
-
-      <h2>Hello, {currentUser.attributes.username}! Welcome to the Main Container of React Fitness!</h2>
-
-      <p>*************************************************************************************************</p>
-
-      <h3>Profile</h3>
-
-      <p>Age: {currentUser.attributes.age}</p>
-      {/* User should have ability to update weight */}
-      <p>Current Weight: {currentUser.attributes.weight}</p>
-      {/* Should take the user's daily calorie goal, subtract any calories user has already eaten, and add any calories user has gained from exercise */}
-      <p>Calories Remaining: {currentUser.attributes.daily_calorie_goal}</p>
-
-      <p>*************************************************************************************************</p>
-
-      <h3>Today's Exercise</h3>
-      <p>Total Calories Burned: {caloriesBurned()}</p>
-
-      <p>*************************************************************************************************</p>
-
-      <h3>Today's Meals</h3>
-
-      <p>*************************************************************************************************</p>
-
-    </div>
-  )
 }
-
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.currentUser
+    loggedIn: !!state.currentUser
   }
 }
 
-export default connect(mapStateToProps)(MainContainer);
+const mapDispatchToProps = {
+  getCurrentUser
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
