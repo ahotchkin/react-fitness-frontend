@@ -6,7 +6,7 @@ import { Route, Redirect, Switch } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getCurrentUser } from '../actions/currentUser'
 // import NavBar from './components/NavBar'
-import DashboardContainer from '../containers/DashboardContainer'
+import Dashboard from '../components/Dashboard'
 import Login from '../components/Login'
 // import Logout from './components/Logout'
 import SignUp from '../components/SignUp'
@@ -31,6 +31,34 @@ class MainContainer extends Component {
     console.log(this.props)
   }
 
+  getDate = date => {
+    const tzoffset = date.getTimezoneOffset() * 60000; //offset in milliseconds
+    const localDate = (new Date(date - tzoffset)).toISOString().split("T")[0];
+    return localDate
+  }
+
+  // can I get this to work with whatever date is selected on datePicker in /diaries and /exercises???
+  caloriesBurned = () => {
+    let data = {}
+
+    if (!!this.props.exercises) {
+      // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
+      // ************************* NEED TO UPDATE THIS SO IF USER IS IN MEAL DIARY OR EXERCISES AND SELECTS A DIFFERENT DAY THE CORRECT TOTAL SHOWS UP *********************************
+      const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate(new Date())).map(filteredExercise => filteredExercise.attributes)
+
+      if (todaysExercises.length === 1) {
+        data = {calories_burned: todaysExercises[0].calories_burned}
+      } else if (todaysExercises.length > 1) {
+        data = todaysExercises.reduce((a, b) => ({calories_burned: a.calories_burned + b.calories_burned}))
+      } else {
+      data = {calories_burned: 0}
+      }
+    }
+    
+    return data.calories_burned
+  }
+
+
   render() {
     const { loggedIn } = this.props
     console.log(this.props)
@@ -43,16 +71,23 @@ class MainContainer extends Component {
         {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
 
         <Switch>
-          <Route exact path="/" render={ () => loggedIn ? <DashboardContainer /> : <Home /> }  />
+          <Route exact path="/" render={ () => loggedIn ? <Dashboard caloriesBurned={this.caloriesBurned()}/> : <Home /> }  />
 
           {/* below routes should only be available to users who are NOT logged in */}
           <Route exact path="/login" render={ (props) => loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
           <Route exact path="/signup" render={ (props) => loggedIn ? <Redirect to="/" /> : <SignUp history={props.history}/> } />
 
           {/* below routes should only be available to users who are logged in - they are working correctly, but i'm not sure how I set that up...*/}
+
           <Route path="/diaries" render={ routerProps => loggedIn ? <DiariesContainer {...routerProps} /> : <Home /> } />
 
           <Route path="/exercises" render={ routerProps => loggedIn ? <ExercisesContainer {...routerProps} /> : <Home /> } />
+
+          {/* TO BE USED IF I CAN GET CALORIESBURNED() TO WORK FOR ALL COMPONENTS IN MAIN CONTAINER
+          <Route path="/diaries" render={ routerProps => loggedIn ? <DiariesContainer caloriesBurned={this.caloriesBurned()} {...routerProps} /> : <Home /> } />
+
+          <Route path="/exercises" render={ routerProps => loggedIn ? <ExercisesContainer caloriesBurned={this.caloriesBurned()} {...routerProps} /> : <Home /> } />
+          */}
 
           <Route path="/foods" render={ routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home />} />
           <Route path="/meals/:mealId/foods" render={ routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home /> } />
@@ -87,12 +122,13 @@ class MainContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    loggedIn: !!state.currentUser
+    loggedIn: !!state.currentUser,
+    exercises: state.exercises
   }
 }
 
 const mapDispatchToProps = {
-  getCurrentUser
+  getCurrentUser,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
