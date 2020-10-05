@@ -1,7 +1,9 @@
 // only needed since LoginForm is in Redux, not react
 // import { resetLoginForm } from './loginForm'
 // import { resetSignUpForm } from './signUpForm'
-// import { getExercises } from './exercises';
+
+// since caloriesBurned shows on Dashboard, need to getExercises as soon as user logs in
+import { getExercises } from './exercises';
 import { clearExercises } from './exercises';
 // import { getDiaries } from './diaries';
 // import { getMeals } from './meals';
@@ -37,7 +39,7 @@ export const login = (credentials, history) => {
           alert(json.error)
         } else {
           dispatch(setCurrentUser(json.data))
-          // dispatch(getExercises())
+          dispatch(getExercises())
           // dispatch(getDiaries())
           // dispatch(getMeals())
           // only needed because Login is in Redux and not React
@@ -72,7 +74,7 @@ export const signUp = (credentials, history) => {
           alert(json.error)
         } else {
           dispatch(setCurrentUser(json.data))
-          // dispatch(getExercises())
+          dispatch(getExercises())
           // dispatch(getDiaries())
           // dispatch(getMeals())
 
@@ -121,7 +123,7 @@ export const getCurrentUser = () => {
           alert(json.error)
         } else {
           dispatch(setCurrentUser(json.data))
-          // dispatch(getExercises())
+          dispatch(getExercises())
           // dispatch(getDiaries())
           // dispatch(getMeals())
 
