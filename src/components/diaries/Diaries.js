@@ -155,7 +155,7 @@ import DiaryCard from './DiaryCard';
 
 const Diaries = props => {
 
-  const createDiaryCards = props.diaries.filter(diary => diary.attributes.date === props.date).map(filteredDiary => <DiaryCard diary={filteredDiary} key={filteredDiary.id} caloriesBurned={props.caloriesBurned} />)
+  const createDiaryCards = props.diaries.filter(diary => diary.attributes.date === props.date).map(filteredDiary => <DiaryCard diary={filteredDiary} key={filteredDiary.id} currentUser={props.currentUser} caloriesBurned={props.caloriesBurned} />)
 
   const renderDiaryCards = () => {
     if (createDiaryCards.length > 0) {
