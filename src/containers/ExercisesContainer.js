@@ -39,25 +39,30 @@ class ExercisesContainer extends Component {
     return date
   }
 
-  getTodaysDate = () => {
-    const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
-    const date = (new Date(new Date() - tzoffset)).toISOString().split("T")[0];
-    return date
-  }
+  // getTodaysDate = () => {
+  //   const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
+  //   const date = (new Date(new Date() - tzoffset)).toISOString().split("T")[0];
+  //   return date
+  // }
 
 
   caloriesBurned = () => {
     let data = {}
 
-    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getTodaysDate())
+    if (!!this.props.exercises) {
+      // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
+      // ************************* NEED TO UPDATE THIS SO IF USER IS IN MEAL DIARY OR EXERCISES AND SELECTS A DIFFERENT DAY THE CORRECT TOTAL SHOWS UP *********************************
+      const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate(new Date())).map(filteredExercise => filteredExercise.attributes)
 
-    if (todaysExercises.length === 1) {
-      data = {calories_burned: todaysExercises[0].attributes.calories_burned}
-    } else if (todaysExercises.length > 1) {
-      data = todaysExercises.reduce((a, b) => ({calories_burned: a.attributes.calories_burned + b.attributes.calories_burned}))
-    } else {
+      if (todaysExercises.length === 1) {
+        data = {calories_burned: todaysExercises[0].calories_burned}
+      } else if (todaysExercises.length > 1) {
+        data = todaysExercises.reduce((a, b) => ({calories_burned: a.calories_burned + b.calories_burned}))
+      } else {
       data = {calories_burned: 0}
+      }
     }
+
     return data.calories_burned
   }
 
@@ -90,6 +95,10 @@ class ExercisesContainer extends Component {
               <div>
               <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
               <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.getDate()} caloriesBurned={this.caloriesBurned()} {...props} /></div>} />
+
+              {/* TO BE USED IF I CAN REFACTOR CALORIESBURNED() TO MAIN CONTAINER
+              <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.getDate()} caloriesBurned={this.props.caloriesBurned} {...props} /></div>} />
+              */}
             <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
               const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
               return (
