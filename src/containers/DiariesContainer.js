@@ -9,6 +9,7 @@ import { getDiaries } from '../actions/diaries';
 import { createDiary } from '../actions/diaries';
 
 import { getExercises } from '../actions/exercises';
+// import { getMeals } from '../actions/meals'
 
 import Diaries from '../components/diaries/Diaries'
 
@@ -114,14 +115,45 @@ class DiariesContainer extends Component {
   //   return date
   // }
 
+  caloriesConsumed = () => {
+    console.log(this.props)
+    let data = {}
+
+    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
+    // Need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
+    if (!!todaysDiary) {
+      const todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
+      console.log(todaysMeals)
+
+      if (todaysMeals.length > 0) {
+        data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
+
+      }
+    }
+    console.log(data.calories)
+    return data.calories
+
+
+    // let data = {}
+    // const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
+    // console.log(todaysDiary)
+    //
+    // if (!!todaysDiary) {
+    //   const todaysMeals = todaysDiary.attributes.meals
+    //   console.log(todaysMeals)
+    //   data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
+    // }
+    // return data.calories
+  }
 
   caloriesBurned = () => {
     let data = {}
 
+    // I don't think this first if statement is necessary here. It will always be an empty array at least, never undefined.
     if (!!this.props.exercises) {
       // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
       // ************************* NEED TO UPDATE THIS SO IF USER IS IN MEAL DIARY OR EXERCISES AND SELECTS A DIFFERENT DAY THE CORRECT TOTAL SHOWS UP *********************************
-      const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate(new Date())).map(filteredExercise => filteredExercise.attributes)
+      const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes)
 
       if (todaysExercises.length === 1) {
         data = {calories_burned: todaysExercises[0].calories_burned}
@@ -134,6 +166,8 @@ class DiariesContainer extends Component {
 
     return data.calories_burned
   }
+
+
   // ***************************************
 
 
@@ -158,7 +192,7 @@ class DiariesContainer extends Component {
                   <h4>Search for Meal Diary by Date:</h4>
                   <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
 
-                  <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.getDate()} caloriesBurned={this.caloriesBurned()} {...props} />
+                  <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.getDate()} caloriesConsumed={this.caloriesConsumed()} caloriesBurned={this.caloriesBurned()} {...props} />
 
                   {/* TO BE USED IF I CAN REFACTOR CALORIESBURNED() TO MAIN CONTAINER
                   <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.getDate()} caloriesBurned={this.props.caloriesBurned} {...props} />
@@ -179,12 +213,13 @@ class DiariesContainer extends Component {
 };
 
 // receives the state of the Redux store as an argument
+// what do I need in mapStateToProps vs. mapDispatchToProps - go through all containers and review
 const mapStateToProps = state => ({
   loggedIn: !!state.currentUser,
   currentUser: state.currentUser,
   diaries: state.diaries,
 
-
+  meals: state.meals,
   exercises: state.exercises
 });
 
