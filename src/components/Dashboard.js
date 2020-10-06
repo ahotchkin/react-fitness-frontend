@@ -69,6 +69,11 @@ const DashboardContainer = props => {
 
       <h3>Today's Meals</h3>
 
+      <p>Breakfast: {props.breakfastNutrition.calories}</p>
+      <p>Lunch: </p>
+      <p>Dinner: </p>
+      <p>Snacks: </p>
+
       <p>*************************************************************************************************</p>
 
     </div>
