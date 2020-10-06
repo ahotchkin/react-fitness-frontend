@@ -2,11 +2,12 @@
 // import { resetLoginForm } from './loginForm'
 // import { resetSignUpForm } from './signUpForm'
 
-// since caloriesBurned shows on Dashboard, need to getExercises as soon as user logs in
+// Because of information that shows on dashboard, these actions need to be dispatched in signUp, login, and getCurrentUser - does this mean they can be removed from their respective containers because information will already be in the store???
 import { getExercises } from './exercises';
+import { getDiaries } from './diaries';
+import { getMeals } from './meals';
+
 import { clearExercises } from './exercises';
-// import { getDiaries } from './diaries';
-// import { getMeals } from './meals';
 
 
 // synchronous action creators
@@ -40,8 +41,8 @@ export const login = (credentials, history) => {
         } else {
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
-          // dispatch(getDiaries())
-          // dispatch(getMeals())
+          dispatch(getDiaries())
+          dispatch(getMeals())
           // only needed because Login is in Redux and not React
           // dispatch(resetLoginForm())
 
@@ -75,8 +76,8 @@ export const signUp = (credentials, history) => {
         } else {
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
-          // dispatch(getDiaries())
-          // dispatch(getMeals())
+          dispatch(getDiaries())
+          dispatch(getMeals())
 
           // only needed because Login is in Redux and not React
           // dispatch(resetSignUpForm())
@@ -124,8 +125,8 @@ export const getCurrentUser = () => {
         } else {
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
-          // dispatch(getDiaries())
-          // dispatch(getMeals())
+          dispatch(getDiaries())
+          dispatch(getMeals())
 
         }
       })
