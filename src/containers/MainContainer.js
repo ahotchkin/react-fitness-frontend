@@ -90,6 +90,32 @@ class MainContainer extends Component {
     return data.calories_burned
   }
 
+  breakfastNutrition = () => {
+    console.log(this.props)
+    let breakfast = {}
+
+    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
+    // Need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
+    if (!!todaysDiary) {
+      const todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
+      console.log(todaysMeals)
+
+      if (todaysMeals.length > 0) {
+        breakfast = todaysMeals.find(meal => meal.category.toLowerCase() === "breakfast")
+
+      }
+      // if (todaysMeals.length > 0) {
+      //   data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
+
+      // }
+    }
+    console.log(breakfast)
+    return breakfast
+
+  }
+
+
+
 
   render() {
     const { loggedIn } = this.props
@@ -103,11 +129,11 @@ class MainContainer extends Component {
         {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
 
         <Switch>
-          <Route exact path="/" render={ () => loggedIn ? <Dashboard caloriesConsumed={this.caloriesConsumed()} caloriesBurned={this.caloriesBurned()}/> : <Home /> }  />
+          <Route exact path="/" render={ () => loggedIn ? <Dashboard caloriesConsumed={this.caloriesConsumed()} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.breakfastNutrition()} /> : <Home /> }  />
 
           {/* below routes should only be available to users who are NOT logged in */}
-          <Route exact path="/login" render={ (props) => loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
-          <Route exact path="/signup" render={ (props) => loggedIn ? <Redirect to="/" /> : <SignUp history={props.history}/> } />
+          <Route exact path="/login" render={ props => loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
+          <Route exact path="/signup" render={ props => loggedIn ? <Redirect to="/" /> : <SignUp history={props.history}/> } />
 
           {/* below routes should only be available to users who are logged in - they are working correctly, but i'm not sure how I set that up...*/}
 
