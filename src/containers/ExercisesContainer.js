@@ -49,10 +49,11 @@ class ExercisesContainer extends Component {
   caloriesBurned = () => {
     let data = {}
 
+    // I don't think this first if statement is necessary here or in ExercisesContainer. It will always be an empty array at least, never undefined.
     if (!!this.props.exercises) {
       // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
       // ************************* NEED TO UPDATE THIS SO IF USER IS IN MEAL DIARY OR EXERCISES AND SELECTS A DIFFERENT DAY THE CORRECT TOTAL SHOWS UP *********************************
-      const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate(new Date())).map(filteredExercise => filteredExercise.attributes)
+      const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes)
 
       if (todaysExercises.length === 1) {
         data = {calories_burned: todaysExercises[0].calories_burned}
