@@ -90,9 +90,10 @@ class MainContainer extends Component {
     return data.calories_burned
   }
 
-  breakfastNutrition = () => {
+
+  mealNutrition = selectedMeal => {
     console.log(this.props)
-    let breakfast = {}
+    let meal = {}
 
     const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
     // Need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
@@ -101,7 +102,7 @@ class MainContainer extends Component {
       console.log(todaysMeals)
 
       if (todaysMeals.length > 0) {
-        breakfast = todaysMeals.find(meal => meal.category.toLowerCase() === "breakfast")
+        meal = todaysMeals.find(meal => meal.category.toLowerCase() === selectedMeal)
 
       }
       // if (todaysMeals.length > 0) {
@@ -109,10 +110,11 @@ class MainContainer extends Component {
 
       // }
     }
-    console.log(breakfast)
-    return breakfast
+    console.log(meal)
+    return meal
 
   }
+
 
 
 
@@ -129,7 +131,7 @@ class MainContainer extends Component {
         {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
 
         <Switch>
-          <Route exact path="/" render={ () => loggedIn ? <Dashboard caloriesConsumed={this.caloriesConsumed()} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.breakfastNutrition()} /> : <Home /> }  />
+          <Route exact path="/" render={ () => loggedIn ? <Dashboard caloriesConsumed={this.caloriesConsumed()} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} lunchNutrition={this.mealNutrition("lunch")} dinnerNutrition={this.mealNutrition("dinner")} snacksNutrition={this.mealNutrition("snacks")} /> : <Home /> }  />
 
           {/* below routes should only be available to users who are NOT logged in */}
           <Route exact path="/login" render={ props => loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
