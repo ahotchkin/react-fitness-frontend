@@ -57,7 +57,7 @@ const DashboardContainer = props => {
       <p>Current Weight: {props.currentUser.attributes.weight}</p>
       {/* Should take the user's daily calorie goal, subtract any calories user has already eaten, and add any calories user has gained from exercise */}
       <p>Daily Calorie Goal: {props.currentUser.attributes.daily_calorie_goal}</p>
-      <p>Calories Remaining: {props.currentUser.attributes.daily_calorie_goal + props.caloriesBurned}</p>
+      <p>Calories Remaining: {props.currentUser.attributes.daily_calorie_goal - props.caloriesConsumed + props.caloriesBurned}</p>
 
       <p>*************************************************************************************************</p>
 
