@@ -79,226 +79,229 @@ class FoodInput extends Component {
 
   render() {
     return(
-      <form onSubmit={this.handleSubmit}>
-        <label>Brand Name: </label>
-        <input
-          name="brand_name"
-          onChange={this.handleOnChange}
-          value={this.state.brand_name}
-        />
+      <div>
+        <h4>While not all information is required, the more information you are able to provide the better we can calculate your macro and nutrient intake.</h4>
+        <p>*required</p>
+        <form onSubmit={this.handleSubmit}>
+          <label>Brand Name:* </label>
+          <input
+            name="brand_name"
+            onChange={this.handleOnChange}
+            value={this.state.brand_name}
+          />
 
-        <br />
+          <br />
 
-        <label>Description: </label>
-        <input
-          name="description"
-          onChange={this.handleOnChange}
-          value={this.state.description}
-        />
+          <label>Description:* </label>
+          <input
+            name="description"
+            onChange={this.handleOnChange}
+            value={this.state.description}
+          />
 
-        <br />
+          <br />
 
-        <label>Serving Size: </label>
-        <input
-          name="serving_size"
-          onChange={this.handleOnChange}
-          value={this.state.serving_size}
-        />
+          <label>Serving Size:* </label>
+          <input
+            name="serving_size"
+            onChange={this.handleOnChange}
+            value={this.state.serving_size}
+          />
 
-        <br />
+          <br />
 
-        <label>Servings Per Container: </label>
-        <input
-          name="servings_per_container"
-          onChange={this.handleOnChange}
-          value={this.state.servings_per_container}
-        />
+          <label>Servings Per Container:* </label>
+          <input
+            name="servings_per_container"
+            onChange={this.handleOnChange}
+            value={this.state.servings_per_container}
+          />
 
-        <br />
+          <br />
 
-        <label>Calories: </label>
-        <input
-          name="calories"
-          onChange={this.handleOnChange}
-          value={this.state.calories}
-        />
+          <label>Calories:* </label>
+          <input
+            name="calories"
+            onChange={this.handleOnChange}
+            value={this.state.calories}
+          />
 
-        <br />
+          <br />
 
-        <label>Total Fat (g): </label>
-        <input
-          name="total_fat"
-          onChange={this.handleOnChange}
-          value={this.state.total_fat}
-        />
+          <label>Total Fat (g):* </label>
+          <input
+            name="total_fat"
+            onChange={this.handleOnChange}
+            value={this.state.total_fat}
+          />
 
-        <br />
+          <br />
 
-        <label>Saturated Fat (g): </label>
-        <input
-          name="saturated_fat"
-          onChange={this.handleOnChange}
-          value={this.state.saturated_fat}
-        />
+          <label>Saturated Fat (g): </label>
+          <input
+            name="saturated_fat"
+            onChange={this.handleOnChange}
+            value={this.state.saturated_fat}
+          />
 
-        <br />
+          <br />
 
-        <label>Polyunsaturated Fat (g): </label>
-        <input
-          name="polyunsaturated_fat"
-          onChange={this.handleOnChange}
-          value={this.state.polyunsaturated_fat}
-        />
+          <label>Polyunsaturated Fat (g): </label>
+          <input
+            name="polyunsaturated_fat"
+            onChange={this.handleOnChange}
+            value={this.state.polyunsaturated_fat}
+          />
 
-        <br />
+          <br />
 
-        <label>Monounsaturated Fat (g): </label>
-        <input
-          name="monounsaturated_fat"
-          onChange={this.handleOnChange}
-          value={this.state.monounsaturated_fat}
-        />
+          <label>Monounsaturated Fat (g): </label>
+          <input
+            name="monounsaturated_fat"
+            onChange={this.handleOnChange}
+            value={this.state.monounsaturated_fat}
+          />
 
-        <br />
+          <br />
 
-        <label>Trans Fat (g): </label>
-        <input
-          name="trans_fat"
-          onChange={this.handleOnChange}
-          value={this.state.trans_fat}
-        />
+          <label>Trans Fat (g): </label>
+          <input
+            name="trans_fat"
+            onChange={this.handleOnChange}
+            value={this.state.trans_fat}
+          />
 
-        <br />
+          <br />
 
-        <label>Cholesterol (mg): </label>
-        <input
-          name="cholesterol"
-          onChange={this.handleOnChange}
-          value={this.state.cholesterol}
-        />
+          <label>Cholesterol (mg): </label>
+          <input
+            name="cholesterol"
+            onChange={this.handleOnChange}
+            value={this.state.cholesterol}
+          />
 
-        <br />
+          <br />
 
-        <label>Sodium (mg): </label>
-        <input
-          name="sodium"
-          onChange={this.handleOnChange}
-          value={this.state.sodium}
-        />
+          <label>Sodium (mg): </label>
+          <input
+            name="sodium"
+            onChange={this.handleOnChange}
+            value={this.state.sodium}
+          />
 
-        <br />
+          <br />
 
-        <label>Total Carbohydrates (g): </label>
-        <input
-          name="total_carbohydrate"
-          onChange={this.handleOnChange}
-          value={this.state.total_carbohydrate}
-        />
+          <label>Total Carbohydrates (g):* </label>
+          <input
+            name="total_carbohydrate"
+            onChange={this.handleOnChange}
+            value={this.state.total_carbohydrate}
+          />
 
-        <br />
+          <br />
 
-        <label>Dietary Fiber (g): </label>
-        <input
-          name="dietary_fiber"
-          onChange={this.handleOnChange}
-          value={this.state.dietary_fiber}
-        />
+          <label>Dietary Fiber (g): </label>
+          <input
+            name="dietary_fiber"
+            onChange={this.handleOnChange}
+            value={this.state.dietary_fiber}
+          />
 
-        <br />
+          <br />
 
-        <label>Total Sugars (g): </label>
-        <input
-          name="total_sugars"
-          onChange={this.handleOnChange}
-          value={this.state.total_sugars}
-        />
+          <label>Total Sugars (g): </label>
+          <input
+            name="total_sugars"
+            onChange={this.handleOnChange}
+            value={this.state.total_sugars}
+          />
 
-        <br />
+          <br />
 
-        <label>Added Sugars (g): </label>
-        <input
-          name="added_sugars"
-          onChange={this.handleOnChange}
-          value={this.state.added_sugars}
-        />
+          <label>Added Sugars (g): </label>
+          <input
+            name="added_sugars"
+            onChange={this.handleOnChange}
+            value={this.state.added_sugars}
+          />
 
-        <br />
+          <br />
 
-        <label>Sugar Alcohols (g): </label>
-        <input
-          name="sugar_alcohols"
-          onChange={this.handleOnChange}
-          value={this.state.sugar_alcohols}
-        />
+          <label>Sugar Alcohols (g): </label>
+          <input
+            name="sugar_alcohols"
+            onChange={this.handleOnChange}
+            value={this.state.sugar_alcohols}
+          />
 
-        <br />
+          <br />
 
-        <label>Protein (g): </label>
-        <input
-          name="protein"
-          onChange={this.handleOnChange}
-          value={this.state.protein}
-        />
+          <label>Protein (g):* </label>
+          <input
+            name="protein"
+            onChange={this.handleOnChange}
+            value={this.state.protein}
+          />
 
-        <br />
+          <br />
 
-        <label>Vitamin A (%): </label>
-        <input
-          name="vitamin_a"
-          onChange={this.handleOnChange}
-          value={this.state.vitamin_a}
-        />
+          <label>Vitamin A (%): </label>
+          <input
+            name="vitamin_a"
+            onChange={this.handleOnChange}
+            value={this.state.vitamin_a}
+          />
 
-        <br />
+          <br />
 
-        <label>Vitamin C (%): </label>
-        <input
-          name="vitamin_c"
-          onChange={this.handleOnChange}
-          value={this.state.vitamin_c}
-        />
+          <label>Vitamin C (%): </label>
+          <input
+            name="vitamin_c"
+            onChange={this.handleOnChange}
+            value={this.state.vitamin_c}
+          />
 
-        <br />
+          <br />
 
-        <label>Vitamin D (%): </label>
-        <input
-          name="vitamin_d"
-          onChange={this.handleOnChange}
-          value={this.state.vitamin_d}
-        />
+          <label>Vitamin D (%): </label>
+          <input
+            name="vitamin_d"
+            onChange={this.handleOnChange}
+            value={this.state.vitamin_d}
+          />
 
-        <br />
+          <br />
 
-        <label>Calcium (%): </label>
-        <input
-          name="calcium"
-          onChange={this.handleOnChange}
-          value={this.state.calcium}
-        />
+          <label>Calcium (%): </label>
+          <input
+            name="calcium"
+            onChange={this.handleOnChange}
+            value={this.state.calcium}
+          />
 
-        <br />
+          <br />
 
-        <label>Iron (%): </label>
-        <input
-          name="iron"
-          onChange={this.handleOnChange}
-          value={this.state.iron}
-        />
+          <label>Iron (%): </label>
+          <input
+            name="iron"
+            onChange={this.handleOnChange}
+            value={this.state.iron}
+          />
 
-        <br />
+          <br />
 
-        <label>Potassium (mg): </label>
-        <input
-          name="potassium"
-          onChange={this.handleOnChange}
-          value={this.state.potassium}
-        />
+          <label>Potassium (mg): </label>
+          <input
+            name="potassium"
+            onChange={this.handleOnChange}
+            value={this.state.potassium}
+          />
 
-        <br />
+          <br />
 
-        <input type="submit" value="Add Food" />
-      </form>
-
+          <input type="submit" value="Add Food" />
+        </form>
+      </div>
     )
   }
 }
