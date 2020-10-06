@@ -38,6 +38,38 @@ class MainContainer extends Component {
   }
 
   // can I get this to work with whatever date is selected on datePicker in /diaries and /exercises???
+  caloriesConsumed = () => {
+    console.log(this.props)
+    let data = {}
+
+    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
+    // Need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
+    if (!!todaysDiary) {
+      const todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
+      console.log(todaysMeals)
+
+      if (todaysMeals.length > 0) {
+        data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
+
+      }
+    }
+    console.log(data.calories)
+    return data.calories
+
+
+    // let data = {}
+    // const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
+    // console.log(todaysDiary)
+    //
+    // if (!!todaysDiary) {
+    //   const todaysMeals = todaysDiary.attributes.meals
+    //   console.log(todaysMeals)
+    //   data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
+    // }
+    // return data.calories
+  }
+
+  // can I get this to work with whatever date is selected on datePicker in /diaries and /exercises???
   caloriesBurned = () => {
     let data = {}
 
@@ -54,7 +86,7 @@ class MainContainer extends Component {
       data = {calories_burned: 0}
       }
     }
-    
+
     return data.calories_burned
   }
 
@@ -71,7 +103,7 @@ class MainContainer extends Component {
         {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
 
         <Switch>
-          <Route exact path="/" render={ () => loggedIn ? <Dashboard caloriesBurned={this.caloriesBurned()}/> : <Home /> }  />
+          <Route exact path="/" render={ () => loggedIn ? <Dashboard caloriesConsumed={this.caloriesConsumed()} caloriesBurned={this.caloriesBurned()}/> : <Home /> }  />
 
           {/* below routes should only be available to users who are NOT logged in */}
           <Route exact path="/login" render={ (props) => loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
@@ -123,7 +155,9 @@ class MainContainer extends Component {
 const mapStateToProps = state => {
   return {
     loggedIn: !!state.currentUser,
-    exercises: state.exercises
+    exercises: state.exercises,
+    diaries: state.diaries,
+    meals: state.meals
   }
 }
 
