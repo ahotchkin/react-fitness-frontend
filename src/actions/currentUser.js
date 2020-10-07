@@ -54,11 +54,14 @@ export const login = (credentials, history) => {
   }
 }
 
-export const signUp = (credentials, history) => {
+export const signUp = (credentials, dailyCalorieGoal, history) => {
   console.log("credentials are", credentials)
   const userInfo = {
     user: credentials
   }
+  userInfo.user.daily_calorie_goal = dailyCalorieGoal
+
+  console.log(userInfo)
   return dispatch => {
     // can abstract fetch requests into an adapter class and do something like - return Adapter.login(args) or Api.login(args)
     return fetch("http://localhost:3001/api/v1/signup", {
@@ -74,6 +77,7 @@ export const signUp = (credentials, history) => {
         if (json.error) {
           alert(json.error)
         } else {
+          console.log(json.data)
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
           dispatch(getDiaries())
