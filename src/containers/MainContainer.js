@@ -50,8 +50,9 @@ class MainContainer extends Component {
 
       if (todaysMeals.length > 0) {
         data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
-
       }
+    } else {
+      data = {calories: 0}
     }
     console.log(data.calories)
     return data.calories
@@ -73,18 +74,16 @@ class MainContainer extends Component {
   caloriesBurned = () => {
     let data = {}
 
-    if (!!this.props.exercises) {
-      // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
-      // ************************* NEED TO UPDATE THIS SO IF USER IS IN MEAL DIARY OR EXERCISES AND SELECTS A DIFFERENT DAY THE CORRECT TOTAL SHOWS UP *********************************
-      const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate(new Date())).map(filteredExercise => filteredExercise.attributes)
+    // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
+    // ************************* NEED TO UPDATE THIS SO IF USER IS IN MEAL DIARY OR EXERCISES AND SELECTS A DIFFERENT DAY THE CORRECT TOTAL SHOWS UP *********************************
+    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate(new Date())).map(filteredExercise => filteredExercise.attributes)
 
-      if (todaysExercises.length === 1) {
-        data = {calories_burned: todaysExercises[0].calories_burned}
-      } else if (todaysExercises.length > 1) {
-        data = todaysExercises.reduce((a, b) => ({calories_burned: a.calories_burned + b.calories_burned}))
-      } else {
-      data = {calories_burned: 0}
-      }
+    if (todaysExercises.length === 1) {
+      data = {calories_burned: todaysExercises[0].calories_burned}
+    } else if (todaysExercises.length > 1) {
+      data = todaysExercises.reduce((a, b) => ({calories_burned: a.calories_burned + b.calories_burned}))
+    } else {
+    data = {calories_burned: 0}
     }
 
     return data.calories_burned
@@ -109,6 +108,8 @@ class MainContainer extends Component {
       //   data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
 
       // }
+    } else {
+      meal = {calories: 0}
     }
     console.log(meal)
     return meal
