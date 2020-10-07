@@ -14,6 +14,58 @@ class SignUp extends Component {
     height_feet: "",
     height_inches: "",
     weight: "",
+    lifestyle: "",
+  }
+
+
+  calculateDailyCalorieGoal = () => {
+    let bmr = 0
+    //
+    let activity = 0
+
+    if (this.state.lifestyle === "notActive") {
+      activity = 1.3
+    } else if (this.state.lifestyle === "lightlyActive") {
+      activity = 1.55
+    } else if (this.state.lifestyle === "moderatelyActive") {
+      activity = 1.65
+    } else if (this.state.lifestyle === "veryActive") {
+      activity = 1.8
+    }
+
+
+    if (this.state.gender === "male") {
+      // BMR = 10W + 6.25H - 5A + 5
+      bmr = ((10 * (parseFloat(this.state.weight) * 0.453592)) + (6.25 * (((parseInt(this.state.height_feet) * 12) + parseFloat(this.state.height_inches)) * 2.54)) - (5 * parseInt(this.state.age)) + 5) * activity
+    } else if (this.state.gender === "female") {
+      // BMR = 10W + 6.25H - 5A - 161
+      bmr = (10 * ((parseFloat(this.state.weight) * 0.453592)) + (6.25 * (((parseInt(this.state.height_feet) * 12) + parseFloat(this.state.height_inches)) * 2.54)) - (5 * parseInt(this.state.age)) - 161) * activity
+
+    }
+    console.log(parseInt(bmr))
+    return parseInt(bmr)
+    // console.log(this.state.lifestyle)
+    // console.log(activity)
+    // return activity
+    // Mifflin-St Jeor Equation:
+    // For men:
+    // BMR = 10W + 6.25H - 5A + 5
+    // For women:
+    // BMR = 10W + 6.25H - 5A - 161
+
+    // W is body weight in kg
+    // H is body height in cm
+    // A is age
+
+    // to get weight from lbs to kg => * by 0.453592
+    // to get height from ft to cm => ((height_feet * 12) + height_inches) * 2.54
+
+    // Lifestyle:
+    // Not active: * 1.3
+    // Lightly active: * 1.55
+    // Moderately active: * 1.65
+    // Very active: * 1.8
+
   }
 
   handleOnChange = event => {
@@ -27,8 +79,10 @@ class SignUp extends Component {
 
   handleOnSubmit = event => {
     event.preventDefault()
+    const dailyCalorieGoal = this.calculateDailyCalorieGoal()
+    {console.log(dailyCalorieGoal)}
 
-    this.props.signUp(this.state, this.props.history)
+    this.props.signUp(this.state, dailyCalorieGoal, this.props.history)
     this.setState({
       username: "",
       password: "",
@@ -37,6 +91,7 @@ class SignUp extends Component {
       height_feet: "",
       height_inches: "",
       weight: "",
+      lifestyle: "",
     })
 
   }
@@ -69,11 +124,33 @@ class SignUp extends Component {
           <br />
 
           <label>Gender: </label>
+          {/*
           <select name="gender" defaultValue="DEFAULT" onChange={this.handleOnChange}>
             <option value="DEFAULT" disabled hidden>Select</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
           </select>
+          */}
+
+          <input
+            type="radio"
+            name="gender"
+            value="male"
+            onChange={this.handleOnChange}
+          />
+          <label>Male</label>
+
+          <input
+            type="radio"
+            name="gender"
+            value="female"
+            onChange={this.handleOnChange}
+          />
+          <label>Female</label><br />
+          {/*
+          <input type="radio" id="other" name="gender" value="other">
+          <label for="other">Other</label>
+          */}
 
           <br />
 
@@ -114,6 +191,42 @@ class SignUp extends Component {
             type="text"
             onChange={this.handleOnChange}
           />
+
+          <br /><br />
+
+          <label>Lifestyle (does not include exercise): </label>
+          <br />
+          <input
+            type="radio"
+            name="lifestyle"
+            value="notActive"
+            onChange={this.handleOnChange}
+          />
+          <label>Not Very Active: Typical office job, sitting at a desk for most of the day</label>
+          <br />
+          <input
+            type="radio"
+            name="lifestyle"
+            value="lightlyActive"
+            onChange={this.handleOnChange}
+          />
+          <label>Lightly Active: On your feet all day (i.e. teacher, restaurant server)</label>
+          <br />
+          <input
+            type="radio"
+            name="lifestyle"
+            value="moderatelyActive"
+            onChange={this.handleOnChange}
+          />
+          <label>Moderately Active: Job that requires physical activity (i.e. landscaping, cleaning, maintenance)</label>
+          <br />
+          <input
+            type="radio"
+            name="lifestyle"
+            value="veryActive"
+            onChange={this.handleOnChange}
+          />
+          <label>Very Active: Job that requires heavy manual labor (i.e. construction, dancer, athlete)</label>
 
           <br /><br />
 
