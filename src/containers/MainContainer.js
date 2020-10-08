@@ -39,7 +39,7 @@ class MainContainer extends Component {
 
   // can I get this to work with whatever date is selected on datePicker in /diaries and /exercises???
   caloriesConsumed = () => {
-    console.log(this.props)
+    // console.log(this.props)
     let data = {}
 
     const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
@@ -91,7 +91,7 @@ class MainContainer extends Component {
 
 
   mealNutrition = selectedMeal => {
-    console.log(this.props)
+    // console.log(this.props)
     let meal = {}
 
     const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
@@ -116,33 +116,92 @@ class MainContainer extends Component {
 
   }
 
+  dailyNutrition = () => {
+    // 1. get all meals for the day
+    // 2. iterate through all meals to get all mealFoods for the day
+    // 3. iterate through all mealFoods to add up the total for each nutrient for the day
+
+    // let todaysMeals = []
+    // let todaysMealFoods = []
+    //
+    // // 1. get all meals for the day
+    // const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
+    //
+    // if (!!todaysDiary) {
+    //   todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
+    //   console.log(todaysMeals)
+    //
+    //   // 2. iterate through all meals to get all mealFoods for the day
+    //   if (todaysMeals.length > 0) {
+    //     todaysMeals.forEach(meal => {
+    //       todaysMealFoods.push(meal.meal_foods)
+    //     })
+    //   }
+    //   console.log(todaysMealFoods.flat())
+    //
+    //   // 3. iterate through all mealFoods to add up the total for each nutrient for the day
+    //
+    // }
+
+    // ************************************************************************
+    // Currently saving all nutrient amounts to mealFood in database and using serializer to get info. Another option is to use the number_of_servings and the foods attribute and multiply every mealFood.attributes.food.nutrient * attributes.number_of_servings, and NOT save this info in the database
+
+    // 1. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
+    // 2. use reduce to combine objects in mealFoodAttributes and total values, while ignoring keys of number_of_servings, meal, and food
+
+    let todaysNutrients = []
+    let mealFoodNutrients = []
+    let mealFoodAttributes = []
+
+    // 1. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
+    if (this.props.mealFoods.length > 0) {
+      this.props.mealFoods.forEach(mealFood => {
+        mealFoodAttributes.push(mealFood.attributes)
+      })
+      console.log(mealFoodAttributes)
+
+      // 2. use reduce to combine objects in mealFoodAttributes and total values, while ignoring keys of number_of_servings, meal, and food
+      const total = mealFoodAttributes.reduce((a, b) => {
+        for (let k in b) {
+          if (b.hasOwnProperty(k) && k !== "number_of_servings" && k !== "meal" && k !== "food")
+            a[k] = (a[k] || 0) + b[k];
+        }
+        return a;
+      }, {});
+
+      console.log(total)
+    }
+  }
+
 
 
 
 
   render() {
-    const { loggedIn } = this.props
+    // const { loggedIn } = this.props
     console.log(this.props)
+    console.log(this.props.mealFoods)
+
     return (
       // Update className when adding css
       <div className="App">
-
+        {this.dailyNutrition()}
         {/* Have to render NavBar here for it to appear on all pages. If rendered in MainContainer it only appears at "/" */}
-        { loggedIn ? <NavBar /> : null }
+        { this.props.loggedIn ? <NavBar /> : null }
         {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
 
         <Switch>
-          <Route exact path="/" render={ () => loggedIn ? <Dashboard caloriesConsumed={this.caloriesConsumed()} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} lunchNutrition={this.mealNutrition("lunch")} dinnerNutrition={this.mealNutrition("dinner")} snacksNutrition={this.mealNutrition("snacks")} /> : <Home /> }  />
+          <Route exact path="/" render={ () => this.props.loggedIn ? <Dashboard caloriesConsumed={this.caloriesConsumed()} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} lunchNutrition={this.mealNutrition("lunch")} dinnerNutrition={this.mealNutrition("dinner")} snacksNutrition={this.mealNutrition("snacks")} dailyNutrition={this.dailyNutrition()} /> : <Home /> }  />
 
           {/* below routes should only be available to users who are NOT logged in */}
-          <Route exact path="/login" render={ props => loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
-          <Route exact path="/signup" render={ props => loggedIn ? <Redirect to="/" /> : <SignUp history={props.history}/> } />
+          <Route exact path="/login" render={ props => this.props.loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
+          <Route exact path="/signup" render={ props => this.props.loggedIn ? <Redirect to="/" /> : <SignUp history={props.history}/> } />
 
           {/* below routes should only be available to users who are logged in - they are working correctly, but i'm not sure how I set that up...*/}
 
-          <Route path="/diaries" render={ routerProps => loggedIn ? <DiariesContainer {...routerProps} /> : <Home /> } />
+          <Route path="/diaries" render={ routerProps => this.props.loggedIn ? <DiariesContainer {...routerProps} /> : <Home /> } />
 
-          <Route path="/exercises" render={ routerProps => loggedIn ? <ExercisesContainer {...routerProps} /> : <Home /> } />
+          <Route path="/exercises" render={ routerProps => this.props.loggedIn ? <ExercisesContainer {...routerProps} /> : <Home /> } />
 
           {/* TO BE USED IF I CAN GET CALORIESBURNED() TO WORK FOR ALL COMPONENTS IN MAIN CONTAINER
           <Route path="/diaries" render={ routerProps => loggedIn ? <DiariesContainer caloriesBurned={this.caloriesBurned()} {...routerProps} /> : <Home /> } />
@@ -150,10 +209,10 @@ class MainContainer extends Component {
           <Route path="/exercises" render={ routerProps => loggedIn ? <ExercisesContainer caloriesBurned={this.caloriesBurned()} {...routerProps} /> : <Home /> } />
           */}
 
-          <Route path="/foods" render={ routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home />} />
-          <Route path="/meals/:mealId/foods" render={ routerProps => loggedIn ? <FoodsContainer {...routerProps} /> : <Home /> } />
+          <Route path="/foods" render={ routerProps => this.props.loggedIn ? <FoodsContainer {...routerProps} /> : <Home />} />
+          <Route path="/meals/:mealId/foods" render={ routerProps => this.props.loggedIn ? <FoodsContainer {...routerProps} /> : <Home /> } />
 
-          <Route path="/meal_foods" render={ routerProps => loggedIn ? <MealFoodsContainer {...routerProps} /> : <Home /> } />
+          <Route path="/meal_foods" render={ routerProps => this.props.loggedIn ? <MealFoodsContainer {...routerProps} /> : <Home /> } />
 
           {/* Added path so Logout link in NavBar isn't highlighted as active when at "/" */}
           <Route exact path="/logout" render={ () => <Redirect to="/" /> } />
@@ -186,7 +245,8 @@ const mapStateToProps = state => {
     loggedIn: !!state.currentUser,
     exercises: state.exercises,
     diaries: state.diaries,
-    meals: state.meals
+    meals: state.meals,
+    mealFoods: state.mealFoods
   }
 }
 
