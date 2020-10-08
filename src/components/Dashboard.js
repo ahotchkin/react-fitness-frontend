@@ -67,6 +67,36 @@ const DashboardContainer = props => {
 
       <p>*************************************************************************************************</p>
 
+      <h3>Today's Macros</h3>
+
+
+      <p>*************************************************************************************************</p>
+
+      <h3>Today's Nutrition</h3>
+        <ul>
+          <li>Total fat: </li>
+          <li>Saturated fat: </li>
+          <li>Polyunsaturated fat: </li>
+          <li>Monounsaturated fat: </li>
+          <li>Trans fat: </li>
+          <li>Cholesterol: </li>
+          <li>Sodium: </li>
+          <li>Total carbohydrate: </li>
+          <li>Dietary fiber: </li>
+          <li>Total sugars: </li>
+          <li>Added sugars: </li>
+          <li>Sugar alcohols: </li>
+          <li>Protein: </li>
+          <li>Vitamin A: </li>
+          <li>Vitamin C: </li>
+          <li>Vitamin D: </li>
+          <li>Calcium: </li>
+          <li>Iron: </li>
+          <li>Potassium: </li>
+        </ul>
+
+      <p>*************************************************************************************************</p>
+
       <h3>Today's Meals</h3>
 
       <p>Breakfast: {props.breakfastNutrition.calories} calories</p>
