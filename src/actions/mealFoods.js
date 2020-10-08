@@ -77,15 +77,35 @@ export const getMealFoods = () => {
 export const createMealFood = (meal, food, number_of_servings, history, location) => {
   console.log(location)
   console.log("foodId is ", food.id, "mealId is ", meal.id)
+  console.log(food)
+  console.log(number_of_servings)
+  console.log(food.attributes.protein * number_of_servings)
   const mealFood = {
     // is there a cleaner way to do this???
     meal_id: meal.id,
     food_id: food.id,
-    // placeholder info - need to have user enter this information
     number_of_servings: number_of_servings,
-    calories: food.attributes.calories * number_of_servings
+    calories: food.attributes.calories * number_of_servings,
+    total_fat: food.attributes.total_fat * number_of_servings,
+    saturated_fat: food.attributes.saturated_fat * number_of_servings,
+    polyunsaturated_fat: food.attributes.polyunsaturated_fat * number_of_servings,
+    monounsaturated_fat: food.attributes.monounsaturated_fat * number_of_servings,
+    trans_fat: food.attributes.trans_fat * number_of_servings,
+    cholesterol: food.attributes.cholesterol * number_of_servings,
+    sodium: food.attributes.sodium * number_of_servings,
+    total_carbohydrate: food.attributes.total_carbohydrate * number_of_servings,
+    dietary_fiber: food.attributes.dietary_fiber * number_of_servings,
+    total_sugars: food.attributes.total_sugars * number_of_servings,
+    added_sugars: food.attributes.added_sugars * number_of_servings,
+    sugar_alcohols: food.attributes.sugar_alcohols * number_of_servings,
+    protein: food.attributes.protein * number_of_servings,
+    vitamin_a: food.attributes.vitamin_a * number_of_servings,
+    vitamin_c: food.attributes.vitamin_c * number_of_servings,
+    vitamin_d: food.attributes.vitamin_d * number_of_servings,
+    calcium: food.attributes.calcium * number_of_servings,
+    iron: food.attributes.iron * number_of_servings,
+    potassium: food.attributes.potassium * number_of_servings
   }
-
 
   return dispatch => {
     return fetch("http://localhost:3001/api/v1/meal_foods", {
