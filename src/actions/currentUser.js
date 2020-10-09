@@ -6,6 +6,7 @@
 import { getExercises } from './exercises';
 import { getDiaries } from './diaries';
 import { getMeals } from './meals';
+// import { getMealFoods } from './mealFoods';
 
 import { clearExercises } from './exercises';
 
@@ -43,6 +44,7 @@ export const login = (credentials, history) => {
           dispatch(getExercises())
           dispatch(getDiaries())
           dispatch(getMeals())
+          // dispatch(getMealFoods())
           // only needed because Login is in Redux and not React
           // dispatch(resetLoginForm())
 
@@ -82,6 +84,7 @@ export const signUp = (credentials, dailyCalorieGoal, history) => {
           dispatch(getExercises())
           dispatch(getDiaries())
           dispatch(getMeals())
+          // dispatch(getMealFoods())
 
           // only needed because Login is in Redux and not React
           // dispatch(resetSignUpForm())
@@ -131,6 +134,7 @@ export const getCurrentUser = () => {
           dispatch(getExercises())
           dispatch(getDiaries())
           dispatch(getMeals())
+          // dispatch(getMealFoods())
 
         }
       })
