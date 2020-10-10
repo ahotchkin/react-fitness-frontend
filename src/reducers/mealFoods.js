@@ -1,10 +1,7 @@
 export default (state = [], action) => {
   switch (action.type) {
-    // *************************************************************
     case "SET_MEAL_FOODS":
       return action.mealFoods
-    // *************************************************************
-
     case "ADD_MEAL_FOOD":
       return state.concat(action.mealFood)
     case "UPDATE_MEAL_FOOD_SUCCESS":
@@ -15,12 +12,11 @@ export default (state = [], action) => {
           return mealFood
         }
       }))
-      case "DELETE_MEAL_FOOD":
-        console.log(state.filter(mealFood => mealFood.id !== action.mealFoodId))
-        return state.filter(mealFood => mealFood.id !== action.mealFoodId)
-        // case "CLEAR_MEAL_FOODS":
-        //   // want the mealFoods to be empty when the current user logs out
-        //   return []
+    case "DELETE_MEAL_FOOD":
+      console.log(state.filter(mealFood => mealFood.id !== action.mealFoodId))
+      return state.filter(mealFood => mealFood.id !== action.mealFoodId)
+    case "CLEAR_MEAL_FOODS":
+      return []
     default:
       return state
   }
