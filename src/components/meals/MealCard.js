@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 // import MealFoods from '../mealFoods/MealFoods';
 
 // *******************************************************************************************************
-import MealFoodsContainer from '/Users/allysonhotchkin/Development/code/react-fitness-app/react-fitness-frontend/src/containers/MealFoodsContainer'
+import MealFoodsContainer from '../../containers/MealFoodsContainer'
 // *******************************************************************************************************
 
 const MealCard = (props) => {
@@ -31,7 +31,7 @@ const MealCard = (props) => {
       <Link to={{
         pathname: `/meals/${props.meal.id}/foods`,
         state: {
-          diaryId: props.diaryId,
+          // diaryId: props.diaryId,
           diaryDate: props.diaryDate
         }
       }}>
