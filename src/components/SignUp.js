@@ -19,6 +19,7 @@ class SignUp extends Component {
 
 
   calculateDailyCalorieGoal = () => {
+    // add conditional so this is never under 1200
     let bmr = 0
     //
     let activity = 0
