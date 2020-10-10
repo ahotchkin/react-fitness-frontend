@@ -29,7 +29,6 @@ export const clearCurrentUser = () => {
 // aysnchronous action creators
 // pass in history prop
 export const login = (credentials, history) => {
-  console.log("credentials are", credentials)
   return dispatch => {
     // can abstract fetch requests into an adapter class and do something like - return Adapter.login(args) or Api.login(args)
     return fetch("http://localhost:3001/api/v1/login", {
