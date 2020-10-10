@@ -16,7 +16,6 @@ export default (state = [], action) => {
       console.log(state.filter(exercise => exercise.id !== action.exerciseId))
       return state.filter(exercise => exercise.id !== action.exerciseId)
     case "CLEAR_EXERCISES":
-      // want the exercises to be empty when the current user logs out
       return []
     default:
       return state
