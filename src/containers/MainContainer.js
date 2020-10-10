@@ -126,6 +126,28 @@ class MainContainer extends Component {
 
     let todaysMeals = []
     let todaysMealFoods = []
+    let total = {
+      added_sugars: 0,
+      calcium: 0,
+      calories: 0,
+      cholesterol: 0,
+      dietary_fiber: 0,
+      iron: 0,
+      monounsaturated_fat: 0,
+      polyunsaturated_fat: 0,
+      potassium: 0,
+      protein: 0,
+      saturated_fat: 0,
+      sodium: 0,
+      sugar_alcohols: 0,
+      total_carbohydrate: 0,
+      total_fat: 0,
+      total_sugars: 0,
+      trans_fat: 0,
+      vitamin_a: 0,
+      vitamin_c: 0,
+      vitamin_d: 0
+    }
     // 1. get all mealFoods for the day
       // get the diary for the day
       // get the meals for the day
@@ -134,17 +156,18 @@ class MainContainer extends Component {
     if (!!todaysDiary) {
       todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
       console.log(todaysMeals)
-        if (todaysMeals.length > 0) {
-          todaysMeals.forEach(meal => {
-            todaysMealFoods.push(meal.meal_foods)
-          })
-        }
-        console.log(todaysMealFoods.flat())
+      if (todaysMeals.length > 0) {
+        todaysMeals.forEach(meal => {
+          todaysMealFoods.push(meal.meal_foods)
+        })
       }
+      // 2. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
+      console.log(todaysMealFoods.flat())
+    }
 
     // 3. use reduce to combine objects in todaysMealFoods and total values, while ignoring keys of properties that aren't needed
-    if (todaysMealFoods.length > 0) {
-      const total = todaysMealFoods.flat().reduce((a, b) => {
+    if (todaysMealFoods.flat().length > 0) {
+      total = todaysMealFoods.flat().reduce((a, b) => {
         for (let k in b) {
           if (b.hasOwnProperty(k) && k !== "id" && k !== "meal_id" && k !== "food_id" && k !== "number_of_servings" && k !== "created_at" && k !== "updated_at")
             a[k] = (a[k] || 0) + b[k];
@@ -153,8 +176,9 @@ class MainContainer extends Component {
         // by adding " , {}" to the end, it returns the new object with the 3 properties above removed. What is happening here?
       }, {});
       console.log(total)
-      return total
     }
+    return total
+
   }
 
   dailyMacros = () => {
@@ -168,9 +192,11 @@ class MainContainer extends Component {
       const totalDailyNutrition = dailyNutrition.total_carbohydrate + dailyNutrition.total_fat + dailyNutrition.protein
       console.log(totalDailyNutrition)
 
-      macros.carbohydrates = Math.round((dailyNutrition.total_carbohydrate / totalDailyNutrition) * 100)
-      macros.fat = Math.round((dailyNutrition.total_fat / totalDailyNutrition) * 100)
-      macros.protein = Math.round((dailyNutrition.protein / totalDailyNutrition) * 100)
+      if (totalDailyNutrition !== 0) {
+        macros.carbohydrates = Math.round((dailyNutrition.total_carbohydrate / totalDailyNutrition) * 100)
+        macros.fat = Math.round((dailyNutrition.total_fat / totalDailyNutrition) * 100)
+        macros.protein = Math.round((dailyNutrition.protein / totalDailyNutrition) * 100)
+      }
 
       console.log(macros)
       return macros
