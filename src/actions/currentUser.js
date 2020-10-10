@@ -1,7 +1,3 @@
-// only needed since LoginForm is in Redux, not react
-// import { resetLoginForm } from './loginForm'
-// import { resetSignUpForm } from './signUpForm'
-
 // Because of information that shows on dashboard, these actions need to be dispatched in signUp, login, and getCurrentUser - does this mean they can be removed from their respective containers because information will already be in the store???
 import { getExercises } from './exercises';
 import { getDiaries } from './diaries';
@@ -9,7 +5,9 @@ import { getMeals } from './meals';
 // import { getMealFoods } from './mealFoods';
 
 import { clearExercises } from './exercises';
-
+import { clearDiaries } from './diaries';
+import { clearMeals } from './meals';
+import { clearMealFoods } from './mealFoods';
 
 // synchronous action creators
 export const setCurrentUser = user => {
@@ -17,6 +15,13 @@ export const setCurrentUser = user => {
     type: "SET_CURRENT_USER",
     user
     // or payload: user
+  }
+}
+
+// get rid of the currentUser that is sitting in Redux store
+export const clearCurrentUser = () => {
+  return {
+    type: "CLEAR_CURRENT_USER"
   }
 }
 
@@ -45,8 +50,6 @@ export const login = (credentials, history) => {
           dispatch(getDiaries())
           dispatch(getMeals())
           // dispatch(getMealFoods())
-          // only needed because Login is in Redux and not React
-          // dispatch(resetLoginForm())
 
           // tells your app which path to go to once logged in
           history.push("/")
@@ -86,32 +89,12 @@ export const signUp = (credentials, dailyCalorieGoal, history) => {
           dispatch(getMeals())
           // dispatch(getMealFoods())
 
-          // only needed because Login is in Redux and not React
-          // dispatch(resetSignUpForm())
-
           history.push("/")
         }
       })
       .catch(console.log())
   }
 }
-
-// this takes care of clearing the session, also need to clear out the user in the store with clearCurrentUser
-export const logout = () => {
-  return dispatch => {
-    // don't need to wait until fetch request resolves to log out a user, when a user clicks logout they should logout right away. call clearCurrentUser immediately
-    // optimistic => make the change to the frontend right away, don't wait for the backend
-    // pessimistic => hold on, make sure the server is running, the response we said works and the backend is all set before changing anything on the frontend and displaying anything to the user
-    dispatch(clearCurrentUser())
-    dispatch(clearExercises())
-    return fetch("http://localhost:3001/api/v1/logout", {
-      credentials: "include",
-      method: "DELETE"
-    })
-
-  }
-}
-
 
 export const getCurrentUser = () => {
   return dispatch => {
@@ -142,9 +125,21 @@ export const getCurrentUser = () => {
   }
 }
 
-// get rid of the currentUser that is sitting in Redux store
-export const clearCurrentUser = () => {
-  return {
-    type: "CLEAR_CURRENT_USER"
+// this takes care of clearing the session, also need to clear out the user in the store with clearCurrentUser
+export const logout = () => {
+  return dispatch => {
+    // don't need to wait until fetch request resolves to log out a user, when a user clicks logout they should logout right away. call clearCurrentUser immediately
+    // optimistic => make the change to the frontend right away, don't wait for the backend
+    // pessimistic => hold on, make sure the server is running, the response we said works and the backend is all set before changing anything on the frontend and displaying anything to the user
+    dispatch(clearCurrentUser())
+    dispatch(clearExercises())
+    dispatch(clearDiaries())
+    dispatch(clearMeals())
+    dispatch(clearMealFoods())
+    return fetch("http://localhost:3001/api/v1/logout", {
+      credentials: "include",
+      method: "DELETE"
+    })
+
   }
 }
