@@ -170,16 +170,6 @@ const Diaries = props => {
     <div>
       <h2>Diaries</h2>
           {renderDiaryCards()}
-
-          {/*
-            IS THIS NECESSARY WITH SEARCHBYDATE SET IN THE CONTAINER?
-          { props.date != "" ?
-            this.renderDiaryCards()
-          :
-            null
-          }
-
-          */}
     </div>
   )
 }
