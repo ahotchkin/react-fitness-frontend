@@ -39,37 +39,37 @@ class MainContainer extends Component {
 
   // can I get this to work with whatever date is selected on datePicker in /diaries and /exercises???
   // don't really need this - can grab from dailyNutrition
-  caloriesConsumed = () => {
-    // console.log(this.props)
-    let data = {}
-
-    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
-    // Need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
-    if (!!todaysDiary) {
-      const todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
-      console.log(todaysMeals)
-
-      if (todaysMeals.length > 0) {
-        data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
-      }
-    } else {
-      data = {calories: 0}
-    }
-    console.log(data.calories)
-    return data.calories
-
-
-    // let data = {}
-    // const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
-    // console.log(todaysDiary)
-    //
-    // if (!!todaysDiary) {
-    //   const todaysMeals = todaysDiary.attributes.meals
-    //   console.log(todaysMeals)
-    //   data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
-    // }
-    // return data.calories
-  }
+  // caloriesConsumed = () => {
+  //   // console.log(this.props)
+  //   let data = {}
+  //
+  //   const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
+  //   // Need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
+  //   if (!!todaysDiary) {
+  //     const todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
+  //     console.log(todaysMeals)
+  //
+  //     if (todaysMeals.length > 0) {
+  //       data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
+  //     }
+  //   } else {
+  //     data = {calories: 0}
+  //   }
+  //   console.log(data.calories)
+  //   return data.calories
+  //
+  //
+  //   // let data = {}
+  //   // const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
+  //   // console.log(todaysDiary)
+  //   //
+  //   // if (!!todaysDiary) {
+  //   //   const todaysMeals = todaysDiary.attributes.meals
+  //   //   console.log(todaysMeals)
+  //   //   data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
+  //   // }
+  //   // return data.calories
+  // }
 
   // can I get this to work with whatever date is selected on datePicker in /diaries and /exercises???
   caloriesBurned = () => {
@@ -212,7 +212,7 @@ class MainContainer extends Component {
         {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
 
         <Switch>
-          <Route exact path="/" render={ () => this.props.loggedIn ? <Dashboard caloriesConsumed={this.caloriesConsumed()} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} lunchNutrition={this.mealNutrition("lunch")} dinnerNutrition={this.mealNutrition("dinner")} snacksNutrition={this.mealNutrition("snacks")} dailyMacros={this.dailyMacros()} dailyNutrition={this.dailyNutrition()} /> : <Home /> }  />
+          <Route exact path="/" render={ () => this.props.loggedIn ? <Dashboard caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} lunchNutrition={this.mealNutrition("lunch")} dinnerNutrition={this.mealNutrition("dinner")} snacksNutrition={this.mealNutrition("snacks")} dailyMacros={this.dailyMacros()} dailyNutrition={this.dailyNutrition()} /> : <Home /> }  />
 
           {/* below routes should only be available to users who are NOT logged in */}
           <Route exact path="/login" render={ props => this.props.loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
