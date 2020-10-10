@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 // removed withRouter 9/20/20 and seems to be working okay
 import { Route, Switch } from 'react-router-dom';
 
-import { getDiaries } from '../actions/diaries';
+// don't need to dispatch diaries here since it is dispatched in getCurrentUser, login, and signUp
+// import { getDiaries } from '../actions/diaries';
 import { createDiary } from '../actions/diaries';
 
-import { getExercises } from '../actions/exercises';
+// import { getExercises } from '../actions/exercises';
 // import { getMeals } from '../actions/meals'
 
 import Diaries from '../components/diaries/Diaries'
@@ -89,7 +90,8 @@ class DiariesContainer extends Component {
       })
     }
 
-    this.props.getDiaries()
+    // this.props.getDiaries()
+
     // this.props.getExercises()
     // this.setState({
     //   loaded: true
@@ -116,21 +118,18 @@ class DiariesContainer extends Component {
   // }
 
   caloriesConsumed = () => {
-    console.log(this.props)
     let data = {}
 
     const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
     // Need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
     if (!!todaysDiary) {
       const todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
-      console.log(todaysMeals)
 
       if (todaysMeals.length > 0) {
         data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
 
       }
     }
-    console.log(data.calories)
     return data.calories
 
 
@@ -215,7 +214,6 @@ class DiariesContainer extends Component {
 // receives the state of the Redux store as an argument
 // what do I need in mapStateToProps vs. mapDispatchToProps - go through all containers and review
 const mapStateToProps = state => ({
-  loggedIn: !!state.currentUser,
   currentUser: state.currentUser,
   diaries: state.diaries,
 
@@ -225,11 +223,11 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = {
-  getDiaries,
+  // getDiaries,
   createDiary,
 
 
-  getExercises
+  // getExercises
 }
 
 
