@@ -63,7 +63,10 @@ const DashboardContainer = props => {
           <p>Calories Remaining: {props.currentUser.attributes.daily_calorie_goal - props.dailyNutrition.calories + props.caloriesBurned}</p>
         </div>
       :
-        null
+        <div>
+          <p>Calories Consumed: 0</p>
+          <p>Calories Remaining: {props.currentUser.attributes.daily_calorie_goal - 0 + props.caloriesBurned}</p>
+        </div>
       }
 
       <p>*************************************************************************************************</p>
