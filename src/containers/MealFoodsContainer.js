@@ -49,12 +49,15 @@ class MealFoodsContainer extends Component {
     return (
       <div>
       <h2>I'm in the mealFoodsContainer Now</h2>
-
+        {/*
+          {console.log(this.props)}
+        */}
+        
         <Switch>
 
           {/* THIS IS MUCH SLOWER THAN RENDERING BASED ON MEALFOODS ASSOCIATED WITH MEALS */}
           {/* Need to pass meal as prop to mealFoods to have access to it in MealFoodCard to pass to deleteMealFood. Can access meal from mealFood, however when doing this in deleteMealFood meal.calories is not always updated appropriately. Passing in the meal itself seems to solve this problem. */}
-          <Route exact path="/diaries" render={props => <MealFoods mealFoods={this.props.mealFoods.filter(mealFood => mealFood.relationships.meal.data.id === parseInt(this.props.meal.id))} meal={this.props.meal} deleteMealFood={this.props.deleteMealFood} {...props} /> } />
+          <Route exact path="/diaries" render={props => <MealFoods mealFoods={this.props.mealFoods.filter(mealFood => mealFood.relationships.meal.data.id === this.props.meal.id)} meal={this.props.meal} deleteMealFood={this.props.deleteMealFood} {...props} /> } />
 
           <Route exact path="/meal_foods/:mealFoodId/edit" render={props => {
             const mealFood = this.props.mealFoods.find(mealFood => mealFood.id === props.match.params.mealFoodId)
