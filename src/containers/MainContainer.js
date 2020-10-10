@@ -92,29 +92,20 @@ class MainContainer extends Component {
 
 
   mealNutrition = selectedMeal => {
-    // console.log(this.props)
     let meal = {}
 
     const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
     // Need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
     if (!!todaysDiary) {
       const todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
-      console.log(todaysMeals)
 
       if (todaysMeals.length > 0) {
         meal = todaysMeals.find(meal => meal.category.toLowerCase() === selectedMeal)
-
       }
-      // if (todaysMeals.length > 0) {
-      //   data = todaysMeals.reduce((a, b) => ({calories: a.calories + b.calories}))
-
-      // }
     } else {
       meal = {calories: 0}
     }
-    console.log(meal)
     return meal
-
   }
 
   dailyNutrition = () => {
@@ -155,14 +146,16 @@ class MainContainer extends Component {
     const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
     if (!!todaysDiary) {
       todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
-      console.log(todaysMeals)
+
+      // requires meal_foods to be an attribute of meals to work properly
       if (todaysMeals.length > 0) {
         todaysMeals.forEach(meal => {
-          todaysMealFoods.push(meal.meal_foods)
+          if (meal.calories > 0) {
+            todaysMealFoods.push(meal.meal_foods)
+          }
         })
       }
       // 2. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
-      console.log(todaysMealFoods.flat())
     }
 
     // 3. use reduce to combine objects in todaysMealFoods and total values, while ignoring keys of properties that aren't needed
@@ -175,10 +168,8 @@ class MainContainer extends Component {
         return a;
         // by adding " , {}" to the end, it returns the new object with the 3 properties above removed. What is happening here?
       }, {});
-      console.log(total)
     }
     return total
-
   }
 
   dailyMacros = () => {
@@ -186,11 +177,8 @@ class MainContainer extends Component {
 
     if (!!this.dailyNutrition()) {
       const dailyNutrition = this.dailyNutrition()
-      console.log("dailyNutrition is: ", dailyNutrition)
-      console.log("carbs: ", dailyNutrition.total_carbohydrate)
 
       const totalDailyNutrition = dailyNutrition.total_carbohydrate + dailyNutrition.total_fat + dailyNutrition.protein
-      console.log(totalDailyNutrition)
 
       if (totalDailyNutrition !== 0) {
         macros.carbohydrates = Math.round((dailyNutrition.total_carbohydrate / totalDailyNutrition) * 100)
@@ -198,7 +186,6 @@ class MainContainer extends Component {
         macros.protein = Math.round((dailyNutrition.protein / totalDailyNutrition) * 100)
       }
 
-      console.log(macros)
       return macros
     }
     // default all users' goals to carbohydrates: 50%, fat: 30%, protein: 20%
@@ -225,11 +212,6 @@ class MainContainer extends Component {
 
 
   render() {
-    // const { loggedIn } = this.props
-    console.log(this.props)
-    console.log(this.props.mealFoods)
-    console.log(this.dailyNutrition())
-
     return (
       // Update className when adding css
       <div className="App">
@@ -238,7 +220,7 @@ class MainContainer extends Component {
         {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
 
         <Switch>
-          <Route exact path="/" render={ () => this.props.loggedIn ? <Dashboard caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} lunchNutrition={this.mealNutrition("lunch")} dinnerNutrition={this.mealNutrition("dinner")} snacksNutrition={this.mealNutrition("snacks")} dailyMacros={this.dailyMacros()} dailyNutrition={this.dailyNutrition()} /> : <Home /> }  />
+          <Route exact path="/" render={ () => this.props.loggedIn ? <Dashboard currentUser={this.props.currentUser} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} lunchNutrition={this.mealNutrition("lunch")} dinnerNutrition={this.mealNutrition("dinner")} snacksNutrition={this.mealNutrition("snacks")} dailyMacros={this.dailyMacros()} dailyNutrition={this.dailyNutrition()} /> : <Home /> }  />
 
           {/* below routes should only be available to users who are NOT logged in */}
           <Route exact path="/login" render={ props => this.props.loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
@@ -299,7 +281,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  getCurrentUser,
+  getCurrentUser
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
