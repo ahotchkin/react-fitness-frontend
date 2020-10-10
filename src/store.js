@@ -2,11 +2,8 @@ import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 // import { compose } from 'redux' ???????????????
 import thunk from 'redux-thunk';
 
-import users from './reducers/users'
 import currentUser from './reducers/currentUser'
-import loginForm from './reducers/loginForm'
 import exercises from './reducers/exercises'
-import signUpForm from './reducers/signUpForm'
 import diaries from './reducers/diaries'
 import meals from './reducers/meals'
 import foods from './reducers/foods'
@@ -14,11 +11,8 @@ import mealFoods from './reducers/mealFoods'
 
 // could separate this into a separate rootReducer file
 const reducer = combineReducers({
-  users,
   currentUser,
-  loginForm,
   exercises,
-  signUpForm,
   diaries,
   meals,
   foods,
