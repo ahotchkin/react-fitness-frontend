@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-// rename to ExerciseUpdate????
 class ExerciseUpdate extends Component {
 
   // CAN I REFACTOR AND USE THE SAME FORM FOR NEW AND UPDATE?????? WATCH GLOBETROTTER PART 11
@@ -21,10 +20,7 @@ class ExerciseUpdate extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    // set the state here by accessing props provided by mapDispatchToProps
-    console.log(this.props)
 
-    // IS IT NOT NECESSARY TO PASS IN THE CURRENT USER BECAUSE ONLY THE FIELDS DECLARED IN THE ACTION WILL BE UPDATED?????????????
     this.props.updateExercise(this.state, this.props.date, this.props.exercise, this.props.history)
     this.setState({
       // drop down stays selected on whatever category was selected. Is this a problem or will it always update on page refresh?
@@ -32,20 +28,14 @@ class ExerciseUpdate extends Component {
       name: "",
       duration_in_minutes: "",
       calories_burned: ""
-    })
-    console.log("you updated your exercise!!!")
+    });
   };
-
-
-
 
   render() {
     return(
       <div>
-
         This is the update exercise page for {this.props.exercise.attributes.name}
         <br /><br />
-        {console.log(this.state)}
 
         <form onSubmit={this.handleSubmit}>
           <label>Category: </label>
@@ -89,8 +79,8 @@ class ExerciseUpdate extends Component {
         </form>
 
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 export default ExerciseUpdate;
