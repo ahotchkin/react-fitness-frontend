@@ -20,9 +20,6 @@ class MealsContainer extends Component {
       <div>
         {/* SHOULD ONLY SHOW DIARY FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
         <h1>I'm in the meals container</h1>
-        {/*
-        {console.log(this.props)}
-        */}
         <Meals meals={this.props.meals} diaryId={this.props.diaryId} diaryDate={this.props.diaryDate}/>
       </div>
     );
@@ -31,13 +28,12 @@ class MealsContainer extends Component {
 
 // receives the state of the Redux store as an argument
 const mapStateToProps = state => ({
-  // loggedIn: !!state.currentUser,
-  // currentUser: state.currentUser,
   meals: state.meals
 });
 
 
 const mapDispatchToProps = {
+  // even though I've already called getMeals() in MainContainer.js, need to call here so meals load when user clicks "Add Diary" button
   getMeals,
 }
 

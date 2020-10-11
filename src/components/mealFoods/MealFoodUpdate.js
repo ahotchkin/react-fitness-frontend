@@ -5,7 +5,7 @@ class MealFoodUpdate extends Component {
   // CAN I REFACTOR AND USE THE SAME FORM FOR NEW AND UPDATE?????? WATCH GLOBETROTTER PART 11
   state = {
     number_of_servings: this.props.mealFood.attributes.number_of_servings,
-  }
+  };
 
   handleOnChange = event => {
     // is this necessary? WHAT DOES EVENT.PERSIST() DO??????
@@ -13,7 +13,7 @@ class MealFoodUpdate extends Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-  }
+  };
 
   handleSubmit = event => {
     event.preventDefault();
@@ -37,6 +37,7 @@ class MealFoodUpdate extends Component {
 
         <p>Meal is {this.props.mealFood.attributes.meal.category}</p>
         <p>Food is {this.props.mealFood.attributes.food.brand_name}</p>
+
         {/* BREAK THIS OUT INTO SEPARATE COMPONENT TO USE HERE AND IN FOODCARD.JS */}
 
         <form onSubmit={this.handleSubmit}>
@@ -50,12 +51,10 @@ class MealFoodUpdate extends Component {
           <br /><br />
 
           <input type="submit" value="Update" />
-
         </form>
-
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 export default MealFoodUpdate;

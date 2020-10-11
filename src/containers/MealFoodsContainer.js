@@ -6,27 +6,18 @@ import { connect } from 'react-redux';
 // removed withRouter 9/20/20 and seems to be working okay
 import { Route, Switch } from 'react-router-dom';
 
+import MealFoods from '../components/mealFoods/MealFoods'
 import MealFoodUpdate from '../components/mealFoods/MealFoodUpdate'
 
+import { getMealFoods } from '../actions/mealFoods';
 import { updateMealFood } from '../actions/mealFoods';
 import { deleteMealFood } from '../actions/mealFoods';
-// *********************************************************************************
-import { getMealFoods } from '../actions/mealFoods';
-import MealFoods from '../components/mealFoods/MealFoods'
-// *********************************************************************************
-
 
 class MealFoodsContainer extends Component {
 
   componentDidMount() {
-    // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
     this.props.getMealFoods()
-
   }
-
-  // ***************************************************************************************************************************************************
-  // This container is only being used for MealFoodUpdate. MealFood and MealFoodCard are rendered, added, and deleted through Meals and Foods since meal_foods is an atttribute of meals and foods. Is this the best way to handle it?
-  // ***************************************************************************************************************************************************
 
 
   // <Route exact path="/meal_foods/:mealFoodId/edit" render={props => {
@@ -43,16 +34,11 @@ class MealFoodsContainer extends Component {
 
 
 
-
-
   render() {
     return (
       <div>
       <h2>I'm in the mealFoodsContainer Now</h2>
-        {/*
-          {console.log(this.props)}
-        */}
-        
+
         <Switch>
 
           {/* THIS IS MUCH SLOWER THAN RENDERING BASED ON MEALFOODS ASSOCIATED WITH MEALS */}

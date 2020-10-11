@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 
-// for routing - WHAT IS SWITCH???
 // removed withRouter 9/20/20 and seems to be working okay
 import { Route, Switch } from 'react-router-dom';
 
@@ -39,29 +38,18 @@ class ExercisesContainer extends Component {
     return date
   }
 
-  // getTodaysDate = () => {
-  //   const tzoffset = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
-  //   const date = (new Date(new Date() - tzoffset)).toISOString().split("T")[0];
-  //   return date
-  // }
-
-
   caloriesBurned = () => {
     let data = {}
 
-    // I don't think this first if statement is necessary here or in ExercisesContainer. It will always be an empty array at least, never undefined.
-    if (!!this.props.exercises) {
-      // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
-      // ************************* NEED TO UPDATE THIS SO IF USER IS IN MEAL DIARY OR EXERCISES AND SELECTS A DIFFERENT DAY THE CORRECT TOTAL SHOWS UP *********************************
-      const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes)
+    // filtering out today's Exercises and getting just the attributes so reduce() will work properly with more than two elements
+    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes)
 
-      if (todaysExercises.length === 1) {
-        data = {calories_burned: todaysExercises[0].calories_burned}
-      } else if (todaysExercises.length > 1) {
-        data = todaysExercises.reduce((a, b) => ({calories_burned: a.calories_burned + b.calories_burned}))
-      } else {
-      data = {calories_burned: 0}
-      }
+    if (todaysExercises.length === 1) {
+      data = {calories_burned: todaysExercises[0].calories_burned}
+    } else if (todaysExercises.length > 1) {
+      data = todaysExercises.reduce((a, b) => ({calories_burned: a.calories_burned + b.calories_burned}))
+    } else {
+    data = {calories_burned: 0}
     }
 
     return data.calories_burned
@@ -70,20 +58,16 @@ class ExercisesContainer extends Component {
 // ***************************************
 
 
-  // add componentDidMount that calls a fetchExercises function from actions/exercises.js??????
-
   // SHOULD I BE USING THE OTHER LIFECYCLE METHODS???????
-  componentDidMount() {
-    // this.props.loggedIn ? this.props.getExercises() : null
-    // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
-    this.props.getExercises()
-
-  }
+  // componentDidMount() {
+  //   // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
+  //   this.props.getExercises()
+  //
+  // }
 
   render() {
     return (
       <div>
-        {/* SHOULD ONLY SHOW EXERCISES FOR THE CURRENT DAY - HAVE THE OPTION TO SEARCH BY DATE */}
         {/* UPDATE ALL ROUTES TO {THIS.PROPS.MATCH.URL} */}
         <h1>I'm in the exercises container</h1>
           <Switch>
@@ -111,38 +95,23 @@ class ExercisesContainer extends Component {
             }} />
 
           </Switch>
-
-          {/* ONLY WANT TO DISPLAY TODAY'S EXERCISES IF PATH IS /
-
-          <Route exact path="/" component={Exercises} />
-          */}
-
       </div>
     );
-  }
+  };
 };
 
-// receives the state of the Redux store as an argument
 const mapStateToProps = state => ({
-  loggedIn: !!state.currentUser,
   currentUser: state.currentUser,
   exercises: state.exercises
 });
 
 
 const mapDispatchToProps = {
-  getExercises,
+  // getExercises,
   createExercise,
   updateExercise,
   deleteExercise
-}
-// const mapDispatchToProps = dispatch => ({
-//   getExercises,
-//   createExercise: formData => dispatch({ type: "ADD_EXERCISE", text: formData }),
-//   updateExercise: (formData, id) => dispatch({ type: "UPDATE_EXERCISE", exercise: { text: formData, id: id } }),
-//   deleteExercise: exerciseId => dispatch({ type: "DELETE_EXERCISE", id: exerciseId })
-// });
-
+};
 
 // the function returned from invoking connect that will now supply ExercisesContainer with props included state as descriped in MSTP and actions as described in MDTP takes ExercisesContainer as an argument - the whole expression is a connected ExercisesContainer component with state and actions
 // not just exporting the const from above, but exporting a bulked up version with state and actions

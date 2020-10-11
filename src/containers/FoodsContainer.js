@@ -1,33 +1,28 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
-
-import Foods from '../components/foods/Foods'
-import FoodInput from '../components/foods/FoodInput'
+import Foods from '../components/foods/Foods';
+import FoodInput from '../components/foods/FoodInput';
 
 
 import { getFoods } from '../actions/foods';
-import { createFood } from '../actions/foods';
-
 // add getMeals to mapDispatchToProps and call in componentDidMount to ensure meals are in state on page refresh
-import { getMeals } from '../actions/meals'
-import { createMealFood } from '../actions/mealFoods'
+import { getMeals } from '../actions/meals';
+import { createFood } from '../actions/foods';
+import { createMealFood } from '../actions/mealFoods';
 
 class FoodsContainer extends Component {
 
   componentDidMount() {
-    // this.props.loggedIn ? this.props.getExercises() : null
-    // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
     this.props.getFoods()
     this.props.getMeals()
-  }
+  };
 
   render() {
     return (
       <div>
         <h1>I'm in the foods container</h1>
-        {console.log(`I'm console logging props at ${new Date()}: `, this.props)}
         <Switch>
           <Route exact path="/foods/new" render={props => <FoodInput createFood={this.props.createFood} {...props} /> } />
 
@@ -50,13 +45,10 @@ class FoodsContainer extends Component {
         </Switch>
       </div>
     );
-  }
+  };
 };
 
-// receives the state of the Redux store as an argument
 const mapStateToProps = state => ({
-  // loggedIn: !!state.currentUser,
-  // currentUser: state.currentUser,
   foods: state.foods,
   meals: state.meals
 });
@@ -67,11 +59,6 @@ const mapDispatchToProps = {
   getMeals,
   createFood,
   createMealFood,
-}
-
-
-
-// the function returned from invoking connect that will now supply DiariesContainer with props included state as descriped in MSTP and actions as described in MDTP takes DiariesContainer as an argument - the whole expression is a connected DiariesContainer component with state and actions
-// not just exporting the const from above, but exporting a bulked up version with state and actions
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(FoodsContainer);
