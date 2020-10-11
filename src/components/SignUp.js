@@ -43,6 +43,11 @@ class SignUp extends Component {
       bmr = (10 * ((parseFloat(this.state.weight) * 0.453592)) + (6.25 * (((parseInt(this.state.height_feet) * 12) + parseFloat(this.state.height_inches)) * 2.54)) - (5 * parseInt(this.state.age)) - 161) * activity
 
     }
+
+    if (bmr < 1200) {
+      bmr = 1200
+    }
+
     console.log(parseInt(bmr))
     return parseInt(bmr)
     // console.log(this.state.lifestyle)
