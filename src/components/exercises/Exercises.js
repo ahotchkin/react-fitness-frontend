@@ -11,7 +11,7 @@ const Exercises = props => {
     <div>
       <h2>Exercises for {props.date}</h2>
       <h3>Total calories burned on {props.date}: {props.caloriesBurned}</h3>
-      {console.log(props)}
+      
       { exerciseCards.length > 0 ? exerciseCards : null }
 
       <Link to="/exercises/new">
