@@ -71,10 +71,7 @@ export const createDiary = (diaryDate, currentUser, history) => {
         if (json.error) {
           alert(json.error)
         } else {
-          console.log(json)
           dispatch(addDiary(json.data))
-          console.log("diary successfully created")
-          // should they go back to home page or to diary show page???
           history.push("/diaries")
         }
       })
