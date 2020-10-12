@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -39,4 +39,25 @@
 
 a.active {
   color: #2d9d92
+} */
+
+.form {
+  margin: 3.5% 25%;
+}
+
+.header {
+  text-align: center;
+  margin-top: 7.5%;
+}
+
+.note {
+  text-align: center;
+  margin-bottom: 7.5%
+}
+
+/* currently not using */
+.submit {
+  /* padding-left: 25%;
+  padding-right: 25%; */
+  text-align: center;
 }
