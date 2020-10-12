@@ -214,7 +214,7 @@ class MainContainer extends Component {
   render() {
     return (
       // Update className when adding css
-      <div className="App">
+      <div>
         {/* Have to render NavBar here for it to appear on all pages. If rendered in MainContainer it only appears at "/" */}
         { this.props.loggedIn ? <NavBar /> : null }
         {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
