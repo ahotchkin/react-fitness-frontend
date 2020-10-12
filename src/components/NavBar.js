@@ -4,28 +4,23 @@ import { connect } from 'react-redux';
 
 import { logout } from '../actions/currentUser';
 
-
 const NavBar = ({ logout }) => {
 
   return (
-    <div className="NavBar">
-      <NavLink exact activeclass="true" to ="/">
+    <div className="navbar navbar-dark">
+      <NavLink className="nav-link" exact activeclass="true" to ="/">
         Home
       </NavLink>
-       |
-      <NavLink exact activeclass="true" to="/diaries">
+      <NavLink className="nav-link" exact activeclass="true" to="/diaries">
         Meal Diary
       </NavLink>
-       |
-      <NavLink activeclass="true" to="/exercises">
+      <NavLink className="nav-link" activeclass="true" to="/exercises">
         Exercise
       </NavLink>
-       |
-      <NavLink activeclass="true" to="/foods">
+      <NavLink className="nav-link" activeclass="true" to="/foods">
         Food Database
       </NavLink>
-       |
-      <NavLink exact to="/logout" onClick={logout}>
+      <NavLink className="nav-link" exact to="/logout" onClick={logout}>
         Log Out
       </NavLink>
     </div>
