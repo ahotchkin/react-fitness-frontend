@@ -105,143 +105,163 @@ class SignUp extends Component {
   render() {
     return (
       <div>
-        <h1>Create an Account</h1>
-        <form onSubmit={this.handleOnSubmit}>
-          <label>Username: </label>
-          <input
-            placeholder="Username"
-            value={this.state.username}
-            name="username"
-            type="text"
-            onChange={this.handleOnChange}
-          />
+        <h1 className="header">Create an Account</h1>
+        <div className="form">
+          <form onSubmit={this.handleOnSubmit}>
+            <div className="form-group">
+              <label htmlFor="username">Username: </label>
+              <input
+                type="text"
+                className="form-control"
+                name="username"
+                id="username"
+                value={this.state.username}
+                onChange={this.handleOnChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password: </label>
+              <input
+                type="password"
+                className="form-control"
+                name="password"
+                id="password"
+                value={this.state.password}
+                onChange={this.handleOnChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>Gender: </label>
+              <div className="form-check">
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  name="gender"
+                  id="male"
+                  value="male"
+                  onChange={this.handleOnChange}
+                />
+                <label className="form-check-label" htmlFor="male">Male</label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  name="gender"
+                  id="female"
+                  value="female"
+                  onChange={this.handleOnChange}
+                />
+                <label className="form-check-label" htmlFor="female">Female</label><br />
+              </div>
+              {/*
+              <input type="radio" id="other" name="gender" value="other">
+              <label for="other">Other</label>
+              */}
+            </div>
+            <div className="form-group">
+              <label htmlFor="age">Age: </label>
+              <input
+                type="number"
+                className="form-control"
+                name="age"
+                id="age"
+                value={this.state.age}
+                onChange={this.handleOnChange}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="height_feet">Height: </label>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <input
+                    type="number"
+                    className="form-control"
+                    name="height_feet"
+                    id="height_feet"
+                    placeholder="Feet"
+                    value={this.state.height_feet}
+                    onChange={this.handleOnChange}
+                  />
+                </div>
+                <div className="form-group col-md-6">
+                  <input
+                    type="number"
+                    className="form-control"
+                    name="height_inches"
+                    id="height_inches"
+                    placeholder="Inches"
+                    value={this.state.height_inches}
+                    onChange={this.handleOnChange}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="form-group">
+              <label htmlFor="weight">Weight:</label>
+              <input
+                type="number"
+                className="form-control"
+                name="weight"
+                id="weight"
+                value={this.state.weight}
+                onChange={this.handleOnChange}
+              />
+            </div>
+            <div className="form-group">
+              <label>Lifestyle (exercise will be tracked separately): </label>
+              <div className="form-check">
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  name="lifestyle"
+                  id="notActive"
+                  value="notActive"
+                  onChange={this.handleOnChange}
+                />
+                <label className="form-check-label" htmlFor="notActive">Not Very Active: Typical office job, sitting at a desk for most of the day</label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  name="lifestyle"
+                  id="lightlyActive"
+                  value="lightlyActive"
+                  onChange={this.handleOnChange}
+                />
+                <label className="form-check-label" htmlFor="lightlyActive">Lightly Active: On your feet all day (i.e. teacher, restaurant server)</label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  name="lifestyle"
+                  id="moderatelyActive"
+                  value="moderatelyActive"
+                  onChange={this.handleOnChange}
+                />
+                <label className="form-check-label" htmlFor="moderatelyActive">Moderately Active: Job that requires physical activity (i.e. landscaping, cleaning, maintenance)</label>
+              </div>
+              <div className="form-check">
+                <input
+                  type="radio"
+                  className="form-check-input"
+                  name="lifestyle"
+                  id="veryActive"
+                  value="veryActive"
+                  onChange={this.handleOnChange}
+                />
+                <label className="form-check-label" htmlFor="veryActive">Very Active: Job that requires heavy manual labor (i.e. construction, dancer, athlete)</label>
+              </div>
+            </div>
+            <input type="submit" className="btn btn-primary submit" value="Sign Up" />
+          </form>
+        </div>
+        <div className="note">
+          <p>Already have an account? Log in <Link to="/login">here</Link>.</p>
+        </div>
 
-          <br />
-
-          <label>Password: </label>
-          <input
-            placeholder="Password"
-            value={this.state.password}
-            name="password"
-            type="text"
-            onChange={this.handleOnChange}
-          />
-
-          <br />
-
-          <label>Gender: </label>
-          {/*
-          <select name="gender" defaultValue="DEFAULT" onChange={this.handleOnChange}>
-            <option value="DEFAULT" disabled hidden>Select</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-          </select>
-          */}
-
-          <input
-            type="radio"
-            name="gender"
-            value="male"
-            onChange={this.handleOnChange}
-          />
-          <label>Male</label>
-
-          <input
-            type="radio"
-            name="gender"
-            value="female"
-            onChange={this.handleOnChange}
-          />
-          <label>Female</label><br />
-          {/*
-          <input type="radio" id="other" name="gender" value="other">
-          <label for="other">Other</label>
-          */}
-
-          <br />
-
-          <label>Age: </label>
-          <input
-            placeholder="Age"
-            value={this.state.age}
-            name="age"
-            type="text"
-            onChange={this.handleOnChange}
-          />
-
-          <br />
-
-          <label>Height: </label>
-          <input
-            placeholder="Feet"
-            value={this.state.height_feet}
-            name="height_feet"
-            type="text"
-            onChange={this.handleOnChange}
-          />
-          <input
-            placeholder="Inches"
-            value={this.state.height_inches}
-            name="height_inches"
-            type="text"
-            onChange={this.handleOnChange}
-          />
-
-          <br />
-
-          <label>Weight:</label>
-          <input
-            placeholder="Weight"
-            value={this.state.weight}
-            name="weight"
-            type="text"
-            onChange={this.handleOnChange}
-          />
-
-          <br /><br />
-
-          <label>Lifestyle (does not include exercise): </label>
-          <br />
-          <input
-            type="radio"
-            name="lifestyle"
-            value="notActive"
-            onChange={this.handleOnChange}
-          />
-          <label>Not Very Active: Typical office job, sitting at a desk for most of the day</label>
-          <br />
-          <input
-            type="radio"
-            name="lifestyle"
-            value="lightlyActive"
-            onChange={this.handleOnChange}
-          />
-          <label>Lightly Active: On your feet all day (i.e. teacher, restaurant server)</label>
-          <br />
-          <input
-            type="radio"
-            name="lifestyle"
-            value="moderatelyActive"
-            onChange={this.handleOnChange}
-          />
-          <label>Moderately Active: Job that requires physical activity (i.e. landscaping, cleaning, maintenance)</label>
-          <br />
-          <input
-            type="radio"
-            name="lifestyle"
-            value="veryActive"
-            onChange={this.handleOnChange}
-          />
-          <label>Very Active: Job that requires heavy manual labor (i.e. construction, dancer, athlete)</label>
-
-          <br /><br />
-
-          <input type="submit" value="Sign Up" />
-        </form>
-
-        <br />
-
-        <p>Already have an account? Log in <Link to="/login">here</Link>.</p>
       </div>
     )
   }

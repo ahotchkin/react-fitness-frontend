@@ -41,36 +41,37 @@ class Login extends Component {
   render() {
     return (
       <div>
-        <h1>Log In</h1>
-        <form onSubmit={this.handleOnSubmit}>
-          <label>Username: </label>
-          <input
-            placeholder="Username"
-            value={this.state.username}
-            name="username"
-            type="text"
-            onChange={this.handleOnChange}
-          />
+        <h1 className="header">Log In</h1>
+        <div className="form">
+          <form onSubmit={this.handleOnSubmit}>
+            <div className="form-group">
+              <label htmlFor="username">Username: </label>
+              <input
+                type="text"
+                className="form-control"
+                name="username"
+                id="username"
+                value={this.state.username}
+                onChange={this.handleOnChange}
+              />
+              <label htmlFor="password">Password: </label>
+              <input
+                type="password"
+                className="form-control"
+                name="password"
+                id="password"
+                value={this.state.password}
+                onChange={this.handleOnChange}
+              />
+              <br />
+              <input type="submit" className="btn btn-primary submit" value="Log In" />
+            </div>
+          </form>
 
-          <br />
-
-          <label>Password: </label>
-          <input
-            placeholder="Password"
-            value={this.state.password}
-            name="password"
-            type="text"
-            onChange={this.handleOnChange}
-          />
-
-          <br /><br />
-
-          <input type="submit" value="Log In" />
-        </form>
-
-        <br />
-        
-        <p>Not a member? Sign up <Link to="/signup">here</Link>.</p>
+        </div>
+        <div className="note">
+          <p>Not a member? Sign up <Link to="/signup">here</Link>.</p>
+        </div>
       </div>
     )
   }
