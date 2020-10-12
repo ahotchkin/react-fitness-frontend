@@ -41,6 +41,10 @@ a.active {
   color: #2d9d92
 } */
 
+body {
+  background-color: #E6EBF2;
+}
+
 .form {
   margin: 3.5% 25%;
 }
@@ -53,6 +57,49 @@ a.active {
 .note {
   text-align: center;
   margin-bottom: 7.5%
+}
+
+.navbar {
+  color: #FFF;
+  background-color: #1E5194;
+  justify-content: left;
+}
+
+.nav-link {
+  color: #B8C4D4;
+}
+
+.nav-link:hover {
+  color: #E6F1FF;
+}
+
+.nav-link.active {
+  color: #FFF;
+}
+
+.btn-primary {
+  background-color: #3F6FAE;
+  border-color: #3F6FAE;
+  width: 150px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-primary:hover {
+  background-color: #1E5194;
+  border-color: #1E5194;
+}
+
+.btn-primary:focus {
+  background-color: #1E5194;
+  border-color: #1E5194;
+}
+
+.btn-primary.active {
+  background-color: #1E5194;
+  border-color: #1E5194;
 }
 
 /* currently not using */
