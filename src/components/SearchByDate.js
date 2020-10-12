@@ -6,6 +6,7 @@ const SearchByDate = props => {
 
   return (
     <DatePicker
+      todayButton="Today"
       selected={props.startDate}
       onChange={props.handleOnChange}
     />
