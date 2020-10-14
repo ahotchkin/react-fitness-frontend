@@ -37,8 +37,6 @@ class MealFoodsContainer extends Component {
   render() {
     return (
       <div>
-      <h2>I'm in the mealFoodsContainer Now</h2>
-
         <Switch>
 
           {/* THIS IS MUCH SLOWER THAN RENDERING BASED ON MEALFOODS ASSOCIATED WITH MEALS */}
