@@ -255,7 +255,7 @@ class SignUp extends Component {
                 <label className="form-check-label" htmlFor="veryActive">Very Active: Job that requires heavy manual labor (i.e. construction, dancer, athlete)</label>
               </div>
             </div>
-            <input type="submit" className="btn btn-primary" value="Sign Up" />
+            <input type="submit" className="btn btn-primary-fill" value="Sign Up" />
           </form>
         </div>
         <div className="note">

@@ -64,7 +64,7 @@ class Login extends Component {
                 onChange={this.handleOnChange}
               />
               <br />
-              <input type="submit" className="btn btn-primary" value="Log In" />
+              <input type="submit" className="btn btn-primary-fill" value="Log In" />
             </div>
           </form>
 
