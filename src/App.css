@@ -77,9 +77,10 @@ body {
   color: #FFF;
 }
 
-.btn-primary {
-  background-color: #3F6FAE;
-  border-color: #3F6FAE;
+.btn-primary-fill {
+  background-color: #1E5194;
+  border-color: #1E5194;
+  color: #FFF;
   width: 150px;
   margin: 0 auto;
   position: relative;
@@ -87,24 +88,76 @@ body {
   justify-content: center;
 }
 
-.btn-primary:hover {
-  background-color: #1E5194;
-  border-color: #1E5194;
+.btn-primary-fill:hover {
+  background-color: #003C8A;
+  border-color: #003C8A;
+  color: #FFF;
 }
 
-.btn-primary:focus {
-  background-color: #1E5194;
-  border-color: #1E5194;
+.btn-primary-fill:focus {
+  background-color: #003C8A;
+  border-color: #003C8A;
+  color: #FFF;
 }
 
-.btn-primary.active {
-  background-color: #1E5194;
-  border-color: #1E5194;
+.btn-primary-fill:active {
+  background-color: #003C8A;
+  border-color: #003C8A;
+  color: #FFF;
 }
+
+.btn-primary-outline {
+  background-color: #FFF;
+  border-color: #1E5194;
+  color: #1E5194;
+}
+
+.btn-primary-outline:hover {
+  background-color: #E6EBF2;
+  color: #1E5194;
+}
+
+.btn-primary-outline:focus {
+  background-color: #E6EBF2;
+  color: #1E5194;
+}
+
+.btn-primary-outline:active {
+  background-color: #E6EBF2;
+  color: #1E5194;
+}
+
 
 /* currently not using */
 .submit {
   /* padding-left: 25%;
   padding-right: 25%; */
   text-align: center;
+}
+
+.dashboard-container {
+  margin: 30px;
+}
+
+.info-container {
+  background-color: #FFF;
+  padding: 20px;
+  margin: 15px;
+  border-radius: 15px;
+}
+
+
+hr.solid-thin {
+  border-top: 1.75px solid #cfd9e8;
+  margin: 25px 0px;
+}
+
+hr.solid-thick {
+  margin: 25px 0px;
+  border-top: 3.5px solid #cfd9e8;
+}
+
+.no-background {
+  background-color: #FFF;
+  border: none;
 }
