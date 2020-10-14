@@ -165,3 +165,19 @@ hr.solid-thick {
   background-color: #FFF;
   border: none;
 }
+
+.positive {
+  color: #1d9902;
+}
+
+.negative {
+  color: #E01212;
+}
+
+.calorie-table {
+  width: 400px;
+}
+
+.calorie-table-cell {
+  width: 100px;
+}
