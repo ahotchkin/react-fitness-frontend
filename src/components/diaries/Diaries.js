@@ -167,9 +167,8 @@ const Diaries = props => {
   }
 
   return (
-    <div>
-      <h2>Diaries</h2>
-          {renderDiaryCards()}
+    <div className="row">
+      {renderDiaryCards()}
     </div>
   )
 }
