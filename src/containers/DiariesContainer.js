@@ -183,28 +183,31 @@ class DiariesContainer extends Component {
   render() {
     return (
       <div>
-        <h1>I'm in the diaries container</h1>
-          <Switch>
-            { !!this.state.loaded ?
-              <Route exact path={this.props.match.url} render={props =>
-                <div>
-                  <h4>Search for Meal Diary by Date:</h4>
-                  <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
+        <Switch>
+          { !!this.state.loaded ?
+            <Route exact path={this.props.match.url} render={props =>
+              <div className="dashboard-container">
+                <div className="row">
+                  <div className="col-lg info-container">
+                    <h4>Search for Meal Diary by Date:</h4>
+                    <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
+                  </div>
+                </div>
 
-                  <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.getDate()} caloriesConsumed={this.caloriesConsumed()} caloriesBurned={this.caloriesBurned()} {...props} />
+                <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.getDate()} caloriesConsumed={this.caloriesConsumed()} caloriesBurned={this.caloriesBurned()} {...props} />
 
-                  {/* TO BE USED IF I CAN REFACTOR CALORIESBURNED() TO MAIN CONTAINER
-                  <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.getDate()} caloriesBurned={this.props.caloriesBurned} {...props} />
-                  */}
-                </div>} />
+                {/* TO BE USED IF I CAN REFACTOR CALORIESBURNED() TO MAIN CONTAINER
+                <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.getDate()} caloriesBurned={this.props.caloriesBurned} {...props} />
+                */}
+              </div>} />
             :
               null
             }
           </Switch>
-          {/* ONLY WANT TO DISPLAY TODAY'S DIARY IF PATH IS /
+        {/* ONLY WANT TO DISPLAY TODAY'S DIARY IF PATH IS /
 
-          <Route exact path="/" component={Diaries} />
-          */}
+        <Route exact path="/" component={Diaries} />
+        */}
 
       </div>
     );
