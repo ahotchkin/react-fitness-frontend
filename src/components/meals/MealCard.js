@@ -23,6 +23,7 @@ const MealCard = (props) => {
       </Link>
 
       <hr className="solid-thin" />
+      
     </div>
   );
 };
