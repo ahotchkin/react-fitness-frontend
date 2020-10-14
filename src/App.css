@@ -157,6 +157,10 @@ hr.solid-thick {
   border-top: 3.5px solid #cfd9e8;
 }
 
+.right-align {
+  text-align: right;
+}
+
 .no-background {
   background-color: #FFF;
   border: none;
