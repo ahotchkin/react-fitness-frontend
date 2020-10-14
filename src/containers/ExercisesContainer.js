@@ -69,32 +69,43 @@ class ExercisesContainer extends Component {
     return (
       <div>
         {/* UPDATE ALL ROUTES TO {THIS.PROPS.MATCH.URL} */}
-        <h1>I'm in the exercises container</h1>
-          <Switch>
-            <Route exact path="/exercises/new" render={props =>
-              <div>
-              Date: <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
-              <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} date={this.getDate()} history={this.props.history} />
-              </div>} />
-            <Route exact path={this.props.match.url} render={props =>
-              <div>
-              <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
-              <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.getDate()} caloriesBurned={this.caloriesBurned()} {...props} /></div>} />
-
-              {/* TO BE USED IF I CAN REFACTOR CALORIESBURNED() TO MAIN CONTAINER
-              <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.getDate()} caloriesBurned={this.props.caloriesBurned} {...props} /></div>} />
-              */}
-            <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
-              const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
-              return (
-              <div>
-                <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
-                <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} date={this.getDate()} {...props} />
+        <Switch>
+          <Route exact path="/exercises/new" render={props =>
+            <div className="dashboard-container">
+              <div className="row">
+                <div className="col-lg info-container">
+                  Date: <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
+                </div>
               </div>
-              )
-            }} />
 
-          </Switch>
+              <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} date={this.getDate()} history={this.props.history} />
+            </div>} />
+          <Route exact path={this.props.match.url} render={props =>
+            <div className="dashboard-container">
+              <div className="row">
+                <div className="col-lg info-container">
+                  <h4>Search for Exercises by Date:</h4>
+
+                  <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
+                </div>
+              </div>
+              <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.getDate()} caloriesBurned={this.caloriesBurned()} {...props} />
+            </div>} />
+
+            {/* TO BE USED IF I CAN REFACTOR CALORIESBURNED() TO MAIN CONTAINER
+            <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.getDate()} caloriesBurned={this.props.caloriesBurned} {...props} /></div>} />
+            */}
+          <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
+            const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
+            return (
+            <div>
+              <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
+              <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} date={this.getDate()} {...props} />
+            </div>
+            )
+          }} />
+
+        </Switch>
       </div>
     );
   };
