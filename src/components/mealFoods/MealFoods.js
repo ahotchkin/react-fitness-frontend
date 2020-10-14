@@ -6,8 +6,23 @@ const MealFoods = props => {
 
   return (
     <div>
-      <h4>Foods for this meal:</h4>
-      { mealFoodCards.length > 0 ? mealFoodCards : null }
+      { mealFoodCards.length > 0 ?
+        <table className="table table-borderless table-sm" id="mealFoods">
+          <thead>
+            <tr>
+              <th>Food</th>
+              <th>Servings</th>
+              <th>Calories</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {mealFoodCards}
+          </tbody>
+        </table>
+      :
+        null
+      }
     </div>
   );
 };
