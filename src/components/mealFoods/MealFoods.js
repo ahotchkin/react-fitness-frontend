@@ -11,9 +11,9 @@ const MealFoods = props => {
           <thead>
             <tr>
               <th>Food</th>
-              <th>Servings</th>
-              <th>Calories</th>
-              <th></th>
+              <th className="right-align">Servings</th>
+              <th className="right-align">Calories</th>
+              <th className="right-align"></th>
             </tr>
           </thead>
           <tbody>
