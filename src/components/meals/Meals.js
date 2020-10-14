@@ -7,7 +7,6 @@ const Meals = props => {
 
   return (
     <div>
-      <h2>Today's Meals</h2>
       { mealCards.length > 0 ? mealCards : null }
     </div>
   );
