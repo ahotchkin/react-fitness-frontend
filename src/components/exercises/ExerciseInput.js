@@ -36,7 +36,7 @@ class ExerciseInput extends Component {
         <select name="category" defaultValue="DEFAULT" onChange={this.handleOnChange}>
           <option value="DEFAULT" disabled hidden>Select</option>
           <option value="cardio">Cardio</option>
-          <option value="strength_training">Strength Training</option>
+          <option value="strength">Strength Training</option>
           <option value="balance">Balance</option>
           <option value="stretching">Stretching</option>
         </select>
