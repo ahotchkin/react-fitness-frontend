@@ -10,7 +10,6 @@ const Exercises = props => {
   return (
     <div className="row">
       <div className="col-lg info-container">
-        <h2>Exercises for {props.date}</h2>
         <h3>Total calories burned on {props.date}: {props.caloriesBurned}</h3>
 
         <Link to="/exercises/new">
