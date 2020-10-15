@@ -22,8 +22,12 @@ const MealCard = (props) => {
         </button>
       </Link>
 
-      <hr className="solid-thin" />
-      
+      { props.meal.attributes.category !== "Snacks" ?
+        <hr className="solid-thin" />
+      :
+        <div><br /></div>
+      }
+
     </div>
   );
 };
