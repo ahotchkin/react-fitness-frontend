@@ -74,11 +74,17 @@ class ExercisesContainer extends Component {
             <div className="dashboard-container">
               <div className="row">
                 <div className="col-lg info-container">
-                  Date: <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
+                <h3 className="center-align">Add Exercise</h3>
+                  <div className="form">
+                    <div className="form-group">
+                      <label>Date: </label>
+                      <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
+                    </div>
+                    <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} date={this.getDate()} history={this.props.history} />
+                  </div>
                 </div>
               </div>
 
-              <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} date={this.getDate()} history={this.props.history} />
             </div>} />
           <Route exact path={this.props.match.url} render={props =>
             <div className="dashboard-container">
