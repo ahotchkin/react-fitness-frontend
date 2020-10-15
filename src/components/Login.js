@@ -54,6 +54,8 @@ class Login extends Component {
                 value={this.state.username}
                 onChange={this.handleOnChange}
               />
+            </div>
+            <div className="form-group">
               <label htmlFor="password">Password: </label>
               <input
                 type="password"
@@ -63,9 +65,9 @@ class Login extends Component {
                 value={this.state.password}
                 onChange={this.handleOnChange}
               />
-              <br />
-              <input type="submit" className="btn btn-primary-fill" value="Log In" />
             </div>
+            <br />
+            <input type="submit" className="btn btn-primary-fill" value="Log In" />
           </form>
 
         </div>
