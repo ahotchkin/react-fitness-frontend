@@ -162,7 +162,7 @@ const Diaries = props => {
       return createDiaryCards
     } else {
       // move createDiary to separate function?
-      return <button onClick={() => props.createDiary(props.date, props.currentUser, props.history)}>Start Meal Diary for {props.date}</button>
+      return <button className="btn btn-primary-fill auto-width" onClick={() => props.createDiary(props.date, props.currentUser, props.history)}>Start Meal Diary for {props.date}</button>
     }
   }
 
