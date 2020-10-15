@@ -32,45 +32,58 @@ class ExerciseInput extends Component {
   render() {
     return(
       <form onSubmit={this.handleSubmit}>
-        <label>Category: </label>
-        <select name="category" defaultValue="DEFAULT" onChange={this.handleOnChange}>
-          <option value="DEFAULT" disabled hidden>Select</option>
-          <option value="cardio">Cardio</option>
-          <option value="strength">Strength Training</option>
-          <option value="balance">Balance</option>
-          <option value="stretching">Stretching</option>
-        </select>
+        <div className="form-group">
+          <label htmlFor="category">Category: </label>
+          <select className="form-control" name="category" id="category" defaultValue="DEFAULT" onChange={this.handleOnChange}>
+            <option value="DEFAULT" disabled hidden>Select</option>
+            <option value="cardio">Cardio</option>
+            <option value="strength">Strength Training</option>
+            <option value="balance">Balance</option>
+            <option value="stretching">Stretching</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="name">Name: </label>
+          <input
+            type="text"
+            className="form-control"
+            name="name"
+            id="name"
+            onChange={this.handleOnChange}
+            value={this.state.name}
+          />
+        </div>
+
+        <div className="form-row">
+          <div className="form-group col-md-6">
+            <label htmlFor="duration_in_minutes">Minutes Performed: </label>
+            <input
+              type="number"
+              className="form-control"
+              name="duration_in_minutes"
+              id="duration_in_minutes"
+              onChange={this.handleOnChange}
+              value={this.state.duration_in_minutes}
+            />
+          </div>
+
+          <div className="form-group col-md-6">
+            <label htmlFor="calories_burned">Calories Burned: </label>
+            <input
+              type="number"
+              className="form-control"
+              name="calories_burned"
+              id="calories_burned"
+              onChange={this.handleOnChange}
+              value={this.state.calories_burned}
+            />
+          </div>
+        </div>
 
         <br />
 
-        <label>Name: </label>
-        <input
-          name="name"
-          onChange={this.handleOnChange}
-          value={this.state.name}
-        />
-
-        <br />
-
-        <label>Minutes Performed: </label>
-        <input
-          name="duration_in_minutes"
-          onChange={this.handleOnChange}
-          value={this.state.duration_in_minutes}
-        />
-
-        <br />
-
-        <label>Calories Burned: </label>
-        <input
-          name="calories_burned"
-          onChange={this.handleOnChange}
-          value={this.state.calories_burned}
-        />
-
-        <br />
-
-        <input type="submit" value="Add Exercise" />
+        <input type="submit" className="btn btn-primary-fill" value="Add Exercise" />
       </form>
     );
   };
