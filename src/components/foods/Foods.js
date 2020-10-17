@@ -2,17 +2,36 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FoodCard from './FoodCard';
 import SearchInput from '../SearchInput';
+// import FoodNutritionCard from './FoodNutritionCard';
+
 
 class Foods extends Component {
 
   state = {
     searchTerm: "",
-    currentlyDisplayed: this.props.foods
+    currentlyDisplayed: this.props.foods,
+    renderFoodNutrition: false,
+    currentFood: {}
   };
 
-  renderFoodCards = () => {
-    return this.state.currentlyDisplayed.map(food => <FoodCard key={food.id} food={food} meal={this.props.meal} createMealFood={this.props.createMealFood} history={this.props.history} location={this.props.location}/>)
-  };
+  renderFoodNutrition = food => {
+    this.setState({
+      renderFoodNutrition: true,
+      currentFood: food
+    })
+  }
+
+  // renderFoodCards = () => {
+  //   return this.state.currentlyDisplayed.map(food => <FoodCard key={food.id} food={food} meal={this.props.meal} createMealFood={this.props.createMealFood} history={this.props.history} location={this.props.location} renderFoodNutrition={this.renderFoodNutrition} />)
+  // };
+
+  renderFoods = () => {
+    return this.state.currentlyDisplayed.map(food =>
+      <tr key={food.id} onClick={() => this.renderFoodNutrition(food)}>
+        <td>{food.attributes.brand_name} {food.attributes.description} - {food.attributes.calories} calories</td>
+      </tr>
+    )
+  }
 
   handleOnChange = event => {
     // is this necessary? What is happening here?
@@ -31,11 +50,11 @@ class Foods extends Component {
     event.preventDefault();
   };
 
-
   render() {
     return (
-      <div>
-        <h2>Foods</h2>
+      <div className="row">
+        <div className="col-lg info-container">
+          <h2>Foods</h2>
           <p>Search the database for a food or add a new food</p>
 
           <SearchInput searchTerm={this.state.searchTerm} handleOnChange={this.handleOnChange} handleSubmit={this.handleSubmit} />
@@ -53,19 +72,37 @@ class Foods extends Component {
               }
             }}>
               <button type="button">
-                Add New Food
+                Add Food to Database
               </button>
             </Link>
             :
             <Link to="/foods/new">
               <button type="button">
-                Add New Food
+                Add Food to Database
               </button>
             </Link>
           }
 
-          {this.renderFoodCards()}
+          <div className="row">
+            <div className="col-sm">
+              <table className="table table-hover">
+                <caption>List of foods</caption>
+                <tbody>
+                  {this.renderFoods()}
+                </tbody>
+              </table>
+            </div>
 
+            <div className="col-sm">
+              { this.state.renderFoodNutrition ?
+                <FoodCard food={this.state.currentFood} meal={this.props.meal} createMealFood={this.props.createMealFood} history={this.props.history} location={this.props.location} />
+              :
+                null
+              }
+            </div>
+
+          </div>
+        </div>
       </div>
     );
   };
