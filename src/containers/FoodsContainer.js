@@ -22,22 +22,32 @@ class FoodsContainer extends Component {
   render() {
     return (
       <div>
-        <h1>I'm in the foods container</h1>
         <Switch>
-          <Route exact path="/foods/new" render={props => <FoodInput createFood={this.props.createFood} {...props} /> } />
-
+          <Route exact path="/foods/new" render={props =>
+            <div className="dashboard-container">
+              <FoodInput createFood={this.props.createFood} {...props} />
+            </div>
+          } />
           {/* Wait until foods array is populated before rendering so currentlyDisplayed in foods.js is populated correctly. Tried rendering both routes within one conditional, but /meals/:mealId/foods was rendering both at the same time. */}
           { this.props.foods.length > 0 ?
             <Route exact path="/meals/:mealId/foods" render={props => {
               const meal = this.props.meals.find(meal => meal.id === props.match.params.mealId)
-              return <Foods foods={this.props.foods} meal={meal} createMealFood={this.props.createMealFood} {...props} />
+              return (
+                <div className="dashboard-container">
+                  <Foods foods={this.props.foods} meal={meal} createMealFood={this.props.createMealFood} {...props} />
+                </div>
+              )
             }} />
           :
             null
           }
 
           { this.props.foods.length > 0 ?
-            <Route exact path={this.props.match.url} render={props => <Foods foods={this.props.foods} createMealFood={this.props.createMealFood} {...props} />} />
+            <Route exact path={this.props.match.url} render={props =>
+              <div className="dashboard-container">
+                <Foods foods={this.props.foods} createMealFood={this.props.createMealFood} {...props} />
+              </div>
+            } />
           :
             null
           }
