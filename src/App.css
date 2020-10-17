@@ -225,3 +225,47 @@ hr.solid-thick {
   /* border-radius: 0.25rem; */
   /* transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; */
 }
+
+.table-font-small {
+  font-size: 14px;
+}
+
+.nutrition-container {
+  background-color: #E6EBF2;
+  padding: 15px;
+}
+
+.nutrition-card {
+  background-color: #FFF;
+  padding: 0px 15px;
+}
+
+td.indent {
+  padding-left: 25px
+}
+
+td.indent-double {
+  padding-left: 50px
+}
+
+.table th, .table td {
+  border-color: #dadfe6;
+}
+
+tr:hover td {
+  background-color: #E6EBF2;
+}
+
+.input-sm {
+  max-width: 75px;
+  padding-left: 0;
+  margin-right: -15px;
+}
+
+label.label-fixed {
+  min-width: 100px;
+}
+
+.btn-padding {
+  margin-left: 15px;
+}
