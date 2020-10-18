@@ -28,7 +28,10 @@ class Foods extends Component {
   renderFoods = () => {
     return this.state.currentlyDisplayed.map(food =>
       <tr key={food.id} onClick={() => this.renderFoodNutrition(food)}>
-        <td>{food.attributes.brand_name} {food.attributes.description} - {food.attributes.calories} calories</td>
+        <td>
+          {food.attributes.brand_name} {food.attributes.description}
+          <footer class="footer"><em>Serving: {food.attributes.serving_size}, {food.attributes.calories} calories</em></footer>
+        </td>
       </tr>
     )
   }
@@ -46,42 +49,54 @@ class Foods extends Component {
   };
 
   // GET RID OF SUBMIT BUTTON, IT'S NOT DOING ANYTHING HERE. DO I EVER USE IT?
-  handleSubmit = event => {
-    event.preventDefault();
-  };
+  // handleSubmit = event => {
+  //   event.preventDefault();
+  // };
 
   render() {
     return (
       <div className="row">
         <div className="col-lg info-container">
           <h2>Foods</h2>
-          <p>Search the database for a food or add a new food</p>
-
+          <br />
+          {/*
           <SearchInput searchTerm={this.state.searchTerm} handleOnChange={this.handleOnChange} handleSubmit={this.handleSubmit} />
+          */}
+
+          <div className="row">
+
+            {/* WITH NO SUBMIT BUTTON */}
+            {/* HOW DO I STACK THESE IF THE CONTAINER GETS TOO SMALL FOR SIDE-BY-SIDE */}
+            <div className="col-6">
+              <SearchInput searchTerm={this.state.searchTerm} handleOnChange={this.handleOnChange} />
+            </div>
+
+            <div className="col-3">
+              {!!this.props.meal ?
+                <Link to={{
+                  pathname: "/foods/new",
+                  state: {
+                    mealId: this.props.meal.id,
+                    // Need to pass diary information when creating new foods, user is directed back to /meals/:mealId/foods and without diary info the newly added food can't be added to the correct diary
+                    diaryId: this.props.location.state.diaryId,
+                    diaryDate: this.props.location.state.diaryDate
+                  }
+                }}>
+                  <button type="button" className="btn btn-primary-outline btn-min-width">
+                    Add Food to Database
+                  </button>
+                </Link>
+                :
+                <Link to="/foods/new">
+                  <button type="button" className="btn btn-primary-outline btn-min-width">
+                    Add Food to Database
+                  </button>
+                </Link>
+              }
+            </div>
+          </div>
 
           <br />
-
-          {!!this.props.meal ?
-            <Link to={{
-              pathname: "/foods/new",
-              state: {
-                mealId: this.props.meal.id,
-                // Need to pass diary information when creating new foods, user is directed back to /meals/:mealId/foods and without diary info the newly added food can't be added to the correct diary
-                diaryId: this.props.location.state.diaryId,
-                diaryDate: this.props.location.state.diaryDate
-              }
-            }}>
-              <button type="button">
-                Add Food to Database
-              </button>
-            </Link>
-            :
-            <Link to="/foods/new">
-              <button type="button">
-                Add Food to Database
-              </button>
-            </Link>
-          }
 
           <div className="row">
             <div className="col-sm">
