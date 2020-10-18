@@ -52,8 +52,8 @@ class FoodCard extends Component {
                     className="form-control"
                     name="number_of_servings"
                     id="number_of_servings"
-                    value={this.state.number_of_servings}
                     onChange={this.handleOnChange}
+                    value={this.state.number_of_servings}
                   />
                 </div>
 
