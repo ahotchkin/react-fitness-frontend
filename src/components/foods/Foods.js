@@ -30,7 +30,7 @@ class Foods extends Component {
       <tr key={food.id} onClick={() => this.renderFoodNutrition(food)}>
         <td>
           {food.attributes.brand_name} {food.attributes.description}
-          <footer class="footer"><em>Serving: {food.attributes.serving_size}, {food.attributes.calories} calories</em></footer>
+          <footer className="footer"><em>Serving: {food.attributes.serving_size}, {food.attributes.calories} calories</em></footer>
         </td>
       </tr>
     )
@@ -66,12 +66,12 @@ class Foods extends Component {
           <div className="row">
 
             {/* WITH NO SUBMIT BUTTON */}
-            {/* HOW DO I STACK THESE IF THE CONTAINER GETS TOO SMALL FOR SIDE-BY-SIDE */}
+            {/* WANT THE SEARCH BAR TO TAKE UP 100% OF THE CONTAINER ONCE ADD FOOD BUTTON MOVES TO SECOND LINE */}
             <div className="col-6">
               <SearchInput searchTerm={this.state.searchTerm} handleOnChange={this.handleOnChange} />
             </div>
 
-            <div className="col-3">
+            <div className="col-auto">
               {!!this.props.meal ?
                 <Link to={{
                   pathname: "/foods/new",
@@ -82,13 +82,13 @@ class Foods extends Component {
                     diaryDate: this.props.location.state.diaryDate
                   }
                 }}>
-                  <button type="button" className="btn btn-primary-outline btn-min-width">
+                  <button type="button" className="btn btn-primary-outline">
                     Add Food to Database
                   </button>
                 </Link>
                 :
                 <Link to="/foods/new">
-                  <button type="button" className="btn btn-primary-outline btn-min-width">
+                  <button type="button" className="btn btn-primary-outline">
                     Add Food to Database
                   </button>
                 </Link>
