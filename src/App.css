@@ -252,7 +252,7 @@ td.indent-double {
   border-color: #DADfE6;
 }
 
-tr:hover td {
+.table-hover tr:hover td {
   background-color: #E6EBF2;
 }
 
@@ -275,6 +275,6 @@ label.label-fixed {
   color: #6C757D;
 }
 
-.btn-min-width {
-  min-width: 188px;
+.bottom-margin {
+  margin-bottom: 15px;
 }
