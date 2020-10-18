@@ -24,12 +24,11 @@ class FoodCard extends Component {
   };
 
   render() {
-    {console.log(this.props)}
     return (
       <div className="nutrition-container">
 
         <h5>{this.props.food.attributes.brand_name} {this.props.food.attributes.description}</h5>
-        <table>
+        <table className="bottom-margin">
           <tbody>
             <tr>
               { this.props.food.attributes.servings_per_container === 1 ?
