@@ -249,7 +249,7 @@ td.indent-double {
 }
 
 .table th, .table td {
-  border-color: #dadfe6;
+  border-color: #DADfE6;
 }
 
 tr:hover td {
@@ -268,4 +268,13 @@ label.label-fixed {
 
 .btn-padding {
   margin-left: 15px;
+}
+
+.footer {
+  font-size: 80%;
+  color: #6C757D;
+}
+
+.btn-min-width {
+  min-width: 188px;
 }
