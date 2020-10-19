@@ -278,3 +278,23 @@ label.label-fixed {
 .bottom-margin {
   margin-bottom: 15px;
 }
+
+#macros-chart {
+  margin: 20px 0px;
+}
+
+.macros-table {
+  font-size: 14px;
+  width: 100%;
+  padding: 20px;
+}
+
+.macros-table thead th {
+  border-bottom: 2px solid #DADFE6;
+  height: 35px;
+}
+
+.macros-table td {
+  border-top: 1px solid #DADFE6;
+  height: 35px;
+}
