@@ -35,40 +35,52 @@ const Dashboard = props => {
           <h3>Today's Macros</h3>
           {!!props.dailyMacros ?
             <div>
-
-
-              <figure className="pie-chart">
-                {/*
-                <figcaption>
-                  Carbohydrates 50 <span style="color:#007bff"></span><br />
-                  Fat 20<span style="color:#ff8000"></span><br />
-                  Protein 30<span style="color:#03d100"></span>
-                </figcaption>
-                */}
-              </figure>
-
               <canvas id="macros-chart">
                 <MacrosChart dailyMacros={props.dailyMacros} />
               </canvas>
 
-
-              <table>
+              <table className="macros-table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th></th>
+                    <th className="right-align">Total</th>
+                    <th className="right-align">Goal</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square-fill" fill="#2BC700" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+                      </svg>
+                    </td>
+                    <td><b>Carbohydrates ({props.dailyNutrition.total_carbohydrate}g)</b></td>
+                    <td className="right-align">{props.dailyMacros.carbohydrates}%</td>
+                    <td className="right-align">50%</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square-fill" fill="#AB0091" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+                      </svg>
+                    </td>
+                    <td><b>Fat ({props.dailyNutrition.total_fat}g)</b></td>
+                    <td className="right-align">{props.dailyMacros.fat}%</td>
+                    <td className="right-align">30%</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square-fill"   fill="#F76319" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+                      </svg>
+                    </td>
+                    <td><b>Protein ({props.dailyNutrition.protein}g)</b></td>
+                    <td className="right-align">{props.dailyMacros.protein}%</td>
+                    <td className="right-align">20%</td>
+                  </tr>
+                </tbody>
               </table>
-              <ul>
-                Carbohydrates ({props.dailyNutrition.total_carbohydrate}g):
-                <li>Total: {props.dailyMacros.carbohydrates}%</li>
-                <li>Goal: 50%</li>
-              </ul>
-              <ul>
-                Fat ({props.dailyNutrition.total_fat}g)
-                <li>Total: {props.dailyMacros.fat}%</li>
-                <li>Goal: 30%</li>
-              </ul>
-              <ul>
-                Protein ({props.dailyNutrition.protein}g)
-                <li>Total: {props.dailyMacros.protein}%</li>
-                <li>Goal: 20%</li>
-              </ul>
             </div>
           :
             null
