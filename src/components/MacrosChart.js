@@ -15,24 +15,52 @@ class MacrosChart extends Component {
 
   renderMacrosChart = () => {
     const ctx = document.getElementById("macros-chart").getContext("2d")
-    console.log(ctx)
 
-    const macrosChart = new Chart(ctx, {
-      type: "doughnut",
-      data: {
-        datasets: [
-          {
-            label: "Daily Macros",
-            data: [this.props.dailyMacros.carbohydrates, this.props.dailyMacros.fat, this.props.dailyMacros.protein],
-            backgroundColor: ["#2ADECE", "#DD3B79", "#FF766B"]
+    if (this.props.dailyMacros.carbohydrates === 0 && this.props.dailyMacros.fat === 0 && this.props.dailyMacros.protein === 0) {
+      const macrosChart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          datasets: [
+            {
+              label: "Daily Macros",
+              data: [100],
+              backgroundColor: ["#E6EBF2"],
+              borderWidth: 0
+            }
+          ],
+        },
+        options: {
+          cutoutPercentage: 67,
+          legend: {
+            display: false
+          },
+          events: null,
+          animation: null
+        }
+      })
+    } else {
+      const macrosChart = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          datasets: [
+            {
+              label: "Daily Macros",
+              data: [this.props.dailyMacros.carbohydrates, this.props.dailyMacros.fat, this.props.dailyMacros.protein],
+              // backgroundColor: ["#2ADECE", "#DD3B79", "#FF766B"]
+              backgroundColor: ["#2BC700", "#AB0091", "#F76319"]
+
+            }
+          ],
+          labels: ["Carbohydrates", "Fat", "Protein"],
+        },
+        options: {
+          cutoutPercentage: 65,
+          legend: {
+            display: false
           }
-        ],
-        labels: ["Carbohydrates", "Fat", "Protein"],
-      },
-      options: {
-        cutoutPercentage: 65,
-      }
-    })
+        }
+      })
+    }
   }
 
   render() {
@@ -46,7 +74,7 @@ class MacrosChart extends Component {
       </div>
     )
   }
-  
+
 }
 
 export default MacrosChart;
