@@ -1,18 +1,7 @@
 import React from 'react';
+import MacrosChart from './MacrosChart';
 
 const Dashboard = props => {
-
-  // <div class="row">
-  //   <div class="col-sm">
-  //     One of three columns
-  //   </div>
-  //   <div class="col-sm">
-  //     One of three columns
-  //   </div>
-  //   <div class="col-sm">
-  //     One of three columns
-  //   </div>
-  // </div>
 
   return (
     <div className="dashboard-container">
@@ -46,6 +35,25 @@ const Dashboard = props => {
           <h3>Today's Macros</h3>
           {!!props.dailyMacros ?
             <div>
+
+
+              <figure className="pie-chart">
+                {/*
+                <figcaption>
+                  Carbohydrates 50 <span style="color:#007bff"></span><br />
+                  Fat 20<span style="color:#ff8000"></span><br />
+                  Protein 30<span style="color:#03d100"></span>
+                </figcaption>
+                */}
+              </figure>
+
+              <canvas id="macros-chart">
+                <MacrosChart dailyMacros={props.dailyMacros} />
+              </canvas>
+
+
+              <table>
+              </table>
               <ul>
                 Carbohydrates ({props.dailyNutrition.total_carbohydrate}g):
                 <li>Total: {props.dailyMacros.carbohydrates}%</li>
