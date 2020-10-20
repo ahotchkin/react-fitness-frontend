@@ -2,17 +2,15 @@ import React from 'react';
 
 import MealsContainer from '../../containers/MealsContainer';
 
-const DiaryCard = props => {
+const  DiaryCard = props => {
 
   const caloriesRemaining = () => {
-    // conditional statement is necessary for all props to load before calculating calories remaining
-    if (!!props.currentUser.attributes.daily_calorie_goal && !!props.caloriesConsumed && !!props.caloriesBurned) {
-      return (
-        props.currentUser.attributes.daily_calorie_goal - props.caloriesConsumed + props.caloriesBurned
-      )
-    } else {
-      return null
+    let dailyCaloriesRemaining = ""
+    if (!!(props.currentUser.attributes.daily_calorie_goal - props.caloriesConsumed + props.caloriesBurned)) {
+      dailyCaloriesRemaining = props.currentUser.attributes.daily_calorie_goal - props.caloriesConsumed + props.caloriesBurned
     }
+
+    return dailyCaloriesRemaining
   }
 
   return (
@@ -53,7 +51,6 @@ const DiaryCard = props => {
 
       <MealsContainer diaryId={props.diary.id} diaryDate={props.diary.attributes.date} />
     </div>
-
   )
 }
 
