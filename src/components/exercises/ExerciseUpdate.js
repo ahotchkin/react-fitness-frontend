@@ -22,62 +22,74 @@ class ExerciseUpdate extends Component {
     event.preventDefault();
 
     this.props.updateExercise(this.state, this.props.date, this.props.exercise, this.props.history)
-    this.setState({
-      // drop down stays selected on whatever category was selected. Is this a problem or will it always update on page refresh?
-      category: "",
-      name: "",
-      duration_in_minutes: "",
-      calories_burned: ""
-    });
+    // this.setState({
+    //   // drop down stays selected on whatever category was selected. Is this a problem or will it always update on page refresh?
+    //   // category: "",
+    //   // name: "",
+    //   // duration_in_minutes: "",
+    //   // calories_burned: ""
+    // });
   };
 
   render() {
     return(
       <div>
-        This is the update exercise page for {this.props.exercise.attributes.name}
-        <br /><br />
+      {console.log(this.state.category)}
 
         <form onSubmit={this.handleSubmit}>
-          <label>Category: </label>
-          <select name="category" value={this.state.category} onChange={this.handleOnChange}>
-            <option value="cardio">Cardio</option>
-            <option value="strength_training">Strength Training</option>
-            <option value="balance">Balance</option>
-            <option value="stretching">Stretching</option>
-          </select>
+          <div className="form-group">
+            <label htmlFor="category">Category: </label>
+            <select className="form-control" name="category" id="category" value={this.state.category} onChange={this.handleOnChange}>
+              <option value="cardio">Cardio</option>
+              <option value="strength">Strength Training</option>
+              <option value="balance">Balance</option>
+              <option value="stretching">Stretching</option>
+            </select>
+          </div>
 
-          <br />
+          <div className="form-group">
+            <label htmlFor="name">Name: </label>
+            <input
+              type="text"
+              className="form-control"
+              name="name"
+              id="name"
+              onChange={this.handleOnChange}
+              value={this.state.name}
+            />
+          </div>
 
-          <label>Name: </label>
-          <input
-            name="name"
-            onChange={this.handleOnChange}
-            value={this.state.name}
-          />
 
-          <br />
+          <div className="form-row">
+            <div className="form-group col-md-6">
 
-          <label>Minutes Performed: </label>
-          <input
-            name="duration_in_minutes"
-            onChange={this.handleOnChange}
-            value={this.state.duration_in_minutes}
-          />
+              <label htmlFor="duration_in_minutes">Minutes Performed: </label>
+              <input
+                type="number"
+                className="form-control"
+                name="duration_in_minutes"
+                id="duration_in_minutes"
+                onChange={this.handleOnChange}
+                value={this.state.duration_in_minutes}
+              />
+            </div>
 
-          <br />
+            <div className="form-group col-md-6">
+              <label htmlFor="calories_burned">Calories Burned: </label>
+              <input
+                type="number"
+                className="form-control"
+                name="calories_burned"
+                id="calories_burned"
+                onChange={this.handleOnChange}
+                value={this.state.calories_burned}
+              />
+            </div>
+          </div>
 
-          <label>Calories Burned: </label>
-          <input
-            name="calories_burned"
-            onChange={this.handleOnChange}
-            value={this.state.calories_burned}
-          />
+          <input type="submit" className="btn btn-primary-fill" value="Update Exercise" />
 
-          <br />
-
-          <input type="submit" value="Update Exercise" />
         </form>
-
       </div>
     );
   };
