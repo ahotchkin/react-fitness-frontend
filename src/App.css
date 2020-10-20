@@ -150,8 +150,16 @@ body {
 .info-container {
   background-color: #FFF;
   padding: 20px;
-  margin: 15px;
+  margin: 0px 15px;
   border-radius: 15px;
+}
+
+.header-container {
+  margin-bottom: 15px;
+}
+
+.dashboard-module {
+  margin-bottom: 30px;
 }
 
 
@@ -297,4 +305,15 @@ label.label-fixed {
 .macros-table td {
   border-top: 1px solid #DADFE6;
   height: 35px;
+}
+
+.update-food-card {
+  background-color: #FFF;
+  margin: 30px 25%;
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.table {
+  margin-bottom: 0px;
 }
