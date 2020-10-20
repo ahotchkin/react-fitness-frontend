@@ -74,7 +74,7 @@ class ExercisesContainer extends Component {
             <div className="dashboard-container">
               <div className="row">
                 <div className="col-lg info-container">
-                <h3 className="center-align">Add Exercise</h3>
+                  <h3 className="center-align">Add Exercise</h3>
                   <div className="form">
                     <div className="form-group">
                       <label>Date: </label>
@@ -84,8 +84,8 @@ class ExercisesContainer extends Component {
                   </div>
                 </div>
               </div>
-
             </div>} />
+
           <Route exact path={this.props.match.url} render={props =>
             <div className="dashboard-container">
               <div className="row">
@@ -103,12 +103,24 @@ class ExercisesContainer extends Component {
             */}
           <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
             const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
-            return (
-            <div>
-              <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
-              <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} date={this.getDate()} {...props} />
-            </div>
-            )
+            if (!!exercise) {
+              return (
+                <div className="dashboard-container">
+                  <div className="row">
+                    <div className="col-lg info-container">
+                      <h3 className="center-align">Update Exercise</h3>
+                      <div className="form">
+                        <div className="form-group">
+                          <label>Date: </label>
+                          <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
+                        </div>
+                        <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} date={this.getDate()} {...props} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )
+            }
           }} />
 
         </Switch>
