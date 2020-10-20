@@ -30,28 +30,142 @@ class MealFoodUpdate extends Component {
 
   render() {
     return(
-      <div>
-      <h1>Let's get ready to update!!!</h1>
+      <div className="update-food-card">
+        {/* FIGURE OUT HOW TO USE FOODCARD COMPONENT WITH PROPS THAT NEED TO BE PASSED IN INSTEAD OF COPYING CODE*/}
 
-        <p>This is the MEALFOOD UPDATE page for mealFood with an ID of {this.props.mealFood.id}.</p>
+        <div className="nutrition-container">
+          <h5>{this.props.mealFood.attributes.food.brand_name} {this.props.mealFood.attributes.food.description}</h5>
+          <table className="bottom-margin">
+            <tbody>
+              <tr>
+                { this.props.mealFood.attributes.food.servings_per_container === 1 ?
+                  <td>Serving size: {this.props.mealFood.attributes.food.serving_size} <span>&#183;</span>  {this.props.mealFood.attributes.food.servings_per_container} serving per container</td>
+                :
+                  <td>Serving size: {this.props.mealFood.attributes.food.serving_size} <span>&#183;</span>  {this.props.mealFood.attributes.food.servings_per_container} servings per container</td>
+                }
+              </tr>
+            </tbody>
+          </table>
 
-        <p>Meal is {this.props.mealFood.attributes.meal.category}</p>
-        <p>Food is {this.props.mealFood.attributes.food.brand_name}</p>
+          {console.log("Meal is ", this.props.mealFood.attributes.meal)}
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group row">
 
-        {/* BREAK THIS OUT INTO SEPARATE COMPONENT TO USE HERE AND IN FOODCARD.JS */}
+              <label htmlFor="number_of_servings" className="col-auto col-form-label label-fixed">Number of Servings: </label>
+              <div className="input-sm col-auto">
+                <input
+                  type="number"
+                  className="form-control"
+                  name="number_of_servings"
+                  id="number_of_servings"
+                  onChange={this.handleOnChange}
+                  value={this.state.number_of_servings}
+                />
+              </div>
 
-        <form onSubmit={this.handleSubmit}>
-          <label>Number of Servings: </label>
-          <input
-            name="number_of_servings"
-            onChange={this.handleOnChange}
-            value={this.state.number_of_servings}
-          />
+              <input type="submit" className="col-auto btn btn-primary-outline btn-sm btn-padding" value="Update" />
+            </div>
+          </form>
 
-          <br /><br />
+          <div className="nutrition-card">
+            <table className="table table-sm">
+              <thead>
+                <tr>
+                  <th>Nutrition Facts</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody className="table-font-small">
+                <tr>
+                  <td><b>Calories</b></td>
+                  <td><b>{this.props.mealFood.attributes.food.calories * this.state.number_of_servings}</b></td>
+                </tr>
+                <tr>
+                  <td>Total Fat</td>
+                  <td>{this.props.mealFood.attributes.food.total_fat * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td className="indent">Saturated Fat</td>
+                  <td>{this.props.mealFood.attributes.food.saturated_fat * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td className="indent">Polyunsaturated Fat</td>
+                  <td>{this.props.mealFood.attributes.food.polyunsaturated_fat * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td className="indent">Monounsaturated Fat</td>
+                  <td>{this.props.mealFood.attributes.food.monounsaturated_fat * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td className="indent"><em>Trans</em> Fat</td>
+                  <td>{this.props.mealFood.attributes.food.trans_fat * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td className="indent">Monounsaturated Fat</td>
+                  <td>{this.props.mealFood.attributes.food.monounsaturated_fat * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td>Cholesterol</td>
+                  <td>{this.props.mealFood.attributes.food.cholesterol * this.state.number_of_servings}mg</td>
+                </tr>
+                <tr>
+                  <td>Sodium</td>
+                  <td>{this.props.mealFood.attributes.food.sodium * this.state.number_of_servings}mg</td>
+                </tr>
+                <tr>
+                  <td>Total Carbohydrate</td>
+                  <td>{this.props.mealFood.attributes.food.total_carbohydrate * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td className="indent">Dietary Fiber</td>
+                  <td>{this.props.mealFood.attributes.food.dietary_fiber * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td className="indent">Total Sugars</td>
+                  <td>{this.props.mealFood.attributes.food.total_sugars * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td className="indent-double">Added Sugars</td>
+                  <td>{this.props.mealFood.attributes.food.added_sugars * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td className="indent-double">Sugar Alcohols</td>
+                  <td>{this.props.mealFood.attributes.food.sugar_alcohols * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td>Protein</td>
+                  <td>{this.props.mealFood.attributes.food.protein * this.state.number_of_servings}g</td>
+                </tr>
+                <tr>
+                  <td>Vitamin A</td>
+                  <td>{this.props.mealFood.attributes.food.vitamin_a * this.state.number_of_servings}%</td>
+                </tr>
+                <tr>
+                  <td>Vitamin C</td>
+                  <td>{this.props.mealFood.attributes.food.vitamin_c * this.state.number_of_servings}%</td>
+                </tr>
+                <tr>
+                  <td>Vitamin D</td>
+                  <td>{this.props.mealFood.attributes.food.vitamin_d * this.state.number_of_servings}%</td>
+                </tr>
+                <tr>
+                  <td>Calcium</td>
+                  <td>{this.props.mealFood.attributes.food.calcium * this.state.number_of_servings}%</td>
+                </tr>
+                <tr>
+                  <td>Iron</td>
+                  <td>{this.props.mealFood.attributes.food.iron * this.state.number_of_servings}%</td>
+                </tr>
+                <tr>
+                  <td>Potassium</td>
+                  <td>{this.props.mealFood.attributes.food.potassium * this.state.number_of_servings}mg</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-          <input type="submit" value="Update" />
-        </form>
+
       </div>
     );
   };
