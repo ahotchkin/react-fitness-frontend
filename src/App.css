@@ -41,12 +41,13 @@ a.active {
   color: #2d9d92
 } */
 
+/* SEE WHAT STYLES I'M ACTUALLY USING - SEPARATE OUT INTO DIFFERENT FILES IF NEEDED */
 body {
   background-color: #E6EBF2;
 }
 
 .form {
-  margin: 3.5% 25%;
+  margin: 0% 25%;
 }
 
 .form-add {
@@ -60,7 +61,8 @@ body {
 
 .note {
   text-align: center;
-  margin-bottom: 7.5%
+  margin-top: 3.5%;
+  margin-bottom: 7.5%;
 }
 
 .navbar {
