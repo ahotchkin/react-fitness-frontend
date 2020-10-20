@@ -89,7 +89,7 @@ class ExercisesContainer extends Component {
           <Route exact path={this.props.match.url} render={props =>
             <div className="dashboard-container">
               <div className="row">
-                <div className="col-lg info-container">
+                <div className="col-lg header-container info-container">
                   <h4>Search for Exercises by Date:</h4>
 
                   <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
