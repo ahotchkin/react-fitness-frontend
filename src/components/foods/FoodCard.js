@@ -26,7 +26,6 @@ class FoodCard extends Component {
   render() {
     return (
       <div className="nutrition-container">
-
         <h5>{this.props.food.attributes.brand_name} {this.props.food.attributes.description}</h5>
         <table className="bottom-margin">
           <tbody>
@@ -41,24 +40,24 @@ class FoodCard extends Component {
         </table>
 
         {!!this.props.meal ?
-            <form onSubmit={this.handleSubmit}>
-              <div className="form-group row">
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group row">
 
-                <label htmlFor="number_of_servings" className="col-auto col-form-label label-fixed">Number of Servings: </label>
-                <div className="input-sm col-auto">
-                  <input
-                    type="number"
-                    className="form-control"
-                    name="number_of_servings"
-                    id="number_of_servings"
-                    onChange={this.handleOnChange}
-                    value={this.state.number_of_servings}
-                  />
-                </div>
-
-                <input type="submit" className="col-auto btn btn-primary-outline btn-sm btn-padding" value="Add to Meal" />
+              <label htmlFor="number_of_servings" className="col-auto col-form-label label-fixed">Number of Servings: </label>
+              <div className="input-sm col-auto">
+                <input
+                  type="number"
+                  className="form-control"
+                  name="number_of_servings"
+                  id="number_of_servings"
+                  onChange={this.handleOnChange}
+                  value={this.state.number_of_servings}
+                />
               </div>
-            </form>
+
+              <input type="submit" className="col-auto btn btn-primary-outline btn-sm btn-padding" value="Add to Meal" />
+            </div>
+          </form>
          :
           null
         }
