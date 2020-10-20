@@ -10,7 +10,7 @@ const Dashboard = props => {
       <br />
 
       <div className="row">
-        <div className="col-sm info-container">
+        <div className="col-sm dashboard-module info-container">
           <h3>Profile</h3>
 
           <p>Age: {props.currentUser.attributes.age}</p>
@@ -31,7 +31,7 @@ const Dashboard = props => {
           }
         </div>
 
-        <div className="col-sm info-container">
+        <div className="col-sm dashboard-module info-container">
           <h3>Today's Macros</h3>
           {!!props.dailyMacros ?
             <div>
@@ -87,7 +87,7 @@ const Dashboard = props => {
           }
         </div>
 
-        <div className="col-sm info-container">
+        <div className="col-sm dashboard-module info-container">
           <h3>Today's Exercise</h3>
           <p>Total Calories Burned: {props.caloriesBurned}</p>
         </div>
@@ -95,7 +95,7 @@ const Dashboard = props => {
       </div>
 
       <div className="row">
-        <div className="row col-lg info-container">
+        <div className="row col-lg dashboard-module info-container">
           {!!props.dailyNutrition ?
             <div>
             <h3>Today's Nutrition</h3>
