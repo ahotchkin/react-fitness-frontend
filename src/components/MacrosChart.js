@@ -14,15 +14,28 @@ class MacrosChart extends Component {
   }
 
   renderMacrosChart = () => {
-    const ctx = document.getElementById("macros-chart").getContext("2d")
+    let elementId = ""
+    if (this.props.macros.meal === "breakfast") {
+      elementId = "breakfast-macros-chart"
+    } else if (this.props.macros.meal === "lunch") {
+      elementId = "lunch-macros-chart"
+    } else if (this.props.macros.meal === "dinner") {
+      elementId = "dinner-macros-chart"
+    } else if (this.props.macros.meal === "snacks") {
+      elementId = "snacks-macros-chart"
+    } else {
+      elementId = "macros-chart"
+    }
 
-    if (this.props.dailyMacros.carbohydrates === 0 && this.props.dailyMacros.fat === 0 && this.props.dailyMacros.protein === 0) {
+    const ctx = document.getElementById(elementId).getContext("2d")
+
+    if (this.props.macros.carbohydrates === 0 && this.props.macros.fat === 0 && this.props.macros.protein === 0) {
       const macrosChart = new Chart(ctx, {
         type: "doughnut",
         data: {
           datasets: [
             {
-              label: "Daily Macros",
+              label: "Macros",
               data: [100],
               backgroundColor: ["#E6EBF2"],
               borderWidth: 0
@@ -30,7 +43,7 @@ class MacrosChart extends Component {
           ],
         },
         options: {
-          cutoutPercentage: 67,
+          cutoutPercentage: 77,
           legend: {
             display: false
           },
@@ -44,8 +57,8 @@ class MacrosChart extends Component {
         data: {
           datasets: [
             {
-              label: "Daily Macros",
-              data: [this.props.dailyMacros.carbohydrates, this.props.dailyMacros.fat, this.props.dailyMacros.protein],
+              label: "Macros",
+              data: [this.props.macros.carbohydrates, this.props.macros.fat, this.props.macros.protein],
               // backgroundColor: ["#2ADECE", "#DD3B79", "#FF766B"]
               backgroundColor: ["#2BC700", "#AB0091", "#F76319"]
 
@@ -54,7 +67,7 @@ class MacrosChart extends Component {
           labels: ["Carbohydrates", "Fat", "Protein"],
         },
         options: {
-          cutoutPercentage: 65,
+          cutoutPercentage: 75,
           legend: {
             display: false
           }
