@@ -13,6 +13,14 @@ const Dashboard = props => {
         <div className="col-sm dashboard-module info-container">
           <h3>Profile</h3>
 
+          <div className="center-align">
+            <svg width="5em" height="5em" viewBox="0 0 16 16" className="bi bi-person-circle" fill="#DADFE6" xmlns="http://www.w3.org/2000/svg">
+              <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+              <path fillRule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+              <path fillRule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+            </svg>
+          </div>
+
           <p>Age: {props.currentUser.attributes.age}</p>
           {/* User should have ability to update weight */}
           <p>Current Weight: {props.currentUser.attributes.weight}</p>
@@ -36,7 +44,7 @@ const Dashboard = props => {
           {!!props.dailyMacros ?
             <div>
               <canvas id="macros-chart">
-                <MacrosChart dailyMacros={props.dailyMacros} />
+                <MacrosChart macros={props.dailyMacros} />
               </canvas>
 
               <table className="macros-table">
@@ -94,8 +102,50 @@ const Dashboard = props => {
 
       </div>
 
+      <div className="row meal-macros">
+        <div className="col-lg dashboard-module info-container">
+          <h3>Today's Meals</h3>
+
+
+            <div class="row">
+              <div class="meal-macros-col-sm">
+                <canvas id="breakfast-macros-chart" className="meal-macros-chart">
+                  <MacrosChart macros={props.breakfastMacros} />
+                </canvas>
+                <span className="meal-labels">Breakfast</span>
+                <br />
+                <span className="meal-labels-calories">{props.breakfastNutrition.calories} calories</span>
+              </div>
+              <div class="meal-macros-col-sm">
+                <canvas id="lunch-macros-chart" className="meal-macros-chart">
+                  <MacrosChart macros={props.lunchMacros} />
+                </canvas>
+                <span className="meal-labels">Lunch</span>
+                <br />
+                <span className="meal-labels-calories">{props.lunchNutrition.calories} calories</span>
+              </div>
+              <div class="meal-macros-col-sm">
+                <canvas id="dinner-macros-chart" className="meal-macros-chart">
+                  <MacrosChart macros={props.dinnerMacros} />
+                </canvas>
+                <span className="meal-labels">Dinner</span>
+                <br />
+                <span className="meal-labels-calories">{props.dinnerNutrition.calories} calories</span>
+              </div>
+            <div class="meal-macros-col-sm">
+              <canvas id="snacks-macros-chart" className="meal-macros-chart">
+                <MacrosChart macros={props.snacksMacros} />
+              </canvas>
+              <span className="meal-labels">Snacks</span>
+              <br />
+              <span className="meal-labels-calories">{props.snacksNutrition.calories} calories</span>
+            </div>
+        </div>
+      </div>
+      </div>
+
       <div className="row">
-        <div className="row col-lg dashboard-module info-container">
+        <div className="row col-lg info-container">
           {!!props.dailyNutrition ?
             <div>
             <h3>Today's Nutrition</h3>
@@ -124,17 +174,6 @@ const Dashboard = props => {
           :
             null
           }
-        </div>
-      </div>
-
-      <div className="row">
-        <div className="col-lg info-container">
-          <h3>Today's Meals</h3>
-
-          <p>Breakfast: {props.breakfastNutrition.calories} calories</p>
-          <p>Lunch: {props.lunchNutrition.calories} calories</p>
-          <p>Dinner: {props.dinnerNutrition.calories} calories</p>
-          <p>Snacks: {props.snacksNutrition.calories} calories</p>
         </div>
       </div>
 
