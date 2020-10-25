@@ -1,8 +1,9 @@
 import React from 'react';
 import MacrosChart from './MacrosChart';
+import NutrientProgressBar from './NutrientProgressBar';
 
 const Dashboard = props => {
-
+  console.log(props)
   return (
     <div className="dashboard-container">
       <h2>Hello, {props.currentUser.attributes.username}! Welcome to your React Fitness Dashboard!</h2>
@@ -107,8 +108,8 @@ const Dashboard = props => {
           <h3>Today's Meals</h3>
 
 
-            <div class="row">
-              <div class="meal-macros-col-sm">
+            <div className="row">
+              <div className="meal-macros-col-sm">
                 <canvas id="breakfast-macros-chart" className="meal-macros-chart">
                   <MacrosChart macros={props.breakfastMacros} />
                 </canvas>
@@ -116,7 +117,7 @@ const Dashboard = props => {
                 <br />
                 <span className="meal-labels-calories">{props.breakfastNutrition.calories} calories</span>
               </div>
-              <div class="meal-macros-col-sm">
+              <div className="meal-macros-col-sm">
                 <canvas id="lunch-macros-chart" className="meal-macros-chart">
                   <MacrosChart macros={props.lunchMacros} />
                 </canvas>
@@ -124,7 +125,7 @@ const Dashboard = props => {
                 <br />
                 <span className="meal-labels-calories">{props.lunchNutrition.calories} calories</span>
               </div>
-              <div class="meal-macros-col-sm">
+              <div className="meal-macros-col-sm">
                 <canvas id="dinner-macros-chart" className="meal-macros-chart">
                   <MacrosChart macros={props.dinnerMacros} />
                 </canvas>
@@ -132,7 +133,7 @@ const Dashboard = props => {
                 <br />
                 <span className="meal-labels-calories">{props.dinnerNutrition.calories} calories</span>
               </div>
-            <div class="meal-macros-col-sm">
+            <div className="meal-macros-col-sm">
               <canvas id="snacks-macros-chart" className="meal-macros-chart">
                 <MacrosChart macros={props.snacksMacros} />
               </canvas>
@@ -149,27 +150,55 @@ const Dashboard = props => {
           {!!props.dailyNutrition ?
             <div>
             <h3>Today's Nutrition</h3>
-              <ul>
-                <li>Total fat: {props.dailyNutrition.total_fat}g</li>
-                <li>Saturated fat: {props.dailyNutrition.saturated_fat}g</li>
-                <li>Polyunsaturated fat: {props.dailyNutrition.polyunsaturated_fat}g</li>
-                <li>Monounsaturated fat: {props.dailyNutrition.monounsaturated_fat}g</li>
-                <li>Trans fat: {props.dailyNutrition.trans_fat}g</li>
-                <li>Cholesterol: {props.dailyNutrition.cholesterol}mg</li>
-                <li>Sodium: {props.dailyNutrition.sodium}mg</li>
-                <li>Total carbohydrates: {props.dailyNutrition.total_carbohydrate}g</li>
-                <li>Dietary fiber: {props.dailyNutrition.dietary_fiber}g</li>
-                <li>Total sugars: {props.dailyNutrition.total_sugars}g</li>
-                <li>Added sugars: {props.dailyNutrition.added_sugars}g</li>
-                <li>Sugar alcohols: {props.dailyNutrition.sugar_alcohols}g</li>
-                <li>Protein: {props.dailyNutrition.protein}g</li>
-                <li>Vitamin A: {props.dailyNutrition.vitamin_a}%</li>
-                <li>Vitamin C: {props.dailyNutrition.vitamin_c}%</li>
-                <li>Vitamin D: {props.dailyNutrition.vitamin_d}%</li>
-                <li>Calcium: {props.dailyNutrition.calcium}%</li>
-                <li>Iron: {props.dailyNutrition.iron}%</li>
-                <li>Potassium: {props.dailyNutrition.potassium}mg</li>
-              </ul>
+              <table width="100%" className="table table-borderless table-sm nutrients-table">
+                <thead className="right-align">
+                  <tr>
+                    <td colSpan="6"></td>
+                    <td colSpan="2">Total</td>
+                    <td colSpan="2">Goal</td>
+                    <td colSpan="2">Remaining</td>
+                  </tr>
+                  <tr>
+                    <td colSpan="12"><hr className="solid-thick" /></td>
+                  </tr>
+                </thead>
+
+                {/* IS THERE A WAY TO DO THIS IN A LOOP EVEN THOUGH NUTRIENT AND UNIT CHANGE? */}
+                <NutrientProgressBar nutrient={"Fat"} nutrientConsumption={props.dailyNutrition.total_fat} nutrientGoal={props.currentUser.attributes.daily_fat_goal} unit={"g"}/>
+
+                <NutrientProgressBar nutrient={"Saturated fat"} nutrientConsumption={props.dailyNutrition.saturated_fat} nutrientGoal={props.currentUser.attributes.daily_saturated_fat_goal} unit={"g"}/>
+
+                <NutrientProgressBar nutrient={"Polyunsaturated fat"} nutrientConsumption={props.dailyNutrition.polyunsaturated_fat} nutrientGoal={props.currentUser.attributes.daily_polyunsaturated_fat_goal} unit={"g"}/>
+
+                <NutrientProgressBar nutrient={"Monounsaturated fat"} nutrientConsumption={props.dailyNutrition.monounsaturated_fat} nutrientGoal={props.currentUser.attributes.daily_monounsaturated_fat_goal} unit={"g"}/>
+
+                <NutrientProgressBar nutrient={"Trans fat"} nutrientConsumption={props.dailyNutrition.trans_fat} nutrientGoal={props.currentUser.attributes.daily_trans_fat_goal} unit={"g"}/>
+
+                <NutrientProgressBar nutrient={"Cholesterol"} nutrientConsumption={props.dailyNutrition.cholesterol} nutrientGoal={props.currentUser.attributes.daily_cholesterol_goal} unit={"mg"}/>
+
+                <NutrientProgressBar nutrient={"Sodium"} nutrientConsumption={props.dailyNutrition.sodium} nutrientGoal={props.currentUser.attributes.daily_sodium_goal} unit={"mg"}/>
+
+                <NutrientProgressBar nutrient={"Carbohydrates"} nutrientConsumption={props.dailyNutrition.total_carbohydrate} nutrientGoal={props.currentUser.attributes.daily_carbohydrate_goal} unit={"g"}/>
+
+                <NutrientProgressBar nutrient={"Fiber"} nutrientConsumption={props.dailyNutrition.dietary_fiber} nutrientGoal={props.currentUser.attributes.daily_fiber_goal} unit={"g"}/>
+
+                <NutrientProgressBar nutrient={"Sugar"} nutrientConsumption={props.dailyNutrition.total_sugars} nutrientGoal={props.currentUser.attributes.daily_sugar_goal} unit={"g"}/>
+
+                <NutrientProgressBar nutrient={"Protein"} nutrientConsumption={props.dailyNutrition.protein} nutrientGoal={props.currentUser.attributes.daily_protein_goal} unit={"g"}/>
+
+                <NutrientProgressBar nutrient={"Vitamin A"} nutrientConsumption={props.dailyNutrition.vitamin_a} nutrientGoal={props.currentUser.attributes.daily_vitamin_a_goal} unit={"mcg"}/>
+
+                <NutrientProgressBar nutrient={"Vitamin C"} nutrientConsumption={props.dailyNutrition.vitamin_c} nutrientGoal={props.currentUser.attributes.daily_vitamin_c_goal} unit={"mg"}/>
+
+                <NutrientProgressBar nutrient={"Vitamin D"} nutrientConsumption={props.dailyNutrition.vitamin_d} nutrientGoal={props.currentUser.attributes.daily_vitamin_d_goal} unit={"mcg"}/>
+
+                <NutrientProgressBar nutrient={"Calcium"} nutrientConsumption={props.dailyNutrition.calcium} nutrientGoal={props.currentUser.attributes.daily_calcium_goal} unit={"mg"}/>
+
+                <NutrientProgressBar nutrient={"Iron"} nutrientConsumption={props.dailyNutrition.iron} nutrientGoal={props.currentUser.attributes.daily_iron_goal} unit={"mg"}/>
+
+                <NutrientProgressBar nutrient={"Potassium"} nutrientConsumption={props.dailyNutrition.potassium} nutrientGoal={props.currentUser.attributes.daily_potassium_goal} unit={"mg"}/>
+
+              </table>
             </div>
           :
             null
