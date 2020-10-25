@@ -155,14 +155,14 @@ body {
 }
 
 .dashboard-container {
-  margin: 30px;
+  margin: 40px;
 }
 
 .info-container {
   background-color: #FFF;
   padding: 20px;
-  margin: 0px 15px;
-  border-radius: 15px;
+  margin: 0px 10px;
+  /* border-radius: 15px; */
 }
 
 .header-container {
@@ -170,7 +170,7 @@ body {
 }
 
 .dashboard-module {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 
