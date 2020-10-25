@@ -341,7 +341,7 @@ class FoodInput extends Component {
               </div>
 
               <div className="form-group row">
-                <label htmlFor="vitamin_a" className="col-sm-5 col-form-label">Vitamin A (%): </label>
+                <label htmlFor="vitamin_a" className="col-sm-5 col-form-label">Vitamin A (mcg): </label>
                 <div className="col-sm-7">
                   <input
                     type="number"
@@ -355,7 +355,7 @@ class FoodInput extends Component {
               </div>
 
               <div className="form-group row">
-                <label htmlFor="vitamin_c" className="col-sm-5 col-form-label">Vitamin C (%): </label>
+                <label htmlFor="vitamin_c" className="col-sm-5 col-form-label">Vitamin C (mg): </label>
                 <div className="col-sm-7">
                   <input
                     type="number"
@@ -369,7 +369,7 @@ class FoodInput extends Component {
               </div>
 
               <div className="form-group row">
-                <label htmlFor="vitamin_d" className="col-sm-5 col-form-label">Vitamin D (%): </label>
+                <label htmlFor="vitamin_d" className="col-sm-5 col-form-label">Vitamin D (mcg): </label>
                 <div className="col-sm-7">
                   <input
                     type="number"
@@ -383,7 +383,7 @@ class FoodInput extends Component {
               </div>
 
               <div className="form-group row">
-                <label htmlFor="calcium" className="col-sm-5 col-form-label">Calcium (%): </label>
+                <label htmlFor="calcium" className="col-sm-5 col-form-label">Calcium (mg): </label>
                 <div className="col-sm-7">
                   <input
                     type="number"
@@ -397,7 +397,7 @@ class FoodInput extends Component {
               </div>
 
               <div className="form-group row">
-                <label htmlFor="iron" className="col-sm-5 col-form-label">Iron (%): </label>
+                <label htmlFor="iron" className="col-sm-5 col-form-label">Iron (mg): </label>
                 <div className="col-sm-7">
                   <input
                     type="number"
