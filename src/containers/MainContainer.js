@@ -220,7 +220,7 @@ class MainContainer extends Component {
     if (!!todaysDiary) {
       todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
 
-      // requires meal_foods to be an attribute of meals to work properly
+      // requires meal_foods to be an attribute of meal to work properly
       if (todaysMeals.length > 0) {
         todaysMeals.forEach(meal => {
           if (meal.calories > 0) {
@@ -228,11 +228,11 @@ class MainContainer extends Component {
           }
         })
       }
-      // 2. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
     }
 
-    // 3. use reduce to combine objects in todaysMealFoods and total values, while ignoring keys of properties that aren't needed
+    // 2. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
     if (todaysMealFoods.flat().length > 0) {
+      // 3. use reduce to combine objects in todaysMealFoods and total values, while ignoring keys of properties that aren't needed
       total = todaysMealFoods.flat().reduce((a, b) => {
         for (let k in b) {
           if (b.hasOwnProperty(k) && k !== "id" && k !== "meal_id" && k !== "food_id" && k !== "number_of_servings" && k !== "created_at" && k !== "updated_at")
