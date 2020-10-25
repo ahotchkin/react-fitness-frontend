@@ -184,6 +184,14 @@ hr.solid-thick {
   border-top: 3.5px solid #cfd9e8;
 }
 
+td hr.solid-thin {
+  margin: 2px;
+}
+
+td hr.solid-thick {
+  margin: 2px;
+}
+
 .right-align {
   text-align: right;
 }
@@ -360,6 +368,10 @@ label.label-fixed {
   transform: translate(-50%, -50%);
   background-color: #FFF;
   border-radius: 15px;
+}
+
+.nutrients-table {
+  table-layout: fixed;
 }
 
 /* .footer {
