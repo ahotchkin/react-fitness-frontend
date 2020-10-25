@@ -58,12 +58,25 @@ export const login = (credentials, history) => {
   }
 }
 
-export const signUp = (credentials, dailyCalorieGoal, history) => {
+export const signUp = (credentials, dailyCalorieGoal, dailyNutrientGoals, history) => {
   console.log("credentials are", credentials)
+  console.log(dailyNutrientGoals)
   const userInfo = {
     user: credentials
   }
   userInfo.user.daily_calorie_goal = dailyCalorieGoal
+  userInfo.user.daily_fat_goal = dailyNutrientGoals.fat
+  userInfo.user.daily_saturated_fat_goal = dailyNutrientGoals.saturatedFat
+  userInfo.user.daily_polyunsaturated_fat_goal = dailyNutrientGoals.polyunsaturatedFat
+  userInfo.user.daily_monounsaturated_fat_goal = dailyNutrientGoals.monounsaturatedFat
+  userInfo.user.daily_carbohydrate_goal = dailyNutrientGoals.carbohydrate
+  userInfo.user.daily_sugar_goal = dailyNutrientGoals.sugar
+  userInfo.user.daily_protein_goal = dailyNutrientGoals.protein
+  userInfo.user.daily_vitamin_a_goal = dailyNutrientGoals.vitaminA
+  userInfo.user.daily_vitamin_c_fat_goal = dailyNutrientGoals.vitaminC
+  userInfo.user.daily_vitamin_d_fat_goal = dailyNutrientGoals.vitaminD
+  userInfo.user.daily_calcium_goal = dailyNutrientGoals.calcium
+  userInfo.user.daily_iron_goal = dailyNutrientGoals.iron
 
   console.log(userInfo)
   return dispatch => {
