@@ -2,6 +2,11 @@ import React from 'react';
 import MacrosChart from './MacrosChart';
 import NutrientProgressBar from './NutrientProgressBar';
 
+import runningShoes from '../icons/runningShoes.svg';
+import dumbbellGray from '../icons/dumbbellGray.svg';
+import yoga from '../icons/yoga.svg';
+import stretching from '../icons/stretching.svg';
+
 const Dashboard = props => {
   console.log(props)
 
@@ -34,23 +39,23 @@ const Dashboard = props => {
               <tbody>
                 <tr>
                   {/* User should have ability to update weight */}
-                  <th>Current Weight:</th>
+                  <td>Current Weight:</td>
                   <td>{props.currentUser.attributes.weight}</td>
                 </tr>
                 <tr>
                   {/* User should have ability to add goal weight */}
                   <th>Goal Weight:</th>
-                  <td>GOAL</td>
+                  <td><b>GOAL</b></td>
                 </tr>
                 <tr>
                   <td colSpan="12"><hr className="solid-thin" /></td>
                 </tr>
                 <tr>
-                  <th>Daily Calorie Goal:</th>
+                  <td>Daily Calorie Goal:</td>
                   <td>{props.currentUser.attributes.daily_calorie_goal}</td>
                 </tr>
                 <tr>
-                  <th>Calories Consumed: </th>
+                  <td>Calories Consumed: </td>
                   {!!props.dailyNutrition ?
                     <td>{props.dailyNutrition.calories}</td>
                   :
@@ -58,7 +63,7 @@ const Dashboard = props => {
                   }
                 </tr>
                 <tr>
-                  <th>Calories Burned:</th>
+                  <td>Calories Burned:</td>
                   <td>{props.caloriesBurned}</td>
                 </tr>
                 <tr>
@@ -131,8 +136,63 @@ const Dashboard = props => {
         </div>
 
         <div className="col-sm dashboard-module info-container">
+          {console.log(props)}
           <h3>Today's Exercise</h3>
-          <p>Total Calories Burned: {props.caloriesBurned}</p>
+
+          <div className="dashboard-icon-container">
+            <div className="row">
+              <div className="col-sm">
+                <img src={runningShoes} alt="Running Shoes" />
+              </div>
+              <div className="col-sm">
+                <img src={dumbbellGray} alt="Dumbbell" />
+              </div>
+              <div className="col-sm">
+              <img src={yoga} alt="Yoga" />
+
+              </div>
+              <div className="col-sm">
+                <img src={stretching} alt="Stretching" />
+              </div>
+            </div>
+          </div>
+
+          <table className="table table-sm exercise-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th className="right-align">Minutes</th>
+                <th className="right-align">Calories</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Cardio:</td>
+                <td className="right-align">{props.totalCardio.duration_in_minutes}</td>
+                <td className="right-align">{props.totalCardio.calories_burned}</td>
+              </tr>
+              <tr>
+                <td>Strength:</td>
+                <td className="right-align">{props.totalStrength.duration_in_minutes}</td>
+                <td className="right-align">{props.totalStrength.calories_burned}</td>
+              </tr>
+              <tr>
+                <td>Balance:</td>
+                <td className="right-align">{props.totalBalance.duration_in_minutes}</td>
+                <td className="right-align">{props.totalBalance.calories_burned}</td>
+              </tr>
+              <tr>
+                <td>Stretching:</td>
+                <td className="right-align">{props.totalStretching.duration_in_minutes}</td>
+                <td className="right-align">{props.totalStretching.calories_burned}</td>
+              </tr>
+              <tr>
+                <th>Total:</th>
+                <td className="right-align">{props.totalCardio.duration_in_minutes + props.totalStrength.duration_in_minutes + props.totalBalance.duration_in_minutes + props.totalStretching.duration_in_minutes}</td>
+                <td className="right-align">{props.totalCardio.calories_burned + props.totalStrength.calories_burned + props.totalBalance.calories_burned + props.totalStretching.calories_burned}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
       </div>
