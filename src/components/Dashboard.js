@@ -4,40 +4,74 @@ import NutrientProgressBar from './NutrientProgressBar';
 
 const Dashboard = props => {
   console.log(props)
+
+  const caloriesRemaining = () => {
+    if ((props.currentUser.attributes.daily_calorie_goal - props.dailyNutrition.calories + props.caloriesBurned) >= 0) {
+      return <td className="positive"><b>{props.currentUser.attributes.daily_calorie_goal - props.dailyNutrition.calories + props.caloriesBurned}</b></td>
+    } else if ((props.currentUser.attributes.daily_calorie_goal - props.dailyNutrition.calories + props.caloriesBurned) < 0) {
+      return <td className="negative"><b>{props.currentUser.attributes.daily_calorie_goal - props.dailyNutrition.calories + props.caloriesBurned}</b></td>
+    }
+  }
+
   return (
     <div className="dashboard-container">
-      <h2>Hello, {props.currentUser.attributes.username}! Welcome to your React Fitness Dashboard!</h2>
-
+      <h2>Your daily summary for -date-</h2>
       <br />
 
       <div className="row">
         <div className="col-sm dashboard-module info-container">
-          <h3>Profile</h3>
+          <h3>{props.currentUser.attributes.username}</h3>
 
-          <div className="center-align">
-            <svg width="5em" height="5em" viewBox="0 0 16 16" className="bi bi-person-circle" fill="#DADFE6" xmlns="http://www.w3.org/2000/svg">
+          <div className="center-align" id="profile-icon">
+            <svg width="7em" height="7em" viewBox="0 0 16 16" className="bi bi-person-circle" fill="#DADFE6" xmlns="http://www.w3.org/2000/svg">
               <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
               <path fillRule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
               <path fillRule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
             </svg>
           </div>
-
-          <p>Age: {props.currentUser.attributes.age}</p>
-          {/* User should have ability to update weight */}
-          <p>Current Weight: {props.currentUser.attributes.weight}</p>
-          {/* Should take the user's daily calorie goal, subtract any calories user has already eaten, and add any calories user has gained from exercise */}
-          <p>Daily Calorie Goal: {props.currentUser.attributes.daily_calorie_goal}</p>
-          {!!props.dailyNutrition ?
-            <div>
-              <p>Calories Consumed: {props.dailyNutrition.calories}</p>
-              <p>Calories Remaining: {props.currentUser.attributes.daily_calorie_goal - props.dailyNutrition.calories + props.caloriesBurned}</p>
-            </div>
-          :
-            <div>
-              <p>Calories Consumed: 0</p>
-              <p>Calories Remaining: {props.currentUser.attributes.daily_calorie_goal - 0 + props.caloriesBurned}</p>
-            </div>
-          }
+          <div className="profile-table">
+            <table className="table table-borderless table-sm">
+              <tbody>
+                <tr>
+                  {/* User should have ability to update weight */}
+                  <th>Current Weight:</th>
+                  <td>{props.currentUser.attributes.weight}</td>
+                </tr>
+                <tr>
+                  {/* User should have ability to add goal weight */}
+                  <th>Goal Weight:</th>
+                  <td>GOAL</td>
+                </tr>
+                <tr>
+                  <td colSpan="12"><hr className="solid-thin" /></td>
+                </tr>
+                <tr>
+                  <th>Daily Calorie Goal:</th>
+                  <td>{props.currentUser.attributes.daily_calorie_goal}</td>
+                </tr>
+                <tr>
+                  <th>Calories Consumed: </th>
+                  {!!props.dailyNutrition ?
+                    <td>{props.dailyNutrition.calories}</td>
+                  :
+                    <td>0</td>
+                  }
+                </tr>
+                <tr>
+                  <th>Calories Burned:</th>
+                  <td>{props.caloriesBurned}</td>
+                </tr>
+                <tr>
+                  <th>Calories Remaining:</th>
+                  {!!props.dailyNutrition ?
+                    caloriesRemaining()
+                  :
+                    <td><b>{props.currentUser.attributes.daily_calorie_goal - 0 + props.caloriesBurned}</b></td>
+                  }
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div className="col-sm dashboard-module info-container">
@@ -60,7 +94,7 @@ const Dashboard = props => {
                 <tbody>
                   <tr>
                     <td>
-                      <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square-fill" fill="#2BC700" xmlns="http://www.w3.org/2000/svg">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square-fill" fill="#01ACAD" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
                       </svg>
                     </td>
@@ -70,7 +104,7 @@ const Dashboard = props => {
                   </tr>
                   <tr>
                     <td>
-                      <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square-fill" fill="#AB0091" xmlns="http://www.w3.org/2000/svg">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square-fill" fill="#A2218E" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
                       </svg>
                     </td>
@@ -80,7 +114,7 @@ const Dashboard = props => {
                   </tr>
                   <tr>
                     <td>
-                      <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square-fill"   fill="#F76319" xmlns="http://www.w3.org/2000/svg">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square-fill"   fill="#F58225" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
                       </svg>
                     </td>
@@ -105,7 +139,7 @@ const Dashboard = props => {
 
       <div className="row meal-macros">
         <div className="col-lg dashboard-module info-container">
-          <h3>Today's Meals</h3>
+          <h3>Macros by Meal</h3>
 
 
             <div className="row">
