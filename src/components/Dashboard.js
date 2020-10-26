@@ -1,6 +1,7 @@
 import React from 'react';
 import MacrosChart from './MacrosChart';
 import NutrientProgressBar from './NutrientProgressBar';
+import Footer from '../components/Footer';
 
 import runningShoes from '../icons/runningShoes.svg';
 import dumbbellGray from '../icons/dumbbellGray.svg';
@@ -20,12 +21,9 @@ const Dashboard = props => {
 
   return (
     <div className="dashboard-container">
-      <h2>Your daily summary for -date-</h2>
-      <br />
-
       <div className="row">
         <div className="col-sm dashboard-module info-container">
-          <h3>{props.currentUser.attributes.username}</h3>
+          <h4>{props.currentUser.attributes.username}</h4>
 
           <div className="center-align" id="profile-icon">
             <svg width="7em" height="7em" viewBox="0 0 16 16" className="bi bi-person-circle" fill="#DADFE6" xmlns="http://www.w3.org/2000/svg">
@@ -80,7 +78,7 @@ const Dashboard = props => {
         </div>
 
         <div className="col-sm dashboard-module info-container">
-          <h3>Today's Macros</h3>
+          <h4>Macros</h4>
           {!!props.dailyMacros ?
             <div>
               <canvas id="macros-chart">
@@ -137,7 +135,7 @@ const Dashboard = props => {
 
         <div className="col-sm dashboard-module info-container">
           {console.log(props)}
-          <h3>Today's Exercise</h3>
+          <h4>Exercise</h4>
 
           <div className="dashboard-icon-container">
             <div className="row">
@@ -199,7 +197,7 @@ const Dashboard = props => {
 
       <div className="row meal-macros">
         <div className="col-lg dashboard-module info-container">
-          <h3>Macros by Meal</h3>
+          <h4>Macros by Meal</h4>
 
 
             <div className="row">
@@ -243,7 +241,7 @@ const Dashboard = props => {
         <div className="row col-lg info-container">
           {!!props.dailyNutrition ?
             <div>
-            <h3>Today's Nutrition</h3>
+            <h4>Nutrition</h4>
               <table width="100%" className="table table-borderless table-sm nutrients-table">
                 <thead className="right-align">
                   <tr>
@@ -299,7 +297,7 @@ const Dashboard = props => {
           }
         </div>
       </div>
-
+      <Footer />
     </div>
   )
 
