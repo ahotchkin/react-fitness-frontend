@@ -221,6 +221,10 @@ td hr.solid-thick {
   width: 100px;
 }
 
+.datepicker-container {
+  margin: 30px 0 -15px 20px;
+}
+
 .react-datepicker-wrapper,
 .react-datepicker__input-container {
     display: block;
@@ -384,9 +388,18 @@ label.label-fixed {
 
 .attribution-footer {
   position: relative;
+  margin-top: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.home-footer {
+  position: absolute;
+  bottom: 0;
   bottom: 0px;
   width: 100%;
   text-align: center;
+
 }
 
 .icon-container {
