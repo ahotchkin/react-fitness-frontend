@@ -3,16 +3,30 @@ import React from 'react'
 // import SignUp from './SignUp'
 import { Link } from 'react-router-dom'
 
-import HealthyFood from './icons/HealthyFood';
-import Barbell from './icons/Barbell';
+import Fruit from './icons/Fruit';
+import Dumbbell from './icons/Dumbbell';
+import WeightScale from './icons/WeightScale';
+import FoodDiary from './icons/FoodDiary';
 
 const Home = ({}) => (
   <div className="welcome-container center-align">
     <h2>React Fitness</h2>
-    <br />
-    <span><HealthyFood />   </span>
-    <span><Barbell />   </span>
-    <br />
+    <div className="icon-container">
+      <div className="row">
+        <div className="col-sm">
+          <Fruit />
+        </div>
+        <div className="col-sm">
+          <FoodDiary />
+        </div>
+        <div className="col-sm">
+          <Dumbbell />
+        </div>
+        <div className="col-sm">
+          <WeightScale />
+        </div>
+      </div>
+    </div>
     <Link to="/signup">
       <button className="btn btn-primary-fill btn-home" type="button">
         Sign Up
