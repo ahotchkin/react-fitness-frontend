@@ -390,11 +390,23 @@ label.label-fixed {
 }
 
 .icon-container {
-  width: 50%;
+  width: 100%;
+  max-width: 300px;
   padding: 30px 0px;
   margin: auto;
+  text-align: center
 }
 
+.dashboard-icon-container {
+  width: 100%;
+  padding: 20px 5px 40px 5px;
+  margin: auto;
+  text-align: center
+}
+
+.exercise-table thead th {
+  border-top: 0px;
+}
 
 
 /* .footer {
