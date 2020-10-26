@@ -3,27 +3,28 @@ import React from 'react'
 // import SignUp from './SignUp'
 import { Link } from 'react-router-dom'
 
-import Fruit from './icons/Fruit';
-import Dumbbell from './icons/Dumbbell';
-import WeightScale from './icons/WeightScale';
-import FoodDiary from './icons/FoodDiary';
+import fruit from '../icons/fruit.svg';
+import dumbbell from '../icons/dumbbell.svg';
+import weightScale from '../icons/weightScale.svg';
+import foodDiary from '../icons/foodDiary.svg';
 
 const Home = ({}) => (
   <div className="welcome-container center-align">
     <h2>React Fitness</h2>
-    <div className="icon-container">
+    {/* FIGURE OUT HOW TO MAKE THIS RESPONSE SO ICONS MOVE CLOSER TOGETHER RATHER THAN STACK */}
+    <div className="container icon-container">
       <div className="row">
         <div className="col-sm">
-          <Fruit />
+          <img src={fruit} alt="Fruit" />
         </div>
         <div className="col-sm">
-          <FoodDiary />
+          <img src={foodDiary} alt="Food Diary" />
         </div>
         <div className="col-sm">
-          <Dumbbell />
+          <img src={dumbbell} alt="Dumbbell" />
         </div>
         <div className="col-sm">
-          <WeightScale />
+          <img src={weightScale} alt="Scale" />
         </div>
       </div>
     </div>
