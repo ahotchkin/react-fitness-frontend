@@ -18,7 +18,10 @@ import FoodsContainer from './FoodsContainer';
 import MealFoodsContainer from './MealFoodsContainer';
 
 import NavBar from '../components/NavBar';
-import Footer from '../components/Footer';
+
+// ********************************************
+import SearchByDate from '../components/SearchByDate';
+// ********************************************
 
 // Add Switch and wrap routes?
 
@@ -26,17 +29,48 @@ import Footer from '../components/Footer';
 
 class MainContainer extends Component {
 
+  // ********* FROM EXERCISESCONTAINER
+  state = {
+    startDate: new Date()
+    // startDate: ""
+  };
+
+  // ********* FROM DIARIESCONTAINER
+  // state = {
+  //   loaded: false,
+  //   // startDate: new Date()
+  //   startDate: ""
+  // };
+  // *********
+
   // when app mounts, I want to get my currentUser
   componentDidMount() {
     this.props.getCurrentUser()
     console.log(this.props)
   }
 
-  getDate = date => {
-    const tzoffset = date.getTimezoneOffset() * 60000; //offset in milliseconds
-    const localDate = (new Date(date - tzoffset)).toISOString().split("T")[0];
-    return localDate
+  // *********
+  handleOnChange = date => {
+    this.setState({
+      startDate: date,
+    });
+  };
+  // *********
+
+  // COMMENTED OUT WHEN SEARCHBYDATE WAS ADDED TO THIS COMPONENT
+  // getDate = date => {
+  //   const tzoffset = date.getTimezoneOffset() * 60000; //offset in milliseconds
+  //   const localDate = (new Date(date - tzoffset)).toISOString().split("T")[0];
+  //   return localDate
+  // }
+
+  // *********
+  getDate = () => {
+    const tzoffset = this.state.startDate.getTimezoneOffset() * 60000; //offset in milliseconds
+    const date = (new Date(this.state.startDate - tzoffset)).toISOString().split("T")[0];
+    return date
   }
+  // *********
 
   // can I get this to work with whatever date is selected on datePicker in /diaries and /exercises???
   // don't really need this - can grab from dailyNutrition
@@ -73,12 +107,34 @@ class MainContainer extends Component {
   // }
 
   // can I get this to work with whatever date is selected on datePicker in /diaries and /exercises???
+
+
+  // COMMENTED OUT WHEN SEARCHBYDATE WAS ADDED TO THIS COMPONENT
+  // caloriesBurned = () => {
+  //   let data = {}
+  //
+  //   // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
+  //   // ************************* NEED TO UPDATE THIS SO IF USER IS IN MEAL DIARY OR EXERCISES AND SELECTS A DIFFERENT DAY THE CORRECT TOTAL SHOWS UP *********************************
+  //   const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate(new Date())).map(filteredExercise => filteredExercise.attributes)
+  //
+  //   if (todaysExercises.length === 1) {
+  //     data = {calories_burned: todaysExercises[0].calories_burned}
+  //   } else if (todaysExercises.length > 1) {
+  //     data = todaysExercises.reduce((a, b) => ({calories_burned: a.calories_burned + b.calories_burned}))
+  //   } else {
+  //   data = {calories_burned: 0}
+  //   }
+  //
+  //   return data.calories_burned
+  // }
+  //
+
   caloriesBurned = () => {
     let data = {}
 
     // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
     // ************************* NEED TO UPDATE THIS SO IF USER IS IN MEAL DIARY OR EXERCISES AND SELECTS A DIFFERENT DAY THE CORRECT TOTAL SHOWS UP *********************************
-    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate(new Date())).map(filteredExercise => filteredExercise.attributes)
+    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes)
 
     if (todaysExercises.length === 1) {
       data = {calories_burned: todaysExercises[0].calories_burned}
@@ -91,11 +147,49 @@ class MainContainer extends Component {
     return data.calories_burned
   }
 
+  // COMMENTED OUT WHEN SEARCHBYDATE WAS ADDED TO THIS COMPONENT
+  // totalExerciseByCategory = category => {
+  //   let exercisesInCategory = []
+  //   let totalForCategory = {}
+  //
+  //   const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate(new Date())).map(filteredExercise => filteredExercise.attributes)
+  //
+  //   if (todaysExercises.length > 0) {
+  //     todaysExercises.forEach(function(exercise) {
+  //       if (exercise.category === category) {
+  //         exercisesInCategory.push(exercise)
+  //       }
+  //     })
+  //   }
+  //
+  //   if (exercisesInCategory.length > 0) {
+  //     totalForCategory = exercisesInCategory.reduce((a, b) => {
+  //       for (let k in b) {
+  //         if (b.hasOwnProperty(k) && k !== "category" && k !== "date" && k !== "name")
+  //           a[k] = (a[k] || 0) + b[k];
+  //       }
+  //       return a;
+  //       // by adding " , {}" to the end, it returns the new object with the 3 properties above removed. What is happening here?
+  //     }, {});
+  //   } else {
+  //     totalForCategory = {
+  //       calories_burned: 0,
+  //       duration_in_minutes: 0
+  //     }
+  //   }
+  //
+  //   console.log(totalForCategory)
+  //
+  //   return totalForCategory
+  // }
+  //
+
+
   totalExerciseByCategory = category => {
     let exercisesInCategory = []
     let totalForCategory = {}
 
-    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate(new Date())).map(filteredExercise => filteredExercise.attributes)
+    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes)
 
     if (todaysExercises.length > 0) {
       todaysExercises.forEach(function(exercise) {
@@ -127,6 +221,61 @@ class MainContainer extends Component {
   }
 
 
+  // COMMENTED OUT WHEN SEARCHBYDATE WAS ADDED TO THIS COMPONENT
+  // mealNutrition = selectedMeal => {
+  //   let mealMealFoods = []
+  //
+  //   let mealTotal = {
+  //     added_sugars: 0,
+  //     calcium: 0,
+  //     calories: 0,
+  //     cholesterol: 0,
+  //     dietary_fiber: 0,
+  //     iron: 0,
+  //     monounsaturated_fat: 0,
+  //     polyunsaturated_fat: 0,
+  //     potassium: 0,
+  //     protein: 0,
+  //     saturated_fat: 0,
+  //     sodium: 0,
+  //     sugar_alcohols: 0,
+  //     total_carbohydrate: 0,
+  //     total_fat: 0,
+  //     total_sugars: 0,
+  //     trans_fat: 0,
+  //     vitamin_a: 0,
+  //     vitamin_c: 0,
+  //     vitamin_d: 0
+  //   }
+  //
+  //   const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
+  //   // Need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
+  //   if (!!todaysDiary) {
+  //     const todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
+  //
+  //     if (todaysMeals.length > 0) {
+  //       mealMealFoods = todaysMeals.find(meal => meal.category.toLowerCase() === selectedMeal).meal_foods
+  //     }
+  //   }
+  //
+  //   console.log("mealfoods not flat: ", mealMealFoods)
+  //   console.log("mealfoods flat: ", mealMealFoods.flat())
+  //   if (mealMealFoods.flat().length > 0) {
+  //     mealTotal = mealMealFoods.flat().reduce((a, b) => {
+  //       for (let k in b) {
+  //         if (b.hasOwnProperty(k) && k !== "id" && k !== "meal_id" && k !== "food_id" && k !== "number_of_servings" && k !== "created_at" && k !== "updated_at")
+  //           a[k] = (a[k] || 0) + b[k];
+  //       }
+  //       return a;
+  //       // by adding " , {}" to the end, it returns the new object with the 3 properties above removed. What is happening here?
+  //     }, {});
+  //   }
+  //
+  //   mealTotal.meal = selectedMeal
+  //   return mealTotal
+  // }
+
+
   mealNutrition = selectedMeal => {
     let mealMealFoods = []
 
@@ -153,7 +302,7 @@ class MainContainer extends Component {
       vitamin_d: 0
     }
 
-    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
+    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
     // Need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
     if (!!todaysDiary) {
       const todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
@@ -179,6 +328,7 @@ class MainContainer extends Component {
     mealTotal.meal = selectedMeal
     return mealTotal
   }
+
 
   mealMacros = selectedMeal => {
     let macros = {"meal": selectedMeal, "carbohydrates": 0, "fat": 0, "protein": 0}
@@ -218,6 +368,72 @@ class MainContainer extends Component {
     // Total grams of protein allowed per day = 600/4 = 150 grams  }
   }
 
+
+  // COMMENTED OUT WHEN SEARCHBYDATE WAS ADDED TO THIS COMPONENT
+  // dailyNutrition = () => {
+  //   // Currently saving all nutrient amounts to mealFood in database and using serializer to get info. Another option is to use the number_of_servings and the foods attribute and multiply every mealFood.attributes.food.nutrient * attributes.number_of_servings, and NOT save this info in the database
+  //
+  //   // 1. get all mealFoods for the day
+  //   // 2. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
+  //   // 3. use reduce to combine objects in mealFoodAttributes and total values, while ignoring keys of number_of_servings, meal, and food
+  //
+  //   let todaysMeals = []
+  //   let todaysMealFoods = []
+  //   let total = {
+  //     added_sugars: 0,
+  //     calcium: 0,
+  //     calories: 0,
+  //     cholesterol: 0,
+  //     dietary_fiber: 0,
+  //     iron: 0,
+  //     monounsaturated_fat: 0,
+  //     polyunsaturated_fat: 0,
+  //     potassium: 0,
+  //     protein: 0,
+  //     saturated_fat: 0,
+  //     sodium: 0,
+  //     sugar_alcohols: 0,
+  //     total_carbohydrate: 0,
+  //     total_fat: 0,
+  //     total_sugars: 0,
+  //     trans_fat: 0,
+  //     vitamin_a: 0,
+  //     vitamin_c: 0,
+  //     vitamin_d: 0
+  //   }
+  //   // 1. get all mealFoods for the day
+  //     // get the diary for the day
+  //     // get the meals for the day
+  //     // get the mealFoods for each meal
+  //   const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
+  //   if (!!todaysDiary) {
+  //     todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
+  //
+  //     // requires meal_foods to be an attribute of meal to work properly
+  //     if (todaysMeals.length > 0) {
+  //       todaysMeals.forEach(meal => {
+  //         if (meal.calories > 0) {
+  //           todaysMealFoods.push(meal.meal_foods)
+  //         }
+  //       })
+  //     }
+  //   }
+  //
+  //   // 2. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
+  //   if (todaysMealFoods.flat().length > 0) {
+  //     // 3. use reduce to combine objects in todaysMealFoods and total values, while ignoring keys of properties that aren't needed
+  //     total = todaysMealFoods.flat().reduce((a, b) => {
+  //       for (let k in b) {
+  //         if (b.hasOwnProperty(k) && k !== "id" && k !== "meal_id" && k !== "food_id" && k !== "number_of_servings" && k !== "created_at" && k !== "updated_at")
+  //           a[k] = (a[k] || 0) + b[k];
+  //       }
+  //       return a;
+  //       // by adding " , {}" to the end, it returns the new object with the 3 properties above removed. What is happening here?
+  //     }, {});
+  //   }
+  //   return total
+  // }
+
   dailyNutrition = () => {
     // Currently saving all nutrient amounts to mealFood in database and using serializer to get info. Another option is to use the number_of_servings and the foods attribute and multiply every mealFood.attributes.food.nutrient * attributes.number_of_servings, and NOT save this info in the database
 
@@ -253,7 +469,7 @@ class MainContainer extends Component {
       // get the diary for the day
       // get the meals for the day
       // get the mealFoods for each meal
-    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate(new Date()))
+    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
     if (!!todaysDiary) {
       todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
 
@@ -281,6 +497,7 @@ class MainContainer extends Component {
     }
     return total
   }
+
 
   dailyMacros = () => {
     let macros = { "carbohydrates": 0, "fat": 0, "protein": 0}
@@ -324,10 +541,18 @@ class MainContainer extends Component {
       <div>
         {/* Have to render NavBar here for it to appear on all pages. If rendered in MainContainer it only appears at "/" */}
         { this.props.loggedIn ? <NavBar /> : null }
+
         {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
 
         <Switch>
-          <Route exact path="/" render={ () => this.props.loggedIn ? <Dashboard currentUser={this.props.currentUser} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} breakfastMacros={this.mealMacros("breakfast")} lunchNutrition={this.mealNutrition("lunch")} lunchMacros={this.mealMacros("lunch")} dinnerNutrition={this.mealNutrition("dinner")} dinnerMacros={this.mealMacros("dinner")} snacksNutrition={this.mealNutrition("snacks")} snacksMacros={this.mealMacros("snacks")} dailyNutrition={this.dailyNutrition()} dailyMacros={this.dailyMacros()} totalCardio={this.totalExerciseByCategory("cardio")} totalStrength={this.totalExerciseByCategory("strength")} totalBalance={this.totalExerciseByCategory("balance")} totalStretching={this.totalExerciseByCategory("stretching")} /> : <Home /> }  />
+          <Route exact path="/" render={ () => this.props.loggedIn ?
+            <div>
+              <SearchByDate header={"Your Daily Summary for:"} startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
+              <Dashboard currentUser={this.props.currentUser} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} breakfastMacros={this.mealMacros("breakfast")} lunchNutrition={this.mealNutrition("lunch")} lunchMacros={this.mealMacros("lunch")} dinnerNutrition={this.mealNutrition("dinner")} dinnerMacros={this.mealMacros("dinner")} snacksNutrition={this.mealNutrition("snacks")} snacksMacros={this.mealMacros("snacks")} dailyNutrition={this.dailyNutrition()} dailyMacros={this.dailyMacros()} totalCardio={this.totalExerciseByCategory("cardio")} totalStrength={this.totalExerciseByCategory("strength")} totalBalance={this.totalExerciseByCategory("balance")} totalStretching={this.totalExerciseByCategory("stretching")} />
+            </div>
+          :
+            <Home />
+          }  />
 
           {/* below routes should only be available to users who are NOT logged in */}
           <Route exact path="/login" render={ props => this.props.loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
@@ -371,7 +596,6 @@ class MainContainer extends Component {
           <Route />
         </Switch>
 
-        <Footer />
       </div>
 
     );
