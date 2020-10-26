@@ -91,6 +91,41 @@ class MainContainer extends Component {
     return data.calories_burned
   }
 
+  totalExerciseByCategory = category => {
+    let exercisesInCategory = []
+    let totalForCategory = {}
+
+    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate(new Date())).map(filteredExercise => filteredExercise.attributes)
+
+    if (todaysExercises.length > 0) {
+      todaysExercises.forEach(function(exercise) {
+        if (exercise.category === category) {
+          exercisesInCategory.push(exercise)
+        }
+      })
+    }
+
+    if (exercisesInCategory.length > 0) {
+      totalForCategory = exercisesInCategory.reduce((a, b) => {
+        for (let k in b) {
+          if (b.hasOwnProperty(k) && k !== "category" && k !== "date" && k !== "name")
+            a[k] = (a[k] || 0) + b[k];
+        }
+        return a;
+        // by adding " , {}" to the end, it returns the new object with the 3 properties above removed. What is happening here?
+      }, {});
+    } else {
+      totalForCategory = {
+        calories_burned: 0,
+        duration_in_minutes: 0
+      }
+    }
+
+    console.log(totalForCategory)
+
+    return totalForCategory
+  }
+
 
   mealNutrition = selectedMeal => {
     let mealMealFoods = []
@@ -128,6 +163,8 @@ class MainContainer extends Component {
       }
     }
 
+    console.log("mealfoods not flat: ", mealMealFoods)
+    console.log("mealfoods flat: ", mealMealFoods.flat())
     if (mealMealFoods.flat().length > 0) {
       mealTotal = mealMealFoods.flat().reduce((a, b) => {
         for (let k in b) {
@@ -282,7 +319,6 @@ class MainContainer extends Component {
   }
 
   render() {
-    console.log(this.mealNutrition("breakfast"))
     return (
       // Update className when adding css
       <div>
@@ -291,7 +327,7 @@ class MainContainer extends Component {
         {/* is there a way to always redirect to "/" if not logged in? except for /login and /signup */}
 
         <Switch>
-          <Route exact path="/" render={ () => this.props.loggedIn ? <Dashboard currentUser={this.props.currentUser} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} breakfastMacros={this.mealMacros("breakfast")} lunchNutrition={this.mealNutrition("lunch")} lunchMacros={this.mealMacros("lunch")} dinnerNutrition={this.mealNutrition("dinner")} dinnerMacros={this.mealMacros("dinner")} snacksNutrition={this.mealNutrition("snacks")} snacksMacros={this.mealMacros("snacks")} dailyNutrition={this.dailyNutrition()} dailyMacros={this.dailyMacros()} /> : <Home /> }  />
+          <Route exact path="/" render={ () => this.props.loggedIn ? <Dashboard currentUser={this.props.currentUser} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} breakfastMacros={this.mealMacros("breakfast")} lunchNutrition={this.mealNutrition("lunch")} lunchMacros={this.mealMacros("lunch")} dinnerNutrition={this.mealNutrition("dinner")} dinnerMacros={this.mealMacros("dinner")} snacksNutrition={this.mealNutrition("snacks")} snacksMacros={this.mealMacros("snacks")} dailyNutrition={this.dailyNutrition()} dailyMacros={this.dailyMacros()} totalCardio={this.totalExerciseByCategory("cardio")} totalStrength={this.totalExerciseByCategory("strength")} totalBalance={this.totalExerciseByCategory("balance")} totalStretching={this.totalExerciseByCategory("stretching")} /> : <Home /> }  />
 
           {/* below routes should only be available to users who are NOT logged in */}
           <Route exact path="/login" render={ props => this.props.loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
