@@ -15,8 +15,7 @@ const  DiaryCard = props => {
 
   return (
     <div className="col-lg info-container">
-      <h3>Meal Diary for {props.diary.attributes.date}</h3>
-      <p>Calories Remaining</p>
+      <h5>Calories Remaining</h5>
       { caloriesRemaining() >= 0 ?
         <h3 className="positive">{caloriesRemaining()}</h3>
       :
