@@ -15,6 +15,7 @@ class SignUp extends Component {
     height_inches: "",
     weight: "",
     lifestyle: "",
+    submitted: false,
   }
 
 
@@ -300,6 +301,7 @@ class SignUp extends Component {
   calculateDailyNutrientGoals = () => {
     const dailyCalorieGoal = this.calculateDailyCalorieGoal()
     const nutrientGoals = {}
+    // tried to set static values as default in create_users table, but wasn't working
     nutrientGoals.fat = parseInt((dailyCalorieGoal * .30) / 9)
     nutrientGoals.saturatedFat = parseInt((dailyCalorieGoal * .07) / 9)
     nutrientGoals.polyunsaturatedFat = parseInt((dailyCalorieGoal * .10) / 9)
@@ -363,6 +365,12 @@ class SignUp extends Component {
     }, console.log(`${[event.target.name]}: ${event.target.value}`))
   }
 
+  handleOnClick = event => {
+    this.setState({
+      submitted: true,
+    })
+  }
+
   handleOnSubmit = event => {
     event.preventDefault()
     const dailyCalorieGoal = this.calculateDailyCalorieGoal()
@@ -370,17 +378,19 @@ class SignUp extends Component {
     {console.log(dailyCalorieGoal)}
     console.log(dailyNutrientGoals)
 
+    // this.state.height_inches === "" ? this.state.height_inches = 0 : null
+
     this.props.signUp(this.state, dailyCalorieGoal, dailyNutrientGoals, this.props.history)
-    this.setState({
-      username: "",
-      password: "",
-      gender: "",
-      age: "",
-      height_feet: "",
-      height_inches: "",
-      weight: "",
-      lifestyle: "",
-    })
+    // this.setState({
+    //   username: "",
+    //   password: "",
+    //   gender: "",
+    //   age: "",
+    //   height_feet: "",
+    //   height_inches: "",
+    //   weight: "",
+    //   lifestyle: "",
+    // })
 
   }
 
@@ -394,63 +404,71 @@ class SignUp extends Component {
               <label htmlFor="username">Username: </label>
               <input
                 type="text"
-                className="form-control"
+                className={`form-control ${!!this.state.submitted && this.state.username === "" ? "is-invalid" : null}`}
                 name="username"
                 id="username"
                 value={this.state.username}
                 onChange={this.handleOnChange}
               />
+              <div className="invalid-feedback">
+                Username required.
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="password">Password: </label>
               <input
                 type="password"
-                className="form-control"
+                className={`form-control ${!!this.state.submitted && this.state.password === "" ? "is-invalid" : null}`}
                 name="password"
                 id="password"
                 value={this.state.password}
                 onChange={this.handleOnChange}
               />
+              <div className="invalid-feedback">
+                Password required.
+              </div>
             </div>
             <div className="form-group">
               <label>Gender: </label>
               <div className="form-check">
                 <input
                   type="radio"
-                  className="form-check-input"
+                  className={`form-check-input ${!!this.state.submitted && this.state.gender === "" ? "is-invalid" : null}`}
                   name="gender"
                   id="male"
                   value="male"
                   onChange={this.handleOnChange}
-                />
+                  />
                 <label className="form-check-label" htmlFor="male">Male</label>
               </div>
               <div className="form-check">
                 <input
                   type="radio"
-                  className="form-check-input"
+                  className={`form-check-input ${!!this.state.submitted && this.state.gender === "" ? "is-invalid" : null}`}
                   name="gender"
                   id="female"
                   value="female"
                   onChange={this.handleOnChange}
-                />
+                  />
                 <label className="form-check-label" htmlFor="female">Female</label><br />
+                <div className="invalid-feedback">
+                  Gender required.
+                </div>
               </div>
-              {/*
-              <input type="radio" id="other" name="gender" value="other">
-              <label for="other">Other</label>
-              */}
             </div>
             <div className="form-group">
               <label htmlFor="age">Age: </label>
               <input
                 type="number"
-                className="form-control"
+                className={`form-control ${!!this.state.submitted && this.state.age === "" ? "is-invalid" : null}`}
                 name="age"
                 id="age"
                 value={this.state.age}
                 onChange={this.handleOnChange}
               />
+              <div className="invalid-feedback">
+                Age required.
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="height_feet">Height: </label>
@@ -458,18 +476,21 @@ class SignUp extends Component {
                 <div className="form-group col-md-6">
                   <input
                     type="number"
-                    className="form-control"
+                    className={`form-control ${!!this.state.submitted && this.state.height_feet === "" ? "is-invalid" : null}`}
                     name="height_feet"
                     id="height_feet"
                     placeholder="Feet"
                     value={this.state.height_feet}
                     onChange={this.handleOnChange}
                   />
+                  <div className="invalid-feedback">
+                    Height required.
+                  </div>
                 </div>
                 <div className="form-group col-md-6">
                   <input
                     type="number"
-                    className="form-control"
+                    className={`form-control ${!!this.state.submitted && this.state.height_inches === "" ? "is-invalid" : null}`}
                     name="height_inches"
                     id="height_inches"
                     placeholder="Inches"
@@ -483,68 +504,74 @@ class SignUp extends Component {
               <label htmlFor="weight">Weight:</label>
               <input
                 type="number"
-                className="form-control"
+                className={`form-control ${!!this.state.submitted && this.state.weight === "" ? "is-invalid" : null}`}
                 name="weight"
                 id="weight"
                 value={this.state.weight}
                 onChange={this.handleOnChange}
               />
+              <div className="invalid-feedback">
+                Weight required.
+              </div>
             </div>
             <div className="form-group">
               <label>Lifestyle (exercise will be tracked separately): </label>
               <div className="form-check">
                 <input
                   type="radio"
-                  className="form-check-input"
+                  className={`form-check-input ${!!this.state.submitted && this.state.lifestyle === "" ? "is-invalid" : null}`}
                   name="lifestyle"
                   id="notActive"
                   value="notActive"
                   onChange={this.handleOnChange}
-                />
+                  />
                 <label className="form-check-label" htmlFor="notActive">Not Very Active: Typical office job, sitting at a desk for most of the day</label>
               </div>
               <div className="form-check">
                 <input
                   type="radio"
-                  className="form-check-input"
+                  className={`form-check-input ${!!this.state.submitted && this.state.lifestyle === "" ? "is-invalid" : null}`}
                   name="lifestyle"
                   id="lightlyActive"
                   value="lightlyActive"
                   onChange={this.handleOnChange}
-                />
+                  />
                 <label className="form-check-label" htmlFor="lightlyActive">Lightly Active: On your feet all day (i.e. teacher, restaurant server)</label>
               </div>
               <div className="form-check">
                 <input
                   type="radio"
-                  className="form-check-input"
+                  className={`form-check-input ${!!this.state.submitted && this.state.lifestyle === "" ? "is-invalid" : null}`}
                   name="lifestyle"
                   id="moderatelyActive"
                   value="moderatelyActive"
                   onChange={this.handleOnChange}
-                />
+                  />
                 <label className="form-check-label" htmlFor="moderatelyActive">Moderately Active: Job that requires physical activity (i.e. landscaping, cleaning, maintenance)</label>
               </div>
               <div className="form-check">
                 <input
                   type="radio"
-                  className="form-check-input"
+                  className={`form-check-input ${!!this.state.submitted && this.state.lifestyle === "" ? "is-invalid" : null}`}
                   name="lifestyle"
                   id="veryActive"
                   value="veryActive"
                   onChange={this.handleOnChange}
-                />
+                  />
                 <label className="form-check-label" htmlFor="veryActive">Very Active: Job that requires heavy manual labor (i.e. construction, dancer, athlete)</label>
+                <div className="invalid-feedback">
+                  Lifestyle required.
+                </div>
               </div>
             </div>
-            <input type="submit" className="btn btn-primary-fill" value="Sign Up" />
+            <input type="submit" className="btn btn-primary-fill" value="Sign Up" onClick={this.handleOnClick} />
           </form>
         </div>
         <div className="note">
           <p>Already have an account? Log in <Link to="/login">here</Link>.</p>
         </div>
-
       </div>
+
     )
   }
 

@@ -8,7 +8,8 @@ import { login } from '../actions/currentUser';
 class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    submitted: false,
   }
 
   handleOnChange = event => {
@@ -17,6 +18,12 @@ class Login extends Component {
 
     this.setState({
       [event.target.name]: event.target.value
+    })
+  }
+
+  handleOnClick = event => {
+    this.setState({
+      submitted: true,
     })
   }
 
@@ -32,10 +39,10 @@ class Login extends Component {
     // take the history prop that you get from using route and pass it in to login - have access to history because Login is rendered directly as the result of a route
 
     this.props.login(this.state, this.props.history)
-    this.setState({
-      username: "",
-      password: ""
-    })
+    // this.setState({
+    //   username: "",
+    //   password: ""
+    // })
   }
 
   render() {
@@ -48,7 +55,7 @@ class Login extends Component {
               <label htmlFor="username">Username: </label>
               <input
                 type="text"
-                className="form-control"
+                className={`form-control ${!!this.state.submitted && this.state.username === "" ? "is-invalid" : null}`}
                 name="username"
                 id="username"
                 value={this.state.username}
@@ -59,15 +66,18 @@ class Login extends Component {
               <label htmlFor="password">Password: </label>
               <input
                 type="password"
-                className="form-control"
+                className={`form-control ${!!this.state.submitted && this.state.password === "" ? "is-invalid" : null}`}
                 name="password"
                 id="password"
                 value={this.state.password}
                 onChange={this.handleOnChange}
               />
+              <div className="invalid-feedback">
+                Username or Password is incorrect.
+              </div>
             </div>
             <br />
-            <input type="submit" className="btn btn-primary-fill" value="Log In" />
+            <input type="submit" className="btn btn-primary-fill" value="Log In" onClick={this.handleOnClick} />
           </form>
 
         </div>
