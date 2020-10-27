@@ -46,7 +46,6 @@ class MainContainer extends Component {
   // when app mounts, I want to get my currentUser
   componentDidMount() {
     this.props.getCurrentUser()
-    console.log(this.props)
   }
 
   // *********
@@ -147,6 +146,7 @@ class MainContainer extends Component {
     return data.calories_burned
   }
 
+
   // COMMENTED OUT WHEN SEARCHBYDATE WAS ADDED TO THIS COMPONENT
   // totalExerciseByCategory = category => {
   //   let exercisesInCategory = []
@@ -214,9 +214,6 @@ class MainContainer extends Component {
         duration_in_minutes: 0
       }
     }
-
-    console.log(totalForCategory)
-
     return totalForCategory
   }
 
@@ -312,8 +309,6 @@ class MainContainer extends Component {
       }
     }
 
-    console.log("mealfoods not flat: ", mealMealFoods)
-    console.log("mealfoods flat: ", mealMealFoods.flat())
     if (mealMealFoods.flat().length > 0) {
       mealTotal = mealMealFoods.flat().reduce((a, b) => {
         for (let k in b) {
@@ -560,7 +555,15 @@ class MainContainer extends Component {
 
           {/* below routes should only be available to users who are logged in - they are working correctly, but i'm not sure how I set that up...*/}
 
-          <Route path="/diaries" render={ routerProps => this.props.loggedIn ? <DiariesContainer {...routerProps} /> : <Home /> } />
+          <Route path="/diaries" render={ routerProps => this.props.loggedIn ?
+            <div>
+              <SearchByDate header={"Meal Diary for: "} startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
+              <DiariesContainer date={this.getDate()} caloriesConsumed={this.dailyNutrition().calories} caloriesBurned={this.caloriesBurned()} {...routerProps} />
+            </div>
+
+          :
+            <Home />
+          } />
 
           {/* IS THERE A WAY TO REFACTOR SINCE THE ONLY THING CHANGING IS THE HEADER IN SEARCHBYDATE? */}
           {/*
