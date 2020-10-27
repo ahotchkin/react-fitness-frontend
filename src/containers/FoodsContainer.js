@@ -13,6 +13,7 @@ import { createFood } from '../actions/foods';
 import { createMealFood } from '../actions/mealFoods';
 
 class FoodsContainer extends Component {
+  // SHOULD I BE USING THE OTHER LIFECYCLE METHODS???????
 
   componentDidMount() {
     this.props.getFoods()
