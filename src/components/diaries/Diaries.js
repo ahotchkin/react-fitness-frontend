@@ -167,8 +167,10 @@ const Diaries = props => {
   }
 
   return (
-    <div className="row">
-      {renderDiaryCards()}
+    <div className="dashboard-container">
+      <div className="row">
+        {renderDiaryCards()}
+      </div>
     </div>
   )
 }
