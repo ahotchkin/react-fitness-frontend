@@ -565,27 +565,6 @@ class MainContainer extends Component {
             <Home />
           } />
 
-          {/* IS THERE A WAY TO REFACTOR SINCE THE ONLY THING CHANGING IS THE HEADER IN SEARCHBYDATE? */}
-          {/*
-          <Route exact path="/exercises/new" render={ routerProps => this.props.loggedIn ?
-            <div>
-              <SearchByDate header={"Add Exercise for:"} startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
-              <ExercisesContainer caloriesBurned={this.caloriesBurned()} date={this.getDate()} {...routerProps} />
-            </div>
-          :
-            <Home />
-          } />
-
-          <Route exact path="/exercises/:exerciseId/edit" render={ routerProps => this.props.loggedIn ?
-            <div>
-              <SearchByDate header={"Update Exercise for:"} startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
-              <ExercisesContainer caloriesBurned={this.caloriesBurned()} date={this.getDate()} {...routerProps} />
-            </div>
-          :
-            <Home />
-          } />
-          */}
-
           <Route path="/exercises" render={ routerProps => {
             let header = ""
 
