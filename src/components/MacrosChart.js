@@ -59,7 +59,7 @@ class MacrosChart extends Component {
             {
               label: "Macros",
               data: [this.props.macros.carbohydrates, this.props.macros.fat, this.props.macros.protein],
-              backgroundColor: ["#01ACAD", "#A2218E", "#F58225"]
+              backgroundColor: ["#01ACAD", "#A2218E", "#F9A51B"]
 
             }
           ],
