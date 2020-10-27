@@ -4,12 +4,11 @@ import NutrientProgressBar from './NutrientProgressBar';
 import Footer from '../components/Footer';
 
 import runningShoes from '../icons/runningShoes.svg';
-import dumbbellGray from '../icons/dumbbellGray.svg';
+import dumbbell from '../icons/dumbbell.svg';
 import yoga from '../icons/yoga.svg';
 import stretching from '../icons/stretching.svg';
 
 const Dashboard = props => {
-  console.log(props)
 
   const caloriesRemaining = () => {
     if ((props.currentUser.attributes.daily_calorie_goal - props.dailyNutrition.calories + props.caloriesBurned) >= 0) {
@@ -78,7 +77,7 @@ const Dashboard = props => {
         </div>
 
         <div className="col-sm dashboard-module info-container">
-          <h4>Macros</h4>
+          <h4>Macronutrients</h4>
           {!!props.dailyMacros ?
             <div>
               <canvas id="macros-chart">
@@ -117,7 +116,7 @@ const Dashboard = props => {
                   </tr>
                   <tr>
                     <td>
-                      <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square-fill"   fill="#F58225" xmlns="http://www.w3.org/2000/svg">
+                      <svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-square-fill"   fill="#F9A51B" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
                       </svg>
                     </td>
@@ -134,7 +133,6 @@ const Dashboard = props => {
         </div>
 
         <div className="col-sm dashboard-module info-container">
-          {console.log(props)}
           <h4>Exercise</h4>
 
           <div className="dashboard-icon-container">
@@ -143,7 +141,7 @@ const Dashboard = props => {
                 <img src={runningShoes} alt="Running Shoes" />
               </div>
               <div className="col-sm">
-                <img src={dumbbellGray} alt="Dumbbell" />
+                <img src={dumbbell} alt="Dumbbell" />
               </div>
               <div className="col-sm">
               <img src={yoga} alt="Yoga" />
@@ -197,7 +195,7 @@ const Dashboard = props => {
 
       <div className="row meal-macros">
         <div className="col-lg dashboard-module info-container">
-          <h4>Macros by Meal</h4>
+          <h4>Macronutrients by Meal</h4>
 
 
             <div className="row">
