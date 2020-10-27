@@ -13,50 +13,8 @@ import Exercises from '../components/exercises/Exercises';
 import ExerciseInput from '../components/exercises/ExerciseInput';
 import ExerciseUpdate from '../components/exercises/ExerciseUpdate';
 
-// ********************************************
-import SearchByDate from '../components/SearchByDate';
-// ********************************************
-
+// tried changing this to functional component but got an error in exercises - can't filter
 class ExercisesContainer extends Component {
-
-// ***************************************
-  state = {
-    startDate: new Date()
-    // startDate: ""
-  };
-
-  handleOnChange = date => {
-    this.setState({
-      startDate: date,
-    });
-  };
-
-  // Below method accounts for time zone difference, ensures date is correct based on location
-  getDate = () => {
-    const tzoffset = this.state.startDate.getTimezoneOffset() * 60000; //offset in milliseconds
-    const date = (new Date(this.state.startDate - tzoffset)).toISOString().split("T")[0];
-    return date
-  }
-
-  caloriesBurned = () => {
-    let data = {}
-
-    // filtering out today's Exercises and getting just the attributes so reduce() will work properly with more than two elements
-    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes)
-
-    if (todaysExercises.length === 1) {
-      data = {calories_burned: todaysExercises[0].calories_burned}
-    } else if (todaysExercises.length > 1) {
-      data = todaysExercises.reduce((a, b) => ({calories_burned: a.calories_burned + b.calories_burned}))
-    } else {
-    data = {calories_burned: 0}
-    }
-
-    return data.calories_burned
-  }
-
-// ***************************************
-
 
   // SHOULD I BE USING THE OTHER LIFECYCLE METHODS???????
   // componentDidMount() {
@@ -68,61 +26,23 @@ class ExercisesContainer extends Component {
   render() {
     return (
       <div>
-        {/* UPDATE ALL ROUTES TO {THIS.PROPS.MATCH.URL} */}
         <Switch>
-          <Route exact path="/exercises/new" render={props =>
-            <div className="dashboard-container">
-              <div className="row">
-                <div className="col-lg info-container">
-                  <h3 className="center-align">Add Exercise</h3>
-                  <div className="form">
-                    <div className="form-group">
-                      <label>Date: </label>
-                      <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
-                    </div>
-                    <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} date={this.getDate()} history={this.props.history} />
-                  </div>
-                </div>
-              </div>
-            </div>} />
+          <Route exact path={`${this.props.match.url}/new`} render={props =>
+            <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} date={this.props.date} history={this.props.history} />
+          } />
 
           <Route exact path={this.props.match.url} render={props =>
-            <div className="dashboard-container">
-              <div className="row">
-                <div className="col-lg header-container info-container">
-                  <h4>Search for Exercises by Date:</h4>
+            <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.props.date} caloriesBurned={this.props.caloriesBurned} {...props} />
+          } />
 
-                  <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange}/>
-                </div>
-              </div>
-              <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.getDate()} caloriesBurned={this.caloriesBurned()} {...props} />
-            </div>} />
-
-            {/* TO BE USED IF I CAN REFACTOR CALORIESBURNED() TO MAIN CONTAINER
-            <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.getDate()} caloriesBurned={this.props.caloriesBurned} {...props} /></div>} />
-            */}
           <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
             const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
             if (!!exercise) {
               return (
-                <div className="dashboard-container">
-                  <div className="row">
-                    <div className="col-lg info-container">
-                      <h3 className="center-align">Update Exercise</h3>
-                      <div className="form">
-                        <div className="form-group">
-                          <label>Date: </label>
-                          <SearchByDate startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
-                        </div>
-                        <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} date={this.getDate()} {...props} />
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} date={this.props.date} {...props} />
               )
             }
           }} />
-
         </Switch>
       </div>
     );
