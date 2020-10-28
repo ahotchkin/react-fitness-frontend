@@ -301,16 +301,11 @@ class SignUp extends Component {
   calculateDailyNutrientGoals = () => {
     const dailyCalorieGoal = this.calculateDailyCalorieGoal()
     const nutrientGoals = {}
-    // tried to set static values as default in create_users table, but wasn't working
     nutrientGoals.fat = parseInt((dailyCalorieGoal * .30) / 9)
     nutrientGoals.saturatedFat = parseInt((dailyCalorieGoal * .07) / 9)
     nutrientGoals.polyunsaturatedFat = parseInt((dailyCalorieGoal * .10) / 9)
     nutrientGoals.monounsaturatedFat = parseInt((dailyCalorieGoal * .20) / 9)
-    nutrientGoals.transFat = 0
-    nutrientGoals.cholesterol = 300
-    nutrientGoals.sodium = 2300
     nutrientGoals.carbohydrate = parseInt((dailyCalorieGoal * .50) / 4)
-    nutrientGoals.fiber = 25
 
     if (this.state.gender === "male") {
       nutrientGoals.sugar = 38
@@ -349,8 +344,6 @@ class SignUp extends Component {
     } else if (parseInt(this.state.age) <= 50 && this.state.gender === "female") {
       nutrientGoals.iron = 18
     }
-
-    nutrientGoals.potassium = 4700
 
     return nutrientGoals
   }
@@ -411,7 +404,7 @@ class SignUp extends Component {
                 onChange={this.handleOnChange}
               />
               <div className="invalid-feedback">
-                Username required.
+                Username required
               </div>
             </div>
             <div className="form-group">
@@ -425,7 +418,7 @@ class SignUp extends Component {
                 onChange={this.handleOnChange}
               />
               <div className="invalid-feedback">
-                Password required.
+                Password required
               </div>
             </div>
             <div className="form-group">
@@ -452,7 +445,7 @@ class SignUp extends Component {
                   />
                 <label className="form-check-label" htmlFor="female">Female</label><br />
                 <div className="invalid-feedback">
-                  Gender required.
+                  Gender required
                 </div>
               </div>
             </div>
@@ -467,7 +460,7 @@ class SignUp extends Component {
                 onChange={this.handleOnChange}
               />
               <div className="invalid-feedback">
-                Age required.
+                Age required
               </div>
             </div>
             <div className="form-group">
@@ -484,7 +477,7 @@ class SignUp extends Component {
                     onChange={this.handleOnChange}
                   />
                   <div className="invalid-feedback">
-                    Height required.
+                    Height required
                   </div>
                 </div>
                 <div className="form-group col-md-6">
@@ -511,7 +504,7 @@ class SignUp extends Component {
                 onChange={this.handleOnChange}
               />
               <div className="invalid-feedback">
-                Weight required.
+                Weight required
               </div>
             </div>
             <div className="form-group">
@@ -560,7 +553,7 @@ class SignUp extends Component {
                   />
                 <label className="form-check-label" htmlFor="veryActive">Very Active: Job that requires heavy manual labor (i.e. construction, dancer, athlete)</label>
                 <div className="invalid-feedback">
-                  Lifestyle required.
+                  Lifestyle required
                 </div>
               </div>
             </div>
