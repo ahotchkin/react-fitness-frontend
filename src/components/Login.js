@@ -61,6 +61,9 @@ class Login extends Component {
                 value={this.state.username}
                 onChange={this.handleOnChange}
               />
+              <div className="invalid-feedback">
+                Username required
+              </div>
             </div>
             <div className="form-group">
               <label htmlFor="password">Password: </label>
@@ -73,7 +76,7 @@ class Login extends Component {
                 onChange={this.handleOnChange}
               />
               <div className="invalid-feedback">
-                Username or Password is incorrect.
+                Password required
               </div>
             </div>
             <br />
