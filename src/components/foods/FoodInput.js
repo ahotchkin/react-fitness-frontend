@@ -27,6 +27,7 @@ class FoodInput extends Component {
     calcium: "",
     iron: "",
     potassium: "",
+    submitted: false,
   }
 
   handleOnChange = event => {
@@ -37,10 +38,43 @@ class FoodInput extends Component {
     })
   }
 
+  handleOnClick = event => {
+    this.setState({
+      submitted: true,
+    })
+  }
+
   handleSubmit = event => {
     event.preventDefault();
     // set the state here by accessing props provided by mapDispatchToProps
     console.log(this.props)
+
+
+    if (event.target.value === "") {
+      this.setState({
+        [event.target.name]: 0
+      })
+    }
+
+    console.log(this.state)
+
+    // t.float :saturated_fat, default: 0
+    // t.float :polyunsaturated_fat, default: 0
+    // t.float :monounsaturated_fat, default: 0
+    // t.float :trans_fat, default: 0
+    // t.float :cholesterol, default: 0
+    // t.float :sodium, default: 0
+    // t.float :dietary_fiber, default: 0
+    // t.float :total_sugars, default: 0
+    // t.float :added_sugars, default: 0
+    // t.float :sugar_alcohols, default: 0
+    // t.float :vitamin_a, default: 0
+    // t.float :vitamin_c, default: 0
+    // t.float :vitamin_d, default: 0
+    // t.float :calcium, default: 0
+    // t.float :iron, default: 0
+    // t.float :potassium, default: 0
+
 
     if (!!this.props.location.state) {
       this.props.createFood(this.state, this.props.location.state.mealId, this.props.history, this.props.location)
@@ -75,6 +109,7 @@ class FoodInput extends Component {
       potassium: "",
     })
     console.log("you submitted your food!!!")
+
   };
 
   render() {
@@ -93,12 +128,15 @@ class FoodInput extends Component {
                 <div className="col-sm-7">
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${!!this.state.submitted && this.state.brand_name === "" ? "is-invalid" : null}`}
                     name="brand_name"
                     id="brand_name"
                     onChange={this.handleOnChange}
                     value={this.state.brand_name}
                   />
+                  <div className="invalid-feedback">
+                    Brand Name required
+                  </div>
                 </div>
               </div>
 
@@ -107,12 +145,15 @@ class FoodInput extends Component {
                 <div className="col-sm-7">
                   <input
                     type="text"
-                    className="form-control"
+                    className={`form-control ${!!this.state.submitted && this.state.description === "" ? "is-invalid" : null}`}
                     name="description"
                     id="description"
                     onChange={this.handleOnChange}
                     value={this.state.description}
                   />
+                  <div className="invalid-feedback">
+                    Description required
+                  </div>
                 </div>
               </div>
 
@@ -120,13 +161,16 @@ class FoodInput extends Component {
                 <label htmlFor="serving_size" className="col-sm-5 col-form-label">Serving Size:* </label>
                 <div className="col-sm-7">
                   <input
-                    type="number"
-                    className="form-control"
+                    type="text"
+                    className={`form-control ${!!this.state.submitted && this.state.serving_size === "" ? "is-invalid" : null}`}
                     name="serving_size"
                     id="serving_size"
                     onChange={this.handleOnChange}
                     value={this.state.serving_size}
                   />
+                  <div className="invalid-feedback">
+                    Serving Size required
+                  </div>
                 </div>
               </div>
 
@@ -135,12 +179,15 @@ class FoodInput extends Component {
                 <div className="col-sm-7">
                   <input
                     type="number"
-                    className="form-control"
+                    className={`form-control ${!!this.state.submitted && this.state.servings_per_container === "" ? "is-invalid" : null}`}
                     name="servings_per_container"
                     id="servings_per_container"
                     onChange={this.handleOnChange}
                     value={this.state.servings_per_container}
                   />
+                  <div className="invalid-feedback">
+                    Servings Per Container required
+                  </div>
                 </div>
               </div>
 
@@ -149,12 +196,15 @@ class FoodInput extends Component {
                 <div className="col-sm-7">
                   <input
                     type="number"
-                    className="form-control"
+                    className={`form-control ${!!this.state.submitted && this.state.calories === "" ? "is-invalid" : null}`}
                     name="calories"
                     id="calories"
                     onChange={this.handleOnChange}
                     value={this.state.calories}
                   />
+                  <div className="invalid-feedback">
+                    Calories required
+                  </div>
                 </div>
               </div>
 
@@ -163,12 +213,15 @@ class FoodInput extends Component {
                 <div className="col-sm-7">
                   <input
                     type="number"
-                    className="form-control"
+                    className={`form-control ${!!this.state.submitted && this.state.total_fat === "" ? "is-invalid" : null}`}
                     name="total_fat"
                     id="total_fat"
                     onChange={this.handleOnChange}
                     value={this.state.total_fat}
                   />
+                  <div className="invalid-feedback">
+                    Total Fat required
+                  </div>
                 </div>
               </div>
 
@@ -261,12 +314,15 @@ class FoodInput extends Component {
                 <div className="col-sm-7">
                   <input
                     type="number"
-                    className="form-control"
+                    className={`form-control ${!!this.state.submitted && this.state.total_carbohydrate === "" ? "is-invalid" : null}`}
                     name="total_carbohydrate"
                     id="total_carbohydrate"
                     onChange={this.handleOnChange}
                     value={this.state.total_carbohydrate}
                   />
+                  <div className="invalid-feedback">
+                    Total Carbohydrates required
+                  </div>
                 </div>
               </div>
 
@@ -331,12 +387,15 @@ class FoodInput extends Component {
                 <div className="col-sm-7">
                   <input
                     type="number"
-                    className="form-control"
+                    className={`form-control ${!!this.state.submitted && this.state.protein === "" ? "is-invalid" : null}`}
                     name="protein"
                     id="protein"
                     onChange={this.handleOnChange}
                     value={this.state.protein}
                   />
+                  <div className="invalid-feedback">
+                    Protein required
+                  </div>
                 </div>
               </div>
 
@@ -424,7 +483,7 @@ class FoodInput extends Component {
                 </div>
               </div>
 
-              <input type="submit" className="btn btn-primary-fill" value="Add Food" />
+              <input type="submit" className="btn btn-primary-fill" value="Add Food" onClick={this.handleOnClick} />
             </form>
           </div>
         </div>
