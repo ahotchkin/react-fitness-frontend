@@ -5,6 +5,7 @@ class MealFoodUpdate extends Component {
   // CAN I REFACTOR AND USE THE SAME FORM FOR NEW AND UPDATE?????? WATCH GLOBETROTTER PART 11
   state = {
     number_of_servings: this.props.mealFood.attributes.number_of_servings,
+    submitted: false
   };
 
   handleOnChange = event => {
@@ -15,18 +16,17 @@ class MealFoodUpdate extends Component {
     })
   };
 
+  handleOnClick = event => {
+    this.setState({
+      submitted: true
+    })
+  }
+
   handleSubmit = event => {
     event.preventDefault();
 
     this.props.updateMealFood(this.props.mealFood, this.state.number_of_servings, this.props.history)
-
-    this.setState({
-      number_of_servings: "",
-    })
   };
-
-
-
 
   render() {
     return(
@@ -55,15 +55,18 @@ class MealFoodUpdate extends Component {
               <div className="input-sm col-auto">
                 <input
                   type="number"
-                  className="form-control"
+                  className={`form-control ${!!this.state.submitted && parseInt(this.state.number_of_servings) <= 0 ? "is-invalid" : null}`}
                   name="number_of_servings"
                   id="number_of_servings"
                   onChange={this.handleOnChange}
                   value={this.state.number_of_servings}
                 />
+                <div className="invalid-feedback">
+                  Must be more than 0
+                </div>
               </div>
 
-              <input type="submit" className="col-auto btn btn-primary-outline btn-sm btn-padding" value="Update" />
+              <input type="submit" className="col-auto btn btn-primary-outline btn-sm btn-padding" value="Update" onClick={this.handleOnClick} />
             </div>
           </form>
 
