@@ -2,6 +2,7 @@
 import { getExercises } from './exercises';
 import { getDiaries } from './diaries';
 import { getMeals } from './meals';
+import { getFoods } from './foods';
 // import { getMealFoods } from './mealFoods';
 
 import { clearExercises } from './exercises';
@@ -48,6 +49,7 @@ export const login = (credentials, history) => {
           dispatch(getExercises())
           dispatch(getDiaries())
           dispatch(getMeals())
+          dispatch(getFoods())
           // dispatch(getMealFoods())
 
           // tells your app which path to go to once logged in
@@ -68,11 +70,7 @@ export const signUp = (credentials, dailyCalorieGoal, dailyNutrientGoals, histor
   userInfo.user.daily_saturated_fat_goal = dailyNutrientGoals.saturatedFat
   userInfo.user.daily_polyunsaturated_fat_goal = dailyNutrientGoals.polyunsaturatedFat
   userInfo.user.daily_monounsaturated_fat_goal = dailyNutrientGoals.monounsaturatedFat
-  userInfo.user.daily_trans_fat_goal = dailyNutrientGoals.transFat
-  userInfo.user.daily_cholesterol_goal = dailyNutrientGoals.cholesterol
-  userInfo.user.daily_sodium_goal = dailyNutrientGoals.sodium
   userInfo.user.daily_carbohydrate_goal = dailyNutrientGoals.carbohydrate
-  userInfo.user.daily_fiber_goal = dailyNutrientGoals.fiber
   userInfo.user.daily_sugar_goal = dailyNutrientGoals.sugar
   userInfo.user.daily_protein_goal = dailyNutrientGoals.protein
   userInfo.user.daily_vitamin_a_goal = dailyNutrientGoals.vitaminA
@@ -80,10 +78,7 @@ export const signUp = (credentials, dailyCalorieGoal, dailyNutrientGoals, histor
   userInfo.user.daily_vitamin_d_goal = dailyNutrientGoals.vitaminD
   userInfo.user.daily_calcium_goal = dailyNutrientGoals.calcium
   userInfo.user.daily_iron_goal = dailyNutrientGoals.iron
-  userInfo.user.daily_potassium_goal = dailyNutrientGoals.potassium
 
-
-  console.log(userInfo)
   return dispatch => {
     // can abstract fetch requests into an adapter class and do something like - return Adapter.login(args) or Api.login(args)
     return fetch("http://localhost:3001/api/v1/signup", {
@@ -97,13 +92,14 @@ export const signUp = (credentials, dailyCalorieGoal, dailyNutrientGoals, histor
       .then(response => response.json())
       .then(json => {
         if (json.error) {
-          alert(json.error)
+          console.log(json.error)
         } else {
           console.log(json.data)
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
           dispatch(getDiaries())
           dispatch(getMeals())
+          dispatch(getFoods())
           // dispatch(getMealFoods())
 
           history.push("/")
@@ -128,12 +124,13 @@ export const getCurrentUser = () => {
       // .then(user => dispatch({type: "SET_CURRENT_USER"}))
       .then(json => {
         if (json.error) {
-          alert(json.error)
+          console.log(json.error)
         } else {
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
           dispatch(getDiaries())
           dispatch(getMeals())
+          dispatch(getFoods())
           // dispatch(getMealFoods())
 
         }
