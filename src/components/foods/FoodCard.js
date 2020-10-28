@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 class FoodCard extends Component {
 
   state = {
-    number_of_servings: 1
+    number_of_servings: 1,
+    submitted: false
   };
 
   handleOnChange = event => {
@@ -15,12 +16,15 @@ class FoodCard extends Component {
     })
   };
 
+  handleOnClick = event => {
+    this.setState({
+      submitted: true
+    })
+  }
+
   handleSubmit = event => {
     event.preventDefault();
     this.props.createMealFood(this.props.meal, this.props.food, this.state.number_of_servings, this.props.history, this.props.location)
-    this.setState({
-      text: "",
-    })
   };
 
   render() {
@@ -47,15 +51,18 @@ class FoodCard extends Component {
               <div className="input-sm col-auto">
                 <input
                   type="number"
-                  className="form-control"
+                  className={`form-control ${!!this.state.submitted && parseInt(this.state.number_of_servings) <= 0 ? "is-invalid" : null}`}
                   name="number_of_servings"
                   id="number_of_servings"
                   onChange={this.handleOnChange}
                   value={this.state.number_of_servings}
                 />
+                <div className="invalid-feedback">
+                  Must be more than 0
+                </div>
               </div>
 
-              <input type="submit" className="col-auto btn btn-primary-outline btn-sm btn-padding" value="Add to Meal" />
+              <input type="submit" className="col-auto btn btn-primary-outline btn-sm btn-padding" value="Add to Meal" onClick={this.handleOnClick} />
             </div>
           </form>
          :
@@ -133,23 +140,23 @@ class FoodCard extends Component {
               </tr>
               <tr>
                 <td>Vitamin A</td>
-                <td>{this.props.food.attributes.vitamin_a * this.state.number_of_servings}%</td>
+                <td>{this.props.food.attributes.vitamin_a * this.state.number_of_servings}mcg</td>
               </tr>
               <tr>
                 <td>Vitamin C</td>
-                <td>{this.props.food.attributes.vitamin_c * this.state.number_of_servings}%</td>
+                <td>{this.props.food.attributes.vitamin_c * this.state.number_of_servings}mg</td>
               </tr>
               <tr>
                 <td>Vitamin D</td>
-                <td>{this.props.food.attributes.vitamin_d * this.state.number_of_servings}%</td>
+                <td>{this.props.food.attributes.vitamin_d * this.state.number_of_servings}mcg</td>
               </tr>
               <tr>
                 <td>Calcium</td>
-                <td>{this.props.food.attributes.calcium * this.state.number_of_servings}%</td>
+                <td>{this.props.food.attributes.calcium * this.state.number_of_servings}mg</td>
               </tr>
               <tr>
                 <td>Iron</td>
-                <td>{this.props.food.attributes.iron * this.state.number_of_servings}%</td>
+                <td>{this.props.food.attributes.iron * this.state.number_of_servings}mg</td>
               </tr>
               <tr>
                 <td>Potassium</td>
