@@ -71,8 +71,6 @@ export const createExercise = (exerciseData, date, currentUser, history) => {
     duration_in_minutes: exerciseData.duration_in_minutes,
     calories_burned: exerciseData.calories_burned
   }
-  console.log(exercise)
-
 
   return dispatch => {
     return fetch(baseUrl, {
@@ -86,11 +84,9 @@ export const createExercise = (exerciseData, date, currentUser, history) => {
       .then(response => response.json())
       .then(json => {
         if (json.error) {
-          alert(json.error)
+          console.log(json.error)
         } else {
-          console.log(json)
           dispatch(addExercise(json.data))
-          // should they go back to home page or to exercise show page???
           history.push("/exercises")
         }
       })
@@ -99,8 +95,6 @@ export const createExercise = (exerciseData, date, currentUser, history) => {
 }
 
 export const updateExercise = (exerciseFormData, date, exercise, history) => {
-  console.log(exercise)
-  console.log(`getting ready to update exercise with an id of ${exercise.id}`)
   const updatedExercise = {
     // is there a cleaner way to do this???
     // is this persisting the userId that was originally saved?????
@@ -110,8 +104,6 @@ export const updateExercise = (exerciseFormData, date, exercise, history) => {
     duration_in_minutes: exerciseFormData.duration_in_minutes,
     calories_burned: exerciseFormData.calories_burned
   }
-  console.log("here is the updated exercise: ")
-  console.log(updatedExercise)
 
   return dispatch => {
     return fetch(baseUrl + `/${exercise.id}`, {
@@ -125,9 +117,8 @@ export const updateExercise = (exerciseFormData, date, exercise, history) => {
       .then(response => response.json())
       .then(json => {
         if (json.error) {
-          alert(json.error)
+          console.log(json.error)
         } else {
-          console.log(json)
           dispatch(updateExerciseSuccess(json.data))
           // what is the difference between push and pushState???
           history.push("/exercises")
