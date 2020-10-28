@@ -13,14 +13,21 @@ import { createFood } from '../actions/foods';
 import { createMealFood } from '../actions/mealFoods';
 
 class FoodsContainer extends Component {
-  // SHOULD I BE USING THE OTHER LIFECYCLE METHODS???????
+  state = {
+    loaded: false
+  }
 
+  // SHOULD I BE USING THE OTHER LIFECYCLE METHODS???????
   componentDidMount() {
     this.props.getFoods()
     this.props.getMeals()
+    this.setState({
+      loaded: true
+    })
   };
 
   render() {
+    console.log(this.props)
     return (
       <div>
         <Switch>
@@ -29,8 +36,8 @@ class FoodsContainer extends Component {
               <FoodInput createFood={this.props.createFood} {...props} />
             </div>
           } />
-          {/* Wait until foods array is populated before rendering so currentlyDisplayed in foods.js is populated correctly. Tried rendering both routes within one conditional, but /meals/:mealId/foods was rendering both at the same time. */}
-          { this.props.foods.length > 0 ?
+          {/* Wait until component mounts before rendering so currentlyDisplayed in foods.js is populated correctly. Tried rendering both routes within one conditional, but /meals/:mealId/foods was rendering both at the same time. */}
+          { !!this.state.loaded ?
             <Route exact path="/meals/:mealId/foods" render={props => {
               const meal = this.props.meals.find(meal => meal.id === props.match.params.mealId)
               return (
@@ -43,7 +50,7 @@ class FoodsContainer extends Component {
             null
           }
 
-          { this.props.foods.length > 0 ?
+          { !!this.state.loaded ?
             <Route exact path={this.props.match.url} render={props =>
               <div className="dashboard-container">
                 <Foods foods={this.props.foods} createMealFood={this.props.createMealFood} {...props} />
