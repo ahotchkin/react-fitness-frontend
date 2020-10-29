@@ -55,6 +55,8 @@ class MealFoodUpdate extends Component {
               <div className="input-sm col-auto">
                 <input
                   type="number"
+                  min="0"
+                  step="any"
                   className={`form-control ${!!this.state.submitted && parseInt(this.state.number_of_servings) <= 0 ? "is-invalid" : null}`}
                   name="number_of_servings"
                   id="number_of_servings"
@@ -81,87 +83,87 @@ class MealFoodUpdate extends Component {
               <tbody className="table-font-small">
                 <tr>
                   <td><b>Calories</b></td>
-                  <td><b>{this.props.mealFood.attributes.food.calories * this.state.number_of_servings}</b></td>
+                  <td><b>{Math.round(this.props.mealFood.attributes.food.calories * this.state.number_of_servings)}</b></td>
                 </tr>
                 <tr>
                   <td>Total Fat</td>
-                  <td>{this.props.mealFood.attributes.food.total_fat * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.total_fat * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td className="indent">Saturated Fat</td>
-                  <td>{this.props.mealFood.attributes.food.saturated_fat * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.saturated_fat * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td className="indent">Polyunsaturated Fat</td>
-                  <td>{this.props.mealFood.attributes.food.polyunsaturated_fat * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.polyunsaturated_fat * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td className="indent">Monounsaturated Fat</td>
-                  <td>{this.props.mealFood.attributes.food.monounsaturated_fat * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.monounsaturated_fat * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td className="indent"><em>Trans</em> Fat</td>
-                  <td>{this.props.mealFood.attributes.food.trans_fat * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.trans_fat * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td className="indent">Monounsaturated Fat</td>
-                  <td>{this.props.mealFood.attributes.food.monounsaturated_fat * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.monounsaturated_fat * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td>Cholesterol</td>
-                  <td>{this.props.mealFood.attributes.food.cholesterol * this.state.number_of_servings}mg</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.cholesterol * this.state.number_of_servings)}mg</td>
                 </tr>
                 <tr>
                   <td>Sodium</td>
-                  <td>{this.props.mealFood.attributes.food.sodium * this.state.number_of_servings}mg</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.sodium * this.state.number_of_servings)}mg</td>
                 </tr>
                 <tr>
                   <td>Total Carbohydrate</td>
-                  <td>{this.props.mealFood.attributes.food.total_carbohydrate * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.total_carbohydrate * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td className="indent">Dietary Fiber</td>
-                  <td>{this.props.mealFood.attributes.food.dietary_fiber * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.dietary_fiber * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td className="indent">Total Sugars</td>
-                  <td>{this.props.mealFood.attributes.food.total_sugars * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.total_sugars * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td className="indent-double">Added Sugars</td>
-                  <td>{this.props.mealFood.attributes.food.added_sugars * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.added_sugars * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td className="indent-double">Sugar Alcohols</td>
-                  <td>{this.props.mealFood.attributes.food.sugar_alcohols * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.sugar_alcohols * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td>Protein</td>
-                  <td>{this.props.mealFood.attributes.food.protein * this.state.number_of_servings}g</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.protein * this.state.number_of_servings)}g</td>
                 </tr>
                 <tr>
                   <td>Vitamin A</td>
-                  <td>{this.props.mealFood.attributes.food.vitamin_a * this.state.number_of_servings}%</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.vitamin_a * this.state.number_of_servings)}mcg</td>
                 </tr>
                 <tr>
                   <td>Vitamin C</td>
-                  <td>{this.props.mealFood.attributes.food.vitamin_c * this.state.number_of_servings}%</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.vitamin_c * this.state.number_of_servings)}mg</td>
                 </tr>
                 <tr>
                   <td>Vitamin D</td>
-                  <td>{this.props.mealFood.attributes.food.vitamin_d * this.state.number_of_servings}%</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.vitamin_d * this.state.number_of_servings)}mcg</td>
                 </tr>
                 <tr>
                   <td>Calcium</td>
-                  <td>{this.props.mealFood.attributes.food.calcium * this.state.number_of_servings}%</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.calcium * this.state.number_of_servings)}mg</td>
                 </tr>
                 <tr>
                   <td>Iron</td>
-                  <td>{this.props.mealFood.attributes.food.iron * this.state.number_of_servings}%</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.iron * this.state.number_of_servings)}mg</td>
                 </tr>
                 <tr>
                   <td>Potassium</td>
-                  <td>{this.props.mealFood.attributes.food.potassium * this.state.number_of_servings}mg</td>
+                  <td>{Math.round(this.props.mealFood.attributes.food.potassium * this.state.number_of_servings)}mg</td>
                 </tr>
               </tbody>
             </table>
