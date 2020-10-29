@@ -133,6 +133,7 @@ class FoodInput extends Component {
                     id="brand_name"
                     onChange={this.handleOnChange}
                     value={this.state.brand_name}
+                    placeholder="e.g. Chobani"
                   />
                   <div className="invalid-feedback">
                     Brand Name required
@@ -150,6 +151,7 @@ class FoodInput extends Component {
                     id="description"
                     onChange={this.handleOnChange}
                     value={this.state.description}
+                    placeholder="e.g. Non-Fat Plain Greek Yogurt"
                   />
                   <div className="invalid-feedback">
                     Description required
@@ -167,6 +169,7 @@ class FoodInput extends Component {
                     id="serving_size"
                     onChange={this.handleOnChange}
                     value={this.state.serving_size}
+                    placeholder="e.g. 170g (include unit)"
                   />
                   <div className="invalid-feedback">
                     Serving Size required
