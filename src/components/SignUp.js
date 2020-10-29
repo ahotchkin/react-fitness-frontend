@@ -453,14 +453,14 @@ class SignUp extends Component {
               <label htmlFor="age">Age: </label>
               <input
                 type="number"
-                className={`form-control ${!!this.state.submitted && this.state.age === "" ? "is-invalid" : null}`}
+                className={`form-control ${!!this.state.submitted && (this.state.age === "" || parseInt(this.state.age) < 18 || this.state.age.includes("."))? "is-invalid" : null}`}
                 name="age"
                 id="age"
                 value={this.state.age}
                 onChange={this.handleOnChange}
               />
               <div className="invalid-feedback">
-                Age required
+                Must be 18 or older to sign up
               </div>
             </div>
             <div className="form-group">
@@ -469,7 +469,7 @@ class SignUp extends Component {
                 <div className="form-group col-md-6">
                   <input
                     type="number"
-                    className={`form-control ${!!this.state.submitted && this.state.height_feet === "" ? "is-invalid" : null}`}
+                    className={`form-control ${!!this.state.submitted && (this.state.height_feet === "" || this.state.height_feet.includes(".")) ? "is-invalid" : null}`}
                     name="height_feet"
                     id="height_feet"
                     placeholder="Feet"
