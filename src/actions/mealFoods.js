@@ -85,26 +85,26 @@ export const createMealFood = (meal, food, number_of_servings, history, location
     meal_id: meal.id,
     food_id: food.id,
     number_of_servings: number_of_servings,
-    calories: food.attributes.calories * number_of_servings,
-    total_fat: food.attributes.total_fat * number_of_servings,
-    saturated_fat: food.attributes.saturated_fat * number_of_servings,
-    polyunsaturated_fat: food.attributes.polyunsaturated_fat * number_of_servings,
-    monounsaturated_fat: food.attributes.monounsaturated_fat * number_of_servings,
-    trans_fat: food.attributes.trans_fat * number_of_servings,
-    cholesterol: food.attributes.cholesterol * number_of_servings,
-    sodium: food.attributes.sodium * number_of_servings,
-    total_carbohydrate: food.attributes.total_carbohydrate * number_of_servings,
-    dietary_fiber: food.attributes.dietary_fiber * number_of_servings,
-    total_sugars: food.attributes.total_sugars * number_of_servings,
-    added_sugars: food.attributes.added_sugars * number_of_servings,
-    sugar_alcohols: food.attributes.sugar_alcohols * number_of_servings,
-    protein: food.attributes.protein * number_of_servings,
-    vitamin_a: food.attributes.vitamin_a * number_of_servings,
-    vitamin_c: food.attributes.vitamin_c * number_of_servings,
-    vitamin_d: food.attributes.vitamin_d * number_of_servings,
-    calcium: food.attributes.calcium * number_of_servings,
-    iron: food.attributes.iron * number_of_servings,
-    potassium: food.attributes.potassium * number_of_servings
+    calories: Math.round(food.attributes.calories * number_of_servings),
+    total_fat: Math.round(food.attributes.total_fat * number_of_servings),
+    saturated_fat: Math.round(food.attributes.saturated_fat * number_of_servings),
+    polyunsaturated_fat: Math.round(food.attributes.polyunsaturated_fat * number_of_servings),
+    monounsaturated_fat: Math.round(food.attributes.monounsaturated_fat * number_of_servings),
+    trans_fat: Math.round(food.attributes.trans_fat * number_of_servings),
+    cholesterol: Math.round(food.attributes.cholesterol * number_of_servings),
+    sodium: Math.round(food.attributes.sodium * number_of_servings),
+    total_carbohydrate: Math.round(food.attributes.total_carbohydrate * number_of_servings),
+    dietary_fiber: Math.round(food.attributes.dietary_fiber * number_of_servings),
+    total_sugars: Math.round(food.attributes.total_sugars * number_of_servings),
+    added_sugars: Math.round(food.attributes.added_sugars * number_of_servings),
+    sugar_alcohols: Math.round(food.attributes.sugar_alcohols * number_of_servings),
+    protein: Math.round(food.attributes.protein * number_of_servings),
+    vitamin_a: Math.round(food.attributes.vitamin_a * number_of_servings),
+    vitamin_c: Math.round(food.attributes.vitamin_c * number_of_servings),
+    vitamin_d: Math.round(food.attributes.vitamin_d * number_of_servings),
+    calcium: Math.round(food.attributes.calcium * number_of_servings),
+    iron: Math.round(food.attributes.iron * number_of_servings),
+    potassium: Math.round(food.attributes.potassium * number_of_servings)
   }
 
   return dispatch => {
@@ -119,7 +119,7 @@ export const createMealFood = (meal, food, number_of_servings, history, location
       .then(response => response.json())
       .then(json => {
         if (json.error) {
-          alert(json.error)
+          console.log(json.error)
         } else {
           // console.log(json)
           // console.log(mealFood)
@@ -159,8 +159,28 @@ export const updateMealFood = (mealFood, updated_number_of_servings, history) =>
     // is this persisting the userId that was originally saved?????
 
     number_of_servings: updated_number_of_servings,
-    calories: mealFood.attributes.food.calories * updated_number_of_servings
+    calories: Math.round(mealFood.attributes.food.calories * updated_number_of_servings),
+    total_fat: Math.round(mealFood.attributes.food.total_fat * updated_number_of_servings),
+    saturated_fat: Math.round(mealFood.attributes.food.saturated_fat * updated_number_of_servings),
+    polyunsaturated_fat: Math.round(mealFood.attributes.food.polyunsaturated_fat * updated_number_of_servings),
+    monounsaturated_fat: Math.round(mealFood.attributes.food.monounsaturated_fat * updated_number_of_servings),
+    trans_fat: Math.round(mealFood.attributes.food.trans_fat * updated_number_of_servings),
+    cholesterol: Math.round(mealFood.attributes.food.cholesterol * updated_number_of_servings),
+    sodium: Math.round(mealFood.attributes.food.sodium * updated_number_of_servings),
+    total_carbohydrate: Math.round(mealFood.attributes.food.total_carbohydrate * updated_number_of_servings),
+    dietary_fiber: Math.round(mealFood.attributes.food.dietary_fiber * updated_number_of_servings),
+    total_sugars: Math.round(mealFood.attributes.food.total_sugars * updated_number_of_servings),
+    added_sugars: Math.round(mealFood.attributes.food.added_sugars * updated_number_of_servings),
+    sugar_alcohols: Math.round(mealFood.attributes.food.sugar_alcohols * updated_number_of_servings),
+    protein: Math.round(mealFood.attributes.food.protein * updated_number_of_servings),
+    vitamin_a: Math.round(mealFood.attributes.food.vitamin_a * updated_number_of_servings),
+    vitamin_c: Math.round(mealFood.attributes.food.vitamin_c * updated_number_of_servings),
+    vitamin_d: Math.round(mealFood.attributes.food.vitamin_d * updated_number_of_servings),
+    calcium: Math.round(mealFood.attributes.food.calcium * updated_number_of_servings),
+    iron: Math.round(mealFood.attributes.food.iron * updated_number_of_servings),
+    potassium: Math.round(mealFood.attributes.food.potassium * updated_number_of_servings)
   }
+
   console.log("here is the updated mealFood: ")
   console.log(updatedMealFood)
 
