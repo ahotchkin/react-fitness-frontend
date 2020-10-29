@@ -59,6 +59,7 @@ class ExerciseInput extends Component {
                     id="name"
                     onChange={this.handleOnChange}
                     value={this.state.name}
+                    placeholder="e.g. Morning Walk"
                   />
                 </div>
 
