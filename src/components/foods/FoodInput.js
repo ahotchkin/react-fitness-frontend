@@ -82,32 +82,32 @@ class FoodInput extends Component {
       this.props.createFood(this.state, null, this.props.history)
     }
 
-    this.setState({
-      brand_name: "",
-      description: "",
-      serving_size: "",
-      servings_per_container: "",
-      calories: "",
-      total_fat: "",
-      saturated_fat: "",
-      polyunsaturated_fat: "",
-      monounsaturated_fat: "",
-      trans_fat: "",
-      cholesterol: "",
-      sodium: "",
-      total_carbohydrate: "",
-      dietary_fiber: "",
-      total_sugars: "",
-      added_sugars: "",
-      sugar_alcohols: "",
-      protein: "",
-      vitamin_a: "",
-      vitamin_c: "",
-      vitamin_d: "",
-      calcium: "",
-      iron: "",
-      potassium: "",
-    })
+    // this.setState({
+    //   brand_name: "",
+    //   description: "",
+    //   serving_size: "",
+    //   servings_per_container: "",
+    //   calories: "",
+    //   total_fat: "",
+    //   saturated_fat: "",
+    //   polyunsaturated_fat: "",
+    //   monounsaturated_fat: "",
+    //   trans_fat: "",
+    //   cholesterol: "",
+    //   sodium: "",
+    //   total_carbohydrate: "",
+    //   dietary_fiber: "",
+    //   total_sugars: "",
+    //   added_sugars: "",
+    //   sugar_alcohols: "",
+    //   protein: "",
+    //   vitamin_a: "",
+    //   vitamin_c: "",
+    //   vitamin_d: "",
+    //   calcium: "",
+    //   iron: "",
+    //   potassium: "",
+    // })
     console.log("you submitted your food!!!")
 
   };
