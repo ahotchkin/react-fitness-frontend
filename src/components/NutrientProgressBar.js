@@ -3,9 +3,15 @@ import React from 'react';
 const NutrientProgressBar = props => {
 
   const nutrientProgress = () => {
-    return (
-      (props.nutrientConsumption / props.nutrientGoal) * 100
-    )
+    if (props.nutrientGoal > 0) {
+      return (
+        (props.nutrientConsumption / props.nutrientGoal) * 100
+      )
+    } else if (props.nutrientGoal === 0 && props.nutrientConsumption > 0){
+      return 100
+    } else {
+      return 0
+    }
   }
 
   return (
