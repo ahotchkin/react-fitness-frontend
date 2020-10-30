@@ -598,8 +598,8 @@ class MainContainer extends Component {
           <Route path="/exercises" render={ routerProps => loggedIn ? <ExercisesContainer caloriesBurned={this.caloriesBurned()} {...routerProps} /> : <Home /> } />
           */}
 
-          <Route path="/foods" render={ routerProps => this.props.loggedIn ? <FoodsContainer {...routerProps} /> : <Home />} />
-          <Route path="/meals/:mealId/foods" render={ routerProps => this.props.loggedIn ? <FoodsContainer {...routerProps} /> : <Home /> } />
+          <Route path="/foods" render={ routerProps => this.props.loggedIn ? <FoodsContainer currentUser={this.props.currentUser} {...routerProps} /> : <Home />} />
+          <Route path="/meals/:mealId/foods" render={ routerProps => this.props.loggedIn ? <FoodsContainer currentUser={this.props.currentUser} {...routerProps} /> : <Home /> } />
 
           <Route path="/meal_foods" render={ routerProps => this.props.loggedIn ? <MealFoodsContainer {...routerProps} /> : <Home /> } />
 
