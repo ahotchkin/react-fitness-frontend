@@ -531,6 +531,7 @@ class MainContainer extends Component {
   }
 
   render() {
+    console.log(this.state.startDate)
     return (
       // Update className when adding css
       <div>
