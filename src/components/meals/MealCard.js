@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import MealFoodsContainer from '../../containers/MealFoodsContainer';
 
-const MealCard = (props) => {
+const MealCard = props => {
 
   return (
     <div>
