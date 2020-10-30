@@ -92,7 +92,12 @@ export const signUp = (credentials, dailyCalorieGoal, dailyNutrientGoals, histor
       .then(response => response.json())
       .then(json => {
         if (json.error) {
-          console.log(json.error)
+          if (json.error.includes("has already been taken")) {
+            alert("Username has already been taken")
+            console.log(json.error)
+          } else {
+            console.log(json.error)
+          }
         } else {
           console.log(json.data)
           dispatch(setCurrentUser(json.data))
