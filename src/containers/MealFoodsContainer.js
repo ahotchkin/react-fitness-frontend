@@ -46,15 +46,8 @@ class MealFoodsContainer extends Component {
           <Route exact path="/meal_foods/:mealFoodId/edit" render={props => {
             const mealFood = this.props.mealFoods.find(mealFood => mealFood.id === props.match.params.mealFoodId)
 
-            {/* See note below in mapStateToProps---
-            const meal = this.props.meals.find(meal => parseInt(meal.id) === mealFood.attributes.meal.id)
-            */}
             if (!!mealFood) {
-              return <MealFoodUpdate mealFood={mealFood} updateMealFood={this.props.updateMealFood} {...props} />
-
-              {/* See note below in mapStateToProps---
-              return <MealFoodUpdate mealFood={mealFood} meal={meal}  updateMealFood={this.props.updateMealFood} {...props} />
-            */}
+              return <MealFoodUpdate mealFood={mealFood} updateMealFood={this.props.updateMealFood} currentUser={this.props.currentUser} {...props} />
             }
           }} />
 
