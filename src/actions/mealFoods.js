@@ -74,37 +74,37 @@ export const getMealFoods = () => {
 
 
 
-export const createMealFood = (meal, food, number_of_servings, history, location) => {
+export const createMealFood = (meal, foodId, food, number_of_servings, history, location) => {
   console.log(location)
-  console.log("foodId is ", food.id, "mealId is ", meal.id)
+  console.log("foodId is ", foodId, "mealId is ", meal.id)
   console.log(food)
   console.log(number_of_servings)
-  console.log(food.attributes.protein * number_of_servings)
+  console.log(food.protein * number_of_servings)
   const mealFood = {
     // is there a cleaner way to do this???
     meal_id: meal.id,
-    food_id: food.id,
+    food_id: foodId,
     number_of_servings: number_of_servings,
-    calories: Math.round(food.attributes.calories * number_of_servings),
-    total_fat: Math.round(food.attributes.total_fat * number_of_servings),
-    saturated_fat: Math.round(food.attributes.saturated_fat * number_of_servings),
-    polyunsaturated_fat: Math.round(food.attributes.polyunsaturated_fat * number_of_servings),
-    monounsaturated_fat: Math.round(food.attributes.monounsaturated_fat * number_of_servings),
-    trans_fat: Math.round(food.attributes.trans_fat * number_of_servings),
-    cholesterol: Math.round(food.attributes.cholesterol * number_of_servings),
-    sodium: Math.round(food.attributes.sodium * number_of_servings),
-    total_carbohydrate: Math.round(food.attributes.total_carbohydrate * number_of_servings),
-    dietary_fiber: Math.round(food.attributes.dietary_fiber * number_of_servings),
-    total_sugars: Math.round(food.attributes.total_sugars * number_of_servings),
-    added_sugars: Math.round(food.attributes.added_sugars * number_of_servings),
-    sugar_alcohols: Math.round(food.attributes.sugar_alcohols * number_of_servings),
-    protein: Math.round(food.attributes.protein * number_of_servings),
-    vitamin_a: Math.round(food.attributes.vitamin_a * number_of_servings),
-    vitamin_c: Math.round(food.attributes.vitamin_c * number_of_servings),
-    vitamin_d: Math.round(food.attributes.vitamin_d * number_of_servings),
-    calcium: Math.round(food.attributes.calcium * number_of_servings),
-    iron: Math.round(food.attributes.iron * number_of_servings),
-    potassium: Math.round(food.attributes.potassium * number_of_servings)
+    calories: Math.round(food.calories * number_of_servings),
+    total_fat: Math.round(food.total_fat * number_of_servings),
+    saturated_fat: Math.round(food.saturated_fat * number_of_servings),
+    polyunsaturated_fat: Math.round(food.polyunsaturated_fat * number_of_servings),
+    monounsaturated_fat: Math.round(food.monounsaturated_fat * number_of_servings),
+    trans_fat: Math.round(food.trans_fat * number_of_servings),
+    cholesterol: Math.round(food.cholesterol * number_of_servings),
+    sodium: Math.round(food.sodium * number_of_servings),
+    total_carbohydrate: Math.round(food.total_carbohydrate * number_of_servings),
+    dietary_fiber: Math.round(food.dietary_fiber * number_of_servings),
+    total_sugars: Math.round(food.total_sugars * number_of_servings),
+    added_sugars: Math.round(food.added_sugars * number_of_servings),
+    sugar_alcohols: Math.round(food.sugar_alcohols * number_of_servings),
+    protein: Math.round(food.protein * number_of_servings),
+    vitamin_a: Math.round(food.vitamin_a * number_of_servings),
+    vitamin_c: Math.round(food.vitamin_c * number_of_servings),
+    vitamin_d: Math.round(food.vitamin_d * number_of_servings),
+    calcium: Math.round(food.calcium * number_of_servings),
+    iron: Math.round(food.iron * number_of_servings),
+    potassium: Math.round(food.potassium * number_of_servings)
   }
 
   return dispatch => {
@@ -197,11 +197,7 @@ export const updateMealFood = (mealFood, updated_number_of_servings, history) =>
       .then(response => response.json())
       .then(json => {
         if (json.error) {
-          if (updated_number_of_servings <= 0) {
-            alert("Number of servings must be greater than 0")
-          } else if (!Number(updated_number_of_servings)) {
-            alert("Number of servings is not a number")
-          }
+          console.log(json.error)
         } else {
           console.log(json)
           console.log(mealFood)
