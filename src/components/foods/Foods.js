@@ -67,7 +67,6 @@ class Foods extends Component {
   // };
 
   render() {
-    console.log(this.state)
     return (
       <div className="row">
         <div className="col-lg info-container">
@@ -118,7 +117,7 @@ class Foods extends Component {
 
             <div className="col-sm">
               { this.state.renderFoodNutrition ?
-                <FoodCard food={this.state.currentFood} meal={this.props.meal} createMealFood={this.props.createMealFood} history={this.props.history} location={this.props.location} />
+                <FoodCard food={this.state.currentFood} meal={this.props.meal} createMealFood={this.props.createMealFood} currentUser={this.props.currentUser} history={this.props.history} location={this.props.location} />
               :
                 null
               }
