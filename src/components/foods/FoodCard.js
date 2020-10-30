@@ -28,9 +28,10 @@ class FoodCard extends Component {
   };
 
   render() {
+    console.log(this.props)
     return (
       <div className="nutrition-container">
-        <h5>{this.props.food.attributes.brand_name} {this.props.food.attributes.description}</h5>
+        <h5>{this.props.food.attributes.brand_name} {this.props.food.attributes.description} Nutrition</h5>
         <table className="bottom-margin">
           <tbody>
             <tr>
@@ -71,98 +72,169 @@ class FoodCard extends Component {
           null
         }
 
+        {console.log(this.props.currentUser.attributes.daily_fat_goal)}
         <div className="nutrition-card">
           <table className="table table-sm">
             <thead>
               <tr>
-                <th>Nutrition Facts</th>
-                <th></th>
+                <th>Calories</th>
+                <th className="right-align">{Math.round(this.props.food.attributes.calories * this.state.number_of_servings)}</th>
               </tr>
             </thead>
             <tbody className="table-font-small">
-              <tr>
-                <td><b>Calories</b></td>
-                <td><b>{Math.round(this.props.food.attributes.calories * this.state.number_of_servings)}</b></td>
+              <tr className="table-font-extra-small">
+                <td></td>
+                <td className="right-align"><b>% Daily Value</b></td>
               </tr>
               <tr>
-                <td>Total Fat</td>
-                <td>{Math.round(this.props.food.attributes.total_fat * this.state.number_of_servings)}g</td>
+                <td><b>Total Fat</b> {Math.round(this.props.food.attributes.total_fat * this.state.number_of_servings)}g</td>
+                { Math.round(((this.props.food.attributes.total_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_fat_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.total_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_fat_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.total_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_fat_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td className="indent">Saturated Fat</td>
-                <td>{Math.round(this.props.food.attributes.saturated_fat * this.state.number_of_servings)}g</td>
+                <td className="indent">Saturated Fat {Math.round(this.props.food.attributes.saturated_fat * this.state.number_of_servings)}g</td>
+                { Math.round(((this.props.food.attributes.saturated_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_saturated_fat_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.saturated_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_saturated_fat_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.saturated_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_saturated_fat_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td className="indent">Polyunsaturated Fat</td>
-                <td>{Math.round(this.props.food.attributes.polyunsaturated_fat * this.state.number_of_servings)}g</td>
+                <td className="indent">Polyunsaturated Fat {Math.round(this.props.food.attributes.polyunsaturated_fat * this.state.number_of_servings)}g</td>
+                { Math.round(((this.props.food.attributes.polyunsaturated_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_polyunsaturated_fat_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.polyunsaturated_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_polyunsaturated_fat_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.polyunsaturated_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_polyunsaturated_fat_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td className="indent">Monounsaturated Fat</td>
-                <td>{Math.round(this.props.food.attributes.monounsaturated_fat * this.state.number_of_servings)}g</td>
+                <td className="indent">Monounsaturated Fat {Math.round(this.props.food.attributes.monounsaturated_fat * this.state.number_of_servings)}g</td>
+                { Math.round(((this.props.food.attributes.monounsaturated_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_monounsaturated_fat_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.monounsaturated_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_monounsaturated_fat_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.monounsaturated_fat * this.state.number_of_servings) / this.props.currentUser.attributes.daily_monounsaturated_fat_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td className="indent"><em>Trans</em> Fat</td>
-                <td>{Math.round(this.props.food.attributes.trans_fat * this.state.number_of_servings)}g</td>
+                <td className="indent"><em>Trans</em> Fat {Math.round(this.props.food.attributes.trans_fat * this.state.number_of_servings)}g</td>
+                <td></td>
+
+                {/*
+                <td><b>
+                  { this.props.food.attributes.trans_fat > 0
+                    100%
+                  :
+                    0%
+                  }
+                </b></td>
+                */}
               </tr>
               <tr>
-                <td className="indent">Monounsaturated Fat</td>
-                <td>{Math.round(this.props.food.attributes.monounsaturated_fat * this.state.number_of_servings)}g</td>
+                <td><b>Cholesterol</b> {Math.round(this.props.food.attributes.cholesterol * this.state.number_of_servings)}mg</td>
+                { Math.round(((this.props.food.attributes.cholesterol * this.state.number_of_servings) / this.props.currentUser.attributes.daily_cholesterol_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.cholesterol * this.state.number_of_servings) / this.props.currentUser.attributes.daily_cholesterol_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.cholesterol * this.state.number_of_servings) / this.props.currentUser.attributes.daily_cholesterol_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td>Cholesterol</td>
-                <td>{Math.round(this.props.food.attributes.cholesterol * this.state.number_of_servings)}mg</td>
+                <td><b>Sodium</b> {Math.round(this.props.food.attributes.sodium * this.state.number_of_servings)}mg</td>
+                { Math.round(((this.props.food.attributes.sodium * this.state.number_of_servings) / this.props.currentUser.attributes.daily_sodium_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.sodium * this.state.number_of_servings) / this.props.currentUser.attributes.daily_sodium_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.sodium * this.state.number_of_servings) / this.props.currentUser.attributes.daily_sodium_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td>Sodium</td>
-                <td>{Math.round(this.props.food.attributes.sodium * this.state.number_of_servings)}mg</td>
+                <td><b>Total Carbohydrate</b> {Math.round(this.props.food.attributes.total_carbohydrate * this.state.number_of_servings)}g</td>
+                { Math.round(((this.props.food.attributes.total_carbohydrate * this.state.number_of_servings) / this.props.currentUser.attributes.daily_carbohydrate_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.total_carbohydrate * this.state.number_of_servings) / this.props.currentUser.attributes.daily_carbohydrate_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.total_carbohydrate * this.state.number_of_servings) / this.props.currentUser.attributes.daily_carbohydrate_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td>Total Carbohydrate</td>
-                <td>{Math.round(this.props.food.attributes.total_carbohydrate * this.state.number_of_servings)}g</td>
+                <td className="indent">Dietary Fiber {Math.round(this.props.food.attributes.dietary_fiber * this.state.number_of_servings)}g</td>
+                { Math.round(((this.props.food.attributes.dietary_fiber * this.state.number_of_servings) / this.props.currentUser.attributes.daily_fiber_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.dietary_fiber * this.state.number_of_servings) / this.props.currentUser.attributes.daily_fiber_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.dietary_fiber * this.state.number_of_servings) / this.props.currentUser.attributes.daily_fiber_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td className="indent">Dietary Fiber</td>
-                <td>{Math.round(this.props.food.attributes.dietary_fiber * this.state.number_of_servings)}g</td>
+                <td className="indent">Total Sugars {Math.round(this.props.food.attributes.total_sugars * this.state.number_of_servings)}g</td>
+                <td></td>
               </tr>
               <tr>
-                <td className="indent">Total Sugars</td>
-                <td>{Math.round(this.props.food.attributes.total_sugars * this.state.number_of_servings)}g</td>
+                <td className="indent-double">Added Sugars {Math.round(this.props.food.attributes.added_sugars * this.state.number_of_servings)}g</td>
+                { Math.round(((this.props.food.attributes.added_sugars * this.state.number_of_servings) / this.props.currentUser.attributes.daily_sugar_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.added_sugars * this.state.number_of_servings) / this.props.currentUser.attributes.daily_sugar_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.added_sugars * this.state.number_of_servings) / this.props.currentUser.attributes.daily_sugar_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td className="indent-double">Added Sugars</td>
-                <td>{Math.round(this.props.food.attributes.added_sugars * this.state.number_of_servings)}g</td>
+                <td className="indent-double">Sugar Alcohols {Math.round(this.props.food.attributes.sugar_alcohols * this.state.number_of_servings)}g</td>
+                <td></td>
               </tr>
               <tr>
-                <td className="indent-double">Sugar Alcohols</td>
-                <td>{Math.round(this.props.food.attributes.sugar_alcohols * this.state.number_of_servings)}g</td>
+                <td><b>Protein</b> {Math.round(this.props.food.attributes.protein * this.state.number_of_servings)}g</td>
+                { Math.round(((this.props.food.attributes.protein * this.state.number_of_servings) / this.props.currentUser.attributes.daily_protein_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.protein * this.state.number_of_servings) / this.props.currentUser.attributes.daily_protein_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.protein * this.state.number_of_servings) / this.props.currentUser.attributes.daily_protein_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td>Protein</td>
-                <td>{Math.round(this.props.food.attributes.protein * this.state.number_of_servings)}g</td>
+                <td>Vitamin A {Math.round(this.props.food.attributes.vitamin_a * this.state.number_of_servings)}mcg</td>
+                { Math.round(((this.props.food.attributes.vitamin_a * this.state.number_of_servings) / this.props.currentUser.attributes.daily_vitamin_a_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.vitamin_a * this.state.number_of_servings) / this.props.currentUser.attributes.daily_vitamin_a_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.vitamin_a * this.state.number_of_servings) / this.props.currentUser.attributes.daily_vitamin_a_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td>Vitamin A</td>
-                <td>{Math.round(this.props.food.attributes.vitamin_a * this.state.number_of_servings)}mcg</td>
+                <td>Vitamin C {Math.round(this.props.food.attributes.vitamin_c * this.state.number_of_servings)}mg</td>
+                { Math.round(((this.props.food.attributes.vitamin_c * this.state.number_of_servings) / this.props.currentUser.attributes.daily_vitamin_c_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.vitamin_c * this.state.number_of_servings) / this.props.currentUser.attributes.daily_vitamin_c_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.vitamin_c *   this.state.number_of_servings) / this.props.currentUser.attributes.daily_vitamin_c_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td>Vitamin C</td>
-                <td>{Math.round(this.props.food.attributes.vitamin_c * this.state.number_of_servings)}mg</td>
+                <td>Vitamin D {Math.round(this.props.food.attributes.vitamin_d * this.state.number_of_servings)}mcg</td>
+                { Math.round(((this.props.food.attributes.vitamin_d * this.state.number_of_servings) / this.props.currentUser.attributes.daily_vitamin_d_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.vitamin_d * this.state.number_of_servings) / this.props.currentUser.attributes.daily_vitamin_d_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.vitamin_d * this.state.number_of_servings) / this.props.currentUser.attributes.daily_vitamin_d_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td>Vitamin D</td>
-                <td>{Math.round(this.props.food.attributes.vitamin_d * this.state.number_of_servings)}mcg</td>
+                <td>Calcium {Math.round(this.props.food.attributes.calcium * this.state.number_of_servings)}mg</td>
+                { Math.round(((this.props.food.attributes.calcium * this.state.number_of_servings) / this.props.currentUser.attributes.daily_calcium_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.calcium * this.state.number_of_servings) / this.props.currentUser.attributes.daily_calcium_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.calcium * this.state.number_of_servings) / this.props.currentUser.attributes.daily_calcium_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td>Calcium</td>
-                <td>{Math.round(this.props.food.attributes.calcium * this.state.number_of_servings)}mg</td>
+                <td>Iron {Math.round(this.props.food.attributes.iron * this.state.number_of_servings)}mg</td>
+                { Math.round(((this.props.food.attributes.iron * this.state.number_of_servings) / this.props.currentUser.attributes.daily_iron_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.iron * this.state.number_of_servings) / this.props.currentUser.attributes.daily_iron_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.iron * this.state.number_of_servings) / this.props.currentUser.attributes.daily_iron_goal) * 100)}%</b></td>
+                }
               </tr>
               <tr>
-                <td>Iron</td>
-                <td>{Math.round(this.props.food.attributes.iron * this.state.number_of_servings)}mg</td>
-              </tr>
-              <tr>
-                <td>Potassium</td>
-                <td>{Math.round(this.props.food.attributes.potassium * this.state.number_of_servings)}mg</td>
+                <td>Potassium {Math.round(this.props.food.attributes.potassium * this.state.number_of_servings)}mg</td>
+                { Math.round(((this.props.food.attributes.potassium * this.state.number_of_servings) / this.props.currentUser.attributes.daily_potassium_goal) * 100) > 100 ?
+                  <td className="right-align negative"><b>{Math.round(((this.props.food.attributes.potassium * this.state.number_of_servings) / this.props.currentUser.attributes.daily_potassium_goal) * 100)}%</b></td>
+                :
+                  <td className="right-align"><b>{Math.round(((this.props.food.attributes.potassium * this.state.number_of_servings) / this.props.currentUser.attributes.daily_potassium_goal) * 100)}%</b></td>
+                }
               </tr>
             </tbody>
           </table>
