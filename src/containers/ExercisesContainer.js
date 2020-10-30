@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // removed withRouter 9/20/20 and seems to be working okay
 import { Route, Switch } from 'react-router-dom';
 
-import { getExercises } from '../actions/exercises';
+// import { getExercises } from '../actions/exercises';
 import { createExercise } from '../actions/exercises';
 import { updateExercise } from '../actions/exercises';
 import { deleteExercise } from '../actions/exercises';
