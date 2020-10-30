@@ -10,7 +10,7 @@ import dumbbell from '../icons/dumbbell.svg';
 import weightScale from '../icons/weightScale.svg';
 import foodDiary from '../icons/foodDiary.svg';
 
-const Home = ({}) => (
+const Home = () => (
   <div>
     <div className="welcome-container center-align">
       <h2>React Fitness</h2>
