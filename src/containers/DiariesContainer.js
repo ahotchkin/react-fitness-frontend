@@ -15,7 +15,7 @@ import { createDiary } from '../actions/diaries';
 import Diaries from '../components/diaries/Diaries'
 
 // ********************************************
-import SearchByDate from '../components/SearchByDate';
+// import SearchByDate from '../components/SearchByDate';
 // ********************************************
 
 
