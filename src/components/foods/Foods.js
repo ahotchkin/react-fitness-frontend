@@ -26,7 +26,16 @@ class Foods extends Component {
   // };
 
   renderFoods = () => {
-    return this.state.currentlyDisplayed.map(food =>
+    let foods = []
+
+    // conditional ensures foods display on page refresh
+    if (this.state.currentlyDisplayed.length === 0 && this.state.searchTerm === "") {
+      foods = this.props.foods
+    } else {
+      foods = this.state.currentlyDisplayed
+    }
+
+    return foods.map(food =>
       <tr key={food.id} onClick={() => this.renderFoodNutrition(food)}>
         <td>
           {food.attributes.brand_name} {food.attributes.description}
@@ -40,12 +49,16 @@ class Foods extends Component {
     // is this necessary? What is happening here?
     event.persist()
 
-    let newlyDisplayed = this.props.foods.filter(food => food.attributes.brand_name.toLowerCase().includes(event.target.value.toLowerCase()) || food.attributes.description.toLowerCase().includes(event.target.value.toLowerCase()))
+    let newlyDisplayed = this.props.foods.filter(food => {
+      const foodFullName = food.attributes.brand_name + " " + food.attributes.description
+      return (foodFullName.toLowerCase().includes(event.target.value.toLowerCase()))
+    })
 
     this.setState({
       [event.target.name]: event.target.value,
       currentlyDisplayed: newlyDisplayed
     });
+
   };
 
   // GET RID OF SUBMIT BUTTON, IT'S NOT DOING ANYTHING HERE. DO I EVER USE IT?
@@ -54,19 +67,14 @@ class Foods extends Component {
   // };
 
   render() {
+    console.log(this.state)
     return (
       <div className="row">
         <div className="col-lg info-container">
           <h2>Foods</h2>
           <br />
-          {/*
-          <SearchInput searchTerm={this.state.searchTerm} handleOnChange={this.handleOnChange} handleSubmit={this.handleSubmit} />
-          */}
 
           <div className="row">
-
-            {/* WITH NO SUBMIT BUTTON */}
-            {/* WANT THE SEARCH BAR TO TAKE UP 100% OF THE CONTAINER ONCE ADD FOOD BUTTON MOVES TO SECOND LINE */}
             <div className="col-6">
               <SearchInput searchTerm={this.state.searchTerm} handleOnChange={this.handleOnChange} />
             </div>
