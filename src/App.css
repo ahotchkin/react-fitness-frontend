@@ -261,6 +261,10 @@ td hr.solid-thick {
   font-size: 14px;
 }
 
+.table-font-extra-small {
+  font-size: 10px
+}
+
 .nutrition-container {
   background-color: #E6EBF2;
   padding: 15px;
