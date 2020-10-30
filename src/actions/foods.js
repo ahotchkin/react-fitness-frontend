@@ -40,10 +40,11 @@ export const getFoods = () => {
   }
 }
 
-export const createFood = (foodData, mealId, history, location) => {
+export const createFood = (userId, foodData, mealId, history, location) => {
   console.log(foodData)
   const food = {
     // is there a cleaner way to do this???
+    user_id: userId,
     brand_name: foodData.brand_name,
     description: foodData.description,
     serving_size: foodData.serving_size,
