@@ -531,7 +531,6 @@ class MainContainer extends Component {
   }
 
   render() {
-    console.log(this.state.startDate)
     return (
       // Update className when adding css
       <div>
@@ -601,7 +600,7 @@ class MainContainer extends Component {
           <Route path="/foods" render={ routerProps => this.props.loggedIn ? <FoodsContainer currentUser={this.props.currentUser} {...routerProps} /> : <Home />} />
           <Route path="/meals/:mealId/foods" render={ routerProps => this.props.loggedIn ? <FoodsContainer currentUser={this.props.currentUser} {...routerProps} /> : <Home /> } />
 
-          <Route path="/meal_foods" render={ routerProps => this.props.loggedIn ? <MealFoodsContainer {...routerProps} /> : <Home /> } />
+          <Route path="/meal_foods" render={ routerProps => this.props.loggedIn ? <MealFoodsContainer currentUser={this.props.currentUser} {...routerProps} /> : <Home /> } />
 
           {/* Added path so Logout link in NavBar isn't highlighted as active when at "/" */}
           <Route exact path="/logout" render={ () => <Redirect to="/" /> } />
