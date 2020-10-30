@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import MealFoodInput from '../mealFoods/MealFoodInput';
 import FoodCard from './FoodCard';
 import SearchInput from '../SearchInput';
 // import FoodNutritionCard from './FoodNutritionCard';
@@ -43,6 +44,18 @@ class Foods extends Component {
         </td>
       </tr>
     )
+  }
+
+  renderFoodCard = () => {
+    if (this.state.renderFoodNutrition && !!this.props.meal) {
+      return <MealFoodInput food={this.state.currentFood.attributes} foodId={this.state.currentFood.id} meal={this.props.meal} createMealFood={this.props.createMealFood} currentUser={this.props.currentUser} history={this.props.history} location={this.props.location}/>
+    } else if (this.state.renderFoodNutrition) {
+      return <FoodCard food={this.state.currentFood.attributes} number_of_servings={1} currentUser={this.props.currentUser} />
+    } else {
+      return (
+        null
+      )
+    }
   }
 
   handleOnChange = event => {
@@ -116,8 +129,10 @@ class Foods extends Component {
             </div>
 
             <div className="col-sm">
-              { this.state.renderFoodNutrition ?
-                <FoodCard food={this.state.currentFood} meal={this.props.meal} createMealFood={this.props.createMealFood} currentUser={this.props.currentUser} history={this.props.history} location={this.props.location} />
+              { !!this.state.renderFoodNutrition ?
+                <div className="nutrition-container">
+                  {this.renderFoodCard()}
+                </div>
               :
                 null
               }
