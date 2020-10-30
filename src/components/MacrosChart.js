@@ -30,7 +30,7 @@ class MacrosChart extends Component {
     const ctx = document.getElementById(elementId).getContext("2d")
 
     if (this.props.macros.carbohydrates === 0 && this.props.macros.fat === 0 && this.props.macros.protein === 0) {
-      const macrosChart = new Chart(ctx, {
+      new Chart(ctx, {
         type: "doughnut",
         data: {
           datasets: [
@@ -52,7 +52,7 @@ class MacrosChart extends Component {
         }
       })
     } else {
-      const macrosChart = new Chart(ctx, {
+      new Chart(ctx, {
         type: "doughnut",
         data: {
           datasets: [
