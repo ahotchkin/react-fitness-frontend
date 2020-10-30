@@ -33,7 +33,7 @@ class FoodsContainer extends Component {
         <Switch>
           <Route exact path="/foods/new" render={props =>
             <div className="dashboard-container">
-              <FoodInput createFood={this.props.createFood} {...props} />
+              <FoodInput createFood={this.props.createFood} userId={this.props.currentUser.id} {...props} />
             </div>
           } />
           {/* Wait until component mounts before rendering so currentlyDisplayed in foods.js is populated correctly. Tried rendering both routes within one conditional, but /meals/:mealId/foods was rendering both at the same time. */}
@@ -42,7 +42,7 @@ class FoodsContainer extends Component {
               const meal = this.props.meals.find(meal => meal.id === props.match.params.mealId)
               return (
                 <div className="dashboard-container">
-                  <Foods foods={this.props.foods} meal={meal} createMealFood={this.props.createMealFood} {...props} />
+                  <Foods foods={this.props.foods} meal={meal} createMealFood={this.props.createMealFood} currentUser={this.props.currentUser} {...props} />
                 </div>
               )
             }} />
@@ -53,7 +53,7 @@ class FoodsContainer extends Component {
           { !!this.state.loaded ?
             <Route exact path={this.props.match.url} render={props =>
               <div className="dashboard-container">
-                <Foods foods={this.props.foods} createMealFood={this.props.createMealFood} {...props} />
+                <Foods foods={this.props.foods} createMealFood={this.props.createMealFood} currentUser={this.props.currentUser} {...props} />
               </div>
             } />
           :
