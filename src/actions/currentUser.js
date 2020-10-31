@@ -117,7 +117,6 @@ export const signUp = (credentials, dailyCalorieGoal, dailyNutrientGoals, histor
 export const getCurrentUser = () => {
   return dispatch => {
     // can abstract fetch requests into an adapter class and do something like - return Adapter.login(args) or Api.login(args)
-    console.log("DISPATCHING CURRENT USER")
     return fetch("http://localhost:3001/api/v1/get_current_user", {
       credentials: "include",
       method: "GET",
@@ -135,9 +134,8 @@ export const getCurrentUser = () => {
           dispatch(getExercises())
           dispatch(getDiaries())
           dispatch(getMeals())
+          // DO I NEED TO GET THIS HERE OR CAN I WAIT UNTIL USER IS IN FOODSCONTAINER?
           dispatch(getFoods())
-          // dispatch(getMealFoods())
-
         }
       })
       .catch(console.log())

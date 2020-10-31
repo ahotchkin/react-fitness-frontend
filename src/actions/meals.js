@@ -26,7 +26,6 @@ export const clearMeals = () => {
 // asychronous actions
 export const getMeals = () => {
   return dispatch => {
-    console.log("DISPATCHING CURRENT USER'S MEALS")
     return fetch("http://localhost:3001/api/v1/meals", {
       credentials: "include",
       method: "GET",
@@ -51,15 +50,9 @@ export const getMeals = () => {
 
 // Updates meal.calories when a meallFood is added, updated, or deleted
 export const updateMeal = (mealId, mealCalories, previousMealFoodCalories = 0, updatedMealFoodCalories = 0) => {
-  console.log(previousMealFoodCalories)
-  console.log(updatedMealFoodCalories)
-  console.log(mealCalories)
-  console.log(mealId)
   const updatedMeal = {
     calories: mealCalories - previousMealFoodCalories + updatedMealFoodCalories,
   }
-  console.log("here is the updated meal: ")
-  console.log(updatedMeal)
 
   return dispatch => {
     return fetch(`http://localhost:3001/api/v1/meals/${mealId}`, {
@@ -75,7 +68,6 @@ export const updateMeal = (mealId, mealCalories, previousMealFoodCalories = 0, u
         if (json.error) {
           alert(json.error)
         } else {
-          console.log(json)
           dispatch(updateMealSuccess(json.data))
           // what is the difference between push and pushState???
         }

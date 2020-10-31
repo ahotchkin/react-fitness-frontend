@@ -47,7 +47,6 @@ class FoodInput extends Component {
   handleSubmit = event => {
     event.preventDefault();
     // set the state here by accessing props provided by mapDispatchToProps
-    console.log(this.props)
 
 
     if (event.target.value === "") {
@@ -56,7 +55,6 @@ class FoodInput extends Component {
       })
     }
 
-    console.log(this.state)
 
     // t.float :saturated_fat, default: 0
     // t.float :polyunsaturated_fat, default: 0
@@ -108,7 +106,6 @@ class FoodInput extends Component {
     //   iron: "",
     //   potassium: "",
     // })
-    console.log("you submitted your food!!!")
 
   };
 

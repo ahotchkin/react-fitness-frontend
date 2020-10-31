@@ -39,7 +39,6 @@ const baseUrl = "http://localhost:3001/api/v1/exercises"
 // asychronous actions
 export const getExercises = () => {
   return dispatch => {
-    console.log("DISPATCHING CURRENT USER'S EXERCISES")
     return fetch(baseUrl, {
       credentials: "include",
       method: "GET",
@@ -61,7 +60,6 @@ export const getExercises = () => {
 }
 
 export const createExercise = (exerciseData, date, currentUser, history) => {
-  console.log("exercise data is ", exerciseData)
   const exercise = {
     // is there a cleaner way to do this???
     user_id: currentUser.id,

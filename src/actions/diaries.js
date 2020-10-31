@@ -27,7 +27,6 @@ export const addDiary = diary => {
 // asychronous actions
 export const getDiaries = () => {
   return dispatch => {
-    console.log("DISPATCHING CURRENT USER'S DIARIES")
     return fetch("http://localhost:3001/api/v1/diaries", {
       credentials: "include",
       method: "GET",

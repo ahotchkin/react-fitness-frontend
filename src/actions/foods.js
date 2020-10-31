@@ -19,7 +19,6 @@ export const addFood = food => {
 // asychronous actions
 export const getFoods = () => {
   return dispatch => {
-    console.log("DISPATCHING ALL FOODS FROM THE DATABASE")
     return fetch("http://localhost:3001/api/v1/foods", {
       credentials: "include",
       method: "GET",
@@ -41,7 +40,6 @@ export const getFoods = () => {
 }
 
 export const createFood = (userId, foodData, mealId, history, location) => {
-  console.log(foodData)
   const food = {
     // is there a cleaner way to do this???
     user_id: userId,

@@ -27,7 +27,6 @@ class FoodsContainer extends Component {
   };
 
   render() {
-    console.log(this.props)
     return (
       <div>
         <Switch>

@@ -29,9 +29,9 @@ class DiariesContainer extends Component {
 
   // SHOULD I BE USING THE OTHER LIFECYCLE METHODS???????
   componentDidMount() {
-    console.log(this.props)
+    // DO I NEED ANY OF THIS ANYMORE????
     if (!!this.props.location.state) {
-      console.log(this.props)
+      // console.log(this.props)
       // const diaryDate = this.props.location.state.diaryDate
       // console.log(diaryDate)
       // console.log(new Date(diaryDate))

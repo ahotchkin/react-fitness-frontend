@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const FoodCard = props => {
 
@@ -181,7 +181,7 @@ const FoodCard = props => {
       </div>
     </div>
   );
-  
+
 };
 
 

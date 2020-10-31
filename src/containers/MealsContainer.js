@@ -9,10 +9,7 @@ import { getMeals } from '../actions/meals';
 class MealsContainer extends Component {
 
   componentDidMount() {
-    // this.props.loggedIn ? this.props.getExercises() : null
-    // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
     this.props.getMeals()
-
   }
 
   render() {
