@@ -13,6 +13,7 @@ const MealCard = props => {
       <Link to={{
         pathname: `/meals/${props.meal.id}/foods`,
         state: {
+          // WHAT INFO IS ACTUALLY NECESSARY TO PASS HERE?
           // diaryId: props.diaryId,
           diaryDate: props.diaryDate
         }

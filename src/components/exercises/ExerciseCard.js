@@ -8,20 +8,6 @@ const ExerciseCard = props => {
   };
 
   return (
-    // <div>
-    //   <h3>{props.exercise.attributes.name}</h3>
-    //   <p>Calories Burned: {props.exercise.attributes.calories_burned}</p>
-    //
-    //   <Link to={`/exercises/${props.exercise.id}/edit`}>
-    //     <button type="button">
-    //       Update Exercise
-    //     </button>
-    //   </Link>
-    //
-    //   <button onClick={handleDeleteClick}>Delete</button>
-    // </div>
-
-
     <tr key={props.exercise.id}>
       <td>{props.exercise.attributes.name}</td>
       <td className="right-align">{props.exercise.attributes.duration_in_minutes}</td>
@@ -40,7 +26,6 @@ const ExerciseCard = props => {
         </button>
       </td>
     </tr>
-
   );
 };
 

@@ -1,10 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-
-// removed withRouter 9/20/20 and seems to be working okay
 import { Route, Switch } from 'react-router-dom';
 
-// import { getExercises } from '../actions/exercises';
 import { createExercise } from '../actions/exercises';
 import { updateExercise } from '../actions/exercises';
 import { deleteExercise } from '../actions/exercises';
@@ -15,13 +12,6 @@ import ExerciseUpdate from '../components/exercises/ExerciseUpdate';
 
 // tried changing this to functional component but got an error in exercises - can't filter
 class ExercisesContainer extends Component {
-
-  // SHOULD I BE USING THE OTHER LIFECYCLE METHODS???????
-  // componentDidMount() {
-  //   // if I end up using this component - comment out all calls to dispatch(getExercises()) in currentUser.js
-  //   this.props.getExercises()
-  //
-  // }
 
   render() {
     return (
@@ -56,14 +46,9 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = {
-  // getExercises,
   createExercise,
   updateExercise,
   deleteExercise
 };
 
-// the function returned from invoking connect that will now supply ExercisesContainer with props included state as descriped in MSTP and actions as described in MDTP takes ExercisesContainer as an argument - the whole expression is a connected ExercisesContainer component with state and actions
-// not just exporting the const from above, but exporting a bulked up version with state and actions
-
-// removed withRouter 9/20/20 and seems to be working okay
 export default connect(mapStateToProps, mapDispatchToProps)(ExercisesContainer);

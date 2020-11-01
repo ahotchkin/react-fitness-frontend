@@ -14,10 +14,6 @@ const SearchInput = props => {
         placeholder="Search the database"
         value={props.searchTerm}
       />
-      {/*
-      <br />
-      <input type="submit" value="Search" />
-      */}
     </form>
   )
 

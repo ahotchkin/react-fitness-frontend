@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import MealFoodInput from '../mealFoods/MealFoodInput';
 import FoodCard from './FoodCard';
 import SearchInput from '../SearchInput';
-// import FoodNutritionCard from './FoodNutritionCard';
-
 
 class Foods extends Component {
 
@@ -21,10 +19,6 @@ class Foods extends Component {
       currentFood: food
     })
   }
-
-  // renderFoodCards = () => {
-  //   return this.state.currentlyDisplayed.map(food => <FoodCard key={food.id} food={food} meal={this.props.meal} createMealFood={this.props.createMealFood} history={this.props.history} location={this.props.location} renderFoodNutrition={this.renderFoodNutrition} />)
-  // };
 
   renderFoods = () => {
     let foods = []
@@ -73,11 +67,6 @@ class Foods extends Component {
     });
 
   };
-
-  // GET RID OF SUBMIT BUTTON, IT'S NOT DOING ANYTHING HERE. DO I EVER USE IT?
-  // handleSubmit = event => {
-  //   event.preventDefault();
-  // };
 
   render() {
     return (

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class ExerciseUpdate extends Component {
 
-  // CAN I REFACTOR AND USE THE SAME FORM FOR NEW AND UPDATE?????? WATCH GLOBETROTTER PART 11
+  // CAN I REFACTOR AND USE THE SAME FORM FOR NEW AND UPDATE??????
   state = {
     category: this.props.exercise.attributes.category,
     name: this.props.exercise.attributes.name,

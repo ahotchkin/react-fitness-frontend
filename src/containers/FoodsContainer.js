@@ -5,10 +5,6 @@ import { Route, Switch } from 'react-router-dom';
 import Foods from '../components/foods/Foods';
 import FoodInput from '../components/foods/FoodInput';
 
-
-// import { getFoods } from '../actions/foods';
-// add getMeals to mapDispatchToProps and call in componentDidMount to ensure meals are in state on page refresh
-// import { getMeals } from '../actions/meals';
 import { createFood } from '../actions/foods';
 import { createMealFood } from '../actions/mealFoods';
 
@@ -17,10 +13,8 @@ class FoodsContainer extends Component {
     loaded: false
   }
 
-  // SHOULD I BE USING THE OTHER LIFECYCLE METHODS???????
+  // SHOULD I BE USING THE OTHER LIFECYCLE METHODS?
   componentDidMount() {
-    // this.props.getFoods()
-    // this.props.getMeals()
     this.setState({
       loaded: true
     })
@@ -72,8 +66,6 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = {
-  // getFoods,
-  // getMeals,
   createFood,
   createMealFood,
 };

@@ -3,7 +3,7 @@ import FoodCard from '../foods/FoodCard';
 
 class MealFoodUpdate extends Component {
 
-  // CAN I REFACTOR AND USE THE SAME FORM FOR NEW AND UPDATE?????? WATCH GLOBETROTTER PART 11
+  // CAN I REFACTOR AND USE THE SAME FORM FOR NEW AND UPDATE??????
   state = {
     number_of_servings: this.props.mealFood.attributes.number_of_servings,
     submitted: false

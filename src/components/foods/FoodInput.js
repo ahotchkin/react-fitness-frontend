@@ -55,58 +55,11 @@ class FoodInput extends Component {
       })
     }
 
-
-    // t.float :saturated_fat, default: 0
-    // t.float :polyunsaturated_fat, default: 0
-    // t.float :monounsaturated_fat, default: 0
-    // t.float :trans_fat, default: 0
-    // t.float :cholesterol, default: 0
-    // t.float :sodium, default: 0
-    // t.float :dietary_fiber, default: 0
-    // t.float :total_sugars, default: 0
-    // t.float :added_sugars, default: 0
-    // t.float :sugar_alcohols, default: 0
-    // t.float :vitamin_a, default: 0
-    // t.float :vitamin_c, default: 0
-    // t.float :vitamin_d, default: 0
-    // t.float :calcium, default: 0
-    // t.float :iron, default: 0
-    // t.float :potassium, default: 0
-
-
     if (!!this.props.location.state) {
       this.props.createFood(this.props.userId, this.state, this.props.location.state.mealId, this.props.history, this.props.location)
     } else {
       this.props.createFood(this.props.userId, this.state, null, this.props.history)
     }
-
-    // this.setState({
-    //   brand_name: "",
-    //   description: "",
-    //   serving_size: "",
-    //   servings_per_container: "",
-    //   calories: "",
-    //   total_fat: "",
-    //   saturated_fat: "",
-    //   polyunsaturated_fat: "",
-    //   monounsaturated_fat: "",
-    //   trans_fat: "",
-    //   cholesterol: "",
-    //   sodium: "",
-    //   total_carbohydrate: "",
-    //   dietary_fiber: "",
-    //   total_sugars: "",
-    //   added_sugars: "",
-    //   sugar_alcohols: "",
-    //   protein: "",
-    //   vitamin_a: "",
-    //   vitamin_c: "",
-    //   vitamin_d: "",
-    //   calcium: "",
-    //   iron: "",
-    //   potassium: "",
-    // })
-
   };
 
   render() {

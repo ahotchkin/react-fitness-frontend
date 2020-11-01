@@ -2,6 +2,7 @@ import React from 'react';
 
 const FoodCard = props => {
 
+  // Is there a way to use iteration to create each table row?
   return (
     <div>
       { !props.mealCheck ?

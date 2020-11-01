@@ -1,6 +1,4 @@
 import React from 'react'
-// import Login from './Login'
-// import SignUp from './SignUp'
 import { Link } from 'react-router-dom'
 
 import Footer from '../components/Footer';
@@ -14,7 +12,7 @@ const Home = () => (
   <div>
     <div className="welcome-container center-align">
       <h2>React Fitness</h2>
-      {/* FIGURE OUT HOW TO MAKE THIS RESPONSE SO ICONS MOVE CLOSER TOGETHER RATHER THAN STACK */}
+      {/* FIGURE OUT HOW TO MAKE THIS RESPONSIVE SO ICONS MOVE CLOSER TOGETHER RATHER THAN STACK */}
       <div className="container icon-container">
         <div className="row">
           <div className="col-sm">
