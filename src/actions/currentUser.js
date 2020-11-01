@@ -10,6 +10,8 @@ import { clearDiaries } from './diaries';
 import { clearMeals } from './meals';
 import { clearMealFoods } from './mealFoods';
 
+// CLEAR EVERYTHING - ADD FOODS
+
 // synchronous action creators
 export const setCurrentUser = user => {
   return {
