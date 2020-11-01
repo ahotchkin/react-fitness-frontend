@@ -1,3 +1,15 @@
+# React Fitness Frontend ReadMe
+
+Have you ever wondered if you're eating enough protein during the day? Or carbohydrates? Or fat (yes, we need fat!)? Or maybe you're not sure how many calories you should be consuming on any given day? Or if you're getting enough exercise? If you found yourself answering "Yes!" to any/all of the above, then React Fitness is just the thing for you. Providing a platform to track daily nutrition and exercise, React Fitness is a tool for users to learn more about their patterns and habits, and what they can do to live a healthier life.
+
+This React frontend works in conjunction with React Fitness Backend, the repo for which can be found at: https://github.com/ahotchkin/react-fitness-backend
+
+The frontend provides the user with a dashboard view of their daily nutrition and fitness, while the backend API contains a database with information for users as well as a comprehensive food database use across the application.
+
+## Demo Video
+
+[Watch Here](ADD LINK HERE)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
@@ -66,3 +78,11 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+## Contributing
+
+Bug reports and pull requests are welcome on GitHub at https://github.com/ahotchkin/react-fitness-frontend. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
+## Code of Conduct
+
+Everyone interacting in the React Fitness Backend project’s codebases, issue trackers, chat rooms, and mailing lists is expected to follow the [code of conduct](https://github.com/ahotchkin/react-fitness-frontend/blob/master/CODE_OF_CONDUCT.md).
