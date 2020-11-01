@@ -3,7 +3,6 @@ export const setDiaries = diaries => {
   return {
     type: "SET_DIARIES",
     diaries
-    // or payload: diaries
   }
 }
 
@@ -35,7 +34,6 @@ export const getDiaries = () => {
       },
     })
       .then(response => response.json())
-      // .then(user => dispatch({type: "SET_CURRENT_USER"}))
       .then(json => {
         if (json.error) {
           alert(json.error)
@@ -51,7 +49,6 @@ export const getDiaries = () => {
 
 export const createDiary = (diaryDate, currentUser, history) => {
   const diary = {
-    // is there a cleaner way to do this???
     user_id: currentUser.id,
     date: diaryDate,
   }

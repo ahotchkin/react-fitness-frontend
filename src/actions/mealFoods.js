@@ -30,18 +30,12 @@ export const deleteMealFoodSuccess = mealFoodId => {
   }
 }
 
-// NEED TO CALL THIS AND ALL OTHER CLEAR FUNCTIONS ON LOGOUT
 export const clearMealFoods = () => {
   return {
     type: "CLEAR_MEAL_FOODS"
   }
 }
 
-
-
-
-
-// ***************************************************************************
 
 // asychronous actions
 export const getMealFoods = () => {
@@ -58,7 +52,6 @@ export const getMealFoods = () => {
         if (json.error) {
           alert(json.error)
         } else {
-          // console.log(json.data)
           dispatch(setMealFoods(json.data))
         }
       })
@@ -66,12 +59,6 @@ export const getMealFoods = () => {
 
   }
 }
-// ^^Added when started pulling mealFoods from database instead of from associated meals
-// ****************************************************************************
-
-
-
-
 
 export const createMealFood = (meal, foodId, food, number_of_servings, history, location) => {
   const mealFood = {
@@ -115,27 +102,14 @@ export const createMealFood = (meal, foodId, food, number_of_servings, history, 
         if (json.error) {
           console.log(json.error)
         } else {
-          // console.log(json)
-          // console.log(mealFood)
-          // console.log(meal)
           dispatch(addMealFood(json.data))
           dispatch(updateMeal(meal.id, meal.attributes.calories, null, mealFood.calories))
-
-          // should they go back to home page or to meal show page???
-          // history.push("/diaries")
-
           history.push({
             pathname: "/diaries",
             state: {
               diaryDate: location.state.diaryDate
             }
           })
-
-          // this.props.history.push({
-          //   pathname: '/template',
-          //   search: '?query=abc',
-          //   state: { detail: response.data }
-          // })
         }
       })
       .catch(console.log())
@@ -150,7 +124,6 @@ export const updateMealFood = (mealFood, updated_number_of_servings, history) =>
   console.log(`getting ready to update mealFood with an id of ${mealFood.id}`)
   const updatedMealFood = {
     // is there a cleaner way to do this???
-    // is this persisting the userId that was originally saved?????
 
     number_of_servings: updated_number_of_servings,
     calories: Math.round(mealFood.attributes.food.calories * updated_number_of_servings),

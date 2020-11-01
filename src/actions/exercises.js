@@ -33,9 +33,8 @@ export const deleteExerciseSuccess = exerciseId => {
   }
 }
 
-// before you think about populating this piece of state with anything, get it into the store first to see the name and data type are correct
-// steps: 1. Build reducer, 2. Add to store, 3. Build action creator
 const baseUrl = "http://localhost:3001/api/v1/exercises"
+
 // asychronous actions
 export const getExercises = () => {
   return dispatch => {
@@ -94,8 +93,6 @@ export const createExercise = (exerciseData, date, currentUser, history) => {
 
 export const updateExercise = (exerciseFormData, date, exercise, history) => {
   const updatedExercise = {
-    // is there a cleaner way to do this???
-    // is this persisting the userId that was originally saved?????
     date: date,
     category: exerciseFormData.category,
     name: exerciseFormData.name,
@@ -148,7 +145,5 @@ export const deleteExercise = (exerciseId, history) => {
         }
       })
       .catch(console.log())
-    // **********NEED TO REDIRECT TO /EXERCISES, FIGURE OUT HOW TO DO THIS**********
-
   }
 }

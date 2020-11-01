@@ -3,7 +3,6 @@ import { getExercises } from './exercises';
 import { getDiaries } from './diaries';
 import { getMeals } from './meals';
 import { getFoods } from './foods';
-// import { getMealFoods } from './mealFoods';
 
 import { clearExercises } from './exercises';
 import { clearDiaries } from './diaries';
@@ -17,11 +16,9 @@ export const setCurrentUser = user => {
   return {
     type: "SET_CURRENT_USER",
     user
-    // or payload: user
   }
 }
 
-// get rid of the currentUser that is sitting in Redux store
 export const clearCurrentUser = () => {
   return {
     type: "CLEAR_CURRENT_USER"
@@ -30,7 +27,6 @@ export const clearCurrentUser = () => {
 
 
 // aysnchronous action creators
-// pass in history prop
 export const login = (credentials, history) => {
   return dispatch => {
     // can abstract fetch requests into an adapter class and do something like - return Adapter.login(args) or Api.login(args)
@@ -52,9 +48,7 @@ export const login = (credentials, history) => {
           dispatch(getDiaries())
           dispatch(getMeals())
           dispatch(getFoods())
-          // dispatch(getMealFoods())
 
-          // tells your app which path to go to once logged in
           history.push("/")
         }
       })
@@ -107,7 +101,6 @@ export const signUp = (credentials, dailyCalorieGoal, dailyNutrientGoals, histor
           dispatch(getDiaries())
           dispatch(getMeals())
           dispatch(getFoods())
-          // dispatch(getMealFoods())
 
           history.push("/")
         }
@@ -127,7 +120,6 @@ export const getCurrentUser = () => {
       },
     })
       .then(response => response.json())
-      // .then(user => dispatch({type: "SET_CURRENT_USER"}))
       .then(json => {
         if (json.error) {
           console.log(json.error)
