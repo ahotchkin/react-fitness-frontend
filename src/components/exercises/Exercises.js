@@ -12,7 +12,7 @@ const Exercises = props => {
       <div className="row">
         <div className="col-lg info-container">
           <h4>Total calories burned: {props.caloriesBurned}</h4>
-
+          <br />
           <Link to="/exercises/new">
             <button className="btn btn-primary-outline btn-sm" type="button">
               Add Exercise
