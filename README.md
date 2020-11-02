@@ -8,7 +8,7 @@ The frontend provides the user with a dashboard view of their daily nutrition an
 
 ## Demo Video
 
-[Watch Here](ADD LINK HERE)
+[Watch Here](https://youtu.be/2yAE0g0WAdM)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
