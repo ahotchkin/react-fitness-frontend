@@ -381,3 +381,8 @@ label.label-fixed {
 .exercise-table thead th {
   border-top: 0px;
 }
+
+.user-form {
+  max-width: 450px;
+  margin: auto
+}
