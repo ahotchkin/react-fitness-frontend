@@ -144,7 +144,8 @@ class SignUp extends Component {
     return (
       <div>
         <h1 className="header">Create an Account</h1>
-        <div className="form">
+        <br />
+        <div className="form user-form">
           <form onSubmit={this.handleOnSubmit}>
             <div className="form-group">
               <label htmlFor="username">Username: </label>
