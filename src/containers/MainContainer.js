@@ -323,7 +323,7 @@ class MainContainer extends Component {
           <Route path="/meal_foods" render={ routerProps => this.props.loggedIn ? <MealFoodsContainer currentUser={this.props.currentUser} {...routerProps} /> : <Home /> } />
 
           {/* Added path so Logout link in NavBar isn't highlighted as active when at "/" */}
-          <Route exact path="/logout" render={ () => <Redirect to="/" /> } />
+          <Route exact path="/logout" render={ () => <Redirect to="/login" /> } />
 
           <Route />
         </Switch>
