@@ -68,7 +68,7 @@ class FoodInput extends Component {
         <div className="col-lg info-container">
         <h3 className="center-align">Add Food</h3>
         <br />
-        <p className="center-align"><b><em>Please Note: While not all information is required, the more information you are able to provide the better we can calculate your macro and nutrient intake.</em></b></p>
+        <p className="center-align"><b><em>Please Note: While not all information is required, the more information you are able to provide the better we can calculate your macronutrient and micronutrient intake.</em></b></p>
         <p className="center-align"><em>*required</em></p>
           <div className="food-form">
 
