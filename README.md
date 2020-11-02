@@ -6,9 +6,17 @@ This React frontend works in conjunction with React Fitness Backend, the repo fo
 
 The frontend provides the user with a dashboard view of their daily nutrition and fitness, while the backend API contains a database with information for users as well as a comprehensive food database use across the application.
 
+## Screenshots
+
+![](https://user-images.githubusercontent.com/33204849/97919030-1815a800-1d25-11eb-95c9-01a17b7cd41d.png)
+![](https://user-images.githubusercontent.com/33204849/97919078-34b1e000-1d25-11eb-804b-27ac5b7a64b2.png)
+![](https://user-images.githubusercontent.com/33204849/97919102-3f6c7500-1d25-11eb-8713-7bb3772ca3d6.png)
+
 ## Demo Video
 
 [Watch Here](https://youtu.be/2yAE0g0WAdM)
+
+<br/><br/>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
