@@ -1,7 +1,7 @@
-// synchronous actions
-
 import { updateMeal } from './meals';
 
+
+// synchronous actions
 export const setMealFoods = mealFoods => {
   return {
     type: "SET_MEAL_FOODS",
@@ -178,7 +178,7 @@ export const updateMealFood = (mealFood, updated_number_of_servings, history) =>
       .catch(console.log())
   }
 }
-//SOMETHING FUNNY IS HAPPENING HERE. CALORIE COUNT NOT UPDATING PROPERLY.
+
 export const deleteMealFood = (mealFood, meal, history) => {
   console.log(`getting ready to delete mealFood with an id of ${mealFood.id}`)
   console.log(history)
@@ -204,6 +204,5 @@ export const deleteMealFood = (mealFood, meal, history) => {
         }
       })
       .catch(console.log())
-
   }
 }

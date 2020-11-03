@@ -20,9 +20,6 @@ export const addDiary = diary => {
 }
 
 
-// before you think about populating this piece of state with anything, get it into the store first to see the name and data type are correct
-// steps: 1. Build reducer, 2. Add to store, 3. Build action creator
-
 // asychronous actions
 export const getDiaries = () => {
   return dispatch => {
