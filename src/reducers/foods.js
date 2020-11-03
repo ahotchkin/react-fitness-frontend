@@ -4,6 +4,8 @@ export default (state = [], action) => {
       return action.foods
     case "ADD_FOOD":
       return state.concat(action.food)
+    case "CLEAR_FOODS":
+        return []
     default:
       return state
   }
