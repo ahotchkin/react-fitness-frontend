@@ -1,4 +1,3 @@
-// Because of information that shows on dashboard, these actions need to be dispatched in signUp, login, and getCurrentUser - does this mean they can be removed from their respective containers because information will already be in the store???
 import { getExercises } from './exercises';
 import { getDiaries } from './diaries';
 import { getMeals } from './meals';
@@ -8,8 +7,7 @@ import { clearExercises } from './exercises';
 import { clearDiaries } from './diaries';
 import { clearMeals } from './meals';
 import { clearMealFoods } from './mealFoods';
-
-// CLEAR EVERYTHING - ADD FOODS
+import { clearFoods } from './foods';
 
 // synchronous action creators
 export const setCurrentUser = user => {
@@ -128,7 +126,6 @@ export const getCurrentUser = () => {
           dispatch(getExercises())
           dispatch(getDiaries())
           dispatch(getMeals())
-          // DO I NEED TO GET THIS HERE OR CAN I WAIT UNTIL USER IS IN FOODSCONTAINER?
           dispatch(getFoods())
         }
       })
@@ -147,10 +144,10 @@ export const logout = () => {
     dispatch(clearDiaries())
     dispatch(clearMeals())
     dispatch(clearMealFoods())
+    dispatch(clearFoods())
     return fetch("http://localhost:3001/api/v1/logout", {
       credentials: "include",
       method: "DELETE"
     })
-
   }
 }
