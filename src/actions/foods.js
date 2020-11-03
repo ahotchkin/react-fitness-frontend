@@ -13,6 +13,13 @@ export const addFood = food => {
   }
 }
 
+export const clearFoods = () => {
+  return {
+    type: "CLEAR_FOODS"
+  }
+}
+
+
 // asychronous actions
 export const getFoods = () => {
   return dispatch => {
