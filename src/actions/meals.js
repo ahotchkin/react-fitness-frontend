@@ -38,7 +38,6 @@ export const getMeals = () => {
         }
       })
       .catch(console.log())
-
   }
 }
 
