@@ -20,9 +20,11 @@ export const clearMeals = () => {
 }
 
 // asychronous actions
+const baseUrl = "http://localhost:3001/api/v1/meals"
+
 export const getMeals = () => {
   return dispatch => {
-    return fetch("http://localhost:3001/api/v1/meals", {
+    return fetch(baseUrl, {
       credentials: "include",
       method: "GET",
       headers: {
@@ -48,7 +50,7 @@ export const updateMeal = (mealId, mealCalories, previousMealFoodCalories = 0, u
   }
 
   return dispatch => {
-    return fetch(`http://localhost:3001/api/v1/meals/${mealId}`, {
+    return fetch(baseUrl + `/${mealId}`, {
       credentials: "include",
       method: "PATCH",
       headers: {
