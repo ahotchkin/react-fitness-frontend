@@ -9,7 +9,7 @@ const MealFoodCard = props => {
 
   return (
     <tr key={props.mealFood.id}>
-      <td>{props.mealFood.attributes.food.brand_name} {props.mealFood.attributes.food.description}</td>
+      <td className="food-column">{props.mealFood.attributes.food.brand_name} {props.mealFood.attributes.food.description}</td>
       <td className="right-align">{props.mealFood.attributes.number_of_servings}</td>
       <td className="right-align">{props.mealFood.attributes.calories}</td>
       <td className="right-align">
