@@ -386,3 +386,7 @@ label.label-fixed {
   max-width: 450px;
   margin: auto
 }
+
+.food-column {
+  width: 50%
+}
