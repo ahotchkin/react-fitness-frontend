@@ -1,4 +1,4 @@
-export default (state = [], action) => {
+const mealFoodsReducer = (state = [], action) => {
   switch (action.type) {
     case "SET_MEAL_FOODS":
       return action.mealFoods
@@ -13,7 +13,6 @@ export default (state = [], action) => {
         }
       }))
     case "DELETE_MEAL_FOOD":
-      console.log(state.filter(mealFood => mealFood.id !== action.mealFoodId))
       return state.filter(mealFood => mealFood.id !== action.mealFoodId)
     case "CLEAR_MEAL_FOODS":
       return []
@@ -21,3 +20,5 @@ export default (state = [], action) => {
       return state
   }
 }
+
+export default mealFoodsReducer;

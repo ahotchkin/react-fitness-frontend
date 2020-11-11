@@ -1,4 +1,4 @@
-export default (state = [], action) => {
+const foodsReducer = (state = [], action) => {
   switch (action.type) {
     case "SET_FOODS":
       return action.foods
@@ -10,3 +10,5 @@ export default (state = [], action) => {
       return state
   }
 }
+
+export default foodsReducer;

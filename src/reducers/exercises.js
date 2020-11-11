@@ -1,4 +1,4 @@
-export default (state = [], action) => {
+const exercisesReducer = (state = [], action) => {
   switch (action.type) {
     case "SET_EXERCISES":
       return action.exercises
@@ -13,7 +13,6 @@ export default (state = [], action) => {
         }
       }))
     case "DELETE_EXERCISE":
-      console.log(state.filter(exercise => exercise.id !== action.exerciseId))
       return state.filter(exercise => exercise.id !== action.exerciseId)
     case "CLEAR_EXERCISES":
       return []
@@ -21,3 +20,5 @@ export default (state = [], action) => {
       return state
   }
 }
+
+export default exercisesReducer;

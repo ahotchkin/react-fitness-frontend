@@ -1,4 +1,4 @@
-export default (state = [], action) => {
+const diariesReducer = (state = [], action) => {
   switch (action.type) {
     case "SET_DIARIES":
       return action.diaries
@@ -10,3 +10,5 @@ export default (state = [], action) => {
       return state
   }
 }
+
+export default diariesReducer;
