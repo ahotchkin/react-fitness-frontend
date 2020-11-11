@@ -33,10 +33,9 @@ export const deleteExerciseSuccess = exerciseId => {
   }
 }
 
-
+// asychronous actions
 const baseUrl = "http://localhost:3001/api/v1/exercises"
 
-// asychronous actions
 export const getExercises = () => {
   return dispatch => {
     return fetch(baseUrl, {
@@ -55,20 +54,16 @@ export const getExercises = () => {
         }
       })
       .catch(console.log())
-
   }
 }
 
 export const createExercise = (exerciseData, date, currentUser, history) => {
-  const exercise = {
-    // is there a cleaner way to do this???
-    user_id: currentUser.id,
-    date: date,
-    category: exerciseData.category,
-    name: exerciseData.name,
-    duration_in_minutes: exerciseData.duration_in_minutes,
-    calories_burned: exerciseData.calories_burned
+  let exerciseInfo = {
+    exercise: exerciseData
   }
+
+  exerciseInfo.exercise.user_id = currentUser.id
+  exerciseInfo.exercise.date = date
 
   return dispatch => {
     return fetch(baseUrl, {
@@ -77,7 +72,7 @@ export const createExercise = (exerciseData, date, currentUser, history) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(exercise)
+      body: JSON.stringify(exerciseInfo)
     })
       .then(response => response.json())
       .then(json => {
@@ -92,14 +87,12 @@ export const createExercise = (exerciseData, date, currentUser, history) => {
   }
 }
 
-export const updateExercise = (exerciseFormData, date, exercise, history) => {
-  const updatedExercise = {
-    date: date,
-    category: exerciseFormData.category,
-    name: exerciseFormData.name,
-    duration_in_minutes: exerciseFormData.duration_in_minutes,
-    calories_burned: exerciseFormData.calories_burned
+export const updateExercise = (exerciseData, date, exercise, history) => {
+  let updatedExerciseInfo = {
+    exercise: exerciseData
   }
+
+  updatedExerciseInfo.exercise.date = date
 
   return dispatch => {
     return fetch(baseUrl + `/${exercise.id}`, {
@@ -108,7 +101,7 @@ export const updateExercise = (exerciseFormData, date, exercise, history) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(updatedExercise)
+      body: JSON.stringify(updatedExerciseInfo)
     })
       .then(response => response.json())
       .then(json => {
@@ -116,7 +109,6 @@ export const updateExercise = (exerciseFormData, date, exercise, history) => {
           console.log(json.error)
         } else {
           dispatch(updateExerciseSuccess(json.data))
-          // what is the difference between push and pushState???
           history.push("/exercises")
         }
       })
@@ -125,8 +117,6 @@ export const updateExercise = (exerciseFormData, date, exercise, history) => {
 }
 
 export const deleteExercise = (exerciseId, history) => {
-  console.log(`getting ready to delete exercise with an id of ${exerciseId}`)
-  console.log(history)
   return dispatch => {
     return fetch(baseUrl + `/${exerciseId}`, {
       credentials: "include",
@@ -140,7 +130,6 @@ export const deleteExercise = (exerciseId, history) => {
         if (json.error) {
           alert(json.error)
         } else {
-          console.log(json)
           dispatch(deleteExerciseSuccess(exerciseId))
           history.push("/exercises")
         }
