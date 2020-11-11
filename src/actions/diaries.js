@@ -21,9 +21,11 @@ export const addDiary = diary => {
 
 
 // asychronous actions
+const baseUrl = "http://localhost:3001/api/v1/diaries"
+
 export const getDiaries = () => {
   return dispatch => {
-    return fetch("http://localhost:3001/api/v1/diaries", {
+    return fetch(baseUrl, {
       credentials: "include",
       method: "GET",
       headers: {
@@ -34,13 +36,11 @@ export const getDiaries = () => {
       .then(json => {
         if (json.error) {
           alert(json.error)
-          console.log(json.data)
         } else {
           dispatch(setDiaries(json.data))
         }
       })
       .catch(console.log())
-
   }
 }
 
@@ -51,7 +51,7 @@ export const createDiary = (diaryDate, currentUser, history) => {
   }
 
   return dispatch => {
-    return fetch("http://localhost:3001/api/v1/diaries", {
+    return fetch(baseUrl, {
       credentials: "include",
       method: "POST",
       headers: {
