@@ -18,20 +18,13 @@ class DiariesContainer extends Component {
     })
   }
 
-  handleOnChange = date => {
-    this.setState({
-      startDate: date,
-    });
-  };
-
-
   render() {
     return (
       <div>
         <Switch>
           { !!this.state.loaded ?
             <Route exact path={this.props.match.url} render={props =>
-              <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.props.date} caloriesConsumed={this.props.caloriesConsumed} caloriesBurned={this.props.caloriesBurned} {...props} />
+              <Diaries diaries={this.props.diaries} currentUser={this.props.currentUser} createDiary={this.props.createDiary} date={this.props.date} caloriesRemaining={this.props.caloriesRemaining} caloriesConsumed={this.props.caloriesConsumed} caloriesBurned={this.props.caloriesBurned} {...props} />
             } />
           :
             null
