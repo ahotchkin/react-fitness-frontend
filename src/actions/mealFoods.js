@@ -38,9 +38,11 @@ export const clearMealFoods = () => {
 
 
 // asychronous actions
+const baseUrl = "http://localhost:3001/api/v1/meal_foods"
+
 export const getMealFoods = () => {
   return dispatch => {
-    return fetch("http://localhost:3001/api/v1/meal_foods", {
+    return fetch(baseUrl, {
       credentials: "include",
       method: "GET",
       headers: {
@@ -89,7 +91,7 @@ export const createMealFood = (meal, foodId, food, number_of_servings, history, 
   }
 
   return dispatch => {
-    return fetch("http://localhost:3001/api/v1/meal_foods", {
+    return fetch(baseUrl, {
       credentials: "include",
       method: "POST",
       headers: {
@@ -117,11 +119,7 @@ export const createMealFood = (meal, foodId, food, number_of_servings, history, 
 }
 
 
-
-
 export const updateMealFood = (mealFood, updated_number_of_servings, history) => {
-  console.log(mealFood)
-  console.log(`getting ready to update mealFood with an id of ${mealFood.id}`)
   const updatedMealFood = {
     // is there a cleaner way to do this???
 
@@ -148,12 +146,9 @@ export const updateMealFood = (mealFood, updated_number_of_servings, history) =>
     potassium: Math.round(mealFood.attributes.food.potassium * updated_number_of_servings)
   }
 
-  console.log("here is the updated mealFood: ")
-  console.log(updatedMealFood)
-
   return dispatch => {
     // CREATE BASE URL VARIABLE TO USE
-    return fetch(`http://localhost:3001/api/v1/meal_foods/${mealFood.id}`, {
+    return fetch(baseUrl + `/${mealFood.id}`, {
       credentials: "include",
       method: "PATCH",
       headers: {
@@ -166,12 +161,8 @@ export const updateMealFood = (mealFood, updated_number_of_servings, history) =>
         if (json.error) {
           console.log(json.error)
         } else {
-          console.log(json)
-          console.log(mealFood)
           dispatch(updateMealFoodSuccess(json.data))
           dispatch(updateMeal(mealFood.attributes.meal.id, mealFood.attributes.meal.calories, mealFood.attributes.calories, updatedMealFood.calories))
-
-          // what is the difference between push and pushState???
           history.push("/diaries")
         }
       })
@@ -180,12 +171,8 @@ export const updateMealFood = (mealFood, updated_number_of_servings, history) =>
 }
 
 export const deleteMealFood = (mealFood, meal, history) => {
-  console.log(`getting ready to delete mealFood with an id of ${mealFood.id}`)
-  console.log(history)
-  console.log(mealFood)
-  console.log(meal)
   return dispatch => {
-    return fetch(`http://localhost:3001/api/v1/meal_foods/${mealFood.id}`, {
+    return fetch(baseUrl + `/${mealFood.id}`, {
       credentials: "include",
       method: "DELETE",
       headers: {
@@ -197,7 +184,6 @@ export const deleteMealFood = (mealFood, meal, history) => {
         if (json.error) {
           alert(json.error)
         } else {
-          console.log(json)
           dispatch(deleteMealFoodSuccess(mealFood.id))
           dispatch(updateMeal(meal.id, meal.attributes.calories, mealFood.attributes.calories, null))
           history.push("/diaries")
