@@ -9,7 +9,7 @@ import { clearMeals } from './meals';
 import { clearMealFoods } from './mealFoods';
 import { clearFoods } from './foods';
 
-// synchronous action creators
+// synchronous actions
 export const setCurrentUser = user => {
   return {
     type: "SET_CURRENT_USER",
@@ -24,11 +24,13 @@ export const clearCurrentUser = () => {
 }
 
 
-// aysnchronous action creators
+// aysnchronous actions
+const baseUrl = "http://localhost:3001/api/v1"
+
 export const login = (credentials, history) => {
   return dispatch => {
     // can abstract fetch requests into an adapter class and do something like - return Adapter.login(args) or Api.login(args)
-    return fetch("http://localhost:3001/api/v1/login", {
+    return fetch(baseUrl + "/login", {
       credentials: "include",
       method: "POST",
       headers: {
@@ -46,7 +48,6 @@ export const login = (credentials, history) => {
           dispatch(getDiaries())
           dispatch(getMeals())
           dispatch(getFoods())
-
           history.push("/")
         }
       })
@@ -55,8 +56,7 @@ export const login = (credentials, history) => {
 }
 
 export const signUp = (credentials, dailyCalorieGoal, dailyNutrientGoals, history) => {
-  console.log("credentials are", credentials)
-  const userInfo = {
+  let userInfo = {
     user: credentials
   }
   userInfo.user.daily_calorie_goal = dailyCalorieGoal
@@ -75,7 +75,7 @@ export const signUp = (credentials, dailyCalorieGoal, dailyNutrientGoals, histor
 
   return dispatch => {
     // can abstract fetch requests into an adapter class and do something like - return Adapter.login(args) or Api.login(args)
-    return fetch("http://localhost:3001/api/v1/signup", {
+    return fetch(baseUrl + "/signup", {
       credentials: "include",
       method: "POST",
       headers: {
@@ -93,13 +93,11 @@ export const signUp = (credentials, dailyCalorieGoal, dailyNutrientGoals, histor
             console.log(json.error)
           }
         } else {
-          console.log(json.data)
           dispatch(setCurrentUser(json.data))
           dispatch(getExercises())
           dispatch(getDiaries())
           dispatch(getMeals())
           dispatch(getFoods())
-
           history.push("/")
         }
       })
@@ -110,7 +108,7 @@ export const signUp = (credentials, dailyCalorieGoal, dailyNutrientGoals, histor
 export const getCurrentUser = () => {
   return dispatch => {
     // can abstract fetch requests into an adapter class and do something like - return Adapter.login(args) or Api.login(args)
-    return fetch("http://localhost:3001/api/v1/get_current_user", {
+    return fetch(baseUrl + "/get_current_user", {
       credentials: "include",
       method: "GET",
       headers: {
@@ -145,7 +143,7 @@ export const logout = () => {
     dispatch(clearMeals())
     dispatch(clearMealFoods())
     dispatch(clearFoods())
-    return fetch("http://localhost:3001/api/v1/logout", {
+    return fetch(baseUrl + "/logout", {
       credentials: "include",
       method: "DELETE"
     })
