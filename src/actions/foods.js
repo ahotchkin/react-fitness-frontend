@@ -21,9 +21,11 @@ export const clearFoods = () => {
 
 
 // asychronous actions
+const baseUrl = "http://localhost:3001/api/v1/foods"
+
 export const getFoods = () => {
   return dispatch => {
-    return fetch("http://localhost:3001/api/v1/foods", {
+    return fetch(baseUrl, {
       credentials: "include",
       method: "GET",
       headers: {
@@ -44,45 +46,20 @@ export const getFoods = () => {
 }
 
 export const createFood = (userId, foodData, mealId, history, location) => {
-  const food = {
-    // is there a cleaner way to do this???
-    user_id: userId,
-    brand_name: foodData.brand_name,
-    description: foodData.description,
-    serving_size: foodData.serving_size,
-    servings_per_container: foodData.servings_per_container,
-    calories: foodData.calories,
-    total_fat: foodData.total_fat,
-    saturated_fat: foodData.saturated_fat,
-    polyunsaturated_fat: foodData.polyunsaturated_fat,
-    monounsaturated_fat: foodData.monounsaturated_fat,
-    trans_fat: foodData.trans_fat,
-    cholesterol: foodData.cholesterol,
-    sodium: foodData.sodium,
-    total_carbohydrate: foodData.total_carbohydrate,
-    dietary_fiber: foodData.dietary_fiber,
-    total_sugars: foodData.total_sugars,
-    added_sugars: foodData.added_sugars,
-    sugar_alcohols: foodData.sugar_alcohols,
-    protein: foodData.protein,
-    vitamin_a: foodData.vitamin_a,
-    vitamin_c: foodData.vitamin_c,
-    vitamin_d: foodData.vitamin_d,
-    calcium: foodData.calcium,
-    iron: foodData.iron,
-    potassium: foodData.potassium,
-
+  let foodInfo = {
+    food: foodData
   }
 
-  return dispatch => {
-    return fetch("http://localhost:3001/api/v1/foods", {
+  foodInfo.food.user_id = userId
 
-      // credentials: "include",
+  return dispatch => {
+    return fetch(baseUrl, {
+      credentials: "include",
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(food)
+      body: JSON.stringify(foodInfo)
     })
       .then(response => response.json())
       .then(json => {
