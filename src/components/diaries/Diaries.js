@@ -3,7 +3,7 @@ import DiaryCard from './DiaryCard';
 
 const Diaries = props => {
 
-  const createDiaryCards = props.diaries.filter(diary => diary.attributes.date === props.date).map(filteredDiary => <DiaryCard diary={filteredDiary} key={filteredDiary.id} currentUser={props.currentUser} caloriesConsumed={props.caloriesConsumed} caloriesBurned={props.caloriesBurned} />)
+  const createDiaryCards = props.diaries.filter(diary => diary.attributes.date === props.date).map(filteredDiary => <DiaryCard diary={filteredDiary} key={filteredDiary.id} currentUser={props.currentUser} caloriesRemaining={props.caloriesRemaining} caloriesConsumed={props.caloriesConsumed} caloriesBurned={props.caloriesBurned} />)
 
   const displayDate = () => {
     const date = props.date.match(/\d+/g)

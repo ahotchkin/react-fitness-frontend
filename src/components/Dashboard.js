@@ -10,14 +10,6 @@ import stretching from '../icons/stretching.svg';
 
 const Dashboard = props => {
 
-  const caloriesRemaining = () => {
-    if ((props.currentUser.attributes.daily_calorie_goal - props.dailyNutrition.calories + props.caloriesBurned) >= 0) {
-      return <td className="positive"><b>{props.currentUser.attributes.daily_calorie_goal - props.dailyNutrition.calories + props.caloriesBurned}</b></td>
-    } else if ((props.currentUser.attributes.daily_calorie_goal - props.dailyNutrition.calories + props.caloriesBurned) < 0) {
-      return <td className="negative"><b>{props.currentUser.attributes.daily_calorie_goal - props.dailyNutrition.calories + props.caloriesBurned}</b></td>
-    }
-  }
-
   return (
     <div className="dashboard-container">
       <div className="row">
@@ -65,10 +57,10 @@ const Dashboard = props => {
                 </tr>
                 <tr>
                   <th>Calories Remaining:</th>
-                  {!!props.dailyNutrition ?
-                    caloriesRemaining()
+                  { props.caloriesRemaining >= 0 ?
+                    <td className="positive"><b>{props.caloriesRemaining}</b></td>
                   :
-                    <td><b>{props.currentUser.attributes.daily_calorie_goal - 0 + props.caloriesBurned}</b></td>
+                    <td className="negative"><b>{props.caloriesRemaining}</b></td>
                   }
                 </tr>
               </tbody>

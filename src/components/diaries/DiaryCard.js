@@ -4,22 +4,13 @@ import MealsContainer from '../../containers/MealsContainer';
 
 const  DiaryCard = props => {
 
-  const caloriesRemaining = () => {
-    let dailyCaloriesRemaining = ""
-    if (!!(props.currentUser.attributes.daily_calorie_goal - props.caloriesConsumed + props.caloriesBurned)) {
-      dailyCaloriesRemaining = props.currentUser.attributes.daily_calorie_goal - props.caloriesConsumed + props.caloriesBurned
-    }
-
-    return dailyCaloriesRemaining
-  }
-
   return (
     <div className="col-lg info-container">
       <h5>Calories Remaining</h5>
-      { caloriesRemaining() >= 0 ?
-        <h3 className="positive">{caloriesRemaining()}</h3>
+      { props.caloriesRemaining >= 0 ?
+        <h3 className="positive">{props.caloriesRemaining}</h3>
       :
-        <h3 className="negative">{caloriesRemaining()}</h3>
+        <h3 className="negative">{props.caloriesRemaining}</h3>
       }
       <table className="calorie-table">
         <thead>
@@ -30,7 +21,7 @@ const  DiaryCard = props => {
             <td className="calorie-table-cell">+</td>
             <td className="calorie-table-cell">{props.caloriesBurned}</td>
             <td className="calorie-table-cell">=</td>
-            <td className="calorie-table-cell">{caloriesRemaining()}</td>
+            <td className="calorie-table-cell">{props.caloriesRemaining}</td>
           </tr>
         </thead>
         <tbody>

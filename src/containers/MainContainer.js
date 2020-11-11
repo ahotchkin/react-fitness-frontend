@@ -258,6 +258,14 @@ class MainContainer extends Component {
     // Total grams of protein allowed per day = 600/4 = 150 grams
   }
 
+  caloriesRemaining = () => {
+    let dailyCaloriesRemaining = ""
+    if (!!this.props.currentUser) {
+      dailyCaloriesRemaining = this.props.currentUser.attributes.daily_calorie_goal - this.dailyNutrition().calories + this.caloriesBurned()
+    }
+    return dailyCaloriesRemaining
+  }
+
   render() {
     return (
       <div>
@@ -269,7 +277,7 @@ class MainContainer extends Component {
           <Route exact path="/" render={ () => this.props.loggedIn ?
             <div>
               <SearchByDate header={"Your Daily Summary for:"} startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
-              <Dashboard currentUser={this.props.currentUser} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} breakfastMacros={this.mealMacros("breakfast")} lunchNutrition={this.mealNutrition("lunch")} lunchMacros={this.mealMacros("lunch")} dinnerNutrition={this.mealNutrition("dinner")} dinnerMacros={this.mealMacros("dinner")} snacksNutrition={this.mealNutrition("snacks")} snacksMacros={this.mealMacros("snacks")} dailyNutrition={this.dailyNutrition()} dailyMacros={this.dailyMacros()} totalCardio={this.totalExerciseByCategory("cardio")} totalStrength={this.totalExerciseByCategory("strength")} totalBalance={this.totalExerciseByCategory("balance")} totalStretching={this.totalExerciseByCategory("stretching")} />
+              <Dashboard currentUser={this.props.currentUser} caloriesRemaining={this.caloriesRemaining()} caloriesBurned={this.caloriesBurned()} breakfastNutrition={this.mealNutrition("breakfast")} breakfastMacros={this.mealMacros("breakfast")} lunchNutrition={this.mealNutrition("lunch")} lunchMacros={this.mealMacros("lunch")} dinnerNutrition={this.mealNutrition("dinner")} dinnerMacros={this.mealMacros("dinner")} snacksNutrition={this.mealNutrition("snacks")} snacksMacros={this.mealMacros("snacks")} dailyNutrition={this.dailyNutrition()} dailyMacros={this.dailyMacros()} totalCardio={this.totalExerciseByCategory("cardio")} totalStrength={this.totalExerciseByCategory("strength")} totalBalance={this.totalExerciseByCategory("balance")} totalStretching={this.totalExerciseByCategory("stretching")} />
             </div>
           :
             <Home />
@@ -284,7 +292,7 @@ class MainContainer extends Component {
           <Route path="/diaries" render={ routerProps => this.props.loggedIn ?
             <div>
               <SearchByDate header={"Meal Diary for: "} startDate={this.state.startDate} handleOnChange={this.handleOnChange} />
-              <DiariesContainer date={this.getDate()} caloriesConsumed={this.dailyNutrition().calories} caloriesBurned={this.caloriesBurned()} {...routerProps} />
+              <DiariesContainer date={this.getDate()} caloriesRemaining={this.caloriesRemaining()} caloriesConsumed={this.dailyNutrition().calories} caloriesBurned={this.caloriesBurned()} {...routerProps} />
             </div>
 
           :
