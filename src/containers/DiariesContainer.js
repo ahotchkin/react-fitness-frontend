@@ -35,15 +35,10 @@ class DiariesContainer extends Component {
   };
 };
 
-// what do I need in mapStateToProps vs. mapDispatchToProps - go through all containers and review
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
   diaries: state.diaries,
-
-  meals: state.meals,
-  exercises: state.exercises
 });
-
 
 const mapDispatchToProps = {
   createDiary,
