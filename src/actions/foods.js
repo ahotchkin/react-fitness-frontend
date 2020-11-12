@@ -45,7 +45,7 @@ export const getFoods = () => {
   }
 }
 
-export const createFood = (userId, foodData, mealId, history, location) => {
+export const createFood = (userId, foodData, mealId, history) => {
   let foodInfo = {
     food: foodData
   }
@@ -68,12 +68,7 @@ export const createFood = (userId, foodData, mealId, history, location) => {
         } else {
           dispatch(addFood(json.data))
           if (!!mealId) {
-            history.push({
-              pathname: `/meals/${mealId}/foods`,
-              state: {
-                diaryDate: location.state.diaryDate,
-              }
-            })
+            history.push(`/meals/${mealId}/foods`)
           } else {
             history.push("/foods")
           }
