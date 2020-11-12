@@ -41,18 +41,18 @@ class MainContainer extends Component {
   todaysExercises = () => {
     // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
     return this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes);
-  }
+  };
 
   todaysDiary = () => {
     return this.props.diaries.find(diary => diary.attributes.date === this.getDate());
-  }
+  };
 
   todaysMeals = () => {
     // need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
     if (!!this.todaysDiary()) {
       return this.props.meals.filter(meal => meal.relationships.diary.data.id === this.todaysDiary().id).map(filteredMeal => filteredMeal.attributes)
-    }
-  }
+    };
+  };
 
   caloriesBurned = () => {
     let data = {};
@@ -126,7 +126,7 @@ class MainContainer extends Component {
 
     if (!!this.todaysMeals()) {
       mealMealFoods = this.todaysMeals().find(meal => meal.category.toLowerCase() === selectedMeal).meal_foods
-    }
+    };
 
     if (mealMealFoods.flat().length > 0) {
       mealTotal = mealMealFoods.flat().reduce((a, b) => {
@@ -195,7 +195,7 @@ class MainContainer extends Component {
           todaysMealFoods.push(meal.meal_foods)
         }
       })
-    }
+    };
 
     // 2. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
     if (todaysMealFoods.flat().length > 0) {
