@@ -106,12 +106,7 @@ export const createMealFood = (meal, foodId, food, number_of_servings, history, 
         } else {
           dispatch(addMealFood(json.data))
           dispatch(updateMeal(meal.id, meal.attributes.calories, null, mealFood.calories))
-          history.push({
-            pathname: "/diaries",
-            state: {
-              diaryDate: location.state.diaryDate
-            }
-          })
+          history.push("/diaries")
         }
       })
       .catch(console.log())
