@@ -23,18 +23,18 @@ class FoodsContainer extends Component {
     return (
       <div>
         <Switch>
-          <Route exact path="/foods/new" render={props =>
+          <Route exact path="/foods/new" render={routerProps =>
             <div className="dashboard-container">
-              <FoodInput createFood={this.props.createFood} userId={this.props.currentUser.id} {...props} />
+              <FoodInput createFood={this.props.createFood} userId={this.props.currentUser.id} {...routerProps} />
             </div>
           } />
           {/* Wait until component mounts before rendering so currentlyDisplayed in foods.js is populated correctly. Tried rendering both routes within one conditional, but /meals/:mealId/foods was rendering both at the same time. */}
           { !!this.state.loaded ?
-            <Route exact path="/meals/:mealId/foods" render={props => {
-              const meal = this.props.meals.find(meal => meal.id === props.match.params.mealId)
+            <Route exact path="/meals/:mealId/foods" render={routerProps => {
+              const meal = this.props.meals.find(meal => meal.id === routerProps.match.params.mealId)
               return (
                 <div className="dashboard-container">
-                  <Foods foods={this.props.foods} meal={meal} createMealFood={this.props.createMealFood} currentUser={this.props.currentUser} {...props} />
+                  <Foods foods={this.props.foods} meal={meal} createMealFood={this.props.createMealFood} currentUser={this.props.currentUser} {...routerProps} />
                 </div>
               )
             }} />
@@ -43,9 +43,9 @@ class FoodsContainer extends Component {
           }
 
           { !!this.state.loaded ?
-            <Route exact path={this.props.match.url} render={props =>
+            <Route exact path={this.props.match.url} render={routerProps =>
               <div className="dashboard-container">
-                <Foods foods={this.props.foods} createMealFood={this.props.createMealFood} currentUser={this.props.currentUser} {...props} />
+                <Foods foods={this.props.foods} createMealFood={this.props.createMealFood} currentUser={this.props.currentUser} {...routerProps} />
               </div>
             } />
           :

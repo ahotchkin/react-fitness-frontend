@@ -17,19 +17,19 @@ class ExercisesContainer extends Component {
     return (
       <div>
         <Switch>
-          <Route exact path={`${this.props.match.url}/new`} render={props =>
+          <Route exact path={`${this.props.match.url}/new`} render={routerProps =>
             <ExerciseInput currentUser={this.props.currentUser} createExercise={this.props.createExercise} date={this.props.date} history={this.props.history} />
           } />
 
-          <Route exact path={this.props.match.url} render={props =>
-            <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.props.date} caloriesBurned={this.props.caloriesBurned} {...props} />
+          <Route exact path={this.props.match.url} render={routerProps =>
+            <Exercises exercises={this.props.exercises} deleteExercise={this.props.deleteExercise} date={this.props.date} caloriesBurned={this.props.caloriesBurned} {...routerProps} />
           } />
 
-          <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={props => {
-            const exercise = this.props.exercises.find(exercise => exercise.id === props.match.params.exerciseId)
+          <Route exact path={`${this.props.match.url}/:exerciseId/edit`} render={routerProps => {
+            const exercise = this.props.exercises.find(exercise => exercise.id === routerProps.match.params.exerciseId)
             if (!!exercise) {
               return (
-                <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} date={this.props.date} {...props} />
+                <ExerciseUpdate exercise={exercise} currentUser={this.props.currentUser} updateExercise={this.props.updateExercise} date={this.props.date} {...routerProps} />
               )
             }
           }} />
