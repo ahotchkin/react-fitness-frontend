@@ -19,7 +19,6 @@ class Login extends Component {
   };
 
   handleOnClick = event => {
-    event.persist();
     this.setState({
       submitted: true,
     });

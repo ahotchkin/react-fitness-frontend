@@ -19,9 +19,8 @@ class ExerciseUpdate extends Component {
   };
 
   handleOnClick = event => {
-    event.persist();
     this.setState({
-      submitted: true
+      submitted: true,
     });
   };
 
