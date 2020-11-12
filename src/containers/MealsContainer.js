@@ -15,7 +15,7 @@ class MealsContainer extends Component {
   render() {
     return (
       <div>
-        <Meals meals={this.props.meals} diaryId={this.props.diaryId} diaryDate={this.props.diaryDate}/>
+        <Meals meals={this.props.meals} diaryId={this.props.diaryId} />
       </div>
     );
   };

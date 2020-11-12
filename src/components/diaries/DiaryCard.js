@@ -39,7 +39,7 @@ const  DiaryCard = props => {
 
       <hr className="solid-thick" />
 
-      <MealsContainer diaryId={props.diary.id} diaryDate={props.diary.attributes.date} />
+      <MealsContainer diaryId={props.diary.id} />
     </div>
   );
 };
