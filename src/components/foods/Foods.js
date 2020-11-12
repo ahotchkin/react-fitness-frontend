@@ -84,9 +84,6 @@ class Foods extends Component {
                   pathname: "/foods/new",
                   state: {
                     mealId: this.props.meal.id,
-                    // Need to pass diary information when creating new foods, user is directed back to /meals/:mealId/foods and without diary info the newly added food can't be added to the correct diary
-                    diaryId: this.props.location.state.diaryId,
-                    diaryDate: this.props.location.state.diaryDate
                   }
                 }}>
                   <button type="button" className="btn btn-primary-outline">
