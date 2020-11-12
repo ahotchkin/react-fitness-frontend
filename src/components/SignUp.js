@@ -15,8 +15,7 @@ class SignUp extends Component {
     weight: "",
     lifestyle: "",
     submitted: false
-  }
-
+  };
 
   calculateDailyCalorieGoal = () => {
     let bmr = 0
@@ -30,7 +29,7 @@ class SignUp extends Component {
       activity = 1.65
     } else if (this.state.lifestyle === "veryActive") {
       activity = 1.8
-    }
+    };
 
 
     if (this.state.gender === "male") {
@@ -39,14 +38,13 @@ class SignUp extends Component {
     } else if (this.state.gender === "female") {
       // BMR = 10W + 6.25H - 5A - 161
       bmr = (10 * ((parseFloat(this.state.weight) * 0.453592)) + (6.25 * (((parseInt(this.state.height_feet) * 12) + parseFloat(this.state.height_inches)) * 2.54)) - (5 * parseInt(this.state.age)) - 161) * activity
-
-    }
+    };
 
     if (bmr < 1200) {
       bmr = 1200
-    }
+    };
 
-    return parseInt(bmr)
+    return parseInt(bmr);
 
     // Mifflin-St Jeor Equation:
     // For men:
@@ -66,79 +64,78 @@ class SignUp extends Component {
     // Lightly active: * 1.55
     // Moderately active: * 1.65
     // Very active: * 1.8
-  }
+  };
 
   calculateDailyNutrientGoals = () => {
-    const dailyCalorieGoal = this.calculateDailyCalorieGoal()
-    const nutrientGoals = {}
-    nutrientGoals.fat = parseInt((dailyCalorieGoal * .30) / 9)
-    nutrientGoals.saturatedFat = parseInt((dailyCalorieGoal * .07) / 9)
-    nutrientGoals.polyunsaturatedFat = parseInt((dailyCalorieGoal * .10) / 9)
-    nutrientGoals.monounsaturatedFat = parseInt((dailyCalorieGoal * .20) / 9)
-    nutrientGoals.carbohydrate = parseInt((dailyCalorieGoal * .50) / 4)
+    const dailyCalorieGoal = this.calculateDailyCalorieGoal();
+    const nutrientGoals = {};
+    nutrientGoals.fat = parseInt((dailyCalorieGoal * .30) / 9);
+    nutrientGoals.saturatedFat = parseInt((dailyCalorieGoal * .07) / 9);
+    nutrientGoals.polyunsaturatedFat = parseInt((dailyCalorieGoal * .10) / 9);
+    nutrientGoals.monounsaturatedFat = parseInt((dailyCalorieGoal * .20) / 9);
+    nutrientGoals.carbohydrate = parseInt((dailyCalorieGoal * .50) / 4);
 
     if (this.state.gender === "male") {
       nutrientGoals.sugar = 38
     } else if (this.state.gender === "female") {
       nutrientGoals.sugar = 25
-    }
+    };
 
-    nutrientGoals.protein = parseInt((dailyCalorieGoal * .20) / 4)
+    nutrientGoals.protein = parseInt((dailyCalorieGoal * .20) / 4);
 
     if (this.state.gender === "male") {
       nutrientGoals.vitaminA = 900
     } else if (this.state.gender === "female") {
       nutrientGoals.vitaminA = 700
-    }
+    };
 
     if (this.state.gender === "male") {
       nutrientGoals.vitaminC = 90
     } else if (this.state.gender === "female") {
       nutrientGoals.vitaminC = 75
-    }
+    };
 
     if (parseInt(this.state.age) <= 70) {
       nutrientGoals.vitaminD = 15
     } else if (parseInt(this.state.age) >= 71) {
       nutrientGoals.vitaminD = 20
-    }
+    };
 
     if ((parseInt(this.state.age) <= 50) || (parseInt(this.state.age) >= 51 && parseInt(this.state.age) <= 70 && this.state.gender === "male")) {
       nutrientGoals.calcium = 1000
     } else if ((parseInt(this.state.age)) >= 71 || (parseInt(this.state.age) >= 51 && parseInt(this.state.age) <= 70 && this.state.gender === "female")) {
       nutrientGoals.calcium = 1200
-    }
+    };
 
     if ((parseInt(this.state.age) <= 50 && this.state.gender === "male") || (parseInt(this.state.age) >= 51)) {
       nutrientGoals.iron = 8
     } else if (parseInt(this.state.age) <= 50 && this.state.gender === "female") {
       nutrientGoals.iron = 18
-    }
+    };
 
-    return nutrientGoals
-  }
+    return nutrientGoals;
+  };
 
   handleOnChange = event => {
-    // what does this do????
-    event.persist()
-
+    event.persist();
     this.setState({
       [event.target.name]: event.target.value
-    })
-  }
+    });
+  };
 
   handleOnClick = event => {
+    event.persist();
     this.setState({
       submitted: true,
-    })
-  }
+    });
+  };
 
   handleOnSubmit = event => {
-    event.preventDefault()
-    const dailyCalorieGoal = this.calculateDailyCalorieGoal()
-    const dailyNutrientGoals = this.calculateDailyNutrientGoals()
-    this.props.signUp(this.state, dailyCalorieGoal, dailyNutrientGoals, this.props.history)
-  }
+    event.preventDefault();
+    const dailyCalorieGoal = this.calculateDailyCalorieGoal();
+    const dailyNutrientGoals = this.calculateDailyNutrientGoals();
+    this.props.signUp(this.state, dailyCalorieGoal, dailyNutrientGoals, this.props.history);
+  };
 
   render() {
     return (
@@ -318,10 +315,8 @@ class SignUp extends Component {
           <p>Already have an account? Log in <Link to="/login">here</Link>.</p>
         </div>
       </div>
-
-    )
-  }
-
-}
+    );
+  };
+};
 
 export default connect(null, { signUp })(SignUp);

@@ -3,7 +3,6 @@ import React from 'react';
 const SearchInput = props => {
 
   return(
-
     <form onSubmit={props.handleSubmit}>
       <input
         type="text"
@@ -15,8 +14,7 @@ const SearchInput = props => {
         value={props.searchTerm}
       />
     </form>
-  )
-
-}
+  );
+};
 
 export default SearchInput;

@@ -3,7 +3,6 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const SearchByDate = props => {
-
   return (
     <div className="datepicker-container">
       <div className="col-lg">
@@ -22,7 +21,6 @@ const SearchByDate = props => {
         </div>
     </div>
   );
+};
 
-}
-
-export default SearchByDate
+export default SearchByDate;

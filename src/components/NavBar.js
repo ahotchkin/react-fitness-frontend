@@ -24,7 +24,7 @@ const NavBar = ({ logout }) => {
         Log Out
       </NavLink>
     </div>
-  )
-}
+  );
+};
 
 export default connect(null, { logout })(NavBar);

@@ -28,38 +28,35 @@ class FoodInput extends Component {
     iron: "",
     potassium: "",
     submitted: false,
-  }
+  };
 
   handleOnChange = event => {
-    // is this necessary?
-    event.persist()
+    event.persist();
     this.setState({
       [event.target.name]: event.target.value
-    })
-  }
+    });
+  };
 
   handleOnClick = event => {
+    event.persist();
     this.setState({
       submitted: true,
-    })
-  }
+    });
+  };
 
   handleSubmit = event => {
     event.preventDefault();
-    // set the state here by accessing props provided by mapDispatchToProps
-
-
     if (event.target.value === "") {
       this.setState({
         [event.target.name]: 0
       })
-    }
+    };
 
     if (!!this.props.location.state) {
       this.props.createFood(this.props.userId, this.state, this.props.location.state.mealId, this.props.history, this.props.location)
     } else {
       this.props.createFood(this.props.userId, this.state, null, this.props.history)
-    }
+    };
   };
 
   render() {
@@ -441,8 +438,8 @@ class FoodInput extends Component {
           </div>
         </div>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 export default FoodInput;

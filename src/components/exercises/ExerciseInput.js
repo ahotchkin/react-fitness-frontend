@@ -11,22 +11,22 @@ class ExerciseInput extends Component {
   };
 
   handleOnChange = event => {
-    // is this necessary? What is happening here?
-    event.persist()
+    event.persist();
     this.setState({
       [event.target.name]: event.target.value
-    })
+    });
   };
 
   handleOnClick = event => {
+    event.persist();
     this.setState({
       submitted: true
-    })
-  }
+    });
+  };
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.createExercise(this.state, this.props.date, this.props.currentUser, this.props.history)
+    this.props.createExercise(this.state, this.props.date, this.props.currentUser, this.props.history);
   };
 
   render() {

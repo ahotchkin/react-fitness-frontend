@@ -11,9 +11,8 @@ import { createMealFood } from '../actions/mealFoods';
 class FoodsContainer extends Component {
   state = {
     loaded: false
-  }
+  };
 
-  // SHOULD I BE USING THE OTHER LIFECYCLE METHODS?
   componentDidMount() {
     this.setState({
       loaded: true

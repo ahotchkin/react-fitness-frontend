@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 
-import MealFoods from '../components/mealFoods/MealFoods'
-import MealFoodUpdate from '../components/mealFoods/MealFoodUpdate'
+import MealFoods from '../components/mealFoods/MealFoods';
+import MealFoodUpdate from '../components/mealFoods/MealFoodUpdate';
 
 import { getMealFoods } from '../actions/mealFoods';
 import { updateMealFood } from '../actions/mealFoods';
@@ -13,7 +13,7 @@ class MealFoodsContainer extends Component {
 
   componentDidMount() {
     this.props.getMealFoods()
-  }
+  };
 
   render() {
     return (
@@ -36,7 +36,7 @@ class MealFoodsContainer extends Component {
 
       </div>
     );
-  }
+  };
 };
 
 const mapStateToProps = state => ({
@@ -48,6 +48,6 @@ const mapDispatchToProps = {
   getMealFoods,
   updateMealFood,
   deleteMealFood
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MealFoodsContainer);

@@ -9,25 +9,24 @@ class ExerciseUpdate extends Component {
     duration_in_minutes: this.props.exercise.attributes.duration_in_minutes,
     calories_burned: this.props.exercise.attributes.calories_burned,
     submitted: false
-  }
+  };
 
   handleOnChange = event => {
-    // is this necessary? WHAT DOES EVENT.PERSIST() DO??????
-    event.persist()
+    event.persist();
     this.setState({
       [event.target.name]: event.target.value
-    })
-  }
+    });
+  };
 
   handleOnClick = event => {
+    event.persist();
     this.setState({
       submitted: true
-    })
-  }
+    });
+  };
 
   handleSubmit = event => {
     event.preventDefault();
-
     this.props.updateExercise(this.state, this.props.date, this.props.exercise, this.props.history)
   };
 

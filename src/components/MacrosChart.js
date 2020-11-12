@@ -5,13 +5,13 @@ class MacrosChart extends Component {
 
   state = {
     loaded: false
-  }
+  };
 
   componentDidMount() {
     this.setState({
       loaded: true
-    })
-  }
+    });
+  };
 
   renderMacrosChart = () => {
     let elementId = ""
@@ -25,9 +25,9 @@ class MacrosChart extends Component {
       elementId = "snacks-macros-chart"
     } else {
       elementId = "macros-chart"
-    }
+    };
 
-    const ctx = document.getElementById(elementId).getContext("2d")
+    const ctx = document.getElementById(elementId).getContext("2d");
 
     if (this.props.macros.carbohydrates === 0 && this.props.macros.fat === 0 && this.props.macros.protein === 0) {
       new Chart(ctx, {
@@ -71,9 +71,9 @@ class MacrosChart extends Component {
             display: false
           }
         }
-      })
-    }
-  }
+      });
+    };
+  };
 
   render() {
     return (
@@ -84,9 +84,8 @@ class MacrosChart extends Component {
           null
         }
       </div>
-    )
-  }
-
-}
+    );
+  };
+};
 
 export default MacrosChart;

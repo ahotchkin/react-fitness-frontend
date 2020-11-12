@@ -17,8 +17,8 @@ class Foods extends Component {
     this.setState({
       renderFoodNutrition: true,
       currentFood: food
-    })
-  }
+    });
+  };
 
   renderFoods = () => {
     let foods = []
@@ -28,7 +28,7 @@ class Foods extends Component {
       foods = this.props.foods
     } else {
       foods = this.state.currentlyDisplayed
-    }
+    };
 
     return foods.map(food =>
       <tr key={food.id} onClick={() => this.renderFoodNutrition(food)}>
@@ -37,8 +37,8 @@ class Foods extends Component {
           <footer className="footer"><em>Serving: {food.attributes.serving_size}, {food.attributes.calories} calories</em></footer>
         </td>
       </tr>
-    )
-  }
+    );
+  };
 
   renderFoodCard = () => {
     if (this.state.renderFoodNutrition && !!this.props.meal) {
@@ -49,23 +49,21 @@ class Foods extends Component {
       return (
         null
       )
-    }
-  }
+    };
+  };
 
   handleOnChange = event => {
-    // is this necessary? What is happening here?
-    event.persist()
+    event.persist();
 
     let newlyDisplayed = this.props.foods.filter(food => {
       const foodFullName = food.attributes.brand_name + " " + food.attributes.description
       return (foodFullName.toLowerCase().includes(event.target.value.toLowerCase()))
-    })
+    });
 
     this.setState({
       [event.target.name]: event.target.value,
       currentlyDisplayed: newlyDisplayed
     });
-
   };
 
   render() {

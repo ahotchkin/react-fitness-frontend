@@ -4,7 +4,7 @@ import ExerciseCard from './ExerciseCard';
 
 const Exercises = props => {
 
-  const exerciseCards = props.exercises.filter(exercise => exercise.attributes.date === props.date).map(filteredExercise => <ExerciseCard exercise={filteredExercise} key={filteredExercise.id} deleteExercise={props.deleteExercise} history={props.history}/>)
+  const exerciseCards = props.exercises.filter(exercise => exercise.attributes.date === props.date).map(filteredExercise => <ExerciseCard exercise={filteredExercise} key={filteredExercise.id} deleteExercise={props.deleteExercise} history={props.history}/>);
 
   // in return, going more than one level deep, so need to make sure exerciseCards are there before rendering anything. instead of just saying exerciseCards, need to say: { exerciseCards.length > 0 ? exerciseCards : null }
   return (
@@ -42,7 +42,7 @@ const Exercises = props => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Exercises;

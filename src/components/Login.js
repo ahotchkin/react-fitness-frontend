@@ -9,28 +9,26 @@ class Login extends Component {
     username: "",
     password: "",
     submitted: false,
-  }
+  };
 
   handleOnChange = event => {
-    // what does this do??
-    event.persist()
-
+    event.persist();
     this.setState({
       [event.target.name]: event.target.value
-    })
-  }
+    });
+  };
 
   handleOnClick = event => {
+    event.persist();
     this.setState({
       submitted: true,
-    })
-  }
+    });
+  };
 
   handleOnSubmit = event => {
-    event.preventDefault()
-
-    this.props.login(this.state, this.props.history)
-  }
+    event.preventDefault();
+    this.props.login(this.state, this.props.history);
+  };
 
   render() {
     return (
@@ -76,8 +74,8 @@ class Login extends Component {
           <p>Not a member? Sign up <Link to="/signup">here</Link>.</p>
         </div>
       </div>
-    )
-  }
-}
+    );
+  };
+};
 
 export default connect(null, { login })(Login);

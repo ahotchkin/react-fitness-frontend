@@ -41,7 +41,7 @@ const  DiaryCard = props => {
 
       <MealsContainer diaryId={props.diary.id} diaryDate={props.diary.attributes.date} />
     </div>
-  )
-}
+  );
+};
 
 export default DiaryCard;

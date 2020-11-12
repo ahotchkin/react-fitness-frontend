@@ -12,7 +12,7 @@ const NutrientProgressBar = props => {
     } else {
       return 0
     }
-  }
+  };
 
   return (
     <tbody>
@@ -37,8 +37,7 @@ const NutrientProgressBar = props => {
         <td colSpan="12"><hr className="solid-thin" /></td>
       </tr>
     </tbody>
+  );
+};
 
-  )
-}
-
-export default NutrientProgressBar
+export default NutrientProgressBar;

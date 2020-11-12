@@ -147,7 +147,6 @@ export const updateMealFood = (mealFood, updated_number_of_servings, history) =>
   }
 
   return dispatch => {
-    // CREATE BASE URL VARIABLE TO USE
     return fetch(baseUrl + `/${mealFood.id}`, {
       credentials: "include",
       method: "PATCH",

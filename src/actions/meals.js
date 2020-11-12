@@ -43,7 +43,7 @@ export const getMeals = () => {
   }
 }
 
-// Updates meal.calories when a meallFood is added, updated, or deleted
+// updates meal.calories when a meallFood is added, updated, or deleted
 export const updateMeal = (mealId, mealCalories, previousMealFoodCalories = 0, updatedMealFoodCalories = 0) => {
   const updatedMeal = {
     calories: mealCalories - previousMealFoodCalories + updatedMealFoodCalories,

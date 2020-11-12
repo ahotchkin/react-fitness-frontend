@@ -10,27 +10,25 @@ class MealFoodUpdate extends Component {
   };
 
   handleOnChange = event => {
-    // is this necessary? WHAT DOES EVENT.PERSIST() DO??????
     event.persist()
     this.setState({
       [event.target.name]: event.target.value
-    })
+    });
   };
 
   handleOnClick = event => {
+    event.persist();
     this.setState({
       submitted: true
-    })
-  }
+    });
+  };
 
   handleSubmit = event => {
     event.preventDefault();
-
-    this.props.updateMealFood(this.props.mealFood, this.state.number_of_servings, this.props.history)
+    this.props.updateMealFood(this.props.mealFood, this.state.number_of_servings, this.props.history);
   };
 
   render() {
-    console.log(this.props)
     return(
       <div className="update-food-card">
         <div className="nutrition-container">

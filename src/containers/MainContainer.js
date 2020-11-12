@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux'
-import { getCurrentUser } from '../actions/currentUser'
+import { getCurrentUser } from '../actions/currentUser';
 
-import Home from '../components/Home'
-import SignUp from '../components/SignUp'
-import Login from '../components/Login'
+import Home from '../components/Home';
+import SignUp from '../components/SignUp';
+import Login from '../components/Login';
 import NavBar from '../components/NavBar';
-import Dashboard from '../components/Dashboard'
+import Dashboard from '../components/Dashboard';
 import SearchByDate from '../components/SearchByDate';
 
 import DiariesContainer from './DiariesContainer';
@@ -24,7 +24,7 @@ class MainContainer extends Component {
 
   componentDidMount() {
     this.props.getCurrentUser()
-  }
+  };
 
   handleOnChange = date => {
     this.setState({
@@ -36,13 +36,13 @@ class MainContainer extends Component {
     const tzoffset = this.state.startDate.getTimezoneOffset() * 60000; //offset in milliseconds
     const date = (new Date(this.state.startDate - tzoffset)).toISOString().split("T")[0];
     return date
-  }
+  };
 
   caloriesBurned = () => {
-    let data = {}
+    let data = {};
 
     // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
-    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes)
+    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes);
 
     if (todaysExercises.length === 1) {
       data = {calories_burned: todaysExercises[0].calories_burned}
@@ -52,14 +52,14 @@ class MainContainer extends Component {
     data = {calories_burned: 0}
     }
 
-    return data.calories_burned
-  }
+    return data.calories_burned;
+  };
 
   totalExerciseByCategory = category => {
-    let exercisesInCategory = []
-    let totalForCategory = {}
+    let exercisesInCategory = [];
+    let totalForCategory = {};
 
-    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes)
+    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes);
 
     if (todaysExercises.length > 0) {
       todaysExercises.forEach(function(exercise) {
@@ -67,7 +67,7 @@ class MainContainer extends Component {
           exercisesInCategory.push(exercise)
         }
       })
-    }
+    };
 
     if (exercisesInCategory.length > 0) {
       totalForCategory = exercisesInCategory.reduce((a, b) => {
@@ -83,12 +83,12 @@ class MainContainer extends Component {
         calories_burned: 0,
         duration_in_minutes: 0
       }
-    }
-    return totalForCategory
-  }
+    };
+    return totalForCategory;
+  };
 
   mealNutrition = selectedMeal => {
-    let mealMealFoods = []
+    let mealMealFoods = [];
 
     let mealTotal = {
       added_sugars: 0,
@@ -111,17 +111,17 @@ class MainContainer extends Component {
       vitamin_a: 0,
       vitamin_c: 0,
       vitamin_d: 0
-    }
+    };
 
-    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
-    // Need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
+    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate());
+    // need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
     if (!!todaysDiary) {
       const todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
 
       if (todaysMeals.length > 0) {
         mealMealFoods = todaysMeals.find(meal => meal.category.toLowerCase() === selectedMeal).meal_foods
       }
-    }
+    };
 
     if (mealMealFoods.flat().length > 0) {
       mealTotal = mealMealFoods.flat().reduce((a, b) => {
@@ -130,17 +130,16 @@ class MainContainer extends Component {
             a[k] = (a[k] || 0) + b[k];
         }
         return a;
-        // by adding " , {}" to the end, it returns the new object with the 3 properties above removed. What is happening here?
       }, {});
-    }
+    };
 
-    mealTotal.meal = selectedMeal
-    return mealTotal
-  }
+    mealTotal.meal = selectedMeal;
+    return mealTotal;
+  };
 
 
   mealMacros = selectedMeal => {
-    let macros = {"meal": selectedMeal, "carbohydrates": 0, "fat": 0, "protein": 0}
+    let macros = {"meal": selectedMeal, "carbohydrates": 0, "fat": 0, "protein": 0};
 
     if (!!this.mealNutrition(selectedMeal)) {
       const mealNutrition = this.mealNutrition(selectedMeal)
@@ -154,8 +153,8 @@ class MainContainer extends Component {
       }
 
       return macros
-    }
-  }
+    };
+  };
 
   dailyNutrition = () => {
     // Currently saving all nutrient amounts to mealFood in database and using serializer to get info. Another option is to use the number_of_servings and the foods attribute and multiply every mealFood.attributes.food.nutrient * attributes.number_of_servings, and NOT save this info in the database
@@ -164,8 +163,8 @@ class MainContainer extends Component {
     // 2. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
     // 3. use reduce to combine objects in mealFoodAttributes and total values, while ignoring keys of number_of_servings, meal, and food
 
-    let todaysMeals = []
-    let todaysMealFoods = []
+    let todaysMeals = [];
+    let todaysMealFoods = [];
     let total = {
       added_sugars: 0,
       calcium: 0,
@@ -187,12 +186,12 @@ class MainContainer extends Component {
       vitamin_a: 0,
       vitamin_c: 0,
       vitamin_d: 0
-    }
+    };
     // 1. get all mealFoods for the day
       // get the diary for the day
       // get the meals for the day
       // get the mealFoods for each meal
-    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate())
+    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate());
     if (!!todaysDiary) {
       todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
 
@@ -204,7 +203,7 @@ class MainContainer extends Component {
           }
         })
       }
-    }
+    };
 
     // 2. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
     if (todaysMealFoods.flat().length > 0) {
@@ -215,15 +214,14 @@ class MainContainer extends Component {
             a[k] = (a[k] || 0) + b[k];
         }
         return a;
-        // by adding " , {}" to the end, it returns the new object with the 3 properties above removed. What is happening here?
       }, {});
-    }
-    return total
-  }
+    };
+    return total;
+  };
 
 
   dailyMacros = () => {
-    let macros = { "carbohydrates": 0, "fat": 0, "protein": 0}
+    let macros = { "carbohydrates": 0, "fat": 0, "protein": 0};
 
     if (!!this.dailyNutrition()) {
       const dailyNutrition = this.dailyNutrition()
@@ -236,8 +234,8 @@ class MainContainer extends Component {
         macros.protein = Math.round((dailyNutrition.protein / totalDailyNutrition) * 100)
       }
 
-      return macros
-    }
+      return macros;
+    };
     // default all users' goals to carbohydrates: 50%, fat: 30%, protein: 20%
     // eventually add these attributes to user and allow user to set individual goals
 
@@ -256,15 +254,15 @@ class MainContainer extends Component {
     // 4 calories per gram
     // 30% of 2,000 calories = 600 calories of protein per day
     // Total grams of protein allowed per day = 600/4 = 150 grams
-  }
+  };
 
   caloriesRemaining = () => {
-    let dailyCaloriesRemaining = ""
+    let dailyCaloriesRemaining = "";
     if (!!this.props.currentUser) {
       dailyCaloriesRemaining = this.props.currentUser.attributes.daily_calorie_goal - this.dailyNutrition().calories + this.caloriesBurned()
-    }
-    return dailyCaloriesRemaining
-  }
+    };
+    return dailyCaloriesRemaining;
+  };
 
   render() {
     return (
@@ -287,7 +285,7 @@ class MainContainer extends Component {
           <Route exact path="/login" render={ props => this.props.loggedIn ? <Redirect to="/" /> : <Login history={props.history}/> } />
           <Route exact path="/signup" render={ props => this.props.loggedIn ? <Redirect to="/" /> : <SignUp history={props.history}/> } />
 
-          {/* below routes should only be available to users who are logged in - they are working correctly, but i'm not sure how I set that up...*/}
+          {/* below routes should only be available to users who are logged */}
 
           <Route path="/diaries" render={ routerProps => this.props.loggedIn ?
             <div>
@@ -339,8 +337,8 @@ class MainContainer extends Component {
       </div>
 
     );
-  }
-}
+  };
+};
 
 const mapStateToProps = state => {
   return {
@@ -349,11 +347,11 @@ const mapStateToProps = state => {
     exercises: state.exercises,
     diaries: state.diaries,
     meals: state.meals,
-  }
-}
+  };
+};
 
 const mapDispatchToProps = {
   getCurrentUser
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

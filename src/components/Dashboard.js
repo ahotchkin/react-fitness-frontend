@@ -289,8 +289,7 @@ const Dashboard = props => {
       </div>
       <Footer />
     </div>
-  )
-
-}
+  );
+};
 
 export default Dashboard;

@@ -131,7 +131,7 @@ export const getCurrentUser = () => {
   }
 }
 
-// this takes care of clearing the session, also need to clear out the user in the store with clearCurrentUser
+// clears the session and the store
 export const logout = () => {
   return dispatch => {
     // don't need to wait until fetch request resolves to log out a user, when a user clicks logout they should logout right away. call clearCurrentUser immediately

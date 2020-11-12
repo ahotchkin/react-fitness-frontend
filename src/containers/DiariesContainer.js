@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 import { createDiary } from '../actions/diaries';
 
-import Diaries from '../components/diaries/Diaries'
+import Diaries from '../components/diaries/Diaries';
 
 class DiariesContainer extends Component {
 
@@ -15,8 +15,8 @@ class DiariesContainer extends Component {
   componentDidMount() {
     this.setState({
       loaded: true,
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -32,10 +32,9 @@ class DiariesContainer extends Component {
         </Switch>
       </div>
     );
-  }
+  };
 };
 
-// receives the state of the Redux store as an argument
 // what do I need in mapStateToProps vs. mapDispatchToProps - go through all containers and review
 const mapStateToProps = state => ({
   currentUser: state.currentUser,
