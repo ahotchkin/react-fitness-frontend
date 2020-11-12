@@ -53,7 +53,7 @@ class FoodInput extends Component {
     };
 
     if (!!this.props.location.state) {
-      this.props.createFood(this.props.userId, this.state, this.props.location.state.mealId, this.props.history, this.props.location)
+      this.props.createFood(this.props.userId, this.state, this.props.location.state.mealId, this.props.history)
     } else {
       this.props.createFood(this.props.userId, this.state, null, this.props.history)
     };
