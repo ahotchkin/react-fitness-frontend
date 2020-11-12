@@ -69,25 +69,25 @@ class MainContainer extends Component {
   };
 
   totalExerciseByCategory = category => {
-    let exercisesInCategory = [];
+    let exercisesByCategory = [];
     let totalForCategory = {};
 
     if (this.todaysExercises().length > 0) {
       this.todaysExercises().forEach(function(exercise) {
         if (exercise.category === category) {
-          exercisesInCategory.push(exercise)
+          exercisesByCategory.push(exercise)
         }
       })
     };
 
-    if (exercisesInCategory.length > 0) {
-      totalForCategory = exercisesInCategory.reduce((a, b) => {
+    if (exercisesByCategory.length > 0) {
+      totalForCategory = exercisesByCategory.reduce((a, b) => {
         for (let k in b) {
-          if (b.hasOwnProperty(k) && k !== "category" && k !== "date" && k !== "name")
+          if (b.hasOwnProperty(k) && k !== "category" && k !== "date" && k !== "name") {
             a[k] = (a[k] || 0) + b[k];
+          }
         }
         return a;
-        // by adding " , {}" to the end, it returns the new object with the 3 properties above removed. What is happening here?
       }, {});
     } else {
       totalForCategory = {
