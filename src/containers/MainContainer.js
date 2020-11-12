@@ -38,16 +38,29 @@ class MainContainer extends Component {
     return date
   };
 
+  todaysExercises = () => {
+    // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
+    return this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes);
+  }
+
+  todaysDiary = () => {
+    return this.props.diaries.find(diary => diary.attributes.date === this.getDate());
+  }
+
+  todaysMeals = () => {
+    // need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
+    if (!!this.todaysDiary()) {
+      return this.props.meals.filter(meal => meal.relationships.diary.data.id === this.todaysDiary().id).map(filteredMeal => filteredMeal.attributes)
+    }
+  }
+
   caloriesBurned = () => {
     let data = {};
 
-    // filtering out today's Exercises and getting just the attributes so reduce function will work properly with more than two elements
-    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes);
-
-    if (todaysExercises.length === 1) {
-      data = {calories_burned: todaysExercises[0].calories_burned}
-    } else if (todaysExercises.length > 1) {
-      data = todaysExercises.reduce((a, b) => ({calories_burned: a.calories_burned + b.calories_burned}))
+    if (this.todaysExercises().length === 1) {
+      data = {calories_burned: this.todaysExercises()[0].calories_burned}
+    } else if (this.todaysExercises().length > 1) {
+      data = this.todaysExercises().reduce((a, b) => ({calories_burned: a.calories_burned + b.calories_burned}))
     } else {
     data = {calories_burned: 0}
     }
@@ -59,10 +72,8 @@ class MainContainer extends Component {
     let exercisesInCategory = [];
     let totalForCategory = {};
 
-    const todaysExercises = this.props.exercises.filter(exercise => exercise.attributes.date === this.getDate()).map(filteredExercise => filteredExercise.attributes);
-
-    if (todaysExercises.length > 0) {
-      todaysExercises.forEach(function(exercise) {
+    if (this.todaysExercises().length > 0) {
+      this.todaysExercises().forEach(function(exercise) {
         if (exercise.category === category) {
           exercisesInCategory.push(exercise)
         }
@@ -113,15 +124,9 @@ class MainContainer extends Component {
       vitamin_d: 0
     };
 
-    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate());
-    // need to get meals from Redux Store rather than from diary.attributes or else /diaries will not refresh if mealFood is deleted
-    if (!!todaysDiary) {
-      const todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
-
-      if (todaysMeals.length > 0) {
-        mealMealFoods = todaysMeals.find(meal => meal.category.toLowerCase() === selectedMeal).meal_foods
-      }
-    };
+    if (!!this.todaysMeals()) {
+      mealMealFoods = this.todaysMeals().find(meal => meal.category.toLowerCase() === selectedMeal).meal_foods
+    }
 
     if (mealMealFoods.flat().length > 0) {
       mealTotal = mealMealFoods.flat().reduce((a, b) => {
@@ -159,11 +164,6 @@ class MainContainer extends Component {
   dailyNutrition = () => {
     // Currently saving all nutrient amounts to mealFood in database and using serializer to get info. Another option is to use the number_of_servings and the foods attribute and multiply every mealFood.attributes.food.nutrient * attributes.number_of_servings, and NOT save this info in the database
 
-    // 1. get all mealFoods for the day
-    // 2. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
-    // 3. use reduce to combine objects in mealFoodAttributes and total values, while ignoring keys of number_of_servings, meal, and food
-
-    let todaysMeals = [];
     let todaysMealFoods = [];
     let total = {
       added_sugars: 0,
@@ -188,22 +188,14 @@ class MainContainer extends Component {
       vitamin_d: 0
     };
     // 1. get all mealFoods for the day
-      // get the diary for the day
-      // get the meals for the day
-      // get the mealFoods for each meal
-    const todaysDiary = this.props.diaries.find(diary => diary.attributes.date === this.getDate());
-    if (!!todaysDiary) {
-      todaysMeals = this.props.meals.filter(meal => meal.relationships.diary.data.id === todaysDiary.id).map(filteredMeal => filteredMeal.attributes)
-
       // requires meal_foods to be an attribute of meal to work properly
-      if (todaysMeals.length > 0) {
-        todaysMeals.forEach(meal => {
-          if (meal.calories > 0) {
-            todaysMealFoods.push(meal.meal_foods)
-          }
-        })
-      }
-    };
+    if (!!this.todaysMeals()) {
+      this.todaysMeals().forEach(meal => {
+        if (meal.calories > 0) {
+          todaysMealFoods.push(meal.meal_foods)
+        }
+      })
+    }
 
     // 2. create array of objects of mealFoodAttributes where each element is mealFood.attributes for one mealFood
     if (todaysMealFoods.flat().length > 0) {
@@ -258,7 +250,7 @@ class MainContainer extends Component {
 
   caloriesRemaining = () => {
     let dailyCaloriesRemaining = "";
-    if (!!this.props.currentUser) {
+    if (this.props.loggedIn) {
       dailyCaloriesRemaining = this.props.currentUser.attributes.daily_calorie_goal - this.dailyNutrition().calories + this.caloriesBurned()
     };
     return dailyCaloriesRemaining;
