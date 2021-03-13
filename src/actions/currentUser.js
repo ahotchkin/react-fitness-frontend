@@ -25,6 +25,12 @@ export const clearCurrentUser = () => {
 
 
 // aysnchronous actions
+
+// ******************************************
+// fix error handling in fetch requests
+// abstract fetch request to adapter class
+// ******************************************
+
 const baseUrl = "http://localhost:3001/api/v1"
 
 export const login = (credentials, history) => {

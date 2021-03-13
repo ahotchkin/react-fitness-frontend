@@ -21,6 +21,12 @@ export const addDiary = diary => {
 
 
 // asychronous actions
+
+// ******************************************
+// fix error handling in fetch requests
+// abstract fetch request to adapter class
+// ******************************************
+
 const baseUrl = "http://localhost:3001/api/v1/diaries"
 
 export const getDiaries = () => {
