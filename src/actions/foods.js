@@ -64,7 +64,8 @@ export const createFood = (userId, foodData, mealId, history) => {
       .then(response => response.json())
       .then(json => {
         if (json.error) {
-          console.log(json.error)
+          // console.log(json.error)
+          throw new Error(json.error)
         } else {
           dispatch(addFood(json.data))
           if (!!mealId) {
@@ -74,6 +75,6 @@ export const createFood = (userId, foodData, mealId, history) => {
           }
         }
       })
-      .catch(console.log())
+      .catch(json => console.log(json))
   }
 }
