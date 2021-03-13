@@ -66,7 +66,20 @@ class Foods extends Component {
     });
   };
 
+  // handleSortClick = event => {
+  //   let foods = [...this.props.foods]
+  //   let sortedFood = foods.sort((a, b) => {
+  //     return a.attributes.brand_name.localeCompare(b.attributes.brand_name)
+  //   })
+  //
+  //   this.setState({
+  //     currentlyDisplayed: sortedFood
+  //   })
+  //
+  // }
+
   render() {
+    // console.log(this.props.foods)
     return (
       <div className="row">
         <div className="col-lg info-container">
