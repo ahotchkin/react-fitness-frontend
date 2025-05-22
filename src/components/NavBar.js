@@ -7,22 +7,36 @@ import { logout } from '../actions/currentUser';
 const NavBar = ({ logout }) => {
 
   return (
-    <div className="navbar navbar-dark">
-      <NavLink className="nav-link" exact activeclass="true" to ="/">
-        Home
-      </NavLink>
-      <NavLink className="nav-link" exact activeclass="true" to="/diaries">
-        Meal Diary
-      </NavLink>
-      <NavLink className="nav-link" activeclass="true" to="/exercises">
-        Exercise
-      </NavLink>
-      <NavLink className="nav-link" activeclass="true" to="/foods">
-        Food Database
-      </NavLink>
-      <NavLink className="nav-link" exact to="/logout" onClick={logout}>
-        Log Out
-      </NavLink>
+    <div className="navbar navbar-dark navbar-expand-lg">
+      <div className="container-fluid">
+        <ul className="navbar-nav">
+          <li className="nav-item">
+            <NavLink className="nav-link" exact activeclass="true" to ="/">
+              Home
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" exact activeclass="true" to="/diaries">
+              Meal Diary
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" activeclass="true" to="/exercises">
+              Exercise
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" activeclass="true" to="/foods">
+              Food Database
+            </NavLink>
+          </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" exact to="/logout" onClick={logout}>
+              Log Out
+            </NavLink>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

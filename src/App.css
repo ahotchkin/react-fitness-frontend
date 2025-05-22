@@ -8,6 +8,10 @@ body {
   margin: 0% 25%;
 }
 
+.form-group {
+  margin-bottom: 15px;
+}
+
 .food-form {
   margin: 0% 19%;
 }
@@ -35,6 +39,8 @@ body {
 
 .nav-link {
   color: #B8C4D4;
+  margin-left: 20px;
+  margin-right: -5px;
 }
 
 .nav-link:hover {
@@ -168,7 +174,7 @@ td hr.solid-thick {
 }
 
 .negative {
-  color: #E01212;
+  color: #E01212 !important;
 }
 
 .calorie-table {
@@ -180,7 +186,7 @@ td hr.solid-thick {
 }
 
 .datepicker-container {
-  margin: 25px 0 -15px 20px;
+  margin: 25px 0 -15px 40px;
 }
 
 .react-datepicker-wrapper,

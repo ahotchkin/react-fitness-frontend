@@ -32,7 +32,7 @@ class SignUp extends Component {
     };
 
 
-    if (this.state.gender === "male") {
+    if (this.state.gender === "male" || this.state.gender === "nonbinary") {
       // BMR = 10W + 6.25H - 5A + 5
       bmr = ((10 * (parseFloat(this.state.weight) * 0.453592)) + (6.25 * (((parseInt(this.state.height_feet) * 12) + parseFloat(this.state.height_inches)) * 2.54)) - (5 * parseInt(this.state.age)) + 5) * activity
     } else if (this.state.gender === "female") {
@@ -144,7 +144,7 @@ class SignUp extends Component {
         <div className="form user-form">
           <form onSubmit={this.handleOnSubmit}>
             <div className="form-group">
-              <label htmlFor="username">Username: </label>
+              <label htmlFor="username" className="form-label">Username: </label>
               <input
                 type="text"
                 className={`form-control ${!!this.state.submitted && this.state.username === "" ? "is-invalid" : null}`}
@@ -158,7 +158,7 @@ class SignUp extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="password">Password: </label>
+              <label htmlFor="password" className="form-label">Password: </label>
               <input
                 type="password"
                 className={`form-control ${!!this.state.submitted && this.state.password === "" ? "is-invalid" : null}`}
@@ -172,7 +172,7 @@ class SignUp extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label>Gender: </label>
+              <label className="form-label">Gender: </label>
               <div className="form-check">
                 <input
                   type="radio"
@@ -194,13 +194,24 @@ class SignUp extends Component {
                   onChange={this.handleOnChange}
                   />
                 <label className="form-check-label" htmlFor="female">Female</label><br />
+              </div>
+              <div className="form-check">
+                <input
+                  type="radio"
+                  className={`form-check-input ${!!this.state.submitted && this.state.gender === "" ? "is-invalid" : null}`}
+                  name="gender"
+                  id="nonbinary"
+                  value="nonbinary"
+                  onChange={this.handleOnChange}
+                  />
+                <label className="form-check-label" htmlFor="nonbinary">Nonbinary</label><br />
                 <div className="invalid-feedback">
                   Gender required
                 </div>
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="age">Age: </label>
+              <label htmlFor="age" className="form-label">Age: </label>
               <input
                 type="number"
                 className={`form-control ${!!this.state.submitted && (this.state.age === "" || parseInt(this.state.age) < 18 || this.state.age.includes("."))? "is-invalid" : null}`}
@@ -214,9 +225,9 @@ class SignUp extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="height_feet">Height: </label>
-              <div className="form-row">
-                <div className="form-group col-md-6">
+              <label htmlFor="height_feet" className="form-label">Height: </label>
+              <div className="row">
+                <div className="form-group col">
                   <input
                     type="number"
                     className={`form-control ${!!this.state.submitted && (this.state.height_feet === "" || this.state.height_feet.includes(".")) ? "is-invalid" : null}`}
@@ -230,7 +241,7 @@ class SignUp extends Component {
                     Height required
                   </div>
                 </div>
-                <div className="form-group col-md-6">
+                <div className="form-group col">
                   <input
                     type="number"
                     className={`form-control ${!!this.state.submitted && this.state.height_inches === "" ? "is-invalid" : null}`}
@@ -244,7 +255,7 @@ class SignUp extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label htmlFor="weight">Weight:</label>
+              <label htmlFor="weight" className="form-label">Weight:</label>
               <input
                 type="number"
                 className={`form-control ${!!this.state.submitted && this.state.weight === "" ? "is-invalid" : null}`}
@@ -258,7 +269,7 @@ class SignUp extends Component {
               </div>
             </div>
             <div className="form-group">
-              <label>Lifestyle (exercise will be tracked separately): </label>
+              <label className="form-label">Lifestyle (exercise will be tracked separately): </label>
               <div className="form-check">
                 <input
                   type="radio"
