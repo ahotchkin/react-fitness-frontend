@@ -62,35 +62,37 @@ class ExerciseUpdate extends Component {
                 </div>
 
 
-                <div className="form-row">
-                  <div className="form-group col-md-6">
+                <div className="form-group">
+                  <div className="row">
+                    <div className="col">
 
-                    <label htmlFor="duration_in_minutes">Minutes Performed: </label>
-                    <input
-                      type="number"
-                      className={`form-control ${!!this.state.submitted && this.state.duration_in_minutes === "" ? "is-invalid" : null}`}
-                      name="duration_in_minutes"
-                      id="duration_in_minutes"
-                      onChange={this.handleOnChange}
-                      value={this.state.duration_in_minutes}
-                    />
-                    <div className="invalid-feedback">
-                      Minutes Performed required
+                      <label htmlFor="duration_in_minutes">Minutes Performed: </label>
+                      <input
+                        type="number"
+                        className={`form-control ${!!this.state.submitted && this.state.duration_in_minutes === "" ? "is-invalid" : null}`}
+                        name="duration_in_minutes"
+                        id="duration_in_minutes"
+                        onChange={this.handleOnChange}
+                        value={this.state.duration_in_minutes}
+                      />
+                      <div className="invalid-feedback">
+                        Minutes Performed required
+                      </div>
                     </div>
-                  </div>
 
-                  <div className="form-group col-md-6">
-                    <label htmlFor="calories_burned">Calories Burned: </label>
-                    <input
-                      type="number"
-                      className={`form-control ${!!this.state.submitted && this.state.calories_burned === "" ? "is-invalid" : null}`}
-                      name="calories_burned"
-                      id="calories_burned"
-                      onChange={this.handleOnChange}
-                      value={this.state.calories_burned}
-                    />
-                    <div className="invalid-feedback">
-                      Calories Burned required
+                    <div className="form-group col-md-6">
+                      <label htmlFor="calories_burned">Calories Burned: </label>
+                      <input
+                        type="number"
+                        className={`form-control ${!!this.state.submitted && this.state.calories_burned === "" ? "is-invalid" : null}`}
+                        name="calories_burned"
+                        id="calories_burned"
+                        onChange={this.handleOnChange}
+                        value={this.state.calories_burned}
+                      />
+                      <div className="invalid-feedback">
+                        Calories Burned required
+                      </div>
                     </div>
                   </div>
                 </div>

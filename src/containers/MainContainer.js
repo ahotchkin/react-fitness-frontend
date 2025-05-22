@@ -124,8 +124,10 @@ class MainContainer extends Component {
       vitamin_d: 0
     };
 
-    if (!!this.todaysMeals()) {
-      mealMealFoods = this.todaysMeals().find(meal => meal.category.toLowerCase() === selectedMeal).meal_foods
+    const todaysMeals = this.todaysMeals();
+
+    if (!!todaysMeals && todaysMeals.length > 0) {
+      mealMealFoods = todaysMeals.find(meal => meal.category.toLowerCase() === selectedMeal).meal_foods
     };
 
     if (mealMealFoods.flat().length > 0) {
@@ -189,8 +191,11 @@ class MainContainer extends Component {
     };
     // 1. get all mealFoods for the day
       // requires meal_foods to be an attribute of meal to work properly
-    if (!!this.todaysMeals()) {
-      this.todaysMeals().forEach(meal => {
+
+    const todaysMeals = this.todaysMeals();
+
+    if (!!todaysMeals) {
+      todaysMeals.forEach(meal => {
         if (meal.calories > 0) {
           todaysMealFoods.push(meal.meal_foods)
         }
