@@ -1,10 +1,12 @@
 # React Fitness Frontend ReadMe
 
-Have you ever wondered if you're eating enough protein during the day? Or carbohydrates? Or fat (yes, we need fat!)? Or maybe you're not sure how many calories you should be consuming on any given day? Or if you're getting enough exercise? If you found yourself answering "Yes!" to any/all of the above, then React Fitness is just the thing for you. Providing a platform to track daily nutrition and exercise, React Fitness is a tool for users to learn more about their patterns and habits, and what they can do to live a healthier life.
+Ever wondered if you're getting enough protein in a day? Or carbs? Or if that workout you did was even worth it? If you've ever felt like your wellness routine is a guessing game, you're not alone. The truth is, it's almost impossible to know without a little help.
+
+Enter React Fitness — your co-pilot in the quest for a healthier you. It's not just a tracker; it's a tool that helps you uncover the hidden patterns in your daily nutrition and exercise. Because living a healthier life shouldn't be a mystery, it should be an adventure.
 
 This React frontend works in conjunction with React Fitness Backend, the repo for which can be found at: https://github.com/ahotchkin/react-fitness-backend
 
-The frontend provides the user with a dashboard view of their daily nutrition and fitness, while the backend API contains a database with information for users as well as a comprehensive food database use across the application.
+The frontend provides the user with a dashboard view of their daily nutrition and fitness, while the backend API contains a database with information for users as well as a comprehensive food database to use across the application.
 
 ## Screenshots
 
